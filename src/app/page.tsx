@@ -44,8 +44,8 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative">
-          <div className="absolute inset-0 bg-black/40 z-10" />
-          <div className="relative h-[80vh] bg-blue-800">
+          <div className="absolute inset-0 bg-black/70 z-10" />
+          <div className="relative h-[80vh]">
             <Image
               src="/Ullanlinnanmäki_Vappuna.jpg?height=800&width=1600"
               alt="Students celebrating"

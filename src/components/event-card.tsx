@@ -22,10 +22,10 @@ export function EventCard({ id, title, date, time, location, image, category, is
       <div className="relative">
         <Image
           src={image || "/placeholder.svg"}
-          alt={title}
+          alt={title + ".png"}
           width={600}
           height={400}
-          className="aspect-video object-cover w-full"
+          className="aspect-video object-cover w-full text-center"
         />
         {isFeatured && <Badge className="absolute top-2 right-2 bg-pink-500 hover:bg-pink-600">Featured</Badge>}
       </div>
