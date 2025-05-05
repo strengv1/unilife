@@ -4,40 +4,13 @@ import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { EventCard } from "@/components/event-card"
+import { type Event, useEvents } from "./hooks/useEvents"
 
-// Mock data for upcoming events
-const upcomingEvents = [
-  {
-    id: "1",
-    title: "Summer Kickoff Festival",
-    date: "June 15, 2025",
-    time: "18:00 - 02:00",
-    location: "Helsinki University Campus",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Festival",
-    isFeatured: true,
-  },
-  {
-    id: "2",
-    title: "Tech Startup Networking Night",
-    date: "June 22, 2025",
-    time: "19:00 - 23:00",
-    location: "Aalto University",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Networking",
-  },
-  {
-    id: "3",
-    title: "International Student Mixer",
-    date: "July 5, 2025",
-    time: "20:00 - 01:00",
-    location: "Turku Student Union",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Social",
-  },
-]
+
 
 export default function Home() {
+  const { upcoming } = useEvents()
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -64,7 +37,7 @@ export default function Home() {
                 Join thousands of students at our high-energy events designed to create memories that last a lifetime.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <Button asChild size="lg" className="bg-pink-600 hover:bg-pink-700 text-white">
+                <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white">
                   <Link href="/events">Explore Events</Link>
                 </Button>
                 <Button
@@ -94,7 +67,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {upcomingEvents.map((event) => (
+              {upcoming.map((event: Event) => (
                 <EventCard key={event.id} {...event} />
               ))}
             </div>
@@ -113,7 +86,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center text-center p-6 rounded-lg border bg-card">
-                <div className="h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center mb-4">
+                <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center mb-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -124,7 +97,7 @@ export default function Home() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-pink-500"
+                    className="text-red-500"
                   >
                     <path d="M17 11h1a3 3 0 0 1 0 6h-1"></path>
                     <path d="M9 12v6"></path>
@@ -140,7 +113,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col items-center text-center p-6 rounded-lg border bg-card">
-                <div className="h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center mb-4">
+                <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center mb-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -151,7 +124,7 @@ export default function Home() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-pink-500"
+                    className="text-red-500"
                   >
                     <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
                     <circle cx="9" cy="7" r="4"></circle>
@@ -167,7 +140,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col items-center text-center p-6 rounded-lg border bg-card">
-                <div className="h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center mb-4">
+                <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center mb-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -178,7 +151,7 @@ export default function Home() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-pink-500"
+                    className="text-red-500"
                   >
                     <path d="M12 2v4"></path>
                     <path d="M12 18v4"></path>
@@ -200,7 +173,7 @@ export default function Home() {
         </section>
 
         {/* Newsletter Section */}
-        <section className="py-16 bg-pink-50 dark:bg-pink-950/20">
+        <section className="py-16 bg-blue-50 dark:bg-blue-950/20">
           <div className="container px-4 mx-auto text-center">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Stay Updated</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
@@ -213,7 +186,7 @@ export default function Home() {
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 required
               />
-              <Button type="submit" className="bg-pink-600 hover:bg-pink-700 text-white">
+              <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white">
                 Subscribe
               </Button>
             </form>

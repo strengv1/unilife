@@ -18,7 +18,7 @@ interface EventCardProps {
 
 export function EventCard({ id, title, date, time, location, image, category, isFeatured = false }: EventCardProps) {
   return (
-    <Card className={`overflow-hidden transition-all hover:shadow-lg ${isFeatured ? "border-pink-500 shadow-md" : ""}`}>
+    <Card className={`overflow-hidden transition-all hover:shadow-lg w-full ${isFeatured ? "border-red-500 shadow-md" : ""}`}>
       <div className="relative">
         <Image
           src={image || "/placeholder.svg"}
@@ -27,11 +27,11 @@ export function EventCard({ id, title, date, time, location, image, category, is
           height={400}
           className="aspect-video object-cover w-full text-center"
         />
-        {isFeatured && <Badge className="absolute top-2 right-2 bg-pink-500 hover:bg-pink-600">Featured</Badge>}
+        {isFeatured && <Badge className="absolute top-2 right-2 bg-red-500 hover:bg-red-600">Featured</Badge>}
       </div>
       <CardHeader className="p-4">
         <div className="space-y-1">
-          <Badge variant="outline" className="mb-2">
+          <Badge variant="outline" className="mb-2 text-blue-900 border-blue-100">
             {category}
           </Badge>
           <h3 className="font-bold text-xl line-clamp-2">{title}</h3>

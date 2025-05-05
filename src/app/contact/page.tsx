@@ -10,7 +10,7 @@ export default function ContactPage() {
       <Navbar />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-pink-600 text-white py-16">
+        <section className="bg-red-600 text-white py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4">Get in Touch</h1>
             <p className="max-w-2xl mx-auto text-lg opacity-90">
@@ -28,7 +28,7 @@ export default function ContactPage() {
                 Feel free to reach out to us through any of the following channels. We&apos;re always happy to hear from
                 students, universities, and potential partners.
               </p>
-              <Button asChild size="lg" className="bg-pink-600 hover:bg-pink-700 text-white">
+              <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white">
                 <a href="mailto:info@uni-life.fi">
                   <Mail className="mr-2 h-5 w-5" />
                   Email Us Now
@@ -39,8 +39,8 @@ export default function ContactPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
               <Card>
                 <CardContent className="flex flex-col items-center text-center gap-4 p-6">
-                  <div className="h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center">
-                    <Mail className="h-6 w-6 text-pink-600" />
+                  <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center">
+                    <Mail className="h-6 w-6 text-red-600" />
                   </div>
                   <div>
                     <h3 className="font-medium">Email</h3>
@@ -51,8 +51,8 @@ export default function ContactPage() {
 
               <Card>
                 <CardContent className="flex flex-col items-center text-center gap-4 p-6">
-                  <div className="h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center">
-                    <Phone className="h-6 w-6 text-pink-600" />
+                  <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center">
+                    <Phone className="h-6 w-6 text-red-600" />
                   </div>
                   <div>
                     <h3 className="font-medium">Phone</h3>
@@ -63,8 +63,8 @@ export default function ContactPage() {
 
               <Card>
                 <CardContent className="flex flex-col items-center text-center gap-4 p-6">
-                  <div className="h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center">
-                    <MapPin className="h-6 w-6 text-pink-600" />
+                  <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center">
+                    <MapPin className="h-6 w-6 text-red-600" />
                   </div>
                   <div>
                     <h3 className="font-medium">Office Address</h3>
@@ -75,8 +75,8 @@ export default function ContactPage() {
 
               <Card>
                 <CardContent className="flex flex-col items-center text-center gap-4 p-6">
-                  <div className="h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center">
-                    <Clock className="h-6 w-6 text-pink-600" />
+                  <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center">
+                    <Clock className="h-6 w-6 text-red-600" />
                   </div>
                   <div>
                     <h3 className="font-medium">Office Hours</h3>
@@ -92,21 +92,21 @@ export default function ContactPage() {
                 <div className="flex space-x-4 justify-center">
                   <a
                     href="#"
-                    className="h-10 w-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-pink-200 transition-colors"
+                    className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-200 transition-colors"
                   >
                     <Instagram className="h-5 w-5" />
                     <span className="sr-only">Instagram</span>
                   </a>
                   <a
                     href="#"
-                    className="h-10 w-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-pink-200 transition-colors"
+                    className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-200 transition-colors"
                   >
                     <Facebook className="h-5 w-5" />
                     <span className="sr-only">Facebook</span>
                   </a>
                   <a
                     href="#"
-                    className="h-10 w-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-pink-200 transition-colors"
+                    className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-200 transition-colors"
                   >
                     <Twitter className="h-5 w-5" />
                     <span className="sr-only">Twitter</span>
@@ -118,17 +118,16 @@ export default function ContactPage() {
         </section>
 
         {/* Map Section */}
-        <section className="py-12 bg-muted/30">
+        {/* <section className="py-12 bg-muted/30">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl font-bold mb-6 text-center">Find Us</h2>
             <div className="aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden border">
-              {/* Placeholder for map - in a real implementation, you would use a map component or iframe */}
               <div className="w-full h-full bg-muted flex items-center justify-center">
                 <p className="text-muted-foreground">Interactive Map Would Be Displayed Here</p>
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* FAQ Section */}
         <section className="py-16">

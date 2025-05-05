@@ -4,74 +4,17 @@ import { EventCard } from "@/components/event-card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
-// Mock data for events
-const events = [
-  {
-    id: "1",
-    title: "Summer Kickoff Festival",
-    date: "June 15, 2025",
-    time: "18:00 - 02:00",
-    location: "Helsinki University Campus",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Festival",
-    isFeatured: true,
-  },
-  {
-    id: "2",
-    title: "Tech Startup Networking Night",
-    date: "June 22, 2025",
-    time: "19:00 - 23:00",
-    location: "Aalto University",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Networking",
-  },
-  {
-    id: "3",
-    title: "International Student Mixer",
-    date: "July 5, 2025",
-    time: "20:00 - 01:00",
-    location: "Turku Student Union",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Social",
-  },
-  {
-    id: "4",
-    title: "End of Semester Party",
-    date: "July 12, 2025",
-    time: "21:00 - 03:00",
-    location: "Club Apollo, Helsinki",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Party",
-  },
-  {
-    id: "5",
-    title: "Career Fair 2025",
-    date: "August 10, 2025",
-    time: "10:00 - 16:00",
-    location: "Tampere University",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Career",
-  },
-  {
-    id: "6",
-    title: "Freshers Welcome Week",
-    date: "September 1, 2025",
-    time: "Various times",
-    location: "Multiple Campuses",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Orientation",
-    isFeatured: true,
-  },
-]
+import { type Event, useEvents } from "../hooks/useEvents"
 
 export default function EventsPage() {
+  const { all } = useEvents();
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-pink-600 text-white py-16">
+        <section className="bg-red-600 text-white py-16">
           <div className="container px-4 text-center mx-auto">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4">Discover Our Events</h1>
             <p className="max-w-2xl mx-auto text-lg opacity-90">
@@ -124,8 +67,8 @@ export default function EventsPage() {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl font-bold mb-8">All Events</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {events.map((event) => (
+            <div className={`grid gap-6 grid-cols-1 justify-items-center ${all.length > 1 ? "md:grid-cols-2 lg:grid-cols-3" : ""}`}>
+              {all.map((event: Event) => (
                 <EventCard key={event.id} {...event} />
               ))}
             </div>
@@ -133,7 +76,7 @@ export default function EventsPage() {
         </section>
 
         {/* Pagination */}
-        <section className="py-8">
+        {/* <section className="py-8">
           <div className="container mx-auto px-4">
             <div className="flex justify-center">
               <nav className="flex items-center gap-1">
@@ -154,7 +97,7 @@ export default function EventsPage() {
                   </svg>
                   <span className="sr-only">Previous</span>
                 </Button>
-                <Button variant="outline" size="sm" className="bg-pink-50 dark:bg-pink-950/20">
+                <Button variant="outline" size="sm" className="bg-red-50 dark:bg-red-950/20">
                   1
                 </Button>
                 <Button variant="outline" size="sm">
@@ -183,7 +126,7 @@ export default function EventsPage() {
               </nav>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Host an Event CTA */}
         <section className="py-16 bg-muted/30">
@@ -193,7 +136,7 @@ export default function EventsPage() {
               If you&apos;re a student organization or university department looking to create an unforgettable event, we can
               help!
             </p>
-            <Button asChild className="bg-pink-600 hover:bg-pink-700 text-white">
+            <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
               <a href="/contact">Get in Touch</a>
             </Button>
           </div>
