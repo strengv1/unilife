@@ -14,7 +14,7 @@ export default function ContactPage() {
           <div className="container px-4 text-center">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4">Get in Touch</h1>
             <p className="max-w-2xl mx-auto text-lg opacity-90">
-              Have questions or want to collaborate? We'd love to hear from you!
+              Have questions or want to collaborate? We&apos;d love to hear from you!
             </p>
           </div>
         </section>
@@ -25,7 +25,7 @@ export default function ContactPage() {
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
               <p className="text-muted-foreground mb-8">
-                Feel free to reach out to us through any of the following channels. We're always happy to hear from
+                Feel free to reach out to us through any of the following channels. We&apos;re always happy to hear from
                 students, universities, and potential partners.
               </p>
               <Button asChild size="lg" className="bg-pink-600 hover:bg-pink-700 text-white">
@@ -139,7 +139,7 @@ export default function ContactPage() {
                 <CardContent className="p-6">
                   <h3 className="font-bold text-lg mb-2">How can I partner with UNI LIFE?</h3>
                   <p className="text-muted-foreground">
-                    We're always looking for partners! Please email us with details about your organization and
+                    We&apos;re always looking for partners! Please email us with details about your organization and
                     partnership ideas.
                   </p>
                 </CardContent>
@@ -157,7 +157,7 @@ export default function ContactPage() {
                 <CardContent className="p-6">
                   <h3 className="font-bold text-lg mb-2">Can I volunteer at your events?</h3>
                   <p className="text-muted-foreground">
-                    We're always looking for enthusiastic volunteers. Send us an email mentioning you're interested in
+                    We&apos;re always looking for enthusiastic volunteers. Send us an email mentioning you&apos;re interested in
                     volunteering.
                   </p>
                 </CardContent>

@@ -190,7 +190,7 @@ export default function EventsPage() {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Want to Host Your Own Event?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              If you're a student organization or university department looking to create an unforgettable event, we can
+              If you&apos;re a student organization or university department looking to create an unforgettable event, we can
               help!
             </p>
             <Button asChild className="bg-pink-600 hover:bg-pink-700 text-white">
