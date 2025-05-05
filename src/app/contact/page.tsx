@@ -11,7 +11,7 @@ export default function ContactPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-pink-600 text-white py-16">
-          <div className="container px-4 text-center">
+          <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4">Get in Touch</h1>
             <p className="max-w-2xl mx-auto text-lg opacity-90">
               Have questions or want to collaborate? We&apos;d love to hear from you!
@@ -21,7 +21,7 @@ export default function ContactPage() {
 
         {/* Contact Info */}
         <section className="py-16">
-          <div className="container px-4">
+          <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
               <p className="text-muted-foreground mb-8">
@@ -119,7 +119,7 @@ export default function ContactPage() {
 
         {/* Map Section */}
         <section className="py-12 bg-muted/30">
-          <div className="container px-4">
+          <div className="container mx-auto px-4">
             <h2 className="text-2xl font-bold mb-6 text-center">Find Us</h2>
             <div className="aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden border">
               {/* Placeholder for map - in a real implementation, you would use a map component or iframe */}
@@ -132,7 +132,7 @@ export default function ContactPage() {
 
         {/* FAQ Section */}
         <section className="py-16">
-          <div className="container px-4">
+          <div className="container mx-auto px-4">
             <h2 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               <Card>
