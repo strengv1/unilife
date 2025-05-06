@@ -27,7 +27,7 @@ export default function Home() {
             <div className="h-full relative z-20 flex flex-col 
               items-center justify-end text-center text-white pb-4 mx-4
             ">
-              <div className="flex flex-col md:flex-row w-full gap-8 md:justify-between">
+              <div className="flex flex-col md:flex-row w-full gap-8 md:gap-1 md:justify-between md:pb-4">
                 <div className="flex flex-col md:basis-[65vw] gap-2
                   text-4xl text-left font-extrabold tracking-tight md:text-6xl lg:text-7xl
                 ">
@@ -90,17 +90,23 @@ export default function Home() {
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
               Subscribe to our newsletter to get the latest updates on upcoming events and exclusive offers.
             </p>
-            <form className="flex flex-col md:flex-row gap-2 max-w-md mx-auto">
+            <form
+              action="https://formspree.io/f/xqaqqwgy"
+              method="POST"
+              className="flex flex-col md:flex-row gap-2 max-w-md mx-auto"
+            >
               <input
                 type="email"
+                name="email"
                 placeholder="Enter your email"
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ..."
                 required
               />
-              <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white">
+              <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
                 Subscribe
               </Button>
             </form>
+
           </div>
         </section>
       </main>

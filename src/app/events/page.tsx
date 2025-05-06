@@ -121,7 +121,7 @@ export default function EventsPage() {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Want to Host an Event Together?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8 text-balance">
-              If you&apos;re a student organization looking to create an unforgettable event - let&apos;s make one, together!
+              If you&apos;re a student organization looking to create an unforgettable event, let&apos;s make it happen — together!
             </p>
             <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
               <a href="/contact">Get in Touch</a>
