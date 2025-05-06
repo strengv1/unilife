@@ -13,9 +13,9 @@ const events: Event[] = [
   {
     id: "1",
     title: "Beer Pong Battle Royale",
-    date: "September 2025, 2025",
-    time: "11:00 - 22:00",
-    location: "Alvarin Aukio, Otaniemi",
+    date: "September 14th, 2025 ",
+    time: "12:00 - 19:00",
+    location: "Alvarinaukio, Otaniemi",
     image: "/abp_festarit.png?height=400&width=600",
     category: "Party / Festival",
     isFeatured: true,
