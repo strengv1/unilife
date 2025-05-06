@@ -9,7 +9,7 @@ export const RegistrationSection = () => {
         <div className="mx-auto max-w-[800px] text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Register Your Team</h2>
           <p className="mt-6 text-lg text-red-100">
-            Secure your spot in Finland's biggest beer pong tournament before all slots are filled!
+            Secure your spot in Finland&apos;s biggest beer pong tournament before all slots are filled!
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export const RegistrationSection = () => {
           </Card>
           <Card className="bg-white shadow-lg">
             <CardContent className="pt-8 pb-6 px-6">
-              <h3 className="text-2xl font-bold">What's Included</h3>
+              <h3 className="text-2xl font-bold">What&apos;s Included</h3>
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />

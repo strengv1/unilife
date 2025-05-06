@@ -16,7 +16,7 @@ export const FAQSection = () => {
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-lg font-medium">Who can participate?</AccordionTrigger>
               <AccordionContent className="text-base">
-                The tournament is open to everyone 18 years and older. You don't need to be a student to
+                The tournament is open to everyone 18 years and older. You don&apos;t need to be a student to
                 participate.
               </AccordionContent>
             </AccordionItem>
@@ -27,7 +27,7 @@ export const FAQSection = () => {
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-              <AccordionTrigger className="text-lg font-medium">What's the refund policy?</AccordionTrigger>
+              <AccordionTrigger className="text-lg font-medium">What&apos;s the refund policy?</AccordionTrigger>
               <AccordionContent className="text-base">
                 You can transfer your registration to another team but no refunds will be issued. Team name can be changed up to 1 week before the tournament date.
               </AccordionContent>

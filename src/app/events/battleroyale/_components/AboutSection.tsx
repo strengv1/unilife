@@ -7,7 +7,7 @@ export const AboutSection = () => {
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-[800px] text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Finland's Ultimate Beer Pong Experience
+            Finland&apos;s Ultimate Beer Pong Experience
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
             Organized by Unilife and Aalto Beer Pong, the Beer Pong Battle Royale brings together the best beer pong
@@ -35,7 +35,7 @@ export const AboutSection = () => {
               </div>
               <h3 className="text-xl font-bold">Community Event</h3>
               <p className="mt-3 text-muted-foreground">
-                More than just a tournament, it's a celebration of student culture and community with music, beer,
+                More than just a tournament, it&apos;s a celebration of student culture and community with music, beer,
                 and entertainment.
               </p>
             </CardContent>

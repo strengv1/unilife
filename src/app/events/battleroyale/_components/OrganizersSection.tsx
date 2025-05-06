@@ -22,7 +22,7 @@ export const OrganizersSection = () => {
             </div>
             <h3 className="mt-6 text-2xl font-bold">UNI LIFE</h3>
             <p className="mt-4 max-w-md text-lg text-muted-foreground">
-              Finland's largest student event organization, bringing professional event management to the
+              Finland&apos;s largest student event organization, bringing professional event management to the
               tournament.
             </p>
           </div>

@@ -15,7 +15,7 @@ export const PrizesSection = () => {
               <h3 className="text-2xl font-bold">1st Place</h3>
               <div className="my-6 text-5xl font-extrabold text-yellow-600">€500</div>
               <p className="text-muted-foreground">
-                Plus championship trophy and title of Finland's Beer Pong Champions
+                Plus championship trophy and title of Finland&apos;s Beer Pong Champions
               </p>
             </CardContent>
           </Card>
