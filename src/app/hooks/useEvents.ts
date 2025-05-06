@@ -6,6 +6,7 @@ export type Event = {
   location: string;
   image: string;
   category: string;
+  urlName: string;
   isFeatured?: boolean;
 };
 
@@ -18,6 +19,7 @@ const events: Event[] = [
     location: "Alvarinaukio, Otaniemi",
     image: "/abp_festarit.png?height=400&width=600",
     category: "Party / Festival",
+    urlName: "battleroyale",
     isFeatured: true,
   },
   // ... more events

@@ -13,10 +13,11 @@ interface EventCardProps {
   location: string
   image: string
   category: string
+  urlName: string
   isFeatured?: boolean
 }
 
-export function EventCard({ id, title, date, time, location, image, category, isFeatured = false }: EventCardProps) {
+export function EventCard({ title, date, time, location, image, category, urlName, isFeatured = false }: EventCardProps) {
   return (
     <Card className={`overflow-hidden transition-all max-w-md hover:shadow-lg w-full ${isFeatured ? "border-red-500 shadow-md" : ""}`}>
       <div className="relative">
@@ -53,7 +54,7 @@ export function EventCard({ id, title, date, time, location, image, category, is
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button asChild className="w-full">
-          <Link href={`/events/${id}`}>View Details</Link>
+          <Link href={`/events/${urlName}`}>View Details</Link>
         </Button>
       </CardFooter>
     </Card>
