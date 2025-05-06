@@ -8,19 +8,9 @@ export default function EventsPage() {
   const { all } = useEvents();
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-amber-50">
       <Navbar />
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="bg-red-600 text-white py-16">
-          <div className="container px-4 text-center mx-auto">
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4">Discover Our Events</h1>
-            <p className="max-w-2xl mx-auto text-lg opacity-90">
-              Browse through our upcoming and past events to find the perfect experience for you.
-            </p>
-          </div>
-        </section>
-
         {/* Filters Section
         <section className="py-8 border-b">
           <div className="container mx-auto px-4">
@@ -127,7 +117,7 @@ export default function EventsPage() {
         </section> */}
 
         {/* Host an Event CTA */}
-        <section className="py-16 bg-muted/30">
+        <section className="py-16 bg-amber-100">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Want to Host an Event Together?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8 text-balance">

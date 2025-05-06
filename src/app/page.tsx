@@ -6,13 +6,11 @@ import { Footer } from "@/components/footer"
 import { EventCard } from "@/components/event-card"
 import { type Event, useEvents } from "./hooks/useEvents"
 
-
-
 export default function Home() {
   const { upcoming } = useEvents()
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-amber-50">
       <Navbar />
       <main className="flex-1">
         {/* Hero Section */}
@@ -26,27 +24,27 @@ export default function Home() {
               className="object-cover opacity-70"
               priority
             />
-            <div className="container h-full max-w-6xl mx-auto relative z-20 flex flex-col 
+            <div className="w-full h-full relative z-20 flex flex-col 
               items-center justify-center text-center text-white
-              px-4 pt-10
+              px-4 pt-10 xl:mx-5
             ">
-              <div className="flex flex-col md:flex-row md:pt-48">
-                <div className="flex flex-col md:basis-[65vw]
-                  text-xl text-left font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl max-w-3xl
+              <div className="flex flex-col md:flex-row md:pt-80 w-full justify-between">
+                <div className="flex flex-col md:basis-[65vw] gap-2
+                  text-xl text-left font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl
                 ">
                   <p>Every uni.</p>
                   <p>One community.</p>
                   <p>Welcome to UNI LIFE.</p>
                 </div>
 
-                <div className="flex flex-col text-left md:basis-[35vw]">
-                  <p className="max-w-2xl text-lg sm:text-xl md:text-2xl">
+                <div className="flex flex-col md:basis-[35vw] gap-2">
+                  <p className=" text-left text-lg sm:text-xl md:text-2xl text-balance">
                     We bring university students together through unforgettable events.
                   </p>
-                  <p className="max-w-2xl text-lg sm:text-xl md:text-2xl">
-                  No one cares what you study — everyone’s here for a good time with great people.
+                  <p className=" text-left text-lg sm:text-xl md:text-2xl text-balance">
+                    No one cares what you study — everyone’s here for a good time with great people.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 mt-8 mx-auto">
+                  <div className="flex flex-col sm:flex-row gap-4 mt-8">
                     <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white">
                       <Link href="/events">Explore Events</Link>
                     </Button>
@@ -60,6 +58,7 @@ export default function Home() {
                     </Button>
                   </div>
                 </div>
+
               </div>
               
               
@@ -68,16 +67,16 @@ export default function Home() {
         </section>
 
         {/* Upcoming Events Section */}
-        <section className="py-16 bg-muted/30">
+        <section className="py-16">
           <div className="container mx-auto max-w-6xl px-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
               <div>
                 <h2 className="text-3xl font-bold tracking-tight">Upcoming Events</h2>
                 <p className="text-muted-foreground mt-2">Don&apos;t miss out on our next big events</p>
               </div>
-              <Button asChild variant="outline" className="mt-4 md:mt-0">
+              {/* <Button asChild variant="outline" className="mt-4 md:mt-0">
                 <Link href="/events">View All Events</Link>
-              </Button>
+              </Button> */}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -89,7 +88,7 @@ export default function Home() {
         </section>
 
         {/* Newsletter Section */}
-        <section className="py-16 bg-blue-50 dark:bg-blue-950/20">
+        <section className="py-16 bg-amber-100">
           <div className="container px-4 mx-auto text-center">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Stay Updated</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">

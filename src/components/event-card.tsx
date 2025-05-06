@@ -18,7 +18,7 @@ interface EventCardProps {
 
 export function EventCard({ id, title, date, time, location, image, category, isFeatured = false }: EventCardProps) {
   return (
-    <Card className={`overflow-hidden transition-all hover:shadow-lg w-full ${isFeatured ? "border-red-500 shadow-md" : ""}`}>
+    <Card className={`overflow-hidden transition-all max-w-md hover:shadow-lg w-full ${isFeatured ? "border-red-500 shadow-md" : ""}`}>
       <div className="relative">
         <Image
           src={image || "/placeholder.svg"}

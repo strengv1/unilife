@@ -1,18 +1,23 @@
 import Link from "next/link"
-import { PartyPopper, Instagram } from "lucide-react"
+import Image from "next/image"
+import { Instagram } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="border-t bg-muted/50">
+    <footer className="border-t bg-amber-50">
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-3">
             <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-              <PartyPopper className="h-6 w-6 text-red-500" />
-              <span>UNI LIFE</span>
+              <Image
+                src="/unilife_logo.png"
+                alt="UNI LIFE"
+                height={48}
+                width={216}
+              />
             </Link>
             <p className="text-sm text-muted-foreground">
-              Creating large-scale and high-value student events across Finland.
+              We don&apos;t do ordinary. We make your uni life unforgettable.
             </p>
           </div>
           <div className="space-y-3">
