@@ -24,7 +24,7 @@ export default function ContactPage() {
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h2 className="text-2xl font-bold mb-4">Open Ears, Open Minds – Pitch Us Anything.</h2>
               <p className="text-muted-foreground mb-2">
-                We're always happy to hear from students, universities, and potential partners.
+                We&apos;re always happy to hear from students, universities, and potential partners.
               </p>
               <p className="text-muted-foreground mb-8">
                 We believe anything is possible — as long as we do it together!
