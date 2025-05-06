@@ -35,7 +35,7 @@ export const FAQSection = () => {
             <AccordionItem value="item-4">
               <AccordionTrigger className="text-lg font-medium">Is there food available at the event?</AccordionTrigger>
               <AccordionContent className="text-base">
-                No food will be provided by the event organizers. However, there are a couple of fast food restaurants and student cafeterias nearby. Please note that student cafeteria opening hours may vary, especially since the event takes place on a Saturday.
+                No food will be provided by the event organizers. However, there are a couple of fast food restaurants and student cafeterias nearby. Please note that student cafeteria opening hours may vary, especially since the event takes place on a Sunday.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
