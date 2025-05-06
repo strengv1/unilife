@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-[#2862ab]">
       <div className="flex h-20 items-center gap-4 mx-4">
         <Link href="/" className="flex items-center gap-1 md:gap-4 font-bold text-xl">
           <Image 

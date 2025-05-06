@@ -1,8 +1,7 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Mail, Phone, MapPin, Clock, Instagram, Facebook, Twitter } from "lucide-react"
+import { Mail } from "lucide-react"
 
 export default function ContactPage() {
   return (

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { PartyPopper, Instagram, Facebook, Twitter } from "lucide-react"
+import { PartyPopper, Instagram } from "lucide-react"
 
 export function Footer() {
   return (

@@ -2,8 +2,6 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { EventCard } from "@/components/event-card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { type Event, useEvents } from "../hooks/useEvents"
 
 export default function EventsPage() {
