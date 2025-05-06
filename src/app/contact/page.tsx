@@ -5,7 +5,7 @@ import { Mail } from "lucide-react"
 
 export default function ContactPage() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-amber-50">
       <Navbar />
       <main className="flex-1">
         {/* Contact Info */}

@@ -24,7 +24,7 @@ export default function Home() {
               className="object-cover opacity-70"
               priority
             />
-            <div className="w-full h-full relative z-20 flex flex-col 
+            <div className="h-full relative z-20 flex flex-col 
               items-center justify-center text-center text-white
               px-4 pt-10 xl:mx-5
             ">
