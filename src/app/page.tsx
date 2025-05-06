@@ -15,36 +15,35 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative">
-          <div className="absolute inset-0 bg-black/70 z-10" />
-          <div className="relative h-[80vh]">
+          <div className="absolute inset-0 bg-black/60 z-10" />
+          <div className="relative h-[80vh] overflow-hidden">
             <Image
-              src="/unilife_cover.jpg?height=800&width=1600"
+              src="/unilife_cover.jpg"
               alt="Students celebrating"
               fill
-              className="object-cover opacity-70"
+              className="object-cover scale-[1.2] object-[center_calc(100%-60px)] sm:scale-[1] sm:object-center opacity-70"
               priority
             />
             <div className="h-full relative z-20 flex flex-col 
-              items-center justify-center text-center text-white
-              px-4 pt-10 xl:mx-5
+              items-center justify-end text-center text-white pb-4 mx-4
             ">
-              <div className="flex flex-col md:flex-row md:pt-80 w-full justify-between">
+              <div className="flex flex-col md:flex-row w-full gap-8 md:justify-between">
                 <div className="flex flex-col md:basis-[65vw] gap-2
-                  text-xl text-left font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl
+                  text-4xl text-left font-extrabold tracking-tight md:text-6xl lg:text-7xl
                 ">
                   <p>Every uni.</p>
                   <p>One community.</p>
-                  <p>Welcome to UNI LIFE.</p>
+                  <p>Welcome to <span className="underline whitespace-nowrap ">UNI LIFE</span>.</p>
                 </div>
 
                 <div className="flex flex-col md:basis-[35vw] gap-2">
-                  <p className=" text-left text-lg sm:text-xl md:text-2xl text-balance">
+                  <p className=" text-left text-lg md:text-2xl text-balance">
                     We bring university students together through unforgettable events.
                   </p>
-                  <p className=" text-left text-lg sm:text-xl md:text-2xl text-balance">
+                  <p className=" text-left text-lg md:text-2xl text-balance">
                     No one cares what you study — everyone’s here for a good time with great people.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                  <div className="flex flex-col md:flex-row gap-4 mt-8">
                     <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white">
                       <Link href="/events">Explore Events</Link>
                     </Button>
@@ -58,10 +57,7 @@ export default function Home() {
                     </Button>
                   </div>
                 </div>
-
               </div>
-              
-              
             </div>
           </div>
         </section>
@@ -94,7 +90,7 @@ export default function Home() {
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
               Subscribe to our newsletter to get the latest updates on upcoming events and exclusive offers.
             </p>
-            <form className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+            <form className="flex flex-col md:flex-row gap-2 max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email"
