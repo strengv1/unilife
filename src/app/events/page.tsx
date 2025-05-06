@@ -23,7 +23,7 @@ export default function EventsPage() {
           </div>
         </section>
 
-        {/* Filters Section */}
+        {/* Filters Section
         <section className="py-8 border-b">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row gap-4">
@@ -61,7 +61,7 @@ export default function EventsPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Events Grid */}
         <section className="py-12">
@@ -131,10 +131,9 @@ export default function EventsPage() {
         {/* Host an Event CTA */}
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">Want to Host Your Own Event?</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              If you&apos;re a student organization or university department looking to create an unforgettable event, we can
-              help!
+            <h2 className="text-3xl font-bold tracking-tight mb-4">Want to Host an Event Together?</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8 text-balance">
+              If you&apos;re a student organization looking to create an unforgettable event - let&apos;s make one, together!
             </p>
             <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
               <a href="/contact">Get in Touch</a>

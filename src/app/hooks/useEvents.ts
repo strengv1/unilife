@@ -16,7 +16,7 @@ const events: Event[] = [
     date: "September 2025, 2025",
     time: "11:00 - 22:00",
     location: "Alvarin Aukio, Otaniemi",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/abp_festarit.png?height=400&width=600",
     category: "Party / Festival",
     isFeatured: true,
   },

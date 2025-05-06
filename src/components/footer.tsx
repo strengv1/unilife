@@ -38,18 +38,15 @@ export function Footer() {
           <div className="space-y-3">
             <h3 className="font-medium">Connect With Us</h3>
             <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-red-500 transition-colors">
+              <Link 
+                href="https://www.instagram.com/unilife.fi"
+                target="_blank" 
+                className="text-muted-foreground hover:text-red-500 transition-colors"
+              >
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-red-500 transition-colors">
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-red-500 transition-colors">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Link>
+
             </div>
             <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} UNI LIFE. All rights reserved.</p>
           </div>
