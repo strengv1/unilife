@@ -19,24 +19,29 @@ export const HeroSection = () => {
           items-center justify-center text-center text-white
           px-4 pt-10
         ">
-          <div className="inline-block pb-10">
-            <Image
-              src="/magic_island_logo.png"
-              alt="Magic Island"
-              height={80}
-              width={600}
-              className="max-w-full h-auto"
-              priority
-            />
-          </div>
           <div className="space-y-6">
-            <div className="inline-block rounded-md bg-sky-600 px-3 py-1 text-sm font-semibold">
-              Are you ready to escape reality?
-            </div>
-            <h1 className="max-w-[95vw] mx-auto font-extrabold tracking-tight text-2xl sm:text-5xl md:text-6xl lg:text-7xl">
-              A summer adventure like no other awaits you at <span className="font-bold">Magic Island</span>
+            <h1 className="max-w-[95vw] mx-auto
+              font-extrabold tracking-tight text-3xl sm:text-5xl md:text-6xl lg:text-7xl
+              text-shadow-lg
+            ">
+              Are you ready?
             </h1>
-
+            <p className="mx-auto max-w-5xl text-center leading-tight
+              text-xl sm:text-3xl md:text-4xl lg:text-6xl
+              text-shadow-lg
+            ">
+              A summer adventure like no other awaits you at{" "}
+              <span className="inline-block align-baseline">
+                <Image
+                  src="/magic_island_logo.png"
+                  alt="Magic Island"
+                  width={800}
+                  height={100}
+                  className="inline h-[1em] w-auto"
+                  priority
+                />
+              </span>
+            </p>
             <div className="grid grid-cols-3 max-w-md mx-auto justify-items-center justify-center text-sm">
               <div className="flex items-center gap-2">
                 <Calendar className="h-5 w-5" />

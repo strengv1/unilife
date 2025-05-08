@@ -24,7 +24,7 @@ export const AboutSection = () => {
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-yellow-100">
                 <Utensils className="h-7 w-7 text-yellow-600" />
               </div>
-              <h3 className="text-xl font-bold">Hot Grill, Cold Drinks</h3>
+              <h3 className="text-xl font-bold">Hot Grill</h3>
               <p className="mt-3 text-muted-foreground">
                 🌭 Fresh hot dogs, all free for guests.
               </p>

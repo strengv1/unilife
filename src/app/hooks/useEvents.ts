@@ -27,7 +27,7 @@ const events: Event[] = [
   {
     id: "2",
     title: "Magic Island",
-    subtitle: "yo wtf is this",
+    subtitle: "yo what's this??",
     date: "???",
     time: "???",
     location: "???",

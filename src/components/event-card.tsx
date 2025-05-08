@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Calendar, MapPin, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 interface EventCardProps {
