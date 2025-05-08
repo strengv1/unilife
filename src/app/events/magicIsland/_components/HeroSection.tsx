@@ -27,17 +27,17 @@ export const HeroSection = () => {
               Are you ready?
             </h1>
             <p className="mx-auto max-w-5xl text-center leading-tight
-              text-xl sm:text-3xl md:text-4xl lg:text-6xl
+              text-xl sm:text-3xl md:text-4xl lg:text-[2.75rem]
               text-shadow-lg
             ">
-              A summer adventure like no other awaits you at{" "}
-              <span className="inline-block align-baseline">
+              A summer adventure like no other awaits you at
+              <span className="flex align-baseline items-center justify-center">
                 <Image
                   src="/magic_island_logo.png"
                   alt="Magic Island"
                   width={800}
                   height={100}
-                  className="inline h-[1em] w-auto"
+                  className="h-[1em] w-auto"
                   priority
                 />
               </span>

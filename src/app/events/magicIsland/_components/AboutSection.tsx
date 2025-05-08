@@ -13,7 +13,7 @@ export const AboutSection = () => {
             The Summer Party You’ll Never Forget
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
-            Magic Island is an open-air party like no other — free food, pulsing music, and just a bit of water between you and the wildest night of the summer season.
+            Magic Island is an open-air party like no other — free food, pulsing music, and just a bit of water between you and the wildest open-air of the summer season.
           </p>
           <p className="mt-6 text-lg text-muted-foreground">
           Yes, you’ll have to trek through water to get there..<br/>
@@ -75,7 +75,7 @@ export const AboutSection = () => {
           You won&apos;t see it on posters. You won&apos;t hear it through friends.
         </p>
         <p className="font-bold text-center text-muted-foreground text-lg">
-          Only newsletter readers get the full details.
+          Only newsletter readers get the time, date, location.
         </p>
       </div>
     </section>
