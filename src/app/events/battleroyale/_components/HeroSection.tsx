@@ -7,7 +7,7 @@ export const HeroSection = () => {
   return (
     <section className="relative">
       <div className="absolute inset-0 bg-black/80 z-10" />
-      <div className="relative h-[80vh] bg-blue-800">
+      <div className="relative flex items-center min-h-[80vh] bg-blue-800 pb-4">
         <Image
           src="/abp_festarit.png"
           alt="Beer Pong Battle Royale"

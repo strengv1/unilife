@@ -7,7 +7,7 @@ export const HeroSection = () => {
   return (
     <section className="relative">
       <div className="absolute inset-0 z-10" />
-      <div className="relative h-[80vh] bg-blue-800">
+      <div className="relative flex items-center justify-center min-h-[80vh] pb-4 bg-blue-800">
         <Image
           src="/magic_island_cover.png"
           alt="Magic Island"
@@ -19,12 +19,22 @@ export const HeroSection = () => {
           items-center justify-center text-center text-white
           px-4 pt-10
         ">
+          <div className="inline-block pb-10">
+            <Image
+              src="/magic_island_logo.png"
+              alt="Magic Island"
+              height={80}
+              width={600}
+              className="max-w-full h-auto"
+              priority
+            />
+          </div>
           <div className="space-y-6">
             <div className="inline-block rounded-md bg-sky-600 px-3 py-1 text-sm font-semibold">
               Are you ready to escape reality?
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              A summer adventure like no other awaits you at <b>Magic Island</b> 
+            <h1 className="max-w-[95vw] mx-auto font-extrabold tracking-tight text-2xl sm:text-5xl md:text-6xl lg:text-7xl">
+              A summer adventure like no other awaits you at <span className="font-bold">Magic Island</span>
             </h1>
 
             <div className="grid grid-cols-3 max-w-md mx-auto justify-items-center justify-center text-sm">

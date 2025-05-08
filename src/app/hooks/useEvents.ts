@@ -1,6 +1,7 @@
 export type Event = {
   id: string;
   title: string;
+  subtitle: string;
   date: string;
   time: string;
   location: string;
@@ -14,6 +15,7 @@ const events: Event[] = [
   {
     id: "1",
     title: "Beer Pong Battle Royale",
+    subtitle: "man I love beer pong",
     date: "September 14th, 2025 ",
     time: "12:00 - 19:00",
     location: "Alvarinaukio, Otaniemi",
@@ -25,6 +27,7 @@ const events: Event[] = [
   {
     id: "2",
     title: "Magic Island",
+    subtitle: "yo wtf is this",
     date: "???",
     time: "???",
     location: "???",

@@ -20,7 +20,7 @@ export const AboutSection = () => {
 
         <div className="mt-16 grid gap-8 md:grid-cols-3">
           <Card className="transform transition-transform hover:scale-105">
-            <CardContent className="pt-8 pb-6 px-6">
+            <CardContent className="pt-4 pb-3 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-yellow-100">
                 <Utensils className="h-7 w-7 text-yellow-600" />
               </div>
@@ -32,7 +32,7 @@ export const AboutSection = () => {
           </Card>
 
           <Card className="transform transition-transform hover:scale-105">
-            <CardContent className="pt-8 pb-6 px-6">
+            <CardContent className="pt-4 pb-3 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-purple-100">
                 <Music2 className="h-7 w-7 text-purple-600" />
               </div>
@@ -44,7 +44,7 @@ export const AboutSection = () => {
           </Card>
 
           <Card className="transform transition-transform hover:scale-105">
-            <CardContent className="pt-8 pb-6 px-6">
+            <CardContent className="pt-4 pb-3 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-pink-100">
                 <PartyPopper className="h-7 w-7 text-pink-600" />
               </div>
