@@ -10,8 +10,7 @@ export const AboutSection = () => {
             Finland&apos;s Ultimate Beer Pong Experience
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
-            Organized by Unilife and Aalto Beer Pong, the Beer Pong Battle Royale brings together the best beer pong
-            players from across Finland for an epic tournament of unheard proportions.
+            Organized by two absolute powerhouses, UNI LIFE and Aalto Beer Pong, the much awaited Beer Pong Battle Royale brings together beer pong lovers from all over Finland for an epic tournament of unprecedented proportions.
           </p>
         </div>
 
@@ -23,8 +22,7 @@ export const AboutSection = () => {
               </div>
               <h3 className="text-xl font-bold">Epic Competition</h3>
               <p className="mt-3 text-muted-foreground">
-                128 teams will battle through multiple rounds in a tournament designed to crown the ultimate beer
-                pong champions.
+                128 teams will battle through multiple rounds in a tournament designed to crown the ultimate beer pong team.
               </p>
             </CardContent>
           </Card>
@@ -35,8 +33,7 @@ export const AboutSection = () => {
               </div>
               <h3 className="text-xl font-bold">Community Event</h3>
               <p className="mt-3 text-muted-foreground">
-                More than just a tournament, it&apos;s a celebration of student culture and community with music, beer,
-                and entertainment.
+                More than just a tournament, itt&apos;s a celebration of student culture and community — with music, food, and a good buzz.
               </p>
             </CardContent>
           </Card>
@@ -47,7 +44,7 @@ export const AboutSection = () => {
               </div>
               <h3 className="text-xl font-bold">Unforgettable Experience</h3>
               <p className="mt-3 text-muted-foreground">
-                A full day of excitement, competition, and memories that will last long after the final cup is sunk.
+                A full day of excitement, competition, and everything a legendary student event should be.
               </p>
             </CardContent>
           </Card>

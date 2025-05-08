@@ -39,7 +39,7 @@ export const RegistrationSection = () => {
                   <span>Registration deadline: One week before the event</span>
                 </li>
               </ul>
-              <Button className="mt-8 w-full bg-red-600 hover:bg-red-700 text-lg py-6">Register Now</Button>
+              <Button disabled className="mt-8 w-full bg-red-600 hover:bg-red-700 text-lg py-6">Register Now</Button>
             </CardContent>
           </Card>
           <Card className="bg-white shadow-lg">

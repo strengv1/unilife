@@ -6,7 +6,7 @@ export const PrizesSection = () => {
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-[800px] text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Massive Prize Pool</h2>
-          <p className="mt-6 text-lg text-muted-foreground">Largest prize pool in the history of finnish Beer Pong!</p>
+          <p className="mt-6 text-xl text-muted-foreground">1,250€</p>
         </div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-2">
@@ -22,20 +22,18 @@ export const PrizesSection = () => {
           <Card className="border-2 border-slate-400 bg-gradient-to-b from-slate-50 to-white transform transition-transform hover:scale-105 shadow-md">
             <CardContent className="pt-8 pb-6 px-6 text-center">
               <h3 className="text-2xl font-bold">2nd Place</h3>
-              <div className="my-6 text-5xl font-extrabold text-slate-600">€200</div>
-              <p className="text-muted-foreground">Plus sponsor gift packages</p>
+              <div className="my-6 text-5xl font-extrabold text-slate-600">€250</div>
             </CardContent>
           </Card>
           <Card className="border-2 border-amber-700 bg-gradient-to-b from-amber-50 to-white transform transition-transform hover:scale-105 shadow-md">
             <CardContent className="pt-8 pb-6 px-6 text-center">
-              <h3 className="text-2xl font-bold">3rd Place</h3>
-              <div className="my-6 text-5xl font-extrabold text-amber-700">€100</div>
-              <p className="text-muted-foreground">Plus sponsor gift packages</p>
+              <h3 className="text-2xl font-bold">3rd-4th Place</h3>
+              <div className="my-6 text-5xl font-extrabold text-amber-700">€150</div>
             </CardContent>
           </Card>
           <Card className="border-2 border-amber-700 bg-gradient-to-b from-amber-50 to-white transform transition-transform hover:scale-105 shadow-md">
             <CardContent className="pt-8 pb-6 px-6 text-center">
-              <h3 className="text-2xl font-bold">4th-8th Place</h3>
+              <h3 className="text-2xl font-bold">5th-8th Place</h3>
               <div className="my-6 text-5xl font-extrabold text-amber-700">€50</div>
             </CardContent>
           </Card>

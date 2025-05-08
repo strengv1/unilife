@@ -37,11 +37,11 @@ export default function Home() {
                   <p>Welcome to <span className="underline whitespace-nowrap ">UNI LIFE</span>.</p>
                 </div>
 
-                <div className="flex flex-col md:basis-[35vw] gap-2">
-                  <p className=" text-left text-lg md:text-2xl text-balance">
-                    We bring university students together through unforgettable events.
+                <div className="flex flex-col justify-end md:basis-[35vw] gap-2">
+                  <p className="text-left text-lg md:text-2xl">
+                    We bring students together to laugh harder, stay up too late, and meet more people
                   </p>
-                  <p className=" text-left text-lg md:text-2xl text-balance">
+                  <p className=" text-left text-lg md:text-2xl">
                     No one cares what you study — everyone’s here for a good time with great people!
                   </p>
                   <div className="flex flex-col md:flex-row gap-4 mt-8">

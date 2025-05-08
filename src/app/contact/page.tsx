@@ -12,7 +12,7 @@ export default function ContactPage() {
         <section className="py-16 lg:py-48">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-2xl font-bold mb-4">Open Ears, Open Minds – Pitch Us Anything.</h2>
+              <h2 className="text-2xl font-bold mb-4">Open Ears, Open Minds – Pitch Us Anything!</h2>
               <p className="text-muted-foreground mb-2">
                 We&apos;re always happy to hear from students, universities, and potential partners.
               </p>
