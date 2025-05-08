@@ -25,7 +25,10 @@ export const NewsletterSection = () => {
             Subscribe
           </Button>
         </form>
-
+        <p className="text-xs text-muted-foreground mt-4">
+          By subscribing, you agree to receive marketing emails from UNI LIFE. You can unsubscribe at any time. Read our{" "}
+          <a href="/privacy" className="underline hover:text-black">Privacy Policy</a>.
+        </p>
       </div>
     </section>
   )
