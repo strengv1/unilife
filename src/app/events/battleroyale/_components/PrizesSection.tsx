@@ -1,12 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card"
+import Image from "next/image"
 
 export const PrizesSection = () => {
   return (
     <section id="prizes" className="py-20 md:py-28">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-[800px] text-center">
+        <div className="flex flex-col mx-auto max-w-[800px] text-center items-center justify-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Massive Prize Pool</h2>
-          <p className="mt-6 text-xl text-muted-foreground">1,250€</p>
+          <Image 
+            src="/1250e_logo.png"
+            alt="1,250€"
+            width={250}
+            height={250}
+          />
         </div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-2">
@@ -15,7 +21,7 @@ export const PrizesSection = () => {
               <h3 className="text-2xl font-bold">1st Place</h3>
               <div className="my-6 text-5xl font-extrabold text-yellow-600">€500</div>
               <p className="text-muted-foreground">
-                Plus championship trophy and title of Finland&apos;s Beer Pong Champions
+                Coupled with a Championship trophy and the title of Beer Pong Battle Royale Champions
               </p>
             </CardContent>
           </Card>
@@ -23,12 +29,18 @@ export const PrizesSection = () => {
             <CardContent className="pt-8 pb-6 px-6 text-center">
               <h3 className="text-2xl font-bold">2nd Place</h3>
               <div className="my-6 text-5xl font-extrabold text-slate-600">€250</div>
+              <p className="text-muted-foreground">
+                Coupled with a Finalist trophy
+              </p>
             </CardContent>
           </Card>
           <Card className="border-2 border-amber-700 bg-gradient-to-b from-amber-50 to-white transform transition-transform hover:scale-105 shadow-md">
             <CardContent className="pt-8 pb-6 px-6 text-center">
               <h3 className="text-2xl font-bold">3rd-4th Place</h3>
               <div className="my-6 text-5xl font-extrabold text-amber-700">€150</div>
+              <p className="text-muted-foreground">
+                Coupled with a Semi-Finalist trophy
+              </p>
             </CardContent>
           </Card>
           <Card className="border-2 border-amber-700 bg-gradient-to-b from-amber-50 to-white transform transition-transform hover:scale-105 shadow-md">

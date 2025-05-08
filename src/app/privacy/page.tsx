@@ -18,7 +18,7 @@ const PrivacyPage = () => {
           The data controller responsible for your personal data is:
           <br />
           <strong>UNI LIFE</strong><br />
-          Email: contact@unilife.fi
+          Email: data@unilife.fi
         </p>
 
         <h2 className="text-xl font-semibold mt-6 mb-2">2. What Data We Collect</h2>
@@ -67,7 +67,7 @@ const PrivacyPage = () => {
           <li>Lodge a complaint with a supervisory authority</li>
         </ul>
         <p className="mb-4">
-          You can exercise your rights by contacting us at contact@unilife.fi.
+          You can exercise your rights by contacting us at data@unilife.fi.
         </p>
 
         <h2 className="text-xl font-semibold mt-6 mb-2">9. Unsubscribing</h2>

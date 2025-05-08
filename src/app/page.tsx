@@ -39,7 +39,7 @@ export default function Home() {
 
                 <div className="flex flex-col justify-end md:basis-[35vw] gap-2">
                   <p className="text-left text-lg md:text-2xl">
-                    We bring students together to laugh harder, stay up too late, and meet more people
+                    We bring students together to laugh harder, stay up too late, and meet more people.
                   </p>
                   <p className=" text-left text-lg md:text-2xl">
                     No one cares what you study — everyone’s here for a good time with great people!
