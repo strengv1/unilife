@@ -17,10 +17,21 @@ const events: Event[] = [
     date: "September 14th, 2025 ",
     time: "12:00 - 19:00",
     location: "Alvarinaukio, Otaniemi",
-    image: "/abp_festarit.png?height=400&width=600",
+    image: "/abp_festarit_thumb.png",
     category: "Party / Festival",
     urlName: "battleroyale",
     isFeatured: true,
+  },
+  {
+    id: "2",
+    title: "Magic Island",
+    date: "???",
+    time: "???",
+    location: "???",
+    image: "/magic_island_thumb.png",
+    category: "Party / Festival",
+    urlName: "magicIsland",
+    isFeatured: false,
   },
   // ... more events
 ];
