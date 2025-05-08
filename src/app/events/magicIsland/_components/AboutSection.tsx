@@ -57,7 +57,7 @@ export const AboutSection = () => {
         </div>
 
         <div className="mx-auto mt-16 max-w-max text-left text-muted-foreground text-lg">
-          Here's the catch...
+          Here&apos;s the catch...
           <br />
           📍 Location: ???
           <br />
@@ -69,7 +69,7 @@ export const AboutSection = () => {
         </div>
         
         <p className="text-center text-muted-foreground text-lg">
-          You won't see it on posters. You won't hear it through friends.
+          You won&apos;t see it on posters. You won&apos;t hear it through friends.
         </p>
         <p className="font-bold text-center text-muted-foreground text-lg">
           Only newsletter readers get the full details.

@@ -21,13 +21,15 @@ export function EventCard({ title, date, time, location, image, category, urlNam
   return (
     <Card className={`overflow-hidden transition-all max-w-md hover:shadow-lg w-full ${isFeatured ? "border-red-500 shadow-md" : ""}`}>
       <div className="relative">
-        <Image
-          src={image || "/placeholder.svg"}
-          alt={title + ".png"}
-          width={600}
-          height={400}
-          className="aspect-video object-cover w-full text-center"
-        />
+        <Link href={`/events/${urlName}`}>
+          <Image
+            src={image || "/placeholder.svg"}
+            alt={title + ".png"}
+            width={600}
+            height={400}
+            className="aspect-video object-cover w-full text-center"
+          />
+        </Link>
         {isFeatured && <Badge className="absolute top-2 right-2 bg-red-500 hover:bg-red-600">Featured</Badge>}
       </div>
       <CardHeader className="p-4">
