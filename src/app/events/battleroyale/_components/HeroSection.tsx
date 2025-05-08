@@ -9,7 +9,7 @@ export const HeroSection = () => {
       <div className="absolute inset-0 bg-black/80 z-10" />
       <div className="relative h-[80vh] bg-blue-800">
         <Image
-          src="/abp_festarit.png?height=800&width=1600"
+          src="/abp_festarit.png"
           alt="Beer Pong Battle Royale"
           fill
           className="object-cover opacity-70"

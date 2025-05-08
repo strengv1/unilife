@@ -30,7 +30,7 @@ export const OrganizersSection = () => {
           <div className="flex flex-col items-center text-center">
             <div className="h-40 w-40 overflow-hidden rounded-full bg-slate-100 shadow-md">
               <Image
-                src="/abp_logo.png?height=160&width=160"
+                src="/abp_logo.png"
                 alt="Aalto Beer Pong"
                 width={160}
                 height={160}
