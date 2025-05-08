@@ -3,6 +3,14 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+} from "@/components/ui/navigation-menu"
 
 export function Navbar() {
   const [isVisible, setIsVisible] = useState<boolean>(true)
@@ -49,28 +57,67 @@ export function Navbar() {
   
   return (
     <header
-      className={`sticky top-0 z-50 w-full bg-amber-50 shadow-lg transition-transform duration-300 ${!isVisible ? '-translate-y-full' : ''}`}
+      className={`sticky top-0 z-50 w-full bg-amber-50 shadow-md transition-transform duration-300 ${
+        !isVisible ? "-translate-y-full" : ""
+      }`}
     >
-      <div className="flex h-20 items-center gap-4 mx-4">
-        <Link href="/" className="flex items-center gap-1 md:gap-4 font-bold text-xl">
-          <Image 
+      <div className="flex h-20 items-center justify-between px-4 max-w-7xl mx-auto">
+        <Link href="/" className="flex items-center gap-2 font-bold text-xl">
+          <Image
             src="/unilife_logo.png"
             alt="UNI LIFE"
             height={48}
             width={216}
+            priority
           />
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link href="/" className=" font-medium hover:text-red-500 transition-colors">
-            Home
-          </Link>
-          <Link href="/events" className=" font-medium hover:text-red-500 transition-colors">
-            Events
-          </Link>
-          <Link href="/contact" className=" font-medium hover:text-red-500 transition-colors">
-            Contact
-          </Link>
-        </nav>
+
+        <NavigationMenu>
+          <NavigationMenuList className="flex ml-4 gap-2 lg:gap-6">
+            <NavigationMenuItem>
+              <Link href="/" passHref>
+                <NavigationMenuLink className="font-medium transition-colors hover:bg-inherit hover:text-red-500">
+                  Home
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger 
+                className="!bg-amber-50 cursor-pointer transition-colors font-medium 
+                hover:text-red-500 data-[state=open]:bg-amber-50 data-[state=open]:text-red-500
+              ">
+                Events
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="p-4 shadow-lg rounded-md">
+                <ul className="grid gap-3 p-2 w-[200px]">
+                  <li>
+                    <Link href="/events/battleroyale" passHref>
+                      <NavigationMenuLink className="block hover:text-red-500 font-medium">
+                        Beer Pong Battle Royale
+                      </NavigationMenuLink>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/events/magicIsland" passHref>
+                      <NavigationMenuLink className="block hover:text-red-500 font-medium">
+                        Magic Island
+                      </NavigationMenuLink>
+                    </Link>
+                  </li>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link href="/contact" passHref>
+                <NavigationMenuLink className="font-medium transition-colors hover:bg-inherit hover:text-red-500">
+                  Contact
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
       </div>
     </header>
   )
