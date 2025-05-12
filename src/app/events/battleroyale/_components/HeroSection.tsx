@@ -28,7 +28,7 @@ export const HeroSection = () => {
               <span className="text-red-500">BATTLE ROYALE</span>
             </h1>
             <p className="mx-auto max-w-[700px] text-lg md:text-xl">
-              128 teams. One champion. Massive cash prizes.
+              150 teams. One champion. Massive cash prizes.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 justify-items-center justify-center gap-6 text-sm">
               <div className="flex items-center gap-2">
@@ -41,7 +41,7 @@ export const HeroSection = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Users className="h-5 w-5" />
-                <span>128 Teams</span>
+                <span>150 Teams</span>
               </div>
               <div className="flex items-center gap-2">
                 <Trophy className="h-5 w-5" />

@@ -20,15 +20,11 @@ export const RegistrationSection = () => {
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Students €40 per team (2 players)</span>
+                  <span>€40 per team (2 players)</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Non-Students €45 per team (2 players)</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Limited to 128 teams - first come, first served</span>
+                  <span>Limited to 150 teams - first come, first served</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
@@ -48,6 +44,10 @@ export const RegistrationSection = () => {
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                  <span>Guaranteed good time with friends, old and new!</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
                   <span>Full day tournament participation</span>
                 </li>
                 <li className="flex items-start gap-3">
@@ -56,7 +56,7 @@ export const RegistrationSection = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Access to after-party with special drink discounts ??</span>
+                  <span>Afterparty at OK20 with sauna and shockingly discounted drinks</span>
                 </li>
               </ul>
               {/* <div className="mt-8 rounded-md bg-red-50 p-6 text-red-800">

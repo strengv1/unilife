@@ -16,7 +16,7 @@ export const TournamentSection = () => {
           <Tabs defaultValue="format" className="mx-auto max-w-[800px]">
             <TabsList className="grid w-full grid-cols-3 mb-6">
               <TabsTrigger value="format">Format</TabsTrigger>
-              <TabsTrigger value="rules">Rules</TabsTrigger>
+              <TabsTrigger value="rules">Quick Rules</TabsTrigger>
               <TabsTrigger value="schedule">Schedule</TabsTrigger>
             </TabsList>
             <TabsContent value="format" className="mt-6 space-y-4">
@@ -103,7 +103,7 @@ export const TournamentSection = () => {
             </TabsContent>
             <TabsContent value="rules" className="mt-6 space-y-4">
               <div className="rounded-lg border p-8 shadow-sm">
-                <h3 className="text-2xl font-bold">Official Rules</h3>
+                <h3 className="text-2xl font-bold">Quick Rules</h3>
                 <ul className="mt-6 space-y-4">
                   <li className="flex items-start gap-3">
                     <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
@@ -138,23 +138,23 @@ export const TournamentSection = () => {
                 <ul className="mt-6 space-y-4">
                   <li className="flex items-start gap-3">
                     <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                    <span>12:00 - Registration and check-in</span>
+                    <span>11:00 - Registration and check-in</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                    <span>13:00 - Swiss rounds begin (6 rounds, approximately 40 minutes each)</span>
+                    <span>12:00 - Swiss rounds begin (6 rounds, approximately 40 minutes each)</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                    <span>17:15 - Top 32 teams announced</span>
+                    <span>16:15 - Top 32 teams announced</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                    <span>18:00 - Single-elimination bracket begins</span>
+                    <span>16:20 - Single-elimination bracket begins</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                    <span>21:00 - Championship finals (best-of-3) and award ceremony</span>
+                    <span>18:00 - Championship finals (best-of-3) and award ceremony</span>
                   </li>
                 </ul>
               </div>

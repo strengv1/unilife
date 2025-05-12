@@ -14,7 +14,7 @@ export const AboutSection = () => {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <div className="hidden md:grid mt-16 gap-8 md:grid-cols-3">
           <Card className="transform transition-transform hover:scale-105">
             <CardContent className="pt-8 pb-6 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
@@ -33,7 +33,7 @@ export const AboutSection = () => {
               </div>
               <h3 className="text-xl font-bold">Community Event</h3>
               <p className="mt-3 text-muted-foreground">
-                More than just a tournament, itt&apos;s a celebration of student culture and community — with music, food, and a good buzz.
+                More than just a tournament, it&apos;s a celebration of student culture and community — with music, food, and a good buzz.
               </p>
             </CardContent>
           </Card>

@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-// import Image from "next/image"
+import Image from "next/image"
 
 export const PrizesSection = () => {
   return (
@@ -7,13 +7,12 @@ export const PrizesSection = () => {
       <div className="container mx-auto max-w-6xl px-4">
         <div className="flex flex-col mx-auto max-w-[800px] text-center items-center justify-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Massive Prize Pool</h2>
-          {/* <Image 
-            src="/1250e_logo.png"
-            alt="1,850€"
+          <Image 
+            src="/1850_logo.png"
+            alt="€1,850"
             width={250}
             height={250}
-          /> */}
-          <p className="text-lg mt-4 text-muted-foreground">1,850€</p>
+          />
         </div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-2">
