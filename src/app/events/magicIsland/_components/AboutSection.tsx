@@ -1,10 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { PartyPopper, Music2, Utensils } from "lucide-react"
+import Image from "next/image"
 
 export const AboutSection = () => {
   return (
     <section id="about" className="py-20 md:py-28 bg-amber-50">
-      <div className="container mx-auto max-w-6xl px-4">
+      <div className="container flex flex-col mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-5xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Magic Island 🏝️
@@ -16,8 +17,8 @@ export const AboutSection = () => {
             Magic Island is an open-air party like no other — free food, pulsing music, and just a bit of water between you and the wildest open-air of the summer season.
           </p>
           <p className="mt-6 text-lg text-muted-foreground">
-          Yes, you’ll have to trek through water to get there..<br/>
-          <b>But what waits on the other side?</b>
+            Yes, you’ll have to trek through water to get there..<br/>
+            <b>But what waits on the other side?</b>
           </p>
         </div>
 
@@ -75,8 +76,15 @@ export const AboutSection = () => {
           You won&apos;t see it on posters. You won&apos;t hear it through friends.
         </p>
         <p className="font-bold text-center text-muted-foreground text-lg">
-          Only newsletter readers get the time, date, location.
+          Only newsletter subscribers get the time, date, location.
         </p>
+        <Image
+          className="self-center rotate-45 mt-8 ml-48 -mb-4"
+          src="/squiggly_arrow_no_bg.png"
+          alt="arrow"
+          height={200}
+          width={200}
+        />
       </div>
     </section>
   )

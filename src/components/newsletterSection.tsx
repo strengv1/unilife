@@ -5,7 +5,7 @@ export const NewsletterSection = () => {
   return (
     <section id="newsletter" className="py-16 bg-amber-100">
       <div className="container px-4 mx-auto text-center">
-        <h2 className="text-3xl font-bold tracking-tight mb-4">Stay Updated</h2>
+        <h2 className="text-3xl font-bold tracking-tight mb-4">Newsletter Signup</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
           Subscribe to our newsletter to get the latest updates on upcoming events and exclusive offers.
         </p>

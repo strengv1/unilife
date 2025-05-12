@@ -19,11 +19,6 @@ export default function PartnerSection() {
   
   const partners: Partner[] = [
     {
-      name: "Red Bull",
-      imageSrc: "/redbull_logo.png",
-      website: "https://redbull.com"
-    },
-    {
       name: "Aalto Beer Pong",
       imageSrc: "/abp_logo.png",
       website: "https://aaltobeerpong.fi"
@@ -33,11 +28,7 @@ export default function PartnerSection() {
       imageSrc: "/unilife_logo.png",
       website: ""
     },
-    {
-      name: "Red Bull",
-      imageSrc: "/redbull_logo.png",
-      website: "https://redbull.com"
-    },
+
     {
       name: "Aalto Beer Pong",
       imageSrc: "/abp_logo.png",
@@ -47,11 +38,6 @@ export default function PartnerSection() {
       name: "UNI LIFE",
       imageSrc: "/unilife_logo.png",
       website: ""
-    },
-    {
-      name: "Red Bull",
-      imageSrc: "/redbull_logo.png",
-      website: "https://redbull.com"
     },
     {
       name: "Aalto Beer Pong",

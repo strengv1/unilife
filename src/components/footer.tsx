@@ -16,7 +16,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-sm text-muted-foreground">
-              We don&apos;t do ordinary. <span className="block md:inline">We make your uni life unforgettable.</span>
+              We don&apos;t do ordinary.
             </p>
           </div>
           <div className="space-y-3">

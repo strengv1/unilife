@@ -33,7 +33,7 @@ export function EventCard({ title, subtitle, date, time, location, image, catego
         </Link>
         {isFeatured && <Badge className="absolute top-2 right-2 bg-red-500 hover:bg-red-600">Featured</Badge>}
       </div>
-      <CardHeader className="p-4 pb-0">
+      <CardHeader className="px-4">
         <div className="space-y-1">
           <Badge variant="outline" className="mb-2 text-blue-900 border-blue-100">
             {category}
