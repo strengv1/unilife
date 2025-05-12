@@ -45,7 +45,7 @@ export const HeroSection = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Trophy className="h-5 w-5" />
-                <span>€1,250 Prize Pool</span>
+                <span>€1,850 Prize Pool</span>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-6 mt-10 mx-10">

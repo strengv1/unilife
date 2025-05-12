@@ -20,11 +20,11 @@ export const RegistrationSection = () => {
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Students €20 per team (2 players)</span>
+                  <span>Students €40 per team (2 players)</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Non-Students €25 per team (2 players)</span>
+                  <span>Non-Students €45 per team (2 players)</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />

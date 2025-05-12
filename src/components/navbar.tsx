@@ -75,46 +75,47 @@ export function Navbar() {
         <NavigationMenu>
           <NavigationMenuList className="flex ml-4 gap-2 lg:gap-6">
             <NavigationMenuItem>
-              <Link href="/" passHref>
-                <NavigationMenuLink className="font-medium transition-colors hover:bg-inherit hover:text-red-500">
+              <NavigationMenuLink asChild>
+                <Link href="/" className="font-medium transition-colors !bg-inherit hover:bg-inherit hover:text-red-500">
                   Home
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
               <NavigationMenuTrigger 
-                className="!bg-amber-50 cursor-pointer transition-colors font-medium 
+                className="!bg-inherit cursor-pointer transition-colors font-medium 
                 hover:text-red-500 data-[state=open]:bg-amber-50 data-[state=open]:text-red-500
               ">
                 Events
               </NavigationMenuTrigger>
               <NavigationMenuContent className="p-4 shadow-lg rounded-md">
                 <ul className="grid gap-3 p-2 w-[200px]">
-                  <li>
-                    <Link href="/events/battleroyale" passHref>
-                      <NavigationMenuLink className="block hover:text-red-500 font-medium">
-                        Beer Pong Battle Royale
-                      </NavigationMenuLink>
+                <li>
+                  <NavigationMenuLink asChild>
+                    <Link href="/events/battleroyale" className="block hover:text-red-500 font-medium">
+                      Beer Pong Battle Royale
                     </Link>
-                  </li>
-                  <li>
-                    <Link href="/events/magicIsland" passHref>
-                      <NavigationMenuLink className="block hover:text-red-500 font-medium">
-                        Magic Island
-                      </NavigationMenuLink>
+                  </NavigationMenuLink>
+                </li>
+
+                <li>
+                  <NavigationMenuLink asChild>
+                    <Link href="/events/magicIsland" className="block hover:text-red-500 font-medium">
+                      Magic Island
                     </Link>
-                  </li>
+                  </NavigationMenuLink>
+                </li>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <Link href="/contact" passHref>
-                <NavigationMenuLink className="font-medium transition-colors hover:bg-inherit hover:text-red-500">
+              <NavigationMenuLink asChild>
+                <Link href="/contact" className="font-medium transition-colors !bg-inherit hover:bg-inherit hover:text-red-500">
                   Contact
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

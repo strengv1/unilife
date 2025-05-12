@@ -20,7 +20,10 @@ interface EventCardProps {
 
 export function EventCard({ title, subtitle, date, time, location, image, category, urlName, isFeatured = false }: EventCardProps) {
   return (
-    <Card className={`overflow-hidden transition-all max-w-md hover:shadow-lg w-full ${isFeatured ? "border-red-500 shadow-md" : ""}`}>
+    <Card className={`overflow-hidden transition-all max-w-md hover:shadow-lg w-full
+      ${isFeatured ? "border-red-500 shadow-md" : ""}
+      ${isFeatured ? "bg-linear-to-bl from-red-100 to-white from-10% to-40%" : ""}
+    `}>
       <div className="relative">
         <Link href={`/events/${urlName}`}>
           <Image

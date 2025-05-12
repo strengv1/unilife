@@ -16,7 +16,7 @@ const events: Event[] = [
     id: "1",
     title: "Beer Pong Battle Royale",
     subtitle: "man I love beer pong",
-    date: "September 14th, 2025 ",
+    date: "September 14th, 2025",
     time: "12:00 - 19:00",
     location: "Alvarinaukio, Otaniemi",
     image: "/abp_festarit_thumb.png",
