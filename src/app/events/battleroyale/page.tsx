@@ -62,12 +62,23 @@ export default function BeerPongBattleRoyale() {
       {/* Add comprehensive Event schema */}
       <EventSchema
         title="Beer Pong Battle Royale"
-        description="Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi with 150 teams competing for a €2,500 prize pool."
+        description="Join Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool."
         date="September 14th, 2025"
-        startTime="12:00"
-        endTime="19:00"
+        time="12:00 - 19:00"
         location="Alvarinaukio, Otaniemi"
         image="/abp_festarit.png"
+        performers="Student Teams from across Finland"
+        organizers={["UNI LIFE", "Aalto Beer Pong"]}
+        price="40"
+        currency="EUR"
+        availability="PreOrder"
+        addressLocality="Espoo"
+        addressRegion="Uusimaa"
+        streetAddress="Alvarinaukio"
+        postalCode="02150"
+        country="Finland"
+        maxAttendees={300}
+        eventCategory="Sports Event"
       />
       <Navbar />
       <main className="flex-1">

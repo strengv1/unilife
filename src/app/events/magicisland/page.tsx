@@ -28,10 +28,13 @@ export default function MagicIsland() {
     <div className="flex min-h-screen flex-col">
       <EventSchema
         title="Magic Island"
-        description="Join this unforgettable open-air party"
-        date="???"
-        location="???"
+        description="Experience an unforgettable open-air party with live DJ sets, free food, and a mysterious location."
         image="/magic_island_cover.png"
+        organizers={["UNI LIFE"]}
+        performers="Live DJs"
+        eventCategory="Entertainment Event"
+        addressRegion="Uusimaa"
+        country="Finland"
       />
       <Navbar />
       <main className="flex-1">
