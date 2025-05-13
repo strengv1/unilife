@@ -4,7 +4,7 @@ import { CheckCircle } from "lucide-react"
 
 export const RegistrationSection = () => {
   return (
-    <section id="registration" className="bg-red-600 py-20 md:py-28 text-white">
+    <section id="registration" className="bg-red-600 py-10 md:py-16 text-white">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-[800px] text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Register Your Team</h2>

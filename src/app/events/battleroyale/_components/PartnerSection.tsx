@@ -24,11 +24,6 @@ export default function PartnerSection() {
       website: "https://aaltobeerpong.fi"
     },
     {
-      name: "UNI LIFE",
-      imageSrc: "/unilife_logo.png",
-      website: "https://www.unilife.fi"
-    },
-    {
       name: "© Fat Lizard Brewing Co.",
       imageSrc: "/fat_lizard_logo.jpg",
       website: "https://www.fatlizard.beer/"
@@ -39,11 +34,6 @@ export default function PartnerSection() {
       website: "https://aaltobeerpong.fi"
     },
     {
-      name: "UNI LIFE",
-      imageSrc: "/unilife_logo.png",
-      website: "https://www.unilife.fi"
-    },
-    {
       name: "© Fat Lizard Brewing Co.",
       imageSrc: "/fat_lizard_logo.jpg",
       website: "https://www.fatlizard.beer/"
@@ -52,11 +42,6 @@ export default function PartnerSection() {
       name: "Aalto Beer Pong",
       imageSrc: "/abp_logo.png",
       website: "https://aaltobeerpong.fi"
-    },
-    {
-      name: "UNI LIFE",
-      imageSrc: "/unilife_logo.png",
-      website: "https://www.unilife.fi"
     },
     {
       name: "© Fat Lizard Brewing Co.",
@@ -129,7 +114,7 @@ export default function PartnerSection() {
   const maxIndex = Math.max(0, partners.length - visibleCount);
 
   return (
-    <section className="py-16 bg-muted/50 relative overflow-hidden">
+    <section className="py-10 bg-muted/50 relative overflow-hidden">
       <div className="container px-4 mx-auto">
         <h2 className="text-3xl font-bold text-center mb-16">Our Partners</h2>
         

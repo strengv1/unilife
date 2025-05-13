@@ -3,7 +3,7 @@ import { CheckCircle } from "lucide-react"
 
 export const TournamentSection = () => {
   return (
-    <section id="tournament" className="bg-slate-50 py-20 md:py-28">
+    <section id="tournament" className="bg-slate-50 py-10 md:py-16">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-[800px] text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Tournament Structure</h2>
