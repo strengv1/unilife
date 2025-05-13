@@ -1,4 +1,5 @@
 import type React from "react"
+import Script from 'next/script';
 import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -60,7 +61,23 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* AHREFS analytics -script */}
-        <script src="https://analytics.ahrefs.com/analytics.js" data-key="c4edFtLyzOY0an+l7w/I4Q" async></script>
+        <Script src="https://analytics.ahrefs.com/analytics.js" data-key="c4edFtLyzOY0an+l7w/I4Q" async></Script>
+        
+        {/* Google Analytics – gtag.js */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-VH8F3Z11MT"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-VH8F3Z11MT');
+          `}
+        </Script>
+
         <OrganizationSchema />
       </head>
       <body className={inter.className}>
