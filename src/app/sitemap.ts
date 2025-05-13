@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
     },
     {
-      url: 'https://unilife.fi/events/magicIsland',
+      url: 'https://unilife.fi/events/magicisland',
       lastModified: new Date(),
     },
     {

@@ -33,7 +33,7 @@ const events: Event[] = [
     location: "???",
     image: "/magic_island_thumb.png",
     category: "Party / Festival",
-    urlName: "magicIsland",
+    urlName: "magicisland",
     isFeatured: false,
   },
   // ... more events
