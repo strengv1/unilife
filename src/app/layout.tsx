@@ -2,36 +2,9 @@ import type React from "react"
 import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import { OrganizationSchema } from "@/components/OrganizationSchema"
 
 const inter = Inter({ subsets: ["latin"] })
-
-export function OrganizationSchema() {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'UNI LIFE',
-    url: 'https://unilife.fi',
-    logo: 'https://unilife.fi/unilife_logo.png',
-    sameAs: [
-      'https://www.instagram.com/unilife.fi',
-      // Add other social profiles
-    ],
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Helsinki',
-      addressRegion: 'Uusimaa',
-      addressCountry: 'Finland',
-    },
-    description: 'Creating large-scale and high-value student events across Finland.',
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
-}
 
 export const metadata = {
   metadataBase: new URL("https://unilife.fi"),
@@ -89,6 +62,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <OrganizationSchema />
+      </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
