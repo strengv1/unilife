@@ -29,18 +29,18 @@ export const PrizesSection = () => {
             <CardContent className="pt-6 pb-4 px-4 text-center">
               <h3 className="text-2xl font-bold">2nd Place</h3>
               <div className="my-6 text-5xl font-extrabold text-slate-600">€400</div>
-              <p className="text-muted-foreground">
+              {/* <p className="text-muted-foreground">
                 Coupled with a Finalist trophy
-              </p>
+              </p> */}
             </CardContent>
           </Card>
           <Card className="border-2 border-amber-700 bg-gradient-to-b from-amber-50 to-white transform transition-transform hover:scale-105 shadow-md">
             <CardContent className="pt-6 pb-4 px-4 text-center">
               <h3 className="text-2xl font-bold">3rd-4th Place</h3>
               <div className="my-6 text-5xl font-extrabold text-amber-700">€250</div>
-              <p className="text-muted-foreground">
+              {/* <p className="text-muted-foreground">
                 Coupled with a Semi-Finalist trophy
-              </p>
+              </p> */}
             </CardContent>
           </Card>
           <Card className="border-2 border-amber-700 bg-gradient-to-b from-amber-50 to-white transform transition-transform hover:scale-105 shadow-md">

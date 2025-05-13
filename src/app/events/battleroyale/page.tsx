@@ -37,8 +37,8 @@ export default function BeerPongBattleRoyale() {
         <HeroSection />
         <AboutSection />
         <PrizesSection />
-        <TournamentSection />
         <RegistrationSection />
+        <TournamentSection />
         <OrganizersSection />
         <FAQSection />
         <PartnerSection />
