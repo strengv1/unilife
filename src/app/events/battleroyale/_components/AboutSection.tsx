@@ -22,7 +22,7 @@ export const AboutSection = () => {
               </div>
               <h3 className="text-xl font-bold">Epic Competition</h3>
               <p className="mt-3 text-muted-foreground">
-                128 teams will battle through multiple rounds in a tournament designed to crown the ultimate beer pong team.
+                150 teams will battle through multiple rounds in a tournament designed to crown the ultimate beer pong team.
               </p>
             </CardContent>
           </Card>

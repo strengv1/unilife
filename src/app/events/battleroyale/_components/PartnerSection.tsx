@@ -26,18 +26,12 @@ export default function PartnerSection() {
     {
       name: "UNI LIFE",
       imageSrc: "/unilife_logo.png",
-      website: ""
-    },
-
-    {
-      name: "Aalto Beer Pong",
-      imageSrc: "/abp_logo.png",
-      website: "https://aaltobeerpong.fi"
+      website: "https://www.unilife.fi"
     },
     {
-      name: "UNI LIFE",
-      imageSrc: "/unilife_logo.png",
-      website: ""
+      name: "© Fat Lizard Brewing Co.",
+      imageSrc: "/fat_lizard_logo.jpg",
+      website: "https://www.fatlizard.beer/"
     },
     {
       name: "Aalto Beer Pong",
@@ -47,7 +41,27 @@ export default function PartnerSection() {
     {
       name: "UNI LIFE",
       imageSrc: "/unilife_logo.png",
-      website: ""
+      website: "https://www.unilife.fi"
+    },
+    {
+      name: "© Fat Lizard Brewing Co.",
+      imageSrc: "/fat_lizard_logo.jpg",
+      website: "https://www.fatlizard.beer/"
+    },
+    {
+      name: "Aalto Beer Pong",
+      imageSrc: "/abp_logo.png",
+      website: "https://aaltobeerpong.fi"
+    },
+    {
+      name: "UNI LIFE",
+      imageSrc: "/unilife_logo.png",
+      website: "https://www.unilife.fi"
+    },
+    {
+      name: "© Fat Lizard Brewing Co.",
+      imageSrc: "/fat_lizard_logo.jpg",
+      website: "https://www.fatlizard.beer/"
     },
   ];
 
