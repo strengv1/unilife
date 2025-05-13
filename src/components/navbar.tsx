@@ -22,8 +22,8 @@ export function Navbar() {
   useEffect(() => {
     // Improved scroll handling with better debounce
     let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
-    let minScrollDifference = 10; // Minimum scroll difference to trigger a hide/show
-    let headerHeight = 100; // Increased from 80 to reduce sensitivity
+    const minScrollDifference = 10; // Minimum scroll difference to trigger a hide/show
+    const headerHeight = 100; // Increased from 80 to reduce sensitivity
     let isMobile = window.innerWidth <= 768;
 
     const controlHeader = () => {
