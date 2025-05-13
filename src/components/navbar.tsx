@@ -14,47 +14,79 @@ import {
 import { Menu, X } from "lucide-react"
 
 export function Navbar() {
-  const [isVisible, setIsVisible] = useState<boolean>(true)
-  const [lastScrollY, setLastScrollY] = useState<number>(0)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
-  const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false)
 
   useEffect(() => {
-    const controlHeader = (): void => {
-      const currentScrollY = window.scrollY
+    // Improved scroll handling with better debounce
+    let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
+    let minScrollDifference = 10; // Minimum scroll difference to trigger a hide/show
+    let headerHeight = 100; // Increased from 80 to reduce sensitivity
+    let isMobile = window.innerWidth <= 768;
+
+    const controlHeader = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDifference = Math.abs(currentScrollY - lastScrollY);
       
-      // Determine scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+      // Only process significant scroll events to reduce jittering
+      if (scrollDifference < minScrollDifference && !isMobile) {
+        return;
+      }
+      
+      // When at the top of the page, always show the header
+      if (currentScrollY < 50) {
+        setIsVisible(true);
+        setLastScrollY(currentScrollY);
+        return;
+      }
+      
+      // On mobile, be less sensitive to hide action
+      const hideThreshold = isMobile ? headerHeight * 1.5 : headerHeight;
+      
+      // Determine scroll direction with improved thresholds
+      if (currentScrollY > lastScrollY && currentScrollY > hideThreshold) {
         // Scrolling DOWN and past header height - hide header
-        setIsVisible(false)
-      } else {
+        setIsVisible(false);
+      } else if (currentScrollY < lastScrollY) {
         // Scrolling UP - show header
-        setIsVisible(true)
+        setIsVisible(true);
       }
       
       // Update last scroll position
-      setLastScrollY(currentScrollY)
-    }
-
-    // Add scroll event listener with throttling for performance
-    let ticking = false;
-    const throttledControlHeader = (): void => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          controlHeader();
-          ticking = false;
-        });
-        ticking = true;
-      }
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', throttledControlHeader)
+    const handleScroll = () => {
+      // Clear the timeout if it's already set
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      
+      // Set a timeout to run the controlHeader function
+      scrollTimeout = setTimeout(() => {
+        controlHeader();
+      }, isMobile ? 50 : 10); // Use a slower debounce on mobile
+    };
+
+    // Handle resize to update isMobile flag
+    const handleResize = () => {
+      isMobile = window.innerWidth <= 768;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
     
-    // Clean up event listener
+    // Clean up
     return () => {
-      window.removeEventListener('scroll', throttledControlHeader)
-    }
-  }, [lastScrollY])
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+    };
+  }, [lastScrollY]);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
