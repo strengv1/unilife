@@ -68,7 +68,7 @@ export const RegistrationSection = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Afterparty at OK20 with sauna and shockingly discounted drinks</span>
+                  <span>Afterparty at OK20 with sauna, music and casual beer pong!</span>
                 </li>
               </ul>
               {/* <div className="mt-8 rounded-md bg-red-50 p-6 text-red-800">
