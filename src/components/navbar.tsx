@@ -12,12 +12,13 @@ import {
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu"
 import { Menu, X } from "lucide-react"
+import { useNavbarContext } from "@/contexts/NavbarContext"
 
 export function Navbar() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false)
+  const { mobileMenuOpen, setMobileMenuOpen } = useNavbarContext();
 
   useEffect(() => {
     // Improved scroll handling with better debounce
@@ -27,6 +28,12 @@ export function Navbar() {
     let isMobile = window.innerWidth <= 768;
 
     const controlHeader = () => {
+      // If mobile menu is open, close it on scroll
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false);
+        return;
+      }
+      
       const currentScrollY = window.scrollY;
       const scrollDifference = Math.abs(currentScrollY - lastScrollY);
       
@@ -86,10 +93,10 @@ export function Navbar() {
         clearTimeout(scrollTimeout);
       }
     };
-  }, [lastScrollY]);
+  }, [lastScrollY, mobileMenuOpen]);
 
   const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen)
+    setMobileMenuOpen(!mobileMenuOpen);
   }
   
   return (
@@ -124,8 +131,9 @@ export function Navbar() {
 
         {/* Mobile menu */}
         <div 
-          className={`inset-0 top-20 z-40 bg-amber-50 md:hidden transition-transform duration-300 ease-in-out transform ${
-            mobileMenuOpen ? "fixed translate-x-0" : "hidden translate-x-full"
+          className={`inset-0 top-20 z-40 bg-amber-50 md:hidden overflow-y-auto
+            transition-transform duration-300 ease-in-out transform
+            ${ mobileMenuOpen ? "fixed translate-x-0" : "hidden translate-x-full"
           }`}
         >
           <nav className="flex flex-col p-4 space-y-4">

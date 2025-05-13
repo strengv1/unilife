@@ -1,13 +1,21 @@
+"use client"
+
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { ArrowLeft } from "lucide-react";
+import { useNavbarContext } from "@/contexts/NavbarContext";
 
 export function BackToEventsButton() {
+  const { mobileMenuOpen } = useNavbarContext();
+  
   return (
     <Link
       href="/events" 
       aria-label="Return to events page"
-      className="fixed top-24 left-4 z-50 group"
+      className={`
+        fixed top-24 left-4 z-40 group
+        ${mobileMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}
+      `}
     >
       <Button
         variant="outline"

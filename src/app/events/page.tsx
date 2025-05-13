@@ -2,7 +2,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { EventCard } from "@/components/event-card"
 import { Button } from "@/components/ui/button"
-import { type Event, useEvents } from "../hooks/useEvents"
+import { type Event, useEvents } from "@/hooks/useEvents"
 
 export const metadata = {
   title: "Student Events in Finland",

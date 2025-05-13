@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { EventCard } from "@/components/event-card"
-import { type Event, useEvents } from "./hooks/useEvents"
+import { type Event, useEvents } from "@/hooks/useEvents"
 import { NewsletterSection } from "@/components/newsletterSection"
 
 export default function Home() {
