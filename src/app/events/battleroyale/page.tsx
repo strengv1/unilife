@@ -20,14 +20,19 @@ export const metadata = {
   title: "Beer Pong Battle Royale 2025",
   description: "Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi on September 14th, 2025. 150 teams compete for a €2,500 prize pool. Register now!",
   keywords: [
-    "Beer Pong Battle Royale",
-    "Finland beer pong tournament",
-    "Otaniemi student events",
-    "beer pong competition Finland",
-    "UNI LIFE events",
-    "beer pong tournament",
+    "beer pong finland",
+    "beer pong tournament helsinki",
+    "student beer pong competition",
+    "beer pong battle royale",
+    "university beer pong events",
     "beer pong turnaus",
-    "opiskelijatapahtumat helsinki"
+    "beer pong tapahtuma",
+    "beer pong 2025",
+    "fun student events finland",
+    "beer pong prizes helsinki",
+    "beer pong palkinto",
+    "opiskelijaturnaus helsinki",
+    "suurin beer pong turnaus"
   ],
   openGraph: {
     title: "Beer Pong Battle Royale 2025",
