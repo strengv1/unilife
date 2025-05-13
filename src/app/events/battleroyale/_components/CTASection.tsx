@@ -10,7 +10,9 @@ export const CTASection = () => {
           Don&apos;t miss your chance to compete in Finland&apos;s biggest beer pong tournament and win amazing prizes!
         </p>
         <Button asChild size="lg" className="mt-10 bg-white text-red-600 hover:bg-red-100 text-lg px-8 py-6">
-          <Link href="#registration">Register Your Team Now</Link>
+          <Link href="#registration">
+            Register for Beer Pong Battle Royale
+          </Link>
         </Button>
       </div>
     </section>

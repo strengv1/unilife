@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import Image from "next/image"
 
 interface Partner {
   name: string;
@@ -159,17 +160,18 @@ export default function PartnerSection() {
                     <a
                       href={partner.website || "#"}
                       target={partner.website ? "_blank" : "_self"}
-                      rel="noopener noreferrer"
+                      rel={partner.website ? "noopener noreferrer" : ""}
                       className="flex flex-col items-center justify-center py-8 px-4 h-full transition-all duration-300 hover:scale-105"
+                      aria-label={`Visit ${partner.name} website`}
                     >
                       <div className="mb-4 transition-transform duration-300 hover:scale-110 flex items-center justify-center h-24">
                         {/* Replace icons with images */}
-                        <img
+                        <Image
                           src={partner.imageSrc}
-                          alt={`${partner.name}`}
+                          alt={`${partner.name} logo`} // More descriptive alt text
+                          width={120}
+                          height={80}
                           className="max-h-full max-w-full object-contain"
-                          // Fallback for image loading errors
-                          
                         />
                       </div>
                       <p className="text-lg font-medium text-center">{partner.name}</p>

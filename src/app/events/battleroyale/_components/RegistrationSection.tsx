@@ -89,13 +89,17 @@ export const RegistrationSection = () => {
             action="https://formspree.io/f/xqaqqwgy"
             method="POST"
             className="flex flex-col md:flex-row gap-2 max-w-md mx-auto"
+            aria-labelledby="newsletter-heading"
           >
+            <h4 id="newsletter-heading" className="sr-only">Newsletter Signup</h4>
             <input
               type="email"
               name="email"
+              id="email"
               placeholder="Enter your email"
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               required
+              aria-label="Your email address"
             />
             <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
               Subscribe

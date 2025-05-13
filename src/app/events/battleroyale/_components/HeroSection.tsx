@@ -5,7 +5,7 @@ import { Calendar, MapPin, Trophy, Users } from "lucide-react"
 
 export const HeroSection = () => {
   return (
-    <section className="relative">
+    <section className="relative" aria-labelledby="hero-heading">
       <div className="absolute inset-0 bg-black/80 z-10" />
       <div className="relative flex items-center min-h-[80vh] bg-blue-800 pb-4">
         <Image
@@ -23,14 +23,14 @@ export const HeroSection = () => {
             <div className="inline-block rounded-md bg-red-600 px-3 py-1 text-sm font-semibold">
               FINLAND&apos;S BIGGEST BEER PONG TOURNAMENT
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 id="hero-heading" className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               BEER PONG <br />
               <span className="text-red-500">BATTLE ROYALE</span>
             </h1>
             <p className="mx-auto max-w-[700px] text-lg md:text-xl">
               150 teams. One champion. <span className="block md:inline">Massive cash prizes.</span>
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 justify-items-center justify-center gap-6 text-sm">
+            <div className="grid grid-cols-2 sm:grid-cols-4 justify-items-center justify-center gap-2 sm:gap-6 text-xs sm:text-sm">
               <div className="flex items-center gap-2">
                 <Calendar className="h-5 w-5" />
                 <span>September 14th, 2025</span>

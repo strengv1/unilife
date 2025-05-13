@@ -9,9 +9,10 @@ export const PrizesSection = () => {
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Massive Prize Pool</h2>
           <Image 
             src="/2500_logo.png"
-            alt="€2,500"
+            alt="€2,500 Prize Pool for Beer Pong Battle Royale"
             width={250}
             height={250}
+            quality={90}
           />
         </div>
 

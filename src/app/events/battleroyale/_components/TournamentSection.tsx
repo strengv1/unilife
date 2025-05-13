@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CheckCircle } from "lucide-react"
+import Link from "next/link"
 
 export const TournamentSection = () => {
   return (
@@ -8,7 +9,11 @@ export const TournamentSection = () => {
         <div className="mx-auto max-w-[800px] text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Tournament Structure</h2>
           <p className="mt-6 text-lg text-muted-foreground">
-            Designed for fair play and maximum excitement for everybody.
+            Designed for fair play and maximum excitement for everybody.{" "}
+            <Link href="#prizes" className="text-red-600 hover:underline">
+              Prizes
+            </Link>{" "}
+            for the 16 best performing teams.{" "}
           </p>
         </div>
 

@@ -13,7 +13,7 @@ export const OrganizersSection = () => {
             <div className="relative flex h-24 lg:h-40 max-w-xs w-full items-center">
               <Image
                 src="/unilife_logo.png"
-                alt="Unilife"
+                alt="UNI LIFE - Student Event Organizer in Finland"
                 width={312}
                 height={96}
                 className="h-auto w-auto max-h-24 object-contain"

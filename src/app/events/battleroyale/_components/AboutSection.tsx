@@ -3,10 +3,10 @@ import { Clock, Trophy, Users } from "lucide-react"
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="py-10 md:py-16">
+    <section id="about" className="py-10 md:py-16" aria-labelledby="about-heading">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-[800px] text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 id="about-heading" className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Finland&apos;s Ultimate Beer Pong Experience
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">

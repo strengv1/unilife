@@ -4,7 +4,7 @@ import { CTASection } from "./_components/CTASection";
 import { FAQSection } from "./_components/FAQSection";
 import { HeroSection } from "./_components/HeroSection";
 import { OrganizersSection } from "./_components/OrganizersSection";
-import PartnerSection from "./_components/PartnerSection";
+import dynamic from 'next/dynamic';
 import { PrizesSection } from "./_components/PrizesSection";
 import { RegistrationSection } from "./_components/RegistrationSection";
 import { TournamentSection } from "./_components/TournamentSection";
@@ -12,34 +12,62 @@ import { Footer } from "@/components/footer";
 import { BackToEventsButton } from "@/components/backToEventsButton";
 import { EventSchema } from "@/components/EventSchema";
 
+const PartnerSection = dynamic(() => import('./_components/PartnerSection'), {
+  loading: () => <div className="py-20 text-center">Loading partners...</div>
+});
+
 export const metadata = {
-  title: "Beer Pong Battle Royale | UNI LIFE",
-  description: "Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi. Compete for the largest prize pool in Finnish Beer Pong history!",
+  title: "Beer Pong Battle Royale 2025 | UNI LIFE",
+  description: "Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi on September 14th, 2025. 150 teams compete for a €2,500 prize pool. Register now!",
+  keywords: [
+    "Beer Pong Battle Royale",
+    "Finland beer pong tournament",
+    "Otaniemi student events",
+    "beer pong competition Finland",
+    "UNI LIFE events",
+    "beer pong tournament",
+    "beer pong turnaus",
+    "opiskelijatapahtumat helsinki"
+  ],
   openGraph: {
-    title: "Beer Pong Battle Royale | UNI LIFE",
-    description: "Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi",
+    title: "Beer Pong Battle Royale 2025 | UNI LIFE",
+    description: "Join Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool",
     images: [
       {
-        url: "/abp_festarit.png",
+        url: "https://unilife.fi/abp_festarit.png",
         width: 1200,
         height: 630,
-        alt: "Beer Pong Battle Royale"
+        alt: "Beer Pong Battle Royale 2025"
       }
     ],
+    type: "website",
+    site_name: "UNI LIFE",
+    locale: "en_FI"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Beer Pong Battle Royale 2025 | UNI LIFE Finland",
+    description: "Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool",
+    images: ["https://unilife.fi/abp_festarit.png"]
+  },
+  alternates: {
+    canonical: "https://unilife.fi/events/battleroyale"
   }
 }
+
 
 export default function BeerPongBattleRoyale() {
   return (
     <div className="flex min-h-screen flex-col">
+      {/* Add comprehensive Event schema */}
       <EventSchema
         title="Beer Pong Battle Royale"
-        description="Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi."
+        description="Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi with 150 teams competing for a €2,500 prize pool."
         date="September 14th, 2025"
-        location="Alvarinaukio, Otaniemi"
-        image="/abp_festarit.png"
         startTime="12:00"
         endTime="19:00"
+        location="Alvarinaukio, Otaniemi"
+        image="/abp_festarit.png"
       />
       <Navbar />
       <main className="flex-1">
