@@ -17,7 +17,7 @@ export function Footer() {
                 width={216}
               />
             </Link>
-            <p className="text-sm text-muted-foreground">
+            <p className="ml-1 text-sm text-muted-foreground">
               We don&apos;t do ordinary.
             </p>
           </div>
