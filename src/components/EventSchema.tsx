@@ -12,7 +12,8 @@ interface EventSchemaProps {
   startDate?: string; // Can be ISO format "2025-09-14T12:00:00" or undefined for unknown
   endDate?: string;   // Optional end date/time
   location?: string;  // Location name
-  
+  timezone?: string   // Default to Finland summer time
+
   // Organization details
   organizers?: string | string[];
   performers?: string | string[];
@@ -43,6 +44,7 @@ export function EventSchema({
   startDate,
   endDate,
   location,
+  timezone = "+03:00",
   organizers = ['UNI LIFE'],
   performers,
   addressLocality,
@@ -105,6 +107,22 @@ export function EventSchema({
     };
   }
   
+  // Add timezone to dates if they don't already have one
+  const formatDateWithTimezone = (dateString?: string) => {
+    if (!dateString) return undefined;
+    
+    // If the date already includes timezone info (contains + or -), return as-is
+    if (dateString.includes('+') || dateString.includes('-') && dateString.length > 10) {
+      return dateString;
+    }
+    
+    // Otherwise append the timezone
+    return `${dateString}${timezone}`;
+  };
+  
+  const formattedStartDate = formatDateWithTimezone(startDate);
+  const formattedEndDate = formatDateWithTimezone(endDate);
+
   // Build the schema object
   const schema = {
     "@context": "https://schema.org",
@@ -112,8 +130,8 @@ export function EventSchema({
     "name": title,
     "description": description,
     "image": image.startsWith('http') ? image : `https://unilife.fi${image}`,
-    ...(startDate && { "startDate": startDate }),
-    ...(endDate && { "endDate": endDate }),
+    ...(formattedStartDate && { "startDate": formattedStartDate }),
+    ...(formattedEndDate && { "endDate": formattedEndDate }),
     "eventStatus": `https://schema.org/${status}`,
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "location": {
