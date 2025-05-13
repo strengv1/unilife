@@ -124,7 +124,7 @@ export const TournamentSection = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                    <span>Redemption round when all cups are eliminated.</span>
+                    <span>No redemption round. First team to drop the last cup wins.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
