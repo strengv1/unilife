@@ -4,8 +4,8 @@ import Image from "next/image"
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="py-10 md:py-16 bg-amber-50">
-      <div className="container flex flex-col mx-auto max-w-6xl px-4">
+    <section id="about" className="py-3 md:py-8 bg-amber-50">
+      <div className="container flex flex-col mx-auto max-w-6xl px-4 overflow-x-clip">
         <div className="mx-auto max-w-5xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Magic Island 🏝️

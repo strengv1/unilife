@@ -7,7 +7,7 @@ export const HeroSection = () => {
   return (
     <section className="relative">
       <div className="absolute inset-0 z-10" />
-      <div className="relative flex items-center justify-center min-h-[80vh] pb-4 bg-blue-800">
+      <div className="relative flex items-center min-h-[80vh] pb-4 bg-blue-800">
         <Image
           src="/magic_island_cover.png"
           alt="Magic Island"
@@ -16,11 +16,10 @@ export const HeroSection = () => {
           priority
         />
         <div className="container h-full max-w-6xl mx-auto relative z-20 flex flex-col 
-          items-center justify-center text-center text-white
-          px-4 pt-10
+          items-center justify-center text-center text-white px-4 pt-10
         ">
-          <div className="space-y-6">
-            <h1 className="max-w-[95vw] mx-auto
+          <div className="space-y-6 w-full">
+            <h1 className="mx-auto
               font-extrabold tracking-tight text-3xl sm:text-5xl md:text-6xl lg:text-7xl
               text-shadow-lg
             ">
@@ -35,8 +34,8 @@ export const HeroSection = () => {
                 <Image
                   src="/magic_island_logo.png"
                   alt="Magic Island"
-                  width={800}
-                  height={100}
+                  width={300}
+                  height={50}
                   className="h-[1em] w-auto"
                   priority
                 />
@@ -51,15 +50,18 @@ export const HeroSection = () => {
                 <MapPin className="h-5 w-5" />
                 <span>???</span>
               </div>
-
               <div className="flex items-center gap-2">
                 <Clock className="h-5 w-5" />
                 <span>???</span>
               </div>
-
             </div>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-6 mt-10 mx-10">
-              <Button asChild size="lg" className="bg-sky-600 hover:bg-sky-700">
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-6 mt-10 px-4">
+              <Button
+                asChild
+                size="lg"
+                className="bg-sky-600 hover:bg-sky-700 whitespace-normal leading-tight h-auto py-3"
+              >
                 <Link href="#newsletter">Information only through newsletter</Link>
               </Button>
             </div>
