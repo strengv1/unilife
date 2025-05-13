@@ -11,12 +11,13 @@ export const metadata = {
   metadataBase: new URL("https://unilife.fi"),
   title: {
     default: "UNI LIFE - Student Events in Finland",
-    template: "%s | UNI LIFE" // For page-specific titles
+    template: "%s | UNI LIFE"
   },
   description: "Creating large-scale and high-value student events across Finland.",
   keywords: [
     "UNI LIFE",
     "Beer Pong Battle Royale",
+    "Otaniemi",
     "Helsinki beer pong tournament",
     "biggest beer pong prize Finland",
     "Magic Island event",
@@ -64,6 +65,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* AHREFS analytics -script */}
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="c4edFtLyzOY0an+l7w/I4Q" async></script>
         <OrganizationSchema />
       </head>
       <body className={inter.className}>
