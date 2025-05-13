@@ -7,10 +7,10 @@ import { BackToEventsButton } from "@/components/backToEventsButton";
 import { EventSchema } from "@/components/EventSchema";
 
 export const metadata = {
-  title: "Magic Island | UNI LIFE",
+  title: "Magic Island",
   description: "Experience the mystery of Magic Island - a unique student event coming soon to Finland.",
   openGraph: {
-    title: "Magic Island | UNI LIFE",
+    title: "Magic Island",
     description: "Experience the mystery of Magic Island - a unique student event coming soon to Finland.",
     images: [
       {

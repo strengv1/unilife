@@ -17,7 +17,7 @@ const PartnerSection = dynamic(() => import('./_components/PartnerSection'), {
 });
 
 export const metadata = {
-  title: "Beer Pong Battle Royale 2025 | UNI LIFE",
+  title: "Beer Pong Battle Royale 2025",
   description: "Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi on September 14th, 2025. 150 teams compete for a €2,500 prize pool. Register now!",
   keywords: [
     "Beer Pong Battle Royale",
@@ -30,7 +30,7 @@ export const metadata = {
     "opiskelijatapahtumat helsinki"
   ],
   openGraph: {
-    title: "Beer Pong Battle Royale 2025 | UNI LIFE",
+    title: "Beer Pong Battle Royale 2025",
     description: "Join Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool",
     images: [
       {

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { type Event, useEvents } from "../hooks/useEvents"
 
 export const metadata = {
-  title: "Student Events in Finland | UNI LIFE",
+  title: "Student Events in Finland",
   description: "Discover the best student events in Finland - from Beer Pong tournaments to exclusive parties. Join the UNI LIFE community today!",
   keywords: [
     "student events Finland",
