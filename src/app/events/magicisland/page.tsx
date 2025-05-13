@@ -30,11 +30,12 @@ export default function MagicIsland() {
         title="Magic Island"
         description="Experience an unforgettable open-air party with live DJ sets, free food, and a mysterious location."
         image="/magic_island_cover.png"
-        organizers={["UNI LIFE"]}
+        location="Secret Location"
         performers="Live DJs"
-        eventCategory="Entertainment Event"
+        organizers="UNI LIFE"
         addressRegion="Uusimaa"
         country="Finland"
+        eventCategory="Entertainment Event"
       />
       <Navbar />
       <main className="flex-1">
