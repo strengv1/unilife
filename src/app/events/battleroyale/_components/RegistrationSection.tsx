@@ -13,7 +13,7 @@ export const RegistrationSection = () => {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2">
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
           <Card className="bg-white shadow-lg">
             <CardContent className="pt-8 pb-6 px-6">
               <h3 className="text-2xl font-bold">Registration Details</h3>
@@ -36,6 +36,18 @@ export const RegistrationSection = () => {
                 </li>
               </ul>
               <Button disabled className="mt-8 w-full bg-red-600 hover:bg-red-700 text-lg py-6">Register Now</Button>
+              <div className="mt-6 text-center">
+                <p className="text-sm text-muted-foreground">
+                  Registration is not yet open.
+                </p>
+                <a
+                  href="#newsletter"
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-red-100 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-200 transition"
+                >
+                  <CheckCircle className="h-4 w-4 text-red-600" />
+                  Notify me when it opens!
+                </a>
+              </div>
             </CardContent>
           </Card>
           <Card className="bg-white shadow-lg">
@@ -66,6 +78,33 @@ export const RegistrationSection = () => {
               </div> */}
             </CardContent>
           </Card>
+        </div>
+        
+        <div id="newsletter" className="mt-10 bg-white text-black rounded-xl p-10 text-center">
+          <h3 className="text-2xl font-bold mb-2">Be first to know when it’s time to drop in to battle 🪂🏓</h3>
+          <p className="mb-6 max-w-xl mx-auto">
+            Registration isn’t open yet – subscribe to our newsletter and we’ll let you know the moment it is. No spam, just raw information.
+          </p>
+          <form
+            action="https://formspree.io/f/xqaqqwgy"
+            method="POST"
+            className="flex flex-col md:flex-row gap-2 max-w-md mx-auto"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              required
+            />
+            <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
+              Subscribe
+            </Button>
+          </form>
+          <p className="text-xs text-muted-foreground mt-4">
+            By subscribing, you agree to receive emails from UNI LIFE about BPBR and related events. You can unsubscribe at any time. Read our{" "}
+            <a href="/privacy" className="underline hover:text-black">Privacy Policy</a>.
+          </p>
         </div>
       </div>
     </section>

@@ -101,7 +101,7 @@ export function Navbar() {
 
                 <li>
                   <NavigationMenuLink asChild>
-                    <Link href="/events/magicssland" className="block hover:text-red-500 font-medium">
+                    <Link href="/events/magicisland" className="block hover:text-red-500 font-medium">
                       Magic Island
                     </Link>
                   </NavigationMenuLink>

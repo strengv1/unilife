@@ -10,7 +10,7 @@ export const AboutSection = () => {
             Finland&apos;s Ultimate Beer Pong Experience
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
-            Organized by two absolute powerhouses, UNI LIFE and Aalto Beer Pong, the much awaited Beer Pong Battle Royale brings together beer pong lovers from all over Finland for an epic tournament of unprecedented proportions.
+            Organized by the powerhouses UNI LIFE and Aalto Beer Pong, the highly anticipated Beer Pong Battle Royale unites beer pong enthusiasts from all over Finland for an epic, one-of-a-kind tournament.
           </p>
         </div>
 
