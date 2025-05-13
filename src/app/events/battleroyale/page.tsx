@@ -9,30 +9,41 @@ import { PrizesSection } from "./_components/PrizesSection";
 import { RegistrationSection } from "./_components/RegistrationSection";
 import { TournamentSection } from "./_components/TournamentSection";
 import { Footer } from "@/components/footer";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { BackToEventsButton } from "@/components/backToEventsButton";
+import { EventSchema } from "@/components/EventSchema";
+
+export const metadata = {
+  title: "Beer Pong Battle Royale | UNI LIFE",
+  description: "Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi. Compete for the largest prize pool in Finnish Beer Pong history!",
+  openGraph: {
+    title: "Beer Pong Battle Royale | UNI LIFE",
+    description: "Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi",
+    images: [
+      {
+        url: "/abp_festarit.png",
+        width: 1200,
+        height: 630,
+        alt: "Beer Pong Battle Royale"
+      }
+    ],
+  }
+}
 
 export default function BeerPongBattleRoyale() {
   return (
     <div className="flex min-h-screen flex-col">
+      <EventSchema
+        title="Beer Pong Battle Royale"
+        description="Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi."
+        date="September 14th, 2025"
+        location="Alvarinaukio, Otaniemi"
+        image="/abp_festarit.png"
+        startTime="12:00"
+        endTime="19:00"
+      />
       <Navbar />
       <main className="flex-1">
-        <Link
-        href="/events" aria-label="Go back to events list"
-        >
-          <Button
-            variant="outline"
-            className="
-              fixed top-24 left-4
-              border-2 rounded-full
-              z-50 h-12 w-12
-              cursor-pointer hover:bg-black hover:text-white
-            "
-          >
-            <ArrowLeft />
-          </Button>
-        </Link>
+        <BackToEventsButton />
 
         <HeroSection />
         <AboutSection />

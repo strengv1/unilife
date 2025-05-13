@@ -17,6 +17,7 @@ export function Navbar() {
   const [isVisible, setIsVisible] = useState<boolean>(true)
   const [lastScrollY, setLastScrollY] = useState<number>(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
+  const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false);
 
   useEffect(() => {
     const controlHeader = (): void => {
@@ -36,23 +37,22 @@ export function Navbar() {
     }
 
     // Add scroll event listener with throttling for performance
-    let timeoutId: NodeJS.Timeout | null = null
-    
+    let ticking = false;
     const throttledControlHeader = (): void => {
-      if (!timeoutId) {
-        timeoutId = setTimeout(() => {
-          controlHeader()
-          timeoutId = null
-        }, 150)
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          controlHeader();
+          ticking = false;
+        });
+        ticking = true;
       }
-    }
+    };
 
     window.addEventListener('scroll', throttledControlHeader)
     
     // Clean up event listener
     return () => {
       window.removeEventListener('scroll', throttledControlHeader)
-      if (timeoutId) clearTimeout(timeoutId)
     }
   }, [lastScrollY])
 
@@ -108,14 +108,14 @@ export function Navbar() {
             <div className="py-2 border-b border-amber-200">
               <div 
                 className="font-medium text-lg flex justify-between items-center cursor-pointer hover:text-red-500"
-                onClick={() => document.getElementById('mobileEventsSubmenu')?.classList.toggle('hidden')}
+                onClick={() => setEventsSubmenuOpen(!eventsSubmenuOpen)}
               >
                 Events
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </div>
-              <div id="mobileEventsSubmenu" className="hidden pl-4 mt-2 space-y-2">
+              <div className={`pl-4 mt-2 space-y-2 ${eventsSubmenuOpen ? '' : 'hidden'}`}>
                 <Link 
                   href="/events/battleroyale" 
                   className="block py-1 hover:text-red-500"

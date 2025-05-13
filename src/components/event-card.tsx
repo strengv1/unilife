@@ -28,9 +28,10 @@ export function EventCard({ title, subtitle, date, time, location, image, catego
         <Link href={`/events/${urlName}`}>
           <Image
             src={image || "/placeholder.svg"}
-            alt={title + ".png"}
+            alt={title}
             width={600}
             height={400}
+            quality={100}
             className="aspect-video object-cover w-full text-center"
           />
         </Link>

@@ -4,6 +4,18 @@ import { EventCard } from "@/components/event-card"
 import { Button } from "@/components/ui/button"
 import { type Event, useEvents } from "../hooks/useEvents"
 
+export const metadata = {
+  title: "Student Events in Finland | UNI LIFE",
+  description: "Discover the best student events in Finland - from Beer Pong tournaments to exclusive parties. Join the UNI LIFE community today!",
+  keywords: [
+    "student events Finland",
+    "university parties Helsinki",
+    "beer pong tournaments",
+    "student festivals Finland",
+    "Helsinki student events"
+  ]
+}
+
 export default function EventsPage() {
   const { all } = useEvents();
 
