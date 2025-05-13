@@ -83,7 +83,7 @@ export const RegistrationSection = () => {
         <div id="newsletter" className="mt-10 bg-white text-black rounded-xl p-10 text-center">
           <h3 className="text-2xl font-bold mb-2">Be first to know when it’s time to drop in to battle 🪂🏓</h3>
           <p className="mb-6 max-w-xl mx-auto">
-            Registration isn’t open yet – subscribe to our newsletter and we’ll let you know when it's time to deploy. No spam, just raw information.
+            Registration isn’t open yet – subscribe to our newsletter and we’ll let you know when it’s time to deploy. No spam, just raw information.
           </p>
           <form
             action="https://formspree.io/f/xqaqqwgy"
