@@ -22,9 +22,9 @@ export const OrganizersSection = () => {
             </div>
             <h3 className="mt-6 text-2xl font-bold">UNI LIFE</h3>
             <p className="mt-4 max-w-md text-lg text-balance text-muted-foreground">
-              Professionally organized student events that are unlike anything you've seen before.
+              Professionally organized student events that are unlike anything you&apos;ve seen before.
               <br /><br />
-              We guarantee you'll have fun - every time!
+              We guarantee you&apos;ll have fun - every time!
             </p>
           </div>
           
