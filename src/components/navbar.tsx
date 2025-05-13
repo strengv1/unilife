@@ -92,8 +92,8 @@ export function Navbar() {
 
         {/* Mobile menu */}
         <div 
-          className={`fixed inset-0 top-20 z-40 bg-amber-50 md:hidden transition-transform duration-300 ease-in-out transform ${
-            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`inset-0 top-20 z-40 bg-amber-50 md:hidden transition-transform duration-300 ease-in-out transform ${
+            mobileMenuOpen ? "fixed translate-x-0" : "hidden translate-x-full"
           }`}
         >
           <nav className="flex flex-col p-4 space-y-4">
