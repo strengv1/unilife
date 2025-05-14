@@ -7,7 +7,7 @@ export const PrizesSection = () => {
         <div className="flex flex-col mx-auto max-w-[800px] text-center items-center justify-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Massive Prize Pool</h2>
           
-          <p className="mt-4 md:mt-6 text-3xl text-shadow-lg">€2,500</p>
+          <p className="mt-4 md:mt-6 text-3xl">Total of €2,500</p>
         </div>
 
         <div className="mt-4 md:mt-6 grid gap-8 grid-cols-2">
