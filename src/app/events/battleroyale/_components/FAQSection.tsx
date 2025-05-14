@@ -69,7 +69,7 @@ export const FAQSection = () => {
           </p>
         </div>
 
-        <div className="mt-4 md:mt-8 mx-auto max-w-[800px] bg-white p-8 rounded-lg shadow-sm">
+        <div className="mt-4 md:mt-8 mx-auto max-w-[800px] bg-white px-8 py-2 rounded-lg shadow-sm">
           <Accordion type="single" collapsible className="w-full">
             {faqItems.map((item, index) => (
               <AccordionItem key={index} value={`item-${index + 1}`}>

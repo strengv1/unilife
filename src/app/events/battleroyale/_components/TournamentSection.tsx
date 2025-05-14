@@ -19,12 +19,12 @@ export const TournamentSection = () => {
 
         <div className="mt-8">
           <Tabs defaultValue="format" className="mx-auto max-w-[800px]">
-            <TabsList className="grid w-full grid-cols-3 mb-4">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="format">Format</TabsTrigger>
               <TabsTrigger value="rules">Quick Rules</TabsTrigger>
               <TabsTrigger value="schedule">Schedule</TabsTrigger>
             </TabsList>
-            <TabsContent value="format" className="mt-6 space-y-4">
+            <TabsContent value="format" className="mt-0 space-y-4">
               <div className="rounded-lg border p-4 md:p-8 shadow-sm">
                 <h3 className="text-2xl font-bold">Swiss Tournament Format</h3>
                 
@@ -106,7 +106,7 @@ export const TournamentSection = () => {
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value="rules" className="mt-6 space-y-4">
+            <TabsContent value="rules" className="space-y-4">
               <div className="rounded-lg border p-8 shadow-sm">
                 <h3 className="text-2xl font-bold">Quick Rules</h3>
                 <ul className="mt-6 space-y-4">
@@ -137,7 +137,7 @@ export const TournamentSection = () => {
                 </ul>
               </div>
             </TabsContent>
-            <TabsContent value="schedule" className="mt-6 space-y-4">
+            <TabsContent value="schedule" className="space-y-4">
               <div className="rounded-lg border p-8 shadow-sm">
                 <h3 className="text-2xl font-bold">Event Schedule</h3>
                 <ul className="mt-6 space-y-4">
