@@ -88,13 +88,13 @@ export const NewsletterForm = ({
             onChange={(e) => setEmail(e.target.value)}
             id="email"
             placeholder="Enter your email"
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+            className="flex h-10 w-full rounded-md border border-input bg-background mx-3 px-3 py-2 text-sm"
             required
             aria-label="Your email address"
           />
           <Button 
             type="submit" 
-            className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
+            className="bg-red-600 hover:bg-red-700 text-white cursor-pointer mx-3"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Subscribing..." : buttonText}
