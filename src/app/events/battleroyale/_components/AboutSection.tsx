@@ -1,19 +1,35 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Clock, Trophy, Users } from "lucide-react"
+import Image from "next/image"
 
 export const AboutSection = () => {
   return (
     <section id="about" className="py-10 md:py-16" aria-labelledby="about-heading">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-[800px] text-center">
-          <h2 id="about-heading" className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Finland&apos;s Ultimate Beer Pong Experience
-          </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Organized by the powerhouses UNI LIFE and Aalto Beer Pong, the highly anticipated Beer Pong Battle Royale unites beer pong enthusiasts from all over Finland for an epic, one-of-a-kind tournament.
-          </p>
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 id="about-heading" className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              Finland&apos;s Ultimate Beer Pong Experience
+            </h2>
+            <Image
+              className="block md:hidden mx-auto h-48 w-auto order-first"
+              src="/bpbr_logo.png"
+              alt="Beer Pong Battle Royale logo"
+              height={250}
+              width={250}
+            />
+            <p className="mt-6 text-lg text-muted-foreground">
+              Organized by the powerhouses UNI LIFE and Aalto Beer Pong, the highly anticipated Beer Pong Battle Royale unites beer pong enthusiasts from all over Finland for an epic, one-of-a-kind tournament.
+            </p>
+          </div>
+          <Image
+            className="hidden md:block mx-auto h-48 w-auto order-first"
+            src="/bpbr_logo.png"
+            alt="Beer Pong Battle Royale logo"
+            height={250}
+            width={250}
+          />
         </div>
-
         <div className="hidden md:grid mt-16 gap-8 md:grid-cols-3">
           <Card className="transform transition-transform hover:scale-105">
             <CardContent className="pt-8 pb-6 px-6">
