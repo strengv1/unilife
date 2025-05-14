@@ -3,7 +3,29 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 
-export const NewsletterSection = () => {
+interface NewsletterFormProps {
+  title: string;
+  description: string;
+  buttonText?: string;
+  className?: string;
+  containerClassName?: string;
+  isSection?: boolean;
+  disclaimerText?: string;
+  privacyLinkText?: string;
+  privacyLinkUrl?: string;
+}
+
+export const NewsletterForm = ({
+  title,
+  description,
+  buttonText = "Subscribe",
+  className = "",
+  containerClassName = "",
+  isSection = false,
+  disclaimerText = "By subscribing, you agree to receive emails from UNI LIFE. You can unsubscribe at any time.",
+  privacyLinkText = "Privacy Policy",
+  privacyLinkUrl = "/privacy",
+}: NewsletterFormProps) => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,8 +36,14 @@ export const NewsletterSection = () => {
     setStatus("");
     
     try {
-      // Replace with your Google Script URL (instructions in comments below)
-      const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL as string;
+      const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+      
+      if (!scriptURL) {
+        console.error("Google Script URL not found in environment variables");
+        setStatus("error");
+        setIsSubmitting(false);
+        return;
+      }
       
       const formData = new FormData();
       formData.append("email", email);
@@ -39,31 +67,37 @@ export const NewsletterSection = () => {
     }
   };
 
+  // Create appropriate wrapper based on isSection prop
+  const Wrapper = isSection ? "section" : "div";
+  
   return (
-    <section id="newsletter" className="py-16 bg-amber-100">
-      <div className="container px-4 mx-auto text-center">
-        <h2 className="text-3xl font-bold tracking-tight mb-4">Newsletter Signup</h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-          Subscribe to our newsletter to get the latest updates on upcoming events and exclusive offers.
-        </p>
+    <Wrapper id="newsletter" className={containerClassName}>
+      <div className={`text-center ${className}`}>
+        {title && <h3 className="text-2xl font-bold mb-2">{title}</h3>}
+        {description && <p className="mb-6 max-w-xl mx-auto">{description}</p>}
+        
         <form
           onSubmit={handleSubmit}
           className="flex flex-col md:flex-row gap-2 max-w-md mx-auto"
+          aria-labelledby="newsletter-heading"
         >
+          <h4 id="newsletter-heading" className="sr-only">Newsletter Signup</h4>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            id="email"
             placeholder="Enter your email"
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ..."
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
             required
+            aria-label="Your email address"
           />
           <Button 
             type="submit" 
             className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Subscribing..." : "Subscribe"}
+            {isSubmitting ? "Subscribing..." : buttonText}
           </Button>
         </form>
         
@@ -75,10 +109,22 @@ export const NewsletterSection = () => {
         )}
         
         <p className="text-xs text-muted-foreground mt-4">
-          By subscribing, you agree to receive marketing emails from UNI LIFE. You can unsubscribe at any time. Read our{" "}
-          <a href="/privacy" className="underline hover:text-black">Privacy Policy</a>.
+          {disclaimerText} Read our{" "}
+          <a href={privacyLinkUrl} className="underline hover:text-black">{privacyLinkText}</a>.
         </p>
       </div>
-    </section>
+    </Wrapper>
+  );
+};
+
+export const NewsletterSection = () => {
+  return (
+    <NewsletterForm
+      isSection={true}
+      containerClassName="py-16 bg-amber-100"
+      title="Newsletter Signup"
+      description="Subscribe to our newsletter to get the latest updates on upcoming events and exclusive offers."
+      disclaimerText="By subscribing, you agree to receive marketing emails from UNI LIFE. You can unsubscribe at any time."
+    />
   );
 };

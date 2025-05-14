@@ -1,3 +1,4 @@
+import { NewsletterForm } from "@/components/newsletterSection"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
@@ -80,36 +81,12 @@ export const RegistrationSection = () => {
           </Card>
         </div>
         
-        <div id="newsletter" className="mt-10 bg-white text-black rounded-xl p-10 text-center">
-          <h3 className="text-2xl font-bold mb-2">Be first to know when it’s time to drop in to battle 🪂🏓</h3>
-          <p className="mb-6 max-w-xl mx-auto">
-            Registration isn’t open yet – subscribe to our newsletter and we’ll let you know when it’s time to deploy. No spam, just raw information.
-          </p>
-          <form
-            action="https://formspree.io/f/xqaqqwgy"
-            method="POST"
-            className="flex flex-col md:flex-row gap-2 max-w-md mx-auto"
-            aria-labelledby="newsletter-heading"
-          >
-            <h4 id="newsletter-heading" className="sr-only">Newsletter Signup</h4>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Enter your email"
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-              required
-              aria-label="Your email address"
-            />
-            <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
-              Subscribe
-            </Button>
-          </form>
-          <p className="text-xs text-muted-foreground mt-4">
-            By subscribing, you agree to receive emails from UNI LIFE about BPBR and related events. You can unsubscribe at any time. Read our{" "}
-            <a href="/privacy" className="underline hover:text-black">Privacy Policy</a>.
-          </p>
-        </div>
+        <NewsletterForm
+          containerClassName="mt-10 bg-white text-black rounded-xl p-10"
+          title="Be first to know when it's time to drop in to battle 🪂🏓"
+          description="Registration isn't open yet – subscribe to our newsletter and we'll let you know when it's time to deploy. No spam, just raw information."
+          disclaimerText="By subscribing, you agree to receive emails from UNI LIFE about BPBR and related events. You can unsubscribe at any time."
+        />
       </div>
     </section>
   )
