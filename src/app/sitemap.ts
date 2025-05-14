@@ -3,31 +3,31 @@ import type { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://unilife.fi',
+      url: 'https://www.unilife.fi',
       lastModified: new Date(),
     },
     {
-      url: 'https://unilife.fi/about',
+      url: 'https://www.unilife.fi/about',
       lastModified: new Date(),
     },
     {
-      url: 'https://unilife.fi/contact',
+      url: 'https://www.unilife.fi/contact',
       lastModified: new Date(),
     },
     {
-      url: 'https://unilife.fi/events',
+      url: 'https://www.unilife.fi/events',
       lastModified: new Date(),
     },
     {
-      url: 'https://unilife.fi/events/battleroyale',
+      url: 'https://www.unilife.fi/events/battleroyale',
       lastModified: new Date(),
     },
     {
-      url: 'https://unilife.fi/events/magicisland',
+      url: 'https://www.unilife.fi/events/magicisland',
       lastModified: new Date(),
     },
     {
-      url: 'https://unilife.fi/privacy',
+      url: 'https://www.unilife.fi/privacy',
       lastModified: new Date(),
     }
   ]
