@@ -22,6 +22,7 @@ export function OrganizationSchema() {
 
   return (
     <Script
+      id="organization-schema"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

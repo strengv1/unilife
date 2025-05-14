@@ -160,6 +160,7 @@ export function EventSchema({
 
   return (
     <Script
+      id={`event-schema`}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(cleanSchema) }}
     />
