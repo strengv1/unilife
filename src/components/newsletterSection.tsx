@@ -26,15 +26,28 @@ export const NewsletterForm = ({
   privacyLinkText = "Privacy Policy",
   privacyLinkUrl = "/privacy",
 }: NewsletterFormProps) => {
+  const [firstName, setFirstName] = useState("") // Honeypot-field! Keep invisible to users
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus("");
-    
+
+    // Check if the honeypot field is filled (bot detection)
+    if (firstName !== "") {
+      // This is likely a bot - silently "succeed" without actually submitting
+      setTimeout(() => {
+        console.log("Honeypot triggered - likely bot submission");
+        setEmail("");
+        setStatus("success"); // Show success message to avoid tipping off the bot
+        setIsSubmitting(false);
+      }, 1243)
+      return;
+    }
+
     try {
       const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
       
@@ -82,6 +95,25 @@ export const NewsletterForm = ({
           aria-labelledby="newsletter-heading"
         >
           <h4 id="newsletter-heading" className="sr-only">Newsletter Signup</h4>
+          
+                  {/* Honeypot field - hidden from humans but visible to bots */}
+                  <input
+                    type="text"
+                    name="firstName" // Common names like "website", "url", or "phone" attract bots
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    style={{
+                      position: 'absolute',
+                      left: '-9900px',
+                      height: 0,
+                      width: 0,
+                      opacity: 0,
+                      zIndex: -1,
+                    }}
+                    tabIndex={-1}
+                    aria-hidden="true"
+                  />
+
           <input
             type="email"
             value={email}
