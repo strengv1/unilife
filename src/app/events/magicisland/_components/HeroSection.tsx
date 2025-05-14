@@ -7,7 +7,7 @@ export const HeroSection = () => {
   return (
     <section className="relative">
       <div className="absolute inset-0 z-10" />
-      <div className="relative flex items-center min-h-[80vh] pb-4 bg-blue-800">
+      <div className="relative flex items-center h-[80vh] min-h-[32rem] max-h-[50rem] pb-4 bg-blue-800">
         <Image
           src="/magic_island_cover.png"
           alt="Magic Island"
@@ -20,7 +20,7 @@ export const HeroSection = () => {
         ">
           <div className="space-y-6 w-full">
             <h1 className="mx-auto
-              font-extrabold tracking-tight text-3xl sm:text-5xl md:text-6xl lg:text-7xl
+              font-bold tracking-tight text-3xl sm:text-5xl md:text-6xl lg:text-7xl
               text-shadow-lg
             ">
               Are you ready?

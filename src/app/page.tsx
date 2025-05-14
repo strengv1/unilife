@@ -17,7 +17,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative">
           <div className="absolute inset-0 bg-black/60 z-10" />
-          <div className="relative h-[80vh] overflow-hidden">
+          <div className="relative h-[80vh] min-h-[32rem] max-h-[50rem] overflow-hidden">
             <Image
               src="/unilife_cover.jpg"
               alt="Students celebrating"
@@ -30,9 +30,9 @@ export default function Home() {
             ">
               <div className="flex flex-col md:flex-row w-full gap-8 md:gap-1 md:justify-between md:pb-4">
                 <div className="flex flex-col md:basis-[65vw] gap-2
-                  text-4xl text-left font-extrabold tracking-tight md:text-6xl lg:text-7xl
+                  text-4xl text-left font-bold tracking-tight md:text-6xl lg:text-7xl
                 ">
-                  <p>Every uni.</p>
+                  <p className="mt-auto">Every uni.</p>
                   <p>One community.</p>
                   <p>Welcome to <span className="underline whitespace-nowrap ">UNI LIFE</span>.</p>
                 </div>

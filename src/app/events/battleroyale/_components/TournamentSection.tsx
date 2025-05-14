@@ -35,7 +35,7 @@ export const TournamentSection = () => {
                 <div className="flex flex-col gap-8">
                   {/* Tournament Structure */}
                   <div>
-                    <h4 className="text-lg font-semibold mb-4">Tournament Structure</h4>
+                    <h4 className="text-lg font-bold mb-4">Tournament Structure</h4>
                     <ul className="space-y-4">
                       <li className="flex items-start gap-3">
                         <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
@@ -58,7 +58,7 @@ export const TournamentSection = () => {
                   
                   {/* How Swiss Format Works */}
                   <div>
-                    <h4 className="text-lg font-semibold mb-4">How Swiss Format Works</h4>
+                    <h4 className="text-lg font-bold mb-4">How Swiss Format Works</h4>
                     <p className="text-muted-foreground mb-4">
                       Teams are paired each round based on their current record:
                     </p>
@@ -81,7 +81,7 @@ export const TournamentSection = () => {
                 
                 {/* Ranking System */}
                 <div className="mt-8 pt-6 border-t border-slate-200">
-                  <h4 className="text-xl font-semibold mb-4">Ranking System</h4>
+                  <h4 className="text-xl font-bold mb-4">Ranking System</h4>
                   <p className="text-muted-foreground mb-4">
                     After 6 rounds, teams are ranked by these tiebreakers (in order):
                   </p>

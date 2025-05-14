@@ -7,7 +7,7 @@ export const HeroSection = () => {
   return (
     <section className="relative" aria-labelledby="hero-heading">
       <div className="absolute inset-0 bg-black/80 z-10" />
-      <div className="relative flex items-center min-h-[80vh] bg-blue-800 pb-4">
+      <div className="relative flex items-center h-[80vh] min-h-[32rem] max-h-[50rem] bg-blue-800 pb-4">
         <Image
           src="/abp_festarit.png"
           alt="Aalto Beer Pong at festival"
@@ -20,10 +20,10 @@ export const HeroSection = () => {
           px-4 pt-10
         ">
           <div className="space-y-6">
-            <div className="inline-block rounded-md bg-red-600 px-3 py-1 text-sm font-semibold">
+            <div className="inline-block rounded-md bg-red-600 px-3 py-1 text-sm font-medium">
               FINLAND&apos;S BIGGEST BEER PONG TOURNAMENT
             </div>
-            <h1 id="hero-heading" className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 id="hero-heading" className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               BEER PONG <br />
               <span className="text-red-500">BATTLE ROYALE</span>
             </h1>

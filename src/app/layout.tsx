@@ -1,12 +1,16 @@
 import type React from "react"
 import Script from 'next/script';
 import "@/app/globals.css"
-import { Inter } from "next/font/google"
+import { Outfit  } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { OrganizationSchema } from "@/components/OrganizationSchema"
 import { NavbarProvider } from "@/contexts/NavbarContext";
 
-const inter = Inter({ subsets: ["latin"] })
+const outfit = Outfit({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  display: 'swap',
+})
 
 export const metadata = {
   metadataBase: new URL("https://unilife.fi"),
@@ -80,7 +84,7 @@ export default function RootLayout({
 
         <OrganizationSchema />
       </head>
-      <body className={inter.className}>
+      <body className={outfit.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <NavbarProvider>
             {children}
