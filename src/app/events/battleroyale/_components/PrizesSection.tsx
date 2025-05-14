@@ -7,10 +7,10 @@ export const PrizesSection = () => {
         <div className="flex flex-col mx-auto max-w-[800px] text-center items-center justify-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Massive Prize Pool</h2>
           
-          <p className="text-3xl pt-3 pb-6 text-shadow-lg">€2,500</p>
+          <p className="mt-4 md:mt-6 text-3xl text-shadow-lg">€2,500</p>
         </div>
 
-        <div className="mt-6 grid gap-8 grid-cols-2">
+        <div className="mt-4 md:mt-6 grid gap-8 grid-cols-2">
           <Card className="border-2 col-span-full border-yellow-500 bg-gradient-to-b from-yellow-50 to-white transform transition-transform hover:scale-105 shadow-lg">
             <CardContent className="pt-6 pb-4 px-4 text-center">
               <h3 className="text-2xl font-bold">1st Place</h3>

@@ -12,14 +12,14 @@ export const AboutSection = () => {
               Finland&apos;s Ultimate Beer Pong Experience
             </h2>
             <Image
-              className="block md:hidden mx-auto h-48 w-auto order-first"
+              className="block md:hidden mx-auto mt-3 h-48 w-auto order-first"
               src="/bpbr_logo.png"
               alt="Beer Pong Battle Royale logo"
               height={250}
               width={250}
             />
-            <p className="mt-6 text-lg text-muted-foreground">
-              Organized by the powerhouses UNI LIFE and Aalto Beer Pong, the highly anticipated Beer Pong Battle Royale unites beer pong enthusiasts from all over Finland for an epic, one-of-a-kind tournament.
+            <p className="mt-4 md:mt-6 text-lg text-muted-foreground text-balance">
+              Organized by the powerhouses UNI LIFE and Aalto Beer Pong, the highly anticipated <span className="text-nowrap">Beer Pong Battle Royale</span> unites beer pong enthusiasts from all over Finland for an epic, one-of-a-kind tournament.
             </p>
           </div>
           <Image
@@ -32,7 +32,7 @@ export const AboutSection = () => {
         </div>
         <div className="hidden md:grid mt-16 gap-8 md:grid-cols-3">
           <Card className="transform transition-transform hover:scale-105">
-            <CardContent className="pt-8 pb-6 px-6">
+            <CardContent className="pt-6 pb-4 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
                 <Trophy className="h-7 w-7 text-red-600" />
               </div>
@@ -43,7 +43,7 @@ export const AboutSection = () => {
             </CardContent>
           </Card>
           <Card className="transform transition-transform hover:scale-105">
-            <CardContent className="pt-8 pb-6 px-6">
+            <CardContent className="pt-6 pb-4 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
                 <Users className="h-7 w-7 text-red-600" />
               </div>
@@ -54,7 +54,7 @@ export const AboutSection = () => {
             </CardContent>
           </Card>
           <Card className="transform transition-transform hover:scale-105">
-            <CardContent className="pt-8 pb-6 px-6">
+            <CardContent className="pt-6 pb-4 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
                 <Clock className="h-7 w-7 text-red-600" />
               </div>

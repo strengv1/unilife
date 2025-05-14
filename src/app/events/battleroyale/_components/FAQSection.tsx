@@ -64,12 +64,12 @@ export const FAQSection = () => {
           <h2 id="faq-heading" className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Frequently Asked Questions
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="mt-4 md:mt-6 text-lg text-muted-foreground">
             Everything you need to know about the Beer Pong Battle Royale.
           </p>
         </div>
 
-        <div className="mt-16 mx-auto max-w-[800px] bg-white p-8 rounded-lg shadow-sm">
+        <div className="mt-4 mx-auto max-w-[800px] bg-white p-8 rounded-lg shadow-sm">
           <Accordion type="single" collapsible className="w-full">
             {faqItems.map((item, index) => (
               <AccordionItem key={index} value={`item-${index + 1}`}>

@@ -115,9 +115,9 @@ export default function PartnerSection() {
   const maxIndex = Math.max(0, partners.length - visibleCount);
 
   return (
-    <section className="py-10 bg-muted/50 relative overflow-hidden">
+    <section className="py-10 md:py-16 bg-muted/50 relative overflow-hidden">
       <div className="container px-4 mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-16">Our Partners</h2>
+        <h2 className="text-3xl font-bold text-center mb-4">Our Partners</h2>
         
         {isMounted && (
           <div 
@@ -182,7 +182,7 @@ export default function PartnerSection() {
             </div>
             
             {/* Indicator Dots */}
-            <div className="flex justify-center mt-8 space-x-2">
+            <div className="flex justify-center mt-4 md:mt-8 space-x-2">
               {Array.from({ length: maxIndex + 1 }).map((_, index) => (
                 <button
                   key={index}
@@ -197,7 +197,7 @@ export default function PartnerSection() {
           </div>
         )}
         
-        <div className="mt-16 text-center">
+        <div className="mt-6 md:mt-16 text-center">
           <p className="text-sm text-muted-foreground">
             Interested in sponsoring our event?{" "}
             <a href="/contact" className="text-primary hover:underline font-medium">

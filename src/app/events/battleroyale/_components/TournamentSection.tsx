@@ -8,7 +8,7 @@ export const TournamentSection = () => {
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-[800px] text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Tournament Structure</h2>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="mt-4 md:mt-6 text-lg text-muted-foreground">
             Designed for fair play and maximum excitement for everybody.{" "}
             <Link href="#prizes" className="text-red-600 hover:underline">
               Prizes
@@ -17,15 +17,15 @@ export const TournamentSection = () => {
           </p>
         </div>
 
-        <div className="mt-16">
+        <div className="mt-8">
           <Tabs defaultValue="format" className="mx-auto max-w-[800px]">
-            <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsList className="grid w-full grid-cols-3 mb-4">
               <TabsTrigger value="format">Format</TabsTrigger>
               <TabsTrigger value="rules">Quick Rules</TabsTrigger>
               <TabsTrigger value="schedule">Schedule</TabsTrigger>
             </TabsList>
             <TabsContent value="format" className="mt-6 space-y-4">
-              <div className="rounded-lg border p-8 shadow-sm">
+              <div className="rounded-lg border p-4 md:p-8 shadow-sm">
                 <h3 className="text-2xl font-bold">Swiss Tournament Format</h3>
                 
                 <div className="mt-6 bg-red-50 p-4 rounded-md text-red-800 font-medium mb-8">

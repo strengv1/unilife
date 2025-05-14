@@ -8,7 +8,7 @@ export const OrganizersSection = () => {
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Organized By</h2>
         </div>
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-2">
+        <div className="mt-6 grid gap-12 lg:grid-cols-2">
           <div className="flex flex-col items-center text-center">
             <div className="relative flex h-24 lg:h-40 max-w-xs w-full items-center">
               <Image
@@ -20,8 +20,8 @@ export const OrganizersSection = () => {
                 style={{ maxWidth: '100%' }}
               />
             </div>
-            <h3 className="mt-6 text-2xl font-bold">UNI LIFE</h3>
-            <p className="mt-4 max-w-md text-lg text-balance text-muted-foreground">
+            <h3 className="mt-4 md:mt-6 text-2xl font-bold">UNI LIFE</h3>
+            <p className="mt-3 max-w-md text-lg text-balance text-muted-foreground">
               Professionally organized student events that are unlike anything you&apos;ve seen before.
               <br /><br />
               We guarantee you&apos;ll have fun - every time!
@@ -38,8 +38,8 @@ export const OrganizersSection = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="mt-6 text-2xl font-bold">Aalto Beer Pong</h3>
-            <p className="mt-4 max-w-md text-lg text-muted-foreground">
+            <h3 className="mt-4 md:mt-6 text-2xl font-bold">Aalto Beer Pong</h3>
+            <p className="mt-3 max-w-md text-lg text-muted-foreground">
               The original beer pong organization from Aalto University.
               <br /><br />
               Organizing tournaments since 2011.

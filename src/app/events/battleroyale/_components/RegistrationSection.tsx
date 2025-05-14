@@ -9,14 +9,14 @@ export const RegistrationSection = () => {
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-[800px] text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Register Your Team</h2>
-          <p className="mt-6 text-lg text-red-100">
+          <p className="mt-4 md:mt-6 text-lg text-red-100">
             Secure your spot in Finland&apos;s biggest beer pong tournament before all slots are filled!
           </p>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           <Card className="bg-white shadow-lg">
-            <CardContent className="pt-8 pb-6 px-6">
+            <CardContent className="pt-4 md:pt-8 pb-6 px-6">
               <h3 className="text-2xl font-bold">Registration Details</h3>
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
@@ -52,7 +52,7 @@ export const RegistrationSection = () => {
             </CardContent>
           </Card>
           <Card className="bg-white shadow-lg">
-            <CardContent className="pt-8 pb-6 px-6">
+            <CardContent className="pt-4 md:pt-8 pb-6 px-6">
               <h3 className="text-2xl font-bold">What&apos;s Included</h3>
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
