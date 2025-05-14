@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Menu, X } from "lucide-react"
 import { useNavbarContext } from "@/contexts/NavbarContext"
+import { Event, useEvents } from "@/hooks/useEvents"
 
 export function Navbar() {
   const [isVisible, setIsVisible] = useState(true)
@@ -20,11 +21,12 @@ export function Navbar() {
   const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false)
   const { mobileMenuOpen, setMobileMenuOpen } = useNavbarContext();
 
+  const { all } = useEvents();
+
   useEffect(() => {
-    // Improved scroll handling with better debounce
     let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
     const minScrollDifference = 10; // Minimum scroll difference to trigger a hide/show
-    const headerHeight = 100; // Increased from 80 to reduce sensitivity
+    const headerHeight = 100;
     let isMobile = window.innerWidth <= 768;
 
     const controlHeader = () => {
@@ -156,20 +158,19 @@ export function Navbar() {
                 </svg>
               </div>
               <div className={`pl-4 mt-2 space-y-2 ${eventsSubmenuOpen ? '' : 'hidden'}`}>
-                <Link 
-                  href="/events/battleroyale" 
-                  className="block py-1 hover:text-red-500"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Beer Pong Battle Royale
-                </Link>
-                <Link 
-                  href="/events/magicisland" 
-                  className="block py-1 hover:text-red-500"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Magic Island
-                </Link>
+                {
+                  all.map((event: Event) => (
+                    <Link
+                      key={event.urlName}
+                      href={`/events/${event.urlName}`}
+                      className="block py-1 hover:text-red-500"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {`${event.title}`}
+                    </Link>
+                  ))
+                }
+                
                 <Link
                   href="/events" 
                   className="block py-1 hover:text-red-500"
@@ -210,21 +211,18 @@ export function Navbar() {
               </NavigationMenuTrigger>
               <NavigationMenuContent className="p-4 shadow-lg rounded-md">
                 <ul className="grid gap-3 p-2 w-[200px]">
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link href="/events/battleroyale" className="block hover:text-red-500 font-medium">
-                        Beer Pong Battle Royale
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
+                  {
+                    all.map((event: Event) => (
+                      <li key={event.urlName}>
+                        <NavigationMenuLink asChild>
+                          <Link href={`/events/${event.urlName}`} className="block hover:text-red-500 font-medium">
+                            {event.title}
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))
+                  }
 
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link href="/events/magicisland" className="block hover:text-red-500 font-medium">
-                        Magic Island
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
                   <li>
                     <NavigationMenuLink asChild>
                       <Link href="/events" className="block hover:text-red-500 font-medium">

@@ -24,18 +24,18 @@ const events: Event[] = [
     urlName: "battleroyale",
     isFeatured: true,
   },
-  {
-    id: "2",
-    title: "Magic Island",
-    subtitle: "yo what's this??",
-    date: "???",
-    time: "???",
-    location: "???",
-    image: "/magic_island_thumb.png",
-    category: "Party / Festival",
-    urlName: "magicisland",
-    isFeatured: false,
-  },
+  // {
+  //   id: "2",
+  //   title: "Magic Island",
+  //   subtitle: "yo what's this??",
+  //   date: "???",
+  //   time: "???",
+  //   location: "???",
+  //   image: "/magic_island_thumb.png",
+  //   category: "Party / Festival",
+  //   urlName: "magicisland",
+  //   isFeatured: false,
+  // },
   // ... more events
 ];
 
