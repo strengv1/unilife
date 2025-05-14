@@ -165,10 +165,9 @@ export default function PartnerSection() {
                       aria-label={`Visit ${partner.name} website`}
                     >
                       <div className="mb-4 transition-transform duration-300 hover:scale-110 flex items-center justify-center h-24">
-                        {/* Replace icons with images */}
                         <Image
                           src={partner.imageSrc}
-                          alt={`${partner.name} logo`} // More descriptive alt text
+                          alt={`${partner.name} logo`}
                           width={120}
                           height={80}
                           className="max-h-full max-w-full object-contain"

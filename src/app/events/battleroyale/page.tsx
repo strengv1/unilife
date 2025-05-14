@@ -4,17 +4,13 @@ import { CTASection } from "./_components/CTASection";
 import { FAQSection } from "./_components/FAQSection";
 import { HeroSection } from "./_components/HeroSection";
 import { OrganizersSection } from "./_components/OrganizersSection";
-import dynamic from 'next/dynamic';
 import { PrizesSection } from "./_components/PrizesSection";
 import { RegistrationSection } from "./_components/RegistrationSection";
 import { TournamentSection } from "./_components/TournamentSection";
 import { Footer } from "@/components/footer";
 import { BackToEventsButton } from "@/components/backToEventsButton";
 import { EventSchema } from "@/components/EventSchema";
-
-const PartnerSection = dynamic(() => import('./_components/PartnerSection'), {
-  loading: () => <div className="py-20 text-center">Loading partners...</div>
-});
+import { SimpleParnersSection } from "./_components/SimplePartnerSection";
 
 export const metadata = {
   title: "Beer Pong Battle Royale 2025",
@@ -100,7 +96,8 @@ export default function BeerPongBattleRoyale() {
         <TournamentSection />
         <OrganizersSection />
         <FAQSection />
-        <PartnerSection />
+        {/* <PartnerSection /> */}
+        <SimpleParnersSection />
         <CTASection />
       </main>
       <Footer />

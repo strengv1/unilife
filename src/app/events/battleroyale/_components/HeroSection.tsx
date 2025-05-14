@@ -10,7 +10,7 @@ export const HeroSection = () => {
       <div className="relative flex items-center min-h-[80vh] bg-blue-800 pb-4">
         <Image
           src="/abp_festarit.png"
-          alt="Students competing in Beer Pong Battle Royale tournament at Otaniemi"
+          alt="Aalto Beer Pong at festival"
           fill
           className="object-cover opacity-70"
           priority
