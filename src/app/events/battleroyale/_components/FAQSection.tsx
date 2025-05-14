@@ -1,4 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import Script from "next/script";
 
 export const FAQSection = () => {
   const faqItems = [
@@ -52,7 +53,8 @@ export const FAQSection = () => {
 
   return (
     <section id="faq" className="bg-slate-50 py-10 md:py-16" aria-labelledby="faq-heading">
-      <script
+      <Script
+        id="faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
