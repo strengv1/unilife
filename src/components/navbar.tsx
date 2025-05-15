@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import {
   NavigationMenu,
@@ -16,12 +17,18 @@ import { useNavbarContext } from "@/contexts/NavbarContext"
 import { Event, useEvents } from "@/hooks/useEvents"
 
 export function Navbar() {
-  const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false)
-  const { mobileMenuOpen, setMobileMenuOpen } = useNavbarContext();
-
+  const { mobileMenuOpen, setMobileMenuOpen, navBarIsVisible, setNavBarIsVisible, navBarHeightPx } = useNavbarContext();
+  
   const { all } = useEvents();
+
+  // Show navbar on route change
+  const pathname = usePathname();
+  useEffect(() => {
+    setNavBarIsVisible(true);
+  }, [pathname]);
+
 
   useEffect(() => {
     let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -46,7 +53,7 @@ export function Navbar() {
       
       // When at the top of the page, always show the header
       if (currentScrollY < 50) {
-        setIsVisible(true);
+        setNavBarIsVisible(true);
         setLastScrollY(currentScrollY);
         return;
       }
@@ -57,10 +64,10 @@ export function Navbar() {
       // Determine scroll direction with improved thresholds
       if (currentScrollY > lastScrollY && currentScrollY > hideThreshold) {
         // Scrolling DOWN and past header height - hide header
-        setIsVisible(false);
+        setNavBarIsVisible(false);
       } else if (currentScrollY < lastScrollY) {
         // Scrolling UP - show header
-        setIsVisible(true);
+        setNavBarIsVisible(true);
       }
       
       // Update last scroll position
@@ -95,7 +102,7 @@ export function Navbar() {
         clearTimeout(scrollTimeout);
       }
     };
-  }, [lastScrollY, mobileMenuOpen]);
+  }, [lastScrollY, mobileMenuOpen, setNavBarIsVisible, setMobileMenuOpen]);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -104,10 +111,13 @@ export function Navbar() {
   return (
     <header
       className={`sticky top-0 z-50 w-full bg-amber-50 shadow-md transition-transform duration-300 ${
-        !isVisible ? "-translate-y-full" : ""
+        !navBarIsVisible ? "-translate-y-full" : ""
       }`}
     >
-      <div className="flex h-20 items-center justify-between px-4 max-w-6xl mx-auto">
+      <div 
+        className="flex items-center justify-between px-4 max-w-6xl mx-auto"
+        style={{ height: `${navBarHeightPx}px` }}
+      >
         <Link href="/" className="flex items-center gap-2 font-bold text-xl">
           <Image
             src="/unilife_logo.png"

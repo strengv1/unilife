@@ -2,30 +2,40 @@
 
 import { createContext, useContext, useState } from 'react';
 
-// Define the shape of the context
 type NavbarContextType = {
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
+  navBarIsVisible: boolean;
+  setNavBarIsVisible: (visible: boolean) => void;
+  navBarHeightPx: number;
 };
 
-// Create the context with a default value
 const NavbarContext = createContext<NavbarContextType>({
   mobileMenuOpen: false,
   setMobileMenuOpen: () => {},
+  navBarIsVisible: true,
+  setNavBarIsVisible: () => {},
+  navBarHeightPx: 80,
 });
 
-// Create a provider component
 export function NavbarProvider({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [navBarIsVisible, setNavBarIsVisible] = useState(true);
 
+  const navBarHeightPx = 80;
   return (
-    <NavbarContext.Provider value={{ mobileMenuOpen, setMobileMenuOpen }}>
+    <NavbarContext.Provider value={{
+      mobileMenuOpen,
+      setMobileMenuOpen,
+      navBarIsVisible,
+      setNavBarIsVisible,
+      navBarHeightPx
+    }}>
       {children}
     </NavbarContext.Provider>
   );
 }
 
-// Create a custom hook to use the context
 export function useNavbarContext() {
   const context = useContext(NavbarContext);
   if (context === undefined) {

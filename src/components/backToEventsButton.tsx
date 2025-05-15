@@ -6,16 +6,18 @@ import { ArrowLeft } from "lucide-react";
 import { useNavbarContext } from "@/contexts/NavbarContext";
 
 export function BackToEventsButton() {
-  const { mobileMenuOpen } = useNavbarContext();
+  const { mobileMenuOpen, navBarIsVisible, navBarHeightPx } = useNavbarContext();
   
   return (
     <Link
-      href="/events" 
+      href="/events"
       aria-label="Return to events page"
       className={`
-        fixed top-24 left-4 z-40 group
-        ${mobileMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}
+        fixed top-24 left-4 z-40 group transition-transform duration-300
       `}
+      style={{
+        transform: (mobileMenuOpen || !navBarIsVisible) ? `translateY(-${navBarHeightPx}px)` : ''
+      }}
     >
       <Button
         variant="outline"

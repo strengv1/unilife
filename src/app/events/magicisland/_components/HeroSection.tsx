@@ -7,7 +7,7 @@ export const HeroSection = () => {
   return (
     <section className="relative">
       <div className="absolute inset-0 z-10" />
-      <div className="relative flex items-center h-[80vh] min-h-[32rem] max-h-[50rem] pb-4 bg-blue-800">
+      <div className="relative flex items-center h-[80vh] min-h-[32rem] max-h-[80rem] pb-4 bg-blue-800">
         <Image
           src="/magic_island_cover.png"
           alt="Magic Island"

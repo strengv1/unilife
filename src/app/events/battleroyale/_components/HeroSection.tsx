@@ -7,7 +7,7 @@ export const HeroSection = () => {
   return (
     <section className="relative" aria-labelledby="hero-heading">
       <div className="absolute inset-0 bg-black/80 z-10" />
-      <div className="relative flex items-center h-[80vh] min-h-[32rem] max-h-[50rem] bg-blue-800 pb-4">
+      <div className="relative flex items-center h-[80vh] min-h-[32rem] max-h-[80rem] bg-blue-800 pb-4">
         <Image
           src="/abp_festarit.png"
           alt="Aalto Beer Pong at festival"

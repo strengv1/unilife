@@ -17,7 +17,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative">
           <div className="absolute inset-0 bg-black/60 z-10" />
-          <div className="relative h-[80vh] min-h-[32rem] max-h-[50rem] overflow-hidden">
+          <div className="relative h-[80vh] min-h-[32rem] max-h-[80rem] overflow-hidden">
             <Image
               src="/unilife_cover.jpg"
               alt="Students celebrating"
