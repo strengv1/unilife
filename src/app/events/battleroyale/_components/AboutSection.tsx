@@ -23,7 +23,7 @@ export const AboutSection = () => {
             </p>
           </div>
           <Image
-            className="hidden md:block mx-auto h-48 w-auto order-first"
+            className="hidden md:block mx-auto pl-8 h-48 w-auto order-first"
             src="/bpbr_logo.png"
             alt="Beer Pong Battle Royale logo"
             height={250}
