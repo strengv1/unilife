@@ -37,7 +37,7 @@ export const HeroSection = () => {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="h-5 w-5" />
-                <span>Espoo, Finland</span>
+                <span>Otaniemi, Espoo</span>
               </div>
               <div className="flex items-center gap-2">
                 <Users className="h-5 w-5" />
