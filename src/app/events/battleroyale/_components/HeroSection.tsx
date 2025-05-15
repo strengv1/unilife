@@ -27,7 +27,7 @@ export const HeroSection = () => {
               BEER PONG <br />
               <span className="text-red-500">BATTLE ROYALE</span>
             </h1>
-            <p className="mx-auto max-w-[700px] text-lg md:text-xl">
+            <p className="mx-auto max-w-3xl text-lg md:text-xl">
               150 teams. One champion. <span className="block md:inline underline">€2,500 Prize Pool</span>
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 justify-items-center justify-center gap-2 sm:gap-6 text-xs sm:text-sm">

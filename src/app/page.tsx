@@ -25,10 +25,10 @@ export default function Home() {
               className="object-cover scale-[1.2] object-[center_calc(100%-60px)] sm:scale-[1] sm:object-center opacity-70"
               priority
             />
-            <div className="h-full relative z-20 flex flex-col 
-              items-center justify-end text-center text-white pb-4 mx-4
+            <div className="h-full max-w-6xl mx-auto relative z-20 flex flex-col 
+              items-center justify-end text-center text-white pb-4
             ">
-              <div className="flex flex-col md:flex-row w-full gap-8 md:gap-1 md:justify-between md:pb-4">
+              <div className="flex flex-col md:flex-row w-full gap-8 md:gap-1 md:justify-between md:pb-4 px-4">
                 <div className="flex flex-col md:basis-[65vw] gap-2
                   text-4xl text-left font-bold tracking-tight md:text-6xl lg:text-7xl
                 ">
@@ -37,14 +37,14 @@ export default function Home() {
                   <p>Welcome to <span className="underline whitespace-nowrap ">UNI LIFE</span>.</p>
                 </div>
 
-                <div className="flex flex-col justify-end md:basis-[35vw] gap-2">
-                  <p className="text-left text-lg md:text-2xl">
+                <div className="flex flex-col justify-end md:basis-[35vw] gap-4 text-left text-lg md:text-xl">
+                  <p>
                     We bring students together to laugh harder, stay up too late, and meet more people.
                   </p>
-                  <p className=" text-left text-lg md:text-2xl">
+                  <p>
                     No one cares what you study — everyone’s here for a good time with great people!
                   </p>
-                  <div className="flex flex-col md:flex-row gap-4 mt-8">
+                  <div className="flex flex-col md:flex-row gap-4 mt-4">
                     <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white">
                       <Link href="/events">Explore Events</Link>
                     </Button>

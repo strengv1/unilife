@@ -7,7 +7,7 @@ export const RegistrationSection = () => {
   return (
     <section id="registration" className="bg-red-600 py-10 md:py-16 text-white">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-[800px] text-center">
+        <div className="mx-auto text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Register Your Team</h2>
           <p className="mt-4 md:mt-6 text-lg text-red-100">
             Secure your spot in Finland&apos;s biggest beer pong tournament before all slots are filled!

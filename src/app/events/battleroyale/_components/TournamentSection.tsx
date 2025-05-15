@@ -6,7 +6,7 @@ export const TournamentSection = () => {
   return (
     <section id="tournament" className="bg-slate-50 py-10 md:py-16">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-[800px] text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Tournament Structure</h2>
           <p className="mt-4 md:mt-6 text-lg text-muted-foreground">
             Designed for fair play and maximum excitement for everybody.{" "}
@@ -18,7 +18,7 @@ export const TournamentSection = () => {
         </div>
 
         <div className="mt-8">
-          <Tabs defaultValue="format" className="mx-auto max-w-[800px]">
+          <Tabs defaultValue="format" className="mx-auto max-w-4xl">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="format">Format</TabsTrigger>
               <TabsTrigger value="rules">Quick Rules</TabsTrigger>

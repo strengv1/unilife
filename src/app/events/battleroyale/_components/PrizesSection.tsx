@@ -8,14 +8,14 @@ export const PrizesSection = () => {
   const commonCardDivClass = "my-6 text-3xl md:text-5xl font-bold"
   return (
     <section id="prizes" className="py-10 md:py-16">
-      <div className="container mx-auto max-w-4xl px-8">
-        <div className="flex flex-col mx-auto max-w-[800px] text-center items-center justify-center">
+      <div className="container mx-auto max-w-6xl px-4">
+        <div className="flex flex-col mx-auto max-w-4xl text-center items-center justify-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Massive Prize Pool</h2>
           
           <p className="mt-4 md:mt-6 text-3xl">Total of €2,500</p>
         </div>
 
-        <div className="mt-4 md:mt-6 grid gap-2 md:gap-8 grid-cols-2">
+        <div className="mt-4 md:mt-6 grid gap-2 md:gap-8 grid-cols-2 max-w-4xl mx-auto">
           <Card className="border-2 col-span-full border-yellow-500 bg-gradient-to-b from-yellow-50 to-white transform transition-transform hover:scale-105 shadow-lg">
             <CardContent className={`${commonCardContentClass}`}>
               <h3 className="text-2xl font-bold">1st Place</h3>

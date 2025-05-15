@@ -8,7 +8,7 @@ export const AboutSection = () => {
       <div className="container mx-auto max-w-6xl px-4">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 id="about-heading" className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            <h2 id="about-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-balance">
               Finland&apos;s Ultimate Beer Pong Experience
             </h2>
             <Image

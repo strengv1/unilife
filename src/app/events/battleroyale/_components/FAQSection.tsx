@@ -60,7 +60,7 @@ export const FAQSection = () => {
       />
       
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-[800px] text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <h2 id="faq-heading" className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Frequently Asked Questions
           </h2>
@@ -69,7 +69,7 @@ export const FAQSection = () => {
           </p>
         </div>
 
-        <div className="mt-4 md:mt-8 mx-auto max-w-[800px] bg-white px-8 py-2 rounded-lg shadow-sm">
+        <div className="mt-4 md:mt-8 mx-auto max-w-4xl bg-white px-8 py-2 rounded-lg shadow-sm">
           <Accordion type="single" collapsible className="w-full">
             {faqItems.map((item, index) => (
               <AccordionItem key={index} value={`item-${index + 1}`}>

@@ -107,7 +107,7 @@ export function Navbar() {
         !isVisible ? "-translate-y-full" : ""
       }`}
     >
-      <div className="flex h-20 items-center justify-between px-4 max-w-7xl mx-auto">
+      <div className="flex h-20 items-center justify-between px-4 max-w-6xl mx-auto">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl">
           <Image
             src="/unilife_logo.png"
