@@ -83,9 +83,9 @@ export const RegistrationSection = () => {
         
         <NewsletterForm
           containerClassName="mt-10 bg-white text-black rounded-xl p-10"
-          title="Be first to know when it's time to drop in to battle 🪂🏓"
+          title="Be first to know when it's time to drop in to battle! 🪂"
           description="Registration isn't open yet – subscribe to our newsletter and we'll let you know when it's time to deploy. No spam, just raw information."
-          disclaimerText="By subscribing, you agree to receive emails from UNI LIFE about BPBR and related events. You can unsubscribe at any time."
+          disclaimerText="By subscribing, you agree to receive emails from UNI LIFE about Beer Pong Battle Royale and related events. You can unsubscribe at any time."
         />
       </div>
     </section>

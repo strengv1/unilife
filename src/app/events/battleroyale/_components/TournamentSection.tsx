@@ -3,17 +3,21 @@ import { CheckCircle } from "lucide-react"
 import Link from "next/link"
 
 export const TournamentSection = () => {
+
+  const commonNumberBadge = "mt-1 h-5 w-5 flex-shrink-0 rounded-full flex items-center justify-center font-bold text-xs"
+  const checkCircleClass = "mt-1 h-5 w-5 flex-shrink-0 text-red-600"
   return (
     <section id="tournament" className="bg-slate-50 py-10 md:py-16">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Tournament Structure</h2>
           <p className="mt-4 md:mt-6 text-lg text-muted-foreground">
-            Designed for fair play and maximum excitement for everybody.{" "}
+            Designed for fair play and maximum excitement for everybody.
+            <br/>
             <Link href="#prizes" className="text-red-600 hover:underline">
-              Prizes
+              Cash Prizes
             </Link>{" "}
-            for the 16 best performing teams.{" "}
+            for the top 16 best performing teams.
           </p>
         </div>
 
@@ -38,19 +42,19 @@ export const TournamentSection = () => {
                     <h4 className="text-lg font-bold mb-4">Tournament Structure</h4>
                     <ul className="space-y-4">
                       <li className="flex items-start gap-3">
-                        <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                        <span>Swiss-system format with 6 preliminary rounds for all teams</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                        <span>Top 32 teams advance to single-elimination playoffs</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                        <CheckCircle className={checkCircleClass} />
                         <span>Teams consist of 2 players each</span>
                       </li>
                       <li className="flex items-start gap-3">
-                        <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                        <CheckCircle className={checkCircleClass} />
+                        <span>Swiss-system format with 6 preliminary rounds for all teams</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className={checkCircleClass} />
+                        <span>Top 64 teams advance to single-elimination playoffs</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className={checkCircleClass} />
                         <span>All games are single-match (best-of-1), except championship final (best-of-3)</span>
                       </li>
                     </ul>
@@ -64,15 +68,15 @@ export const TournamentSection = () => {
                     </p>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-3">
-                        <div className="mt-1 h-5 w-5 flex-shrink-0 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-xs">1</div>
+                        <div className={`${commonNumberBadge} bg-red-100 text-red-600`}>1</div>
                         <span>Round 1: Random initial pairings</span>
                       </li>
                       <li className="flex items-start gap-3">
-                        <div className="mt-1 h-5 w-5 flex-shrink-0 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-xs">2</div>
+                        <div className={`${commonNumberBadge} bg-red-100 text-red-600`}>2</div>
                         <span>Rounds 2-6: Teams with similar records face each other</span>
                       </li>
                       <li className="flex items-start gap-3">
-                        <div className="mt-1 h-5 w-5 flex-shrink-0 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-xs">3</div>
+                        <div className={`${commonNumberBadge} bg-red-100 text-red-600`}>3</div>
                         <span>No rematches - teams never play the same opponent twice</span>
                       </li>
                     </ul>
@@ -87,20 +91,20 @@ export const TournamentSection = () => {
                   </p>
                   <ul className="space-y-3 grid md:grid-cols-2 gap-x-4">
                     <li className="flex items-start gap-3">
-                      <div className="mt-1 h-5 w-5 flex-shrink-0 rounded-full bg-red-600 flex items-center justify-center text-white font-bold text-xs">1</div>
+                      <div className={`${commonNumberBadge} bg-red-600 text-white`}>1</div>
                       <span><strong>Win-Loss Record</strong> – Total matches won</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="mt-1 h-5 w-5 flex-shrink-0 rounded-full bg-red-600 flex items-center justify-center text-white font-bold text-xs">2</div>
+                      <div className={`${commonNumberBadge} bg-red-600 text-white`}>2</div>
                       <span><strong>Cup Differential</strong> – Cups won minus cups lost</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="mt-1 h-5 w-5 flex-shrink-0 rounded-full bg-red-600 flex items-center justify-center text-white font-bold text-xs">3</div>
-                      <span><strong>Opponent Win %</strong> – Strength of schedule</span>
+                      <div className={`${commonNumberBadge} bg-red-600 text-white`}>3</div>
+                      <span><strong>Resistance</strong> – Average win % of your opponents.</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="mt-1 h-5 w-5 flex-shrink-0 rounded-full bg-red-600 flex items-center justify-center text-white font-bold text-xs">4</div>
-                      <span><strong>Head-to-Head</strong> – Winner of direct matchup ranks higher</span>
+                      <div className={`${commonNumberBadge} bg-red-600 text-white`}>4</div>
+                      <span><strong>Opponents' Resistance </strong> – Average win % of your opponents’ opponents.</span>
                     </li>
                   </ul>
                 </div>
@@ -111,27 +115,27 @@ export const TournamentSection = () => {
                 <h3 className="text-2xl font-bold">Quick Rules</h3>
                 <ul className="mt-6 space-y-4">
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                    <CheckCircle className={checkCircleClass} />
                     <span>Standard 10-cup triangle formation</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                    <span>Re-racking into standard triangles is done automatically when 6 or 3 cups are left. Last cup is centered to the back row.</span>
+                    <CheckCircle className={checkCircleClass} />
+                    <span>Re-racking is done automatically into standard triangles that are centered to the back when 6 or 3 cups are left. Last cup is also centered to the back row. Cups are placed so that they're centered and 2 fingers away (index and middle finger) from the edge of the table.</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                    <CheckCircle className={checkCircleClass} />
                     <span>Bounce shots count as two cups and can be blocked.</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                    <CheckCircle className={checkCircleClass} />
                     <span>No redemption round. First team to drop the last cup wins.</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                    <CheckCircle className={checkCircleClass} />
                     <span>Game length: 20 minutes maximum for Swiss rounds</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                    <CheckCircle className={checkCircleClass} />
                     <span>Tiebreakers determined by cup differential and swiss-format magic</span>
                   </li>
                 </ul>
@@ -142,24 +146,24 @@ export const TournamentSection = () => {
                 <h3 className="text-2xl font-bold">Event Schedule</h3>
                 <ul className="mt-6 space-y-4">
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                    <CheckCircle className={checkCircleClass} />
                     <span>11:00 - Registration and check-in</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                    <CheckCircle className={checkCircleClass} />
                     <span>12:00 - Swiss rounds begin (6 rounds, approximately 40 minutes each)</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                    <span>16:15 - Top 32 teams announced</span>
+                    <CheckCircle className={checkCircleClass} />
+                    <span>16:15 - Top 64 teams announced</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                    <CheckCircle className={checkCircleClass} />
                     <span>16:20 - Single-elimination bracket begins</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                    <span>18:00 - Championship finals (best-of-3) and award ceremony</span>
+                    <CheckCircle className={checkCircleClass} />
+                    <span>18:30 - Championship finals (best-of-3) and award ceremony</span>
                   </li>
                 </ul>
               </div>
