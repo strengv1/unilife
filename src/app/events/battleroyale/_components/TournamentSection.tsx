@@ -104,7 +104,7 @@ export const TournamentSection = () => {
                     </li>
                     <li className="flex items-start gap-3">
                       <div className={`${commonNumberBadge} bg-red-600 text-white`}>4</div>
-                      <span><strong>Opponents' Resistance </strong> – Average win % of your opponents’ opponents.</span>
+                      <span><strong>Opponents&apos; Resistance </strong> – Average win % of your opponents&apos; opponents.</span>
                     </li>
                   </ul>
                 </div>
@@ -120,7 +120,7 @@ export const TournamentSection = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>Re-racking is done automatically into standard triangles that are centered to the back when 6 or 3 cups are left. Last cup is also centered to the back row. Cups are placed so that they're centered and 2 fingers away (index and middle finger) from the edge of the table.</span>
+                    <span>Re-racking is done automatically into standard triangles that are centered to the back when 6 or 3 cups are left. Last cup is also centered to the back row. Cups are placed so that they&apos;re centered and 2 fingers away (index and middle finger) from the edge of the table.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
