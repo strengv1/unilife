@@ -118,7 +118,7 @@ export const TournamentSection = () => {
               <div className="rounded-lg border p-8 shadow-sm">
                 <h3 className="text-2xl font-bold">Quick Rules</h3>
                 <a 
-                  href="/rules.pdf" 
+                  href="/" 
                   download 
                   className="text-blue-500 hover:text-blue-700 underline flex items-center gap-2"
                 >
@@ -179,7 +179,7 @@ export const TournamentSection = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>18:30 - Championship finals (best-of-3) and award ceremony</span>
+                    <span>18:30 - Championship finals and award ceremony</span>
                   </li>
                 </ul>
               </div>
