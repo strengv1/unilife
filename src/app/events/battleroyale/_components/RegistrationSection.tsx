@@ -85,12 +85,12 @@ export const RegistrationSection = () => {
           containerClassName="mt-10 bg-white text-black rounded-xl p-10"
           title="Be first to know when it's time to drop in to battle! 🪂"
           description={
-            <p className="mb-6 max-w-xl mx-auto">
+            <p className="mb-6 max-w-xl mx-auto text-balance">
               Registration isn&apos;t open{" "}
               <span className="underline">yet</span>{" "}
               <ArrowRight className="inline-block -mt-0.5" size="1rem" />{" "}
               <span className="font-bold">subscribe to our newsletter and we&apos;ll let you know when it&apos;s time to deploy!</span>{" "}
-              No spam, just raw information.
+              <span className="block">No spam, just raw information.</span>
             </p>
           }
           disclaimerText="By subscribing, you agree to receive emails from UNI LIFE about Beer Pong Battle Royale and related events. You can unsubscribe at any time."

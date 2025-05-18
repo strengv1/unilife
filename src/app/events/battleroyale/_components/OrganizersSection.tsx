@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export const OrganizersSection = () => {
   return (
@@ -29,14 +30,21 @@ export const OrganizersSection = () => {
           </div>
           
           <div className="flex flex-col items-center text-center">
-            <div className="h-40 w-40 overflow-hidden rounded-full bg-slate-100 shadow-md">
-              <Image
-                src="/abp_logo.png"
-                alt="Aalto Beer Pong"
-                width={160}
-                height={160}
-                className="h-full w-full object-cover"
-              />
+            <div className="h-40 w-40 overflow-hidden rounded-full bg-slate-100 shadow-md hover:shadow-xl">
+              <Link
+                href="https://aaltobeerpong.fi/en/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit Aalto Beer Pong's website`}
+              >
+                <Image
+                  src="/abp_logo.png"
+                  alt="Aalto Beer Pong"
+                  width={160}
+                  height={160}
+                  className="h-full w-full object-cover"
+                />
+              </Link>
             </div>
             <h3 className="mt-4 md:mt-6 text-2xl font-bold">Aalto Beer Pong</h3>
             <p className="mt-3 max-w-md text-lg text-muted-foreground">

@@ -2,6 +2,7 @@ export type Event = {
   id: string;
   title: string;
   subtitle: string;
+  coverText: string;
   date: string;
   time: string;
   location: string;
@@ -15,7 +16,8 @@ const events: Event[] = [
   {
     id: "1",
     title: "Beer Pong Battle Royale",
-    subtitle: "man I love beer pong",
+    subtitle: "Don't miss your chance to win!",
+    coverText: "€2,500 Prize Pool",
     date: "September 14th, 2025",
     time: "12:00 - 19:00",
     location: "Alvarinaukio, Otaniemi",

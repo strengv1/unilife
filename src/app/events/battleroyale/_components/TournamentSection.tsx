@@ -25,7 +25,7 @@ export const TournamentSection = () => {
           <Tabs defaultValue="format" className="mx-auto max-w-4xl">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="format">Format</TabsTrigger>
-              <TabsTrigger value="rules">Quick Rules</TabsTrigger>
+              <TabsTrigger value="rules">Rules</TabsTrigger>
               <TabsTrigger value="schedule">Schedule</TabsTrigger>
             </TabsList>
             <TabsContent value="format" className="mt-0 space-y-4">
@@ -117,6 +117,18 @@ export const TournamentSection = () => {
             <TabsContent value="rules" className="space-y-4">
               <div className="rounded-lg border p-8 shadow-sm">
                 <h3 className="text-2xl font-bold">Quick Rules</h3>
+                <a 
+                  href="/rules.pdf" 
+                  download 
+                  className="text-blue-500 hover:text-blue-700 underline flex items-center gap-2"
+                >
+                  <span>Download full rules here</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                </a>
                 <ul className="mt-6 space-y-4">
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />

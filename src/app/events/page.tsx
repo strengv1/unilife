@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { EventCard } from "@/components/event-card"
+import EventCard from "@/components/event-card"
 import { Button } from "@/components/ui/button"
 import { type Event, useEvents } from "@/hooks/useEvents"
 

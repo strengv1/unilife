@@ -154,7 +154,7 @@ export const NewsletterSection = () => {
     <NewsletterForm
       isSection={true}
       containerClassName="py-16 bg-amber-100 px-4"
-      title="Newsletter Signup"//<p className="mb-6 max-w-xl mx-auto">{description}</p>
+      title="Newsletter Signup"
       description={<p className="mb-6 max-w-xl mx-auto">Subscribe to our newsletter to get the latest updates on upcoming events and exclusive offers.</p>}
       disclaimerText="By subscribing, you agree to receive marketing emails from UNI LIFE. You can unsubscribe at any time."
     />
