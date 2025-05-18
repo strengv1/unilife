@@ -17,7 +17,7 @@ export const TournamentSection = () => {
             <Link href="#prizes" className="text-red-600 hover:underline">
               Cash Prizes
             </Link>{" "}
-            for the top 16 best performing teams.
+            for the Top 16 best performing teams.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export const TournamentSection = () => {
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className={checkCircleClass} />
-                        <span>All games are single-match (best-of-1), except championship final (best-of-3)</span>
+                        <span>All games are single-match (best-of-1)</span>
                       </li>
                     </ul>
                   </div>
@@ -79,6 +79,10 @@ export const TournamentSection = () => {
                         <div className={`${commonNumberBadge} bg-red-100 text-red-600`}>3</div>
                         <span>No rematches - teams never play the same opponent twice</span>
                       </li>
+                      <li className="flex items-start gap-3">
+                        <div className={`${commonNumberBadge} bg-red-100 text-red-600`}>4</div>
+                        <span>Wins award 3 points each. Draws award 1 point each. Losses award 0 points.</span>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -92,7 +96,7 @@ export const TournamentSection = () => {
                   <ul className="space-y-3 grid md:grid-cols-2 gap-x-4">
                     <li className="flex items-start gap-3">
                       <div className={`${commonNumberBadge} bg-red-600 text-white`}>1</div>
-                      <span><strong>Win-Loss Record</strong> – Total matches won</span>
+                      <span><strong>Win-Loss-Draw Record</strong> – Total amount of points</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <div className={`${commonNumberBadge} bg-red-600 text-white`}>2</div>

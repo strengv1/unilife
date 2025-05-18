@@ -1,7 +1,7 @@
 import { NewsletterForm } from "@/components/newsletterSection"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle } from "lucide-react"
+import { ArrowRight, CheckCircle } from "lucide-react"
 
 export const RegistrationSection = () => {
   return (
@@ -84,7 +84,15 @@ export const RegistrationSection = () => {
         <NewsletterForm
           containerClassName="mt-10 bg-white text-black rounded-xl p-10"
           title="Be first to know when it's time to drop in to battle! 🪂"
-          description="Registration isn't open yet – subscribe to our newsletter and we'll let you know when it's time to deploy. No spam, just raw information."
+          description={
+            <p className="mb-6 max-w-xl mx-auto">
+              Registration isn&apos;t open{" "}
+              <span className="underline">yet</span>{" "}
+              <ArrowRight className="inline-block -mt-0.5" size="1rem" />{" "}
+              <span className="font-bold">subscribe to our newsletter and we&apos;ll let you know when it&apos;s time to deploy!</span>{" "}
+              No spam, just raw information.
+            </p>
+          }
           disclaimerText="By subscribing, you agree to receive emails from UNI LIFE about Beer Pong Battle Royale and related events. You can unsubscribe at any time."
         />
       </div>

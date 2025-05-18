@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 interface NewsletterFormProps {
   title: string;
-  description: string;
+  description: React.ReactNode;
   buttonText?: string;
   className?: string;
   containerClassName?: string;
@@ -87,7 +87,7 @@ export const NewsletterForm = ({
     <Wrapper id="newsletter" className={containerClassName}>
       <div className={`text-center ${className}`}>
         {title && <h3 className="text-2xl font-bold mb-2">{title}</h3>}
-        {description && <p className="mb-6 max-w-xl mx-auto">{description}</p>}
+        {description}
         
         <form
           onSubmit={handleSubmit}
@@ -154,8 +154,8 @@ export const NewsletterSection = () => {
     <NewsletterForm
       isSection={true}
       containerClassName="py-16 bg-amber-100 px-4"
-      title="Newsletter Signup"
-      description="Subscribe to our newsletter to get the latest updates on upcoming events and exclusive offers."
+      title="Newsletter Signup"//<p className="mb-6 max-w-xl mx-auto">{description}</p>
+      description={<p className="mb-6 max-w-xl mx-auto">Subscribe to our newsletter to get the latest updates on upcoming events and exclusive offers.</p>}
       disclaimerText="By subscribing, you agree to receive marketing emails from UNI LIFE. You can unsubscribe at any time."
     />
   );
