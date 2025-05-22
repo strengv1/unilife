@@ -24,7 +24,7 @@ interface EventCardProps {
   attendeeCount?: number;
 }
 
-export default function EnhancedEventCard({
+export default function EventCard({
   title,
   subtitle,
   coverText,
@@ -46,7 +46,7 @@ export default function EnhancedEventCard({
   // Set visibility with a slight delay for animation
   useEffect(() => {
     if (inView) {
-      const timer = setTimeout(() => setIsVisible(true), 300);
+      const timer = setTimeout(() => setIsVisible(true), 100);
       return () => clearTimeout(timer);
     }
   }, [inView]);
