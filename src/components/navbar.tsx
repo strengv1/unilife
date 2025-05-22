@@ -27,7 +27,7 @@ export function Navbar() {
   const pathname = usePathname();
   useEffect(() => {
     setNavBarIsVisible(true);
-  }, [pathname]);
+  }, [pathname, setNavBarIsVisible]);
 
 
   useEffect(() => {
