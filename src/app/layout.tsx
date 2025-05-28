@@ -7,7 +7,7 @@ import { OrganizationSchema } from "@/components/OrganizationSchema"
 import { NavbarProvider } from "@/contexts/NavbarContext";
 
 const outfit = Outfit({
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "700"], // font-normal, -medium, -bold
   subsets: ["latin"],
   display: 'swap',
 })
@@ -18,7 +18,7 @@ export const metadata = {
     default: "UNI LIFE - Student Events in Finland",
     template: "%s | UNI LIFE"
   },
-  description: "Creating large-scale and high-value student events across Finland.",
+  description: "No more boring parties. Time to make the most out of uni.",
   keywords: [
     "UNI LIFE",
     "student events finland",
