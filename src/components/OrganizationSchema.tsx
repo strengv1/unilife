@@ -5,7 +5,7 @@ export function OrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'UNI LIFE',
-    url: 'https://unilife.fi',
+    url: 'https://www.unilife.fi',
     logo: 'https://unilife.fi/unilife_logo.png',
     sameAs: [
       'https://www.instagram.com/unilife.fi',
@@ -17,7 +17,7 @@ export function OrganizationSchema() {
       addressRegion: 'Uusimaa',
       addressCountry: 'Finland',
     },
-    description: 'Creating large-scale and high-value student events across Finland.',
+    description: 'No more boring parties. Time to make the most out of uni.',
   };
 
   return (

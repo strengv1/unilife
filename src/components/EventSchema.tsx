@@ -68,13 +68,13 @@ export function EventSchema({
       organizerSchema = organizers.map(organizer => ({
         "@type": "Organization",
         "name": organizer,
-        "url": organizer === "UNI LIFE" ? "https://unilife.fi" : undefined
+        "url": organizer === "UNI LIFE" ? "https://www.unilife.fi" : undefined
       }));
     } else {
       organizerSchema = {
         "@type": "Organization",
         "name": organizers,
-        "url": organizers === "UNI LIFE" ? "https://unilife.fi" : undefined
+        "url": organizers === "UNI LIFE" ? "https://www.unilife.fi" : undefined
       };
     }
   }

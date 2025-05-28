@@ -56,7 +56,7 @@ export const metadata = {
     images: ["https://unilife.fi/abp_festarit.png"]
   },
   alternates: {
-    canonical: "https://unilife.fi/events/battleroyale"
+    canonical: "https://www.unilife.fi/events/battleroyale"
   }
 }
 

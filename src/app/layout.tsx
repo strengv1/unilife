@@ -13,7 +13,7 @@ const outfit = Outfit({
 })
 
 export const metadata = {
-  metadataBase: new URL("https://unilife.fi"),
+  metadataBase: new URL("https://www.unilife.fi"),
   title: {
     default: "UNI LIFE - Student Events in Finland",
     template: "%s | UNI LIFE"
@@ -39,7 +39,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_FI',
-    url: 'https://unilife.fi/',
+    url: 'https://www.unilife.fi/',
     siteName: 'UNI LIFE',
     images: [
       {
@@ -52,7 +52,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://unilife.fi/og-unilife_cover.jpg'],
+    images: ['https://www.unilife.fi/og-unilife_cover.jpg'],
   },
 }
 
