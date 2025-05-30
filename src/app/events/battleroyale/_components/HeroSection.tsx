@@ -9,7 +9,7 @@ export const HeroSection = () => {
       <div className="absolute inset-0 bg-black/80 z-10" />
       <div className="relative flex items-center h-[80vh] min-h-[32rem] max-h-[80rem] bg-blue-800 pb-4">
         <Image
-          src="/abp_festarit.png"
+          src="/abp_festarit_full.JPG"
           alt="Aalto Beer Pong at festival"
           fill
           className="object-cover opacity-70"
