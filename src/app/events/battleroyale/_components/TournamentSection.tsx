@@ -117,7 +117,7 @@ export const TournamentSection = () => {
             <TabsContent value="rules" className="space-y-4">
               <div className="rounded-lg border p-8 shadow-sm">
                 <h3 className="text-2xl font-bold">Quick Rules</h3>
-                <a 
+                {/* <a 
                   href="/" 
                   download 
                   className="text-blue-500 hover:text-blue-700 underline flex items-center gap-2"
@@ -128,7 +128,7 @@ export const TournamentSection = () => {
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                   </svg>
-                </a>
+                </a> */}
                 <ul className="mt-6 space-y-4">
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />

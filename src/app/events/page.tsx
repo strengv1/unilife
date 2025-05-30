@@ -66,7 +66,7 @@ export default function EventsPage() {
         {/* Events Grid */}
         <section className="py-12">
           <div className="container mx-auto max-w-6xl px-4">
-            <h2 className="text-2xl font-bold mb-8">Upcoming Events</h2>
+            <h1 className="text-2xl font-bold mb-8">Upcoming Events</h1>
             <div className={`grid gap-6 grid-cols-1 justify-items-center ${all.length > 1 ? "md:grid-cols-2 lg:grid-cols-3" : ""}`}>
               {all.map((event: Event) => (
                 <EventCard key={event.id} {...event} />

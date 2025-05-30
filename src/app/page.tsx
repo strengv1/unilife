@@ -34,7 +34,7 @@ export default function Home() {
                 ">
                   <p className="mt-auto">Every uni.</p>
                   <p>One community.</p>
-                  <p>Welcome to <span className="underline whitespace-nowrap ">UNI LIFE</span>.</p>
+                  <h1>Welcome to <span className="underline whitespace-nowrap ">UNI LIFE</span>.</h1>
                 </div>
 
                 <div className="flex flex-col justify-end md:basis-[35vw] gap-4 text-left text-lg md:text-xl">
