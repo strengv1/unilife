@@ -21,7 +21,7 @@ export const FAQSection = () => {
     {
       question: "Is there food available at the event?",
       answer:
-        "No food will be provided by the event organizers. However, there are a couple of fast food restaurants and student cafeterias nearby. Please note that student cafeteria opening hours may vary, especially since the event takes place on a Sunday.",
+        "No food will be provided by the event organizers. However, there are a couple of fast food restaurants nearby.",
     },
     {
       question: "Can we bring our own beverages?",

@@ -117,8 +117,8 @@ export const TournamentSection = () => {
             <TabsContent value="rules" className="space-y-4">
               <div className="rounded-lg border p-8 shadow-sm">
                 <h3 className="text-2xl font-bold">Quick Rules</h3>
-                {/* <a 
-                  href="/" 
+                <a 
+                  href="/BPBR_official_rules.pdf" 
                   download 
                   className="text-blue-500 hover:text-blue-700 underline flex items-center gap-2"
                 >
@@ -128,31 +128,47 @@ export const TournamentSection = () => {
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                   </svg>
-                </a> */}
+                </a>
                 <ul className="mt-6 space-y-4">
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>Standard 10-cup triangle formation</span>
+                    <span>Standard 10-cup triangle formation, 2 fingers from table edge</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>Re-racking is done automatically into standard triangles that are centered to the back when 6 or 3 cups are left. Last cup is also centered to the back row. Cups are placed so that they&apos;re centered and 2 fingers away (index and middle finger) from the edge of the table.</span>
+                    <span>Elbow must be behind the table when releasing the ball</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>Bounce shots count as two cups and can be blocked.</span>
+                    <span>Bounce shots count as two cups and can be blocked</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>No redemption round. First team to drop the last cup wins.</span>
+                    <span>Rebound: If the ball remains on the table after a throw, it can be caught by the throwing team for a Trickshot opportunity</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>Game length: 20 minutes maximum for Swiss rounds</span>
+                    <span>Triple Shot: Two balls in same cup = 3 cups removed total</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>Tiebreakers determined by cup differential and swiss-format magic</span>
+                    <span>Balls Back: When both teammates hit cups in same turn, get balls back + extra turn</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className={checkCircleClass} />
+                    <span>On Fire!: Hit 3 cups in a row to keep shooting until you miss</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className={checkCircleClass} />
+                    <span>Re-racking automatically at 6, 3, and 1 cups remaining (centered, 2 fingers from back edge)</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className={checkCircleClass} />
+                    <span>No redemption round. First team to drop the last cup wins</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className={checkCircleClass} />
+                    <span>Game length: 20 minutes maximum. Tiebreakers by cup differential</span>
                   </li>
                 </ul>
               </div>
