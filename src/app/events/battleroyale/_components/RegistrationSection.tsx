@@ -29,11 +29,11 @@ export const RegistrationSection = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Registration includes tournament entry and a welcome package</span>
+                  <span>Registration includes a welcome package and a Beer Pong Battle Royale patch</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Registration deadline: One week before the event</span>
+                  <span>Ticket sales close one week before the event</span>
                 </li>
               </ul>
               <Button disabled className="mt-8 w-full bg-red-600 hover:bg-red-700 text-lg py-6">Register Now</Button>

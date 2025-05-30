@@ -16,7 +16,7 @@ export const FAQSection = () => {
     {
       question: "What's the refund policy?",
       answer:
-        "You can transfer your registration to another team but no refunds will be issued. Team name can be changed up to 1 week before the tournament date.",
+        "You can transfer your registration to another team but no refunds will be issued.",
     },
     {
       question: "Is there food available at the event?",
