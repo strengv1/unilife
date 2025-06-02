@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
@@ -33,11 +35,18 @@ export const RegistrationSection = () => {
                 </li>
               </ul>
               
-              <Link href="https://kide.app/events/be966048-0eb5-464e-a389-fd7caae8d4dd" target="_blank" rel="noopener noreferrer">
-                <Button className="mt-8 w-full bg-red-600 hover:bg-red-700 text-lg py-6 cursor-pointer">
-                  Register Now
-                </Button>
-              </Link>
+              <div className="mt-8">
+                <Link href="https://kide.app/events/be966048-0eb5-464e-a389-fd7caae8d4dd" target="_blank" rel="noopener noreferrer" className="relative block">
+                  <Button 
+                    className="relative w-full bg-red-600 hover:bg-red-700 text-lg py-6 cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 font-semibold overflow-hidden shine-effect"
+                  >
+                    <span className="relative z-10">
+                      Register Now
+                    </span>
+                  </Button>
+                </Link>
+              </div>
+
               {/* <div className="mt-6 text-center">
                 <p className="text-sm text-muted-foreground">
                   Registration is not yet open.
@@ -97,6 +106,29 @@ export const RegistrationSection = () => {
           disclaimerText="By subscribing, you agree to receive emails from UNI LIFE about Beer Pong Battle Royale and related events. You can unsubscribe at any time."
         /> */}
       </div>
+      
+      {/* Add CSS for shine effect */}
+      <style jsx global>{`
+        .shine-effect::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          width: 30px;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.6);
+          transform: skewX(-30deg);
+          animation: shine 3s infinite;
+          filter: blur(3px);
+          z-index: 20;
+          pointer-events: none;
+        }
+        
+        @keyframes shine {
+          0% { left: -30px; }
+          20% { left: 110%; }
+          100% { left: 110%; }
+        }
+      `}</style>
     </section>
   )
 }

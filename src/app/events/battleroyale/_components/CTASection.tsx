@@ -16,7 +16,7 @@ export const CTASection = () => {
             text-lg px-8 py-2 whitespace-normal h-fit
             shadow-lg
           ">
-          <Link href="#registration">
+          <Link href="https://kide.app/events/be966048-0eb5-464e-a389-fd7caae8d4dd" target="_blank" rel="noopener noreferrer" className="relative block">
             Register for Beer Pong Battle Royale
           </Link>
         </Button>
