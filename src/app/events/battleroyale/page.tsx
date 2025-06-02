@@ -39,7 +39,7 @@ export const metadata = {
     description: "Join Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool",
     images: [
       {
-        url: "https://unilife.fi/abp_festarit.png",
+        url: "https://unilife.fi/abp_festarit_full.JPG",
         width: 1200,
         height: 630,
         alt: "Beer Pong Battle Royale 2025"
@@ -53,7 +53,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Beer Pong Battle Royale 2025 | UNI LIFE Finland",
     description: "Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool",
-    images: ["https://unilife.fi/abp_festarit.png"]
+    images: ["https://unilife.fi/abp_festarit_full.JPG"]
   },
   alternates: {
     canonical: "https://www.unilife.fi/events/battleroyale"
@@ -68,7 +68,7 @@ export default function BeerPongBattleRoyale() {
       <EventSchema
         title="Beer Pong Battle Royale"
         description="Join Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool."
-        image="/abp_festarit.png"
+        image="/abp_festarit_full.JPG"
         startDate="2025-09-14T12:00:00"
         endDate="2025-09-14T19:00:00"
         location="Alvarinaukio, Otaniemi"
