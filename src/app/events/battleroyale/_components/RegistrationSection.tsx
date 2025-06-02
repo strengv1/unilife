@@ -1,7 +1,7 @@
-import { NewsletterForm } from "@/components/newsletterSection"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, CheckCircle } from "lucide-react"
+import { CheckCircle } from "lucide-react"
+import Link from "next/link"
 
 export const RegistrationSection = () => {
   return (
@@ -29,15 +29,16 @@ export const RegistrationSection = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Registration includes a welcome package and a Beer Pong Battle Royale patch</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
                   <span>Ticket sales close one week before the event</span>
                 </li>
               </ul>
-              <Button disabled className="mt-8 w-full bg-red-600 hover:bg-red-700 text-lg py-6">Register Now</Button>
-              <div className="mt-6 text-center">
+              
+              <Link href="https://kide.app/events/be966048-0eb5-464e-a389-fd7caae8d4dd" target="_blank" rel="noopener noreferrer">
+                <Button className="mt-8 w-full bg-red-600 hover:bg-red-700 text-lg py-6 cursor-pointer">
+                  Register Now
+                </Button>
+              </Link>
+              {/* <div className="mt-6 text-center">
                 <p className="text-sm text-muted-foreground">
                   Registration is not yet open.
                 </p>
@@ -48,7 +49,7 @@ export const RegistrationSection = () => {
                   <CheckCircle className="h-4 w-4 text-red-600" />
                   Notify me when it opens!
                 </a>
-              </div>
+              </div> */}
             </CardContent>
           </Card>
           <Card className="bg-white shadow-lg">
@@ -57,19 +58,19 @@ export const RegistrationSection = () => {
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Guaranteed good time with friends, old and new!</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Full day tournament participation</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
                   <span>Welcome package with sponsor gifts and merchandise</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Afterparty at OK20 with sauna, music and casual beer pong!</span>
+                  <span>Exclusive Beer Pong Battle Royale patch</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                  <span>Afterparty at OK20 with sauna, music and casual beer pong</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
+                  <span>Guaranteed good time with friends, old and new!</span>
                 </li>
               </ul>
               {/* <div className="mt-8 rounded-md bg-red-50 p-6 text-red-800">
@@ -81,7 +82,7 @@ export const RegistrationSection = () => {
           </Card>
         </div>
         
-        <NewsletterForm
+        {/* <NewsletterForm
           containerClassName="mt-10 bg-white text-black rounded-xl p-10"
           title="Be first to know when it's time to drop in to battle! 🪂"
           description={
@@ -94,7 +95,7 @@ export const RegistrationSection = () => {
             </p>
           }
           disclaimerText="By subscribing, you agree to receive emails from UNI LIFE about Beer Pong Battle Royale and related events. You can unsubscribe at any time."
-        />
+        /> */}
       </div>
     </section>
   )
