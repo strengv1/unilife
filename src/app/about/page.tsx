@@ -24,8 +24,8 @@ const Card3D: React.FC<CardProps> = ({ children, className = "" }) => {
     const rect = card.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    const rotateXValue = (e.clientY - centerY) / 10;
-    const rotateYValue = (centerX - e.clientX) / 10;
+    const rotateXValue = (e.clientY - centerY) / 15;
+    const rotateYValue = (centerX - e.clientX) / 15;
 
     setRotateX(rotateXValue);
     setRotateY(rotateYValue);
@@ -112,7 +112,7 @@ const AboutPage = () => {
                   <h2 className="text-2xl font-bold text-gray-900">Why We Exist</h2>
                 </div>
                 <p className="text-lg text-gray-700 mb-4">
-                  University can be the best time of your life. But too often, students feel <strong>isolated, invisible, and bored</strong>. We&apos;re here to change that.
+                  University can be the best time of your life. But too often, students feel <strong>isolated, invisible, and bored</strong>. We are here to change that.
                 </p>
                 <p className="text-lg text-gray-700">
                   We fight against the idea that your field of study defines your social life. Our events are engineered to break the cliques and forge real connections — across faculties, backgrounds, and even campuses.
@@ -188,14 +188,14 @@ const AboutPage = () => {
                     revealContent={
                       <div className="flex items-center justify-center h-full">
                         <div className="text-center">
-                          <Coffee className="w-8 h-8 mx-auto mb-2" />
+                          <Users className="w-8 h-8 mx-auto mb-2" />
                           <span className="text-sm font-medium">Chill Vibes</span>
                         </div>
                       </div>
                     }
                   >
                     <div className="text-center">
-                      <Coffee className="w-8 h-8 mx-auto mb-2 text-red-500" />
+                      <Users className="w-8 h-8 mx-auto mb-2 text-red-500" />
                       <span className="text-sm font-medium text-gray-700">Hangouts</span>
                     </div>
                   </RevealCard>
@@ -217,7 +217,7 @@ const AboutPage = () => {
                   </div>
                   
                   <p className="text-lg text-gray-700 mb-6">
-                    No cliques. We say <strong>no more</strong> to boring nights out! We create <strong>brand new experiences you didn&apos;t know you needed.</strong>
+                    No cliques. We say <strong>no more</strong> to boring nights out! Expect <strong>brand new experiences you didn&apos;t know you needed.</strong>
                   </p>
                   
                   <p className="text-lg text-gray-700 text-center">
