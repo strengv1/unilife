@@ -192,6 +192,14 @@ export function Navbar() {
             </div>
             
             <Link 
+              href="/about" 
+              className="font-medium text-lg py-2 border-b border-amber-200 hover:text-red-500"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About Us
+            </Link>
+
+            <Link 
               href="/contact" 
               className="font-medium text-lg py-2 border-b border-amber-200 hover:text-red-500"
               onClick={() => setMobileMenuOpen(false)}
@@ -243,6 +251,15 @@ export function Navbar() {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link href="/about" className="font-medium transition-colors !bg-inherit hover:bg-inherit hover:text-red-500">
+                  About Us
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
 
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
