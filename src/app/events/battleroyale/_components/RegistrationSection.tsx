@@ -67,7 +67,7 @@ export const RegistrationSection = () => {
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Welcome package with sponsor gifts and merchandise</span>
+                  <span>Sponsor package (drinks and food provided by our sponsors)</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
