@@ -49,7 +49,7 @@ export const SimpleParnersSection = () => {
 
         <div className="mt-6 md:mt-10 text-center">
           <p className="text-sm text-muted-foreground">
-            Interested in sponsoring our event?{" "}
+            Interested in reaching our audience through this event? Let’s put your brand in the spotlight.{" "}
             <a href="/contact" className="text-primary hover:underline font-medium">
               Contact us
             </a>
