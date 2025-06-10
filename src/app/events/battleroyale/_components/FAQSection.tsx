@@ -19,11 +19,6 @@ export const FAQSection = () => {
         "You can transfer your registration to another team but no refunds will be issued.",
     },
     {
-      question: "Is there food available at the event?",
-      answer:
-        "No food will be provided by the event organizers. However, there are a couple of fast food restaurants nearby.",
-    },
-    {
       question: "Can we bring our own beverages?",
       answer: "Yes.",
     },

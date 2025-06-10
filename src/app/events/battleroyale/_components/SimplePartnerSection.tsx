@@ -2,12 +2,14 @@ import Image from "next/image"
 import Link from "next/link"
 
 export const SimpleParnersSection = () => {
+
+  const partnerNameClass = "font-medium text-center text-sm sm:text-base text-pretty"
   return (
     <section className="py-10 md:py-16 relative overflow-hidden">
       <div className="container px-4 mx-auto">
         <h2 className="text-3xl font-bold text-center mb-4">Our Partners</h2>
 
-        <div className="my-8 flex items-center justify-center h-40 gap-2 md:gap-32 ">
+        <div className="my-8 grid grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-12 items-center justify-center gap-2 ">
           <div className="flex flex-col items-center h-full justify-between">
             <Link
               href="https://www.fatlizard.beer/"
@@ -23,7 +25,7 @@ export const SimpleParnersSection = () => {
                 className="max-h-full max-w-full object-contain shadow-md hover:shadow-xl"
               />
             </Link>
-            <p className="font-medium text-center">© Fat Lizard Brewing Co.</p>
+            <p className={partnerNameClass}>© Fat Lizard Brewing Co.</p>
           </div>
           
           <div className="flex flex-col items-center h-full justify-between">
@@ -35,19 +37,19 @@ export const SimpleParnersSection = () => {
                 aria-label={`Visit Oikia's website`}
               >
                 <Image
-                  src="/oikia_logo.jpg"
+                  src="/oikia_logo.png"
                   alt={`Oikia logo`}
-                  width={120}
+                  width={150}
                   height={80}
                   className="max-h-full max-w-full object-contain"
                 />
               </Link>
             </div>
-            <p className="font-medium text-center">Oikia</p>
+            <p className={partnerNameClass}>Oikia</p>
           </div>
 
           <div className="flex flex-col items-center h-full justify-between">
-            <div className="flex-grow flex items-center bg-black px-4 my-3">
+            <div className="flex-grow flex items-center bg-black py-3 px-4 my-3">
               <Link
                 href="https://masisbrewery.com/"
                 target="_blank"
@@ -63,7 +65,27 @@ export const SimpleParnersSection = () => {
                 />
               </Link>
             </div>
-            <p className="font-medium text-center">Masis Brewery</p>
+            <p className={partnerNameClass}>Masis Brewery</p>
+          </div>
+
+          <div className="flex flex-col items-center h-full justify-between">
+            <div className="flex-grow flex items-center ">
+              <Link
+                href="https://www.beerpongkauppa.fi/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit Beerpongkauppa.fi`}
+              >
+                <Image
+                  src="/beerpongkauppa_logo.png"
+                  alt={`Beerpongkauppa logo`}
+                  width={150}
+                  height={80}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </Link>
+            </div>
+            <p className={partnerNameClass}>Beerpongkauppa</p>
           </div>
         </div>
 

@@ -15,45 +15,6 @@ interface RevealCardProps extends CardProps {
   revealContent: React.ReactNode;
 }
 
-const Card3D: React.FC<CardProps> = ({ children, className = "" }) => {
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const rotateXValue = (e.clientY - centerY) / 15;
-    const rotateYValue = (centerX - e.clientX) / 15;
-
-    setRotateX(rotateXValue);
-    setRotateY(rotateYValue);
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-  };
-
-  return (
-    <div
-      className={`perspective-1000 ${className}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div
-        className="transition-transform duration-200 ease-out transform-gpu"
-        style={{
-          transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-        }}
-      >
-        {children}
-      </div>
-    </div>
-  );
-};
-
 const RevealCard: React.FC<RevealCardProps> = ({ children, revealContent, className = "" }) => {
   const [isRevealed, setIsRevealed] = useState(false);
 
@@ -209,22 +170,22 @@ const AboutPage = () => {
 
             {/* Why We're Different */}
             <div className="mb-16">
-              <Card3D>
-                <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300">
-                  <div className="flex items-center mb-6">
-                    <Zap className="w-12 h-12 text-orange-500 mr-4" />
-                    <h2 className="text-2xl font-bold text-gray-900">Why We&apos;re Wildly Different</h2>
-                  </div>
-                  
-                  <p className="text-lg text-gray-700 mb-6">
-                    No cliques. We say <strong>no more</strong> to boring nights out! Expect <strong>brand new experiences you didn&apos;t know you needed.</strong>
-                  </p>
-                  
-                  <p className="text-lg text-gray-700 text-center">
-                    Thoughtfully <strong>engineered to get you out of your comfort zone</strong> — in the best way.
-                  </p>
+              <div className="bg-white rounded-xl p-8 shadow-sm">
+                <div className="flex items-center mb-6">
+                  <Zap className="w-12 h-12 text-orange-500 mr-4" />
+                  <h2 className="text-2xl font-bold text-gray-900">Why We&apos;re Wildly Different</h2>
                 </div>
-              </Card3D>
+                
+                <p className="text-lg text-gray-700 mb-6">
+                  No cliques. We say <strong>no more</strong> to boring nights out!
+                  <br/>
+                  Expect <strong>brand new experiences you didn&apos;t know you needed.</strong>
+                </p>
+                
+                <p className="text-lg text-gray-700 text-center">
+                  Thoughtfully <strong>engineered to get you out of your comfort zone</strong> — in the best way.
+                </p>
+              </div>
             </div>
 
             {/* Team Section */}
