@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Lightbulb, Crosshair, BarChart3, Zap, Users, Music, Trophy, Trees, Coffee } from "lucide-react";
+import { Lightbulb, Crosshair, BarChart3, Zap, Users, Music, Trophy, Trees } from "lucide-react";
 import { NewsletterSection } from '@/components/newsletterSection';
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
