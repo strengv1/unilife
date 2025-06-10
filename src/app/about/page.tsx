@@ -93,7 +93,7 @@ const AboutPage = () => {
 
             {/* The Beginning */}
             <div className="mb-16">
-              <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300">
+              <div className="bg-white rounded-xl p-8 shadow-sm">
                 <div className="flex items-center mb-6">
                   <Lightbulb className="w-12 h-12 text-amber-500 mr-4" />
                   <h2 className="text-2xl font-bold text-gray-900">The Beginning</h2>
@@ -106,7 +106,7 @@ const AboutPage = () => {
 
             {/* Why We Exist */}
             <div className="mb-16">
-              <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300">
+              <div className="bg-white rounded-xl p-8 shadow-sm">
                 <div className="flex items-center mb-6">
                   <Crosshair className="w-12 h-12 text-red-500 mr-4" />
                   <h2 className="text-2xl font-bold text-gray-900">Why We Exist</h2>
@@ -122,7 +122,7 @@ const AboutPage = () => {
 
             {/* What We Do */}
             <div className="mb-16">
-              <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300">
+              <div className="bg-white rounded-xl p-8 shadow-sm">
                 <div className="flex items-center mb-6">
                   <BarChart3 className="w-12 h-12 text-green-500 mr-4" />
                   <h2 className="text-2xl font-bold text-gray-900">What We Do</h2>
@@ -228,7 +228,7 @@ const AboutPage = () => {
             </div>
 
             {/* Team Section */}
-            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300">
+            <div className="bg-white rounded-xl p-8 shadow-sm">
               <div className="flex items-center mb-6">
                 <Users className="w-12 h-12 text-indigo-500 mr-4" />
                 <h2 className="text-2xl font-bold text-gray-900">Who We Are</h2>
