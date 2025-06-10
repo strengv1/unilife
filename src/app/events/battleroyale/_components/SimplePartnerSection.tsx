@@ -45,6 +45,26 @@ export const SimpleParnersSection = () => {
             </div>
             <p className="font-medium text-center">Oikia</p>
           </div>
+
+          <div className="flex flex-col items-center h-full justify-between">
+            <div className="flex-grow flex items-center bg-black px-4 my-3">
+              <Link
+                href="https://masisbrewery.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit Masis Brewery's website`}
+              >
+                <Image
+                  src="https://masisbrewery.com/wp-content/themes/iggo20/images/logonew-white.svg"
+                  alt={`Masis Brewery logo`}
+                  width={120}
+                  height={80}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </Link>
+            </div>
+            <p className="font-medium text-center">Masis Brewery</p>
+          </div>
         </div>
 
         <div className="mt-6 md:mt-10 text-center">
