@@ -170,6 +170,10 @@ export const TournamentSection = () => {
                     <CheckCircle className={checkCircleClass} />
                     <span>Game length: 20 minutes maximum. Tiebreakers by cup differential</span>
                   </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className={checkCircleClass} />
+                    <span>Special rules <strong>The Gulag</strong> and <strong>Tactical Nuke</strong>! Read full rules for more information.</span>
+                  </li>
                 </ul>
               </div>
             </TabsContent>
