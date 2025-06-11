@@ -182,7 +182,7 @@ const AboutPage = () => {
                   Expect <strong>brand new experiences you didn&apos;t know you needed.</strong>
                 </p>
                 
-                <p className="text-lg text-gray-700 text-center">
+                <p className="text-lg text-gray-700">
                   Thoughtfully <strong>engineered to get you out of your comfort zone</strong> — in the best way.
                 </p>
               </div>

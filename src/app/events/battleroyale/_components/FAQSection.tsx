@@ -11,7 +11,7 @@ export const FAQSection = () => {
     {
       question: "Do I need to bring my own equipment?",
       answer:
-        "No, all equipment will be provided, including cups, balls, and tables. Just bring your A-game! (Note! Drinks are not included. BYOB)",
+        "No, all equipment will be provided, including cups, balls, and tables. Just bring your A-game!",
     },
     {
       question: "What's the refund policy?",
