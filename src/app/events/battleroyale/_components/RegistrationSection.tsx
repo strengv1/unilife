@@ -31,7 +31,7 @@ export const RegistrationSection = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Ticket sales close one week before the event</span>
+                  <span>Ticket sales close 24 hours before the event! (13.09. 12:00)</span>
                 </li>
               </ul>
               
