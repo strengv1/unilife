@@ -10,7 +10,7 @@ const PrivacyPage = () => {
         <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
 
         <p className="mb-4">
-          This Privacy Policy explains how UNI LIFE ("we," "our," or "us") collects, uses, and protects your personal data when you subscribe to our newsletter. We are committed to safeguarding your privacy in accordance with the General Data Protection Regulation (GDPR).
+          This Privacy Policy explains how UNI LIFE (“we,“ “our,“ or “us“) collects, uses, and protects your personal data when you subscribe to our newsletter. We are committed to safeguarding your privacy in accordance with the General Data Protection Regulation (GDPR).
         </p>
 
         <h2 className="text-xl font-medium mt-6 mb-2">1. Data Controller</h2>
