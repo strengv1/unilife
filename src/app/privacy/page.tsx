@@ -10,7 +10,7 @@ const PrivacyPage = () => {
         <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
 
         <p className="mb-4">
-          This Privacy Policy explains how UNI LIFE collects, uses, and protects your personal data when you subscribe to our newsletter. We are committed to safeguarding your privacy in accordance with the General Data Protection Regulation (GDPR).
+          This Privacy Policy explains how UNI LIFE ("we," "our," or "us") collects, uses, and protects your personal data when you subscribe to our newsletter. We are committed to safeguarding your privacy in accordance with the General Data Protection Regulation (GDPR).
         </p>
 
         <h2 className="text-xl font-medium mt-6 mb-2">1. Data Controller</h2>
@@ -45,9 +45,7 @@ const PrivacyPage = () => {
 
         <h2 className="text-xl font-medium mt-6 mb-2">6. Who Has Access to Your Data</h2>
         <p className="mb-4">
-          Your data may be processed by third-party services such as Formspree (for form submission).
-          <br />
-          These providers process data on our behalf and are bound by strict data protection agreements.
+          Only we have access to your email address.
         </p>
 
         <h2 className="text-xl font-medium mt-6 mb-2">7. Data Retention</h2>
