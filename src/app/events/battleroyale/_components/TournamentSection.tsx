@@ -130,6 +130,10 @@ export const TournamentSection = () => {
                   </svg>
                 </a>
                 <ul className="mt-6 space-y-4">
+                <li className="flex items-start gap-3">
+                    <CheckCircle className={checkCircleClass} />
+                    <span>Rock-Paper-Scissors determines the starting team</span>
+                  </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
                     <span>Standard 10-cup triangle formation, 2 fingers from table edge</span>
@@ -156,7 +160,7 @@ export const TournamentSection = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>On Fire!: Hit 3 cups in a row to keep shooting until you miss</span>
+                    <span><strong>On Fire!</strong>: Hit 3 cups in a row to keep shooting until you miss</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
