@@ -9,7 +9,7 @@ export const SimpleParnersSection = () => {
       <div className="container px-4 mx-auto">
         <h2 className="text-3xl font-bold text-center mb-4">Our Partners</h2>
 
-        <div className="my-8 grid grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-12 items-center justify-center gap-2 ">
+        <div className="my-8 grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-12 items-center justify-center gap-2 ">
           <div className="flex flex-col items-center h-full justify-between">
             <Link
               href="https://www.fatlizard.beer/"
@@ -26,26 +26,6 @@ export const SimpleParnersSection = () => {
               />
             </Link>
             <p className={partnerNameClass}>© Fat Lizard Brewing Co.</p>
-          </div>
-          
-          <div className="flex flex-col items-center h-full justify-between">
-            <div className="flex-grow flex items-center">
-              <Link
-                href="https://oikiasipsi.fi/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Visit Oikia's website`}
-              >
-                <Image
-                  src="/oikia_logo.png"
-                  alt={`Oikia logo`}
-                  width={150}
-                  height={80}
-                  className="max-h-full max-w-full object-contain"
-                />
-              </Link>
-            </div>
-            <p className={partnerNameClass}>Oikia</p>
           </div>
 
           <div className="flex flex-col items-center h-full justify-between">
