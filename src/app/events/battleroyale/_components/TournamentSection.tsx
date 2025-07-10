@@ -148,15 +148,15 @@ export const TournamentSection = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>Rebound: If the ball remains on the table after a throw, it can be caught by the throwing team for a Trickshot opportunity</span>
+                    <span><strong>Rebound</strong>: If the ball remains on the table after a throw, it can be caught by the throwing team for a Trickshot opportunity</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>Triple Shot: Two balls in same cup = 3 cups removed total</span>
+                    <span><strong>Triple Shot</strong>: Two balls in same cup = 3 cups removed total</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
-                    <span>Balls Back: When both teammates hit cups in same turn, get balls back + extra turn</span>
+                    <span><strong>Balls Back</strong>: When both teammates hit cups in same turn, get balls back + extra turn</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className={checkCircleClass} />
