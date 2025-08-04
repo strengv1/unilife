@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UNI LIFE Tournament System
 
-## Getting Started
+A serverless tournament management system for organizing Swiss-system and elimination tournaments.
 
-First, run the development server:
+## 🚀 Quick Links
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Production Site**: https://unilife.fi
+- **Admin Panel**: https://unilife.fi/admin
+- **Vercel Dashboard**: https://vercel.com/villes-97-hotmailcoms-projects/unilife
+- **Neon Database Console**: https://console.neon.tech/app/projects/misty-breeze-05142636?branchId=br-round-violet-a2z56wet
+- **GitHub Repository**: https://github.com/strengv1/unilife
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 15 (App Router), React, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes (Serverless Functions)
+- **Database**: 
+  - Production: Neon (Serverless PostgreSQL)
+  - Development: Docker PostgreSQL
+- **ORM**: Drizzle ORM
+- **Hosting**: Vercel (Serverless)
+- **Authentication**: JWT with httpOnly cookies
+
+## 📁 Project Structure
+```
+src/
+├── app/
+│   ├── admin/                    # Admin dashboard
+│   │   ├── page.tsx             # Admin login & main page
+│   │   ├── tournaments/[slug]/   # Tournament management
+│   │   └── components/          # Admin components
+│   ├── events/[slug]/
+│   │   ├── bracket/             # Public bracket view
+│   │   │   ├── page.tsx        # Live bracket display
+│   │   │   └── admin/          # Score reporter
+│   │   └── components/         # Bracket components
+│   ├── api/
+│   │   ├── auth/               # Authentication endpoints
+│   │   └── tournaments/        # Tournament CRUD operations
+│   ├── lib/
+│   │   ├── db.ts              # Database connection
+│   │   ├── schema.ts          # Database schema
+│   │   ├── auth.ts            # Auth utilities
+│   │   └── tournament-logic.ts # Swiss & elimination logic
+│   └── hooks/                  # Custom React hooks
+├── public/
+│   └── archives/              # Static tournament archives
+└── docker-compose.yml         # Local PostgreSQL setup
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏃‍♂️ Development Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
+- Node.js 18+
+- Docker Desktop (for local database)
+- Git
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Initial Setup
 
-## Learn More
+1. **Clone and install dependencies**
+  ```bash
+  git clone https://github.com/your-username/unilife
+  cd unilife
+  npm install
+  ```
+2. **Start local database**
+  ```bash
+  npm run docker:up
+  ```
+3. **Set up environment variables**
+  ```bash
+  cp .env.example .env.local
 
-To learn more about Next.js, take a look at the following resources:
+  # Edit .env.local with:
+  DATABASE_URL="postgresql://postgres:postgres@localhost:5432/tournament_dev"
+  ADMIN_PASSWORD="your-dev-password"
+  JWT_SECRET="your-dev-jwt-secret"
+  ```
+4. **Start local database**
+  ```bash
+  npm run db:push
+  ```
+5. **Start dev server**
+  ```bash
+  npm run dev
+  ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Common Tasks
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Database Operations
 
-## Deploy on Vercel
+**View Database Locally**
+  ```bash
+  npm run db:studio
+  ```
+Opens Drizzle Studio at https://local.drizzle.studio
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Access Production Database**
+1. Go to Neon Console
+2. Select your project
+3. Use SQL Editor for queries
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Deployment**
+- Vercel auto-deploys on push to main branch.
+
+- Update Production Database Schema
+
+  ````bash
+  copy .env.local .env.local.backup
+  copy .env.production.local .env.local
+  npx drizzle-kit push
+  copy .env.local.backup .env.local
+  del .env.local.backup
+  ```

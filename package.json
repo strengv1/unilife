@@ -7,9 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:init": "tsx src/scripts/init-db.ts"
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",
