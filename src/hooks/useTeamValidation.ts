@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 interface ValidationResult {
   name: string;
@@ -7,8 +7,10 @@ interface ValidationResult {
 }
 
 export function useTeamValidation(existingTeams: string[] = []) {
-  // Create a set of existing team names (case-insensitive)
-  const existingNamesSet = new Set(existingTeams.map(name => name.toLowerCase()));
+  // Wrap the set creation in useMemo to prevent recreation on every render
+  const existingNamesSet = useMemo(() => {
+    return new Set(existingTeams.map(name => name.toLowerCase()));
+  }, [existingTeams]);
 
   const validateSingleTeam = useCallback((name: string): ValidationResult => {
     const trimmed = name.trim();

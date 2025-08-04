@@ -77,8 +77,7 @@ export async function GET(
 }
 
 export async function PUT(
-  request: NextRequest,
-  context: { params: Promise<{ slug: string }> }
+  request: NextRequest
 ) {
   // Verify admin authentication
   const isAuthenticated = await verifyAuth();

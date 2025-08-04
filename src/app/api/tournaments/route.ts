@@ -13,6 +13,7 @@ export async function GET() {
 
     return NextResponse.json(tournamentList);
   } catch (error) {
+    console.error('Error fetching tournaments:', error);
     return NextResponse.json({ error: 'Failed to fetch tournaments' }, { status: 500 });
   }
 }
@@ -41,6 +42,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(tournament);
   } catch (error) {
+    console.error('Error creating tournaments:', error);
     return NextResponse.json({ error: 'Failed to create tournament' }, { status: 500 });
   }
 }

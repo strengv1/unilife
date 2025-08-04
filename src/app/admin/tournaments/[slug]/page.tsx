@@ -61,6 +61,8 @@ export default function TournamentManagePage() {
 
   useEffect(() => {
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.slug]);
 
   useEffect(() => {
@@ -274,7 +276,6 @@ export default function TournamentManagePage() {
             {searchQuery && ` - Showing ${displayedTeams.length}`}
           </h2>
 
-          {/* Add teams form - keep existing but improved */}
           {tournament.status === 'registration' && (
             <form onSubmit={handleAddTeams} className="mb-6 border-t pt-6">
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -289,10 +290,40 @@ export default function TournamentManagePage() {
                 rows={10}
                 placeholder={`Team Alpha\nTeam Bravo\nTeam Charlie\n...`}
               />
+              
+              {/* Team count info */}
+              {teamsText.trim() && (
+                <div className="mt-2 text-sm">
+                  <span className="text-gray-600">
+                    Total teams: {duplicatesInfo.total}
+                  </span>
+                  {duplicatesInfo.hasDuplicates && (
+                    <span className="text-red-600 ml-3">
+                      ({duplicatesInfo.duplicates} duplicate{duplicatesInfo.duplicates > 1 ? 's' : ''})
+                    </span>
+                  )}
+                </div>
+              )}
+              
+              {/* Validation errors */}
+              {validationErrors.length > 0 && (
+                <div className="mt-2 text-sm text-red-600">
+                  <p className="font-medium">Please fix the following errors:</p>
+                  <ul className="list-disc list-inside mt-1">
+                    {validationErrors.slice(0, 5).map((error, index) => (
+                      <li key={index}>{error}</li>
+                    ))}
+                    {validationErrors.length > 5 && (
+                      <li>... and {validationErrors.length - 5} more errors</li>
+                    )}
+                  </ul>
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                disabled={addingTeams}
+                disabled={addingTeams || validationErrors.length > 0}
+                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {addingTeams ? 'Adding...' : 'Add Teams'}
               </button>

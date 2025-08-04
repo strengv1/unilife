@@ -8,20 +8,21 @@ let db: DatabaseType;
 
 if (process.env.NODE_ENV === 'production') {
   // Production: Use Neon
-  const { neon } = require('@neondatabase/serverless');
-  const { drizzle } = require('drizzle-orm/neon-http');
-  
-  const sql = neon(process.env.DATABASE_URL!);
-  db = drizzle(sql, { schema });
+  import('@neondatabase/serverless').then(({ neon }) => {
+    import('drizzle-orm/neon-http').then(({ drizzle }) => {
+      const sql = neon(process.env.DATABASE_URL!);
+      db = drizzle(sql, { schema });
+    });
+  });
 } else {
   // Development: Use regular PostgreSQL
-  const { drizzle } = require('drizzle-orm/postgres-js');
-  const postgres = require('postgres');
-  
-  const client = postgres(process.env.DATABASE_URL!);
-  db = drizzle(client, { schema });
+  import('drizzle-orm/postgres-js').then(({ drizzle }) => {
+    import('postgres').then(({ default: postgres }) => {
+      const client = postgres(process.env.DATABASE_URL!);
+      db = drizzle(client, { schema });
+    });
+  });
 }
-
 // Export with proper typing
 export { db };
 
