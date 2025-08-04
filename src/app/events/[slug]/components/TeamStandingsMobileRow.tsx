@@ -64,7 +64,7 @@ const ExpandableTeam: React.FC<{
               )}
             </div>
             <div className="text-sm text-gray-600">
-              {team.swissWins}-{team.swissDraws}-{team.swissLosses}
+              {team.swissWins}-{team.swissLosses}-{team.swissDraws}
             </div>
           </div>
         </div>

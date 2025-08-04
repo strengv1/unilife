@@ -76,7 +76,7 @@ export function TeamStandings({
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Team</th>
               <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">W-D-L</th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">W-L-D</th>
               <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Cup Diff</th>
               <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">MB</th>
               <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">OMB</th>
@@ -97,7 +97,7 @@ export function TeamStandings({
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{team.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center font-semibold">{team.swissPoints}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                    {team.swissWins}-{team.swissDraws}-{team.swissLosses}
+                    {team.swissWins}-{team.swissLosses}-{team.swissDraws}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-center">
                     <span className={pointDiff > 0 ? 'text-green-600' : pointDiff < 0 ? 'text-red-600' : ''}>

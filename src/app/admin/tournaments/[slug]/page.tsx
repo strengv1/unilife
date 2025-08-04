@@ -442,9 +442,9 @@ export default function TournamentManagePage() {
                           <span className="ml-1 font-medium">{team.swissPoints || 0}</span>
                         </div>
                         <div>
-                          <span className="text-gray-500">W-D-L:</span>
+                          <span className="text-gray-500">W-L-D:</span>
                           <span className="ml-1 font-medium">
-                            {team.swissWins || 0}-{team.swissDraws || 0}-{team.swissLosses || 0}
+                            {team.swissWins || 0}-{team.swissLosses || 0}-{team.swissDraws || 0}
                           </span>
                         </div>
                       </div>
@@ -471,7 +471,7 @@ export default function TournamentManagePage() {
                           Points
                         </th>
                         <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          W-D-L
+                          W-L-D
                         </th>
                         <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Seed
@@ -500,7 +500,7 @@ export default function TournamentManagePage() {
                             {team.swissPoints || 0}
                           </td>
                           <td className="px-4 py-3 text-sm text-center">
-                            {team.swissWins || 0}-{team.swissDraws || 0}-{team.swissLosses || 0}
+                            {team.swissWins || 0}-{team.swissLosses || 0}-{team.swissDraws || 0}
                           </td>
                           <td className="px-4 py-3 text-sm text-center">
                             {team.seed || '-'}
