@@ -189,7 +189,7 @@ const AboutPage = () => {
                 <p className="text-lg text-gray-700">
                   So say no more to boring nights out!
                   <br />
-                  Expect brand new experiences you didn't know you needed.
+                  Expect brand new experiences you didn&apos;t know you needed.
                 </p>
               </div>
             </div>
