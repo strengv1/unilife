@@ -6,6 +6,7 @@ import { EliminationBracket } from '../components/EliminationBracket';
 import { TeamStandings } from '../components/TeamStandings';
 import { Match, TeamWithBuchholz, Tournament } from '@/app/lib/db';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function BracketPage() {
   const params = useParams();
@@ -81,14 +82,16 @@ export default function BracketPage() {
 
   useEffect(() => {
     fetchData();
+  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.slug]);
   
   if (error === 'Tournament not found') {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
         <h1 className="text-2xl font-bold text-gray-800 mb-4">Tournament Not Found</h1>
-        <p className="mb-4">The tournament you're looking for doesn't exist or has been removed.</p>
-        <a href="/" className="text-blue-600 hover:underline">Go back home</a>
+        <p className="mb-4">The tournament you&apos;re looking for doesn&apos;t exist or has been removed.</p>
+        <Link href="/" className="text-blue-600 hover:underline">Go back home</Link>
       </div>
     );
   }

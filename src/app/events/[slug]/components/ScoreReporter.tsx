@@ -17,6 +17,8 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
 
   useEffect(() => {
     fetchMatches();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tournamentSlug, filter]);
 
   // Set the scores to existing scores when selecting a completed game

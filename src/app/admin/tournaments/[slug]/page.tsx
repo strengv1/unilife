@@ -11,7 +11,7 @@ export default function TournamentManagePage() {
   const params = useParams();
   
   const [tournament, setTournament] = useState<Tournament | null>(null);
-  const [teams, setTeams] = useState<any[]>([]);
+  const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
   const [addingTeams, setAddingTeams] = useState(false);
 
@@ -31,17 +31,22 @@ export default function TournamentManagePage() {
   const { validateMultipleTeams, getDuplicatesInfo } = useTeamValidation(existingTeamNames);
   
   const displayedTeams = useMemo(() => {
-    let filtered = teams.filter(team => 
+    const filtered = teams.filter(team => 
       team.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
+  
     filtered.sort((a, b) => {
-      let aVal = a[sortBy];
-      let bVal = b[sortBy];
+      let aVal = a[sortBy as keyof Team];
+      let bVal = b[sortBy as keyof Team];
+      
+      // Handle null/undefined values
+      if (aVal == null && bVal == null) return 0;
+      if (aVal == null) return 1;
+      if (bVal == null) return -1;
       
       if (sortBy === 'name') {
-        aVal = aVal.toLowerCase();
-        bVal = bVal.toLowerCase();
+        aVal = String(aVal).toLowerCase();
+        bVal = String(bVal).toLowerCase();
       }
       
       if (sortOrder === 'asc') {
@@ -113,6 +118,7 @@ export default function TournamentManagePage() {
         fetchData();
       }
     } catch (error) {
+      console.error('Error deleting team:', error);
       alert('Error deleting team');
     }
   };
@@ -155,6 +161,7 @@ export default function TournamentManagePage() {
       setValidationErrors([]);
       fetchData();
     } catch (error) {
+      console.error('Error adding teams:', error);
       alert('Error adding teams');
     } finally {
       setAddingTeams(false);

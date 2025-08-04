@@ -68,6 +68,7 @@ export async function PATCH(
 
     return NextResponse.json(updated);
   } catch (error) {
+    console.error('Failed to update tournament:', error);
     return NextResponse.json({ error: 'Failed to update tournament' }, { status: 500 });
   }
 }

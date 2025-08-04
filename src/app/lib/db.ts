@@ -1,6 +1,10 @@
 import * as schema from './schema';
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
+import type { NeonHttpDatabase } from 'drizzle-orm/neon-http';
 
-let db: any;
+type DatabaseType = PostgresJsDatabase<typeof schema> | NeonHttpDatabase<typeof schema>;
+
+let db: DatabaseType;
 
 if (process.env.NODE_ENV === 'production') {
   // Production: Use Neon

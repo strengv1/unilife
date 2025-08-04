@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/app/lib/db';
+import { db, Team } from '@/app/lib/db';
 import { teams, tournaments } from '@/app/lib/schema';
 import { verifyAuth } from '@/app/lib/auth';
 import { eq, and } from 'drizzle-orm';
@@ -97,6 +97,12 @@ export async function POST(
   }
 }
 
+interface ValidationItem {
+  name: string;
+  isValid: boolean;
+  error: string | null;
+}
+
 export async function PUT(
   request: NextRequest,
   context: { params: Promise<{ slug: string }> }
@@ -131,10 +137,10 @@ export async function PUT(
       .from(teams)
       .where(eq(teams.tournamentId, tournament.id));
 
-    const existingNames = new Set(existingTeams.map(t => t.name.toLowerCase()));
+    const existingNames = new Set(existingTeams.map((t: Team) => t.name.toLowerCase()));
 
     // Check for duplicates
-    const validation = names.map((name: string) => {
+    const validation: ValidationItem[] = names.map((name: string) => {
       const trimmed = name.trim();
       const isValid = trimmed.length > 0 && !existingNames.has(trimmed.toLowerCase());
       return {
@@ -151,7 +157,7 @@ export async function PUT(
       nameCount.set(lower, (nameCount.get(lower) || 0) + 1);
     });
 
-    validation.forEach((item: any) => {
+    validation.forEach((item: ValidationItem) => {
       if (item.isValid && nameCount.get(item.name.toLowerCase())! > 1) {
         item.isValid = false;
         item.error = 'Duplicate in list';

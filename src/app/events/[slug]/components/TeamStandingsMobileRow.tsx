@@ -107,7 +107,7 @@ const ExpandableTeam: React.FC<{
               Median Buccholz (MB): {team.buchholzScore?.toFixed(1) || "0.0"}
             </div>
             <div>
-              Opponents' MB: {team.opponentsBuchholzScore?.toFixed(1) || "0.0"}
+              Opponents&apos; MB: {team.opponentsBuchholzScore?.toFixed(1) || "0.0"}
             </div>
           </div>  
           

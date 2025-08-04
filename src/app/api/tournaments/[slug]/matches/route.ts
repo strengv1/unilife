@@ -69,14 +69,7 @@ export async function GET(
       .where(and(...conditions))
       .orderBy(asc(matches.roundNumber), asc(matches.matchNumber));
 
-    // Transform the results to match expected format
-    const formattedMatches = matchList.map(match => ({
-      ...match,
-      team1: match.team1Id ? match.team1 : null,
-      team2: match.team2Id ? match.team2 : null,
-    }));
-
-    return NextResponse.json(formattedMatches);
+    return NextResponse.json(matchList);
   } catch (error) {
     console.error('Error fetching matches:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
