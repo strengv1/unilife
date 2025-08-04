@@ -5,6 +5,7 @@ import { Outfit  } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { OrganizationSchema } from "@/components/OrganizationSchema"
 import { NavbarProvider } from "@/contexts/NavbarContext";
+import { Toaster } from "@/components/ui/sonner";
 
 const outfit = Outfit({
   weight: ["400", "500", "700"], // font-normal, -medium, -bold
@@ -90,6 +91,7 @@ export default function RootLayout({
             {children}
           </NavbarProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   )
