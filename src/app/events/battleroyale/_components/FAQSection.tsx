@@ -5,31 +5,42 @@ export const FAQSection = () => {
   const faqItems = [
     {
       question: "Who can participate?",
-      answer:
-        "The tournament is open to everyone 18 years and older. You don't need to be a student to participate.",
+      answer: [
+        "The tournament is open to everyone 18 years and older. You don't need to be a student to participate."
+      ],
     },
     {
       question: "Do I need to bring my own equipment?",
-      answer:
-        "No, all equipment will be provided, including cups, balls, and tables. Just bring your A-game!",
+      answer: [
+        "No, all equipment will be provided, including cups, balls, and tables. Just bring your A-game!"
+      ],
     },
     {
       question: "What's the refund policy?",
-      answer:
-        "You can transfer your registration to another team but no refunds will be issued.",
+      answer: [
+        "You can transfer your registration on kide.app to another user, but no refunds will be issued. The registered team name will remain the same, if you choose to transfer the ticket."
+      ],
     },
     {
       question: "Can we bring our own beverages?",
-      answer: "Yes.",
+      answer: [
+        "Yes!",
+        "Our fantastic brewery sponsors will be providing each player with a drink or two.",
+        "To reach an even better buzz bringing your own drinks is recommended.",
+        "Note: drinking alcohol is not required at this tournament or UNI LIFE events in general."
+      ],
     },
     {
       question: "Is drinking mandatory for players?",
-      answer: "No. You do not have to drink to participate.",
+      answer: [
+        "No. You do not have to drink to participate."
+      ],
     },
     {
       question: "Is there parking available?",
-      answer:
-        "Limited parking is available nearby. We recommend using public transportation.",
+      answer: [
+        "Limited parking is available nearby. We recommend using public transportation."
+      ],
     },
   ];  
 
@@ -41,7 +52,7 @@ export const FAQSection = () => {
       "name": item.question,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": item.answer
+        "text": Array.isArray(item.answer) ? item.answer.join(' ') : item.answer
       }
     }))
   };
@@ -72,7 +83,15 @@ export const FAQSection = () => {
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-base">
-                  {item.answer}
+                  {Array.isArray(item.answer) ? (
+                    item.answer.map((line, lineIndex) => (
+                      <p key={lineIndex} className={lineIndex > 0 ? "mt-2" : ""}>
+                        {line}
+                      </p>
+                    ))
+                  ) : (
+                    item.answer
+                  )}
                 </AccordionContent>
               </AccordionItem>
             ))}

@@ -49,7 +49,7 @@ export const AboutSection = () => {
               </div>
               <h3 className="text-xl font-bold">Community Event</h3>
               <p className="mt-3 text-muted-foreground">
-                More than just a tournament, it&apos;s a celebration of student culture and community — with music, food, and a good buzz.
+                More than just a tournament, it’s a celebration of student culture and community — having ton of fun with great people, music and a good buzz.
               </p>
             </CardContent>
           </Card>

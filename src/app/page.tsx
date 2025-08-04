@@ -39,7 +39,7 @@ export default function Home() {
 
                 <div className="flex flex-col justify-end md:basis-[35vw] gap-4 text-left text-lg md:text-xl">
                   <p>
-                    We bring students together to laugh harder, stay up too late, and meet more people.
+                    We’re on a mission to bring students from every uni together to laugh harder, stay up too late, and meet more people
                   </p>
                   <p>
                     No one cares what you study — everyone’s here for a good time with great people!

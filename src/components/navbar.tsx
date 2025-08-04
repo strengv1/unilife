@@ -114,7 +114,7 @@ export function Navbar() {
         !navBarIsVisible ? "-translate-y-full" : ""
       }`}
     >
-      <div 
+      <div
         className="flex items-center justify-between px-4 max-w-6xl mx-auto"
         style={{ height: `${navBarHeightPx}px` }}
       >
@@ -129,8 +129,8 @@ export function Navbar() {
         </Link>
 
         {/* Mobile menu button */}
-        <button 
-          className="md:hidden text-gray-700 hover:text-red-500 focus:outline-none" 
+        <button
+          className="md:hidden text-gray-700 hover:text-red-500 focus:outline-none"
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
         >
@@ -142,15 +142,15 @@ export function Navbar() {
         </button>
 
         {/* Mobile menu */}
-        <div 
+        <div
           className={`inset-0 top-20 z-40 bg-amber-50 md:hidden overflow-y-auto
             transition-transform duration-300 ease-in-out transform
             ${ mobileMenuOpen ? "fixed translate-x-0" : "hidden translate-x-full"
           }`}
         >
           <nav className="flex flex-col p-4 space-y-4">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="font-medium text-lg py-2 border-b border-amber-200 hover:text-red-500"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -158,7 +158,7 @@ export function Navbar() {
             </Link>
             
             <div className="py-2 border-b border-amber-200">
-              <div 
+              <div
                 className="font-medium text-lg flex justify-between items-center cursor-pointer hover:text-red-500"
                 onClick={() => setEventsSubmenuOpen(!eventsSubmenuOpen)}
               >
@@ -182,7 +182,7 @@ export function Navbar() {
                 }
                 
                 <Link
-                  href="/events" 
+                  href="/events"
                   className="block py-1 hover:text-red-500"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -191,16 +191,16 @@ export function Navbar() {
               </div>
             </div>
             
-            <Link 
-              href="/about" 
+            <Link
+              href="/about"
               className="font-medium text-lg py-2 border-b border-amber-200 hover:text-red-500"
               onClick={() => setMobileMenuOpen(false)}
             >
               About Us
             </Link>
 
-            <Link 
-              href="/contact" 
+            <Link
+              href="/contact"
               className="font-medium text-lg py-2 border-b border-amber-200 hover:text-red-500"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -221,13 +221,17 @@ export function Navbar() {
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <NavigationMenuTrigger 
-                className="!bg-inherit cursor-pointer transition-colors font-medium 
+              <NavigationMenuTrigger
+                onPointerMove={(event) => event.preventDefault()}
+                onPointerLeave={(event) => event.preventDefault()}
+                className="!bg-inherit cursor-pointer transition-colors font-medium
                 hover:text-red-500 data-[state=open]:bg-amber-50 data-[state=open]:text-red-500
               ">
                 Events
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="p-4 shadow-lg rounded-md">
+              <NavigationMenuContent
+                className="p-4 shadow-lg rounded-md"
+              >
                 <ul className="grid gap-3 p-2 w-[200px]">
                   {
                     all.map((event: Event) => (

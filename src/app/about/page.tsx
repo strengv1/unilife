@@ -65,12 +65,12 @@ const AboutPage = () => {
               </div>
             </div>
 
-            {/* Why We Exist */}
+            {/* Our Mission */}
             <div className="mb-16">
               <div className="bg-white rounded-xl p-8 shadow-sm">
                 <div className="flex items-center mb-6">
                   <Crosshair className="w-12 h-12 text-red-500 mr-4" />
-                  <h2 className="text-2xl font-bold text-gray-900">Why We Exist</h2>
+                  <h2 className="text-2xl font-bold text-gray-900">Our Mission</h2>
                 </div>
                 <p className="text-lg text-gray-700 mb-4">
                   University can be the best time of your life. But too often, students feel <strong>isolated, invisible, and bored</strong>. We are here to change that.
@@ -176,14 +176,20 @@ const AboutPage = () => {
                   <h2 className="text-2xl font-bold text-gray-900">Why We&apos;re Wildly Different</h2>
                 </div>
                 
-                <p className="text-lg text-gray-700 mb-6">
-                  No cliques. We say <strong>no more</strong> to boring nights out!
-                  <br/>
-                  Expect <strong>brand new experiences you didn&apos;t know you needed.</strong>
+                <p className="text-lg text-gray-700 mb-4">
+                  We want <strong>your university life</strong> to be as vibrant as possible.
+                  <br />
+                  UNI LIFE is on a mission to bring university students together regardless of university and field of study. 
                 </p>
                 
+                <p className="text-lg text-gray-700 mb-4">
+                  Our events are thoughtfully engineered to get you out of your comfort zone — in the best way.
+                </p>
+
                 <p className="text-lg text-gray-700">
-                  Thoughtfully <strong>engineered to get you out of your comfort zone</strong> — in the best way.
+                  So say no more to boring nights out!
+                  <br />
+                  Expect brand new experiences you didn't know you needed.
                 </p>
               </div>
             </div>
