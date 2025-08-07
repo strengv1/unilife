@@ -31,7 +31,7 @@ export const AboutSection = () => {
           />
         </div>
         <div className="hidden md:grid mt-16 gap-8 md:grid-cols-3">
-          <Card className="transform transition-transform hover:scale-105">
+          <Card>
             <CardContent className="pt-8 pb-6 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
                 <Trophy className="h-7 w-7 text-red-600" />
@@ -42,7 +42,7 @@ export const AboutSection = () => {
               </p>
             </CardContent>
           </Card>
-          <Card className="transform transition-transform hover:scale-105">
+          <Card>
             <CardContent className="pt-8 pb-6 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
                 <Users className="h-7 w-7 text-red-600" />
@@ -53,7 +53,7 @@ export const AboutSection = () => {
               </p>
             </CardContent>
           </Card>
-          <Card className="transform transition-transform hover:scale-105">
+          <Card>
             <CardContent className="pt-8 pb-6 px-6">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
                 <Clock className="h-7 w-7 text-red-600" />

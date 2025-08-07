@@ -48,7 +48,7 @@ export const SimpleParnersSection = () => {
             <p className={partnerNameClass}>Masis Brewery</p>
           </div>
 
-          <div className="flex flex-col items-center h-full justify-between">
+          <div className="col-span-2 md:col-span-1 flex flex-col items-center h-full justify-between">
             <div className="flex-grow flex items-center ">
               <Link
                 href="https://www.beerpongkauppa.fi/"

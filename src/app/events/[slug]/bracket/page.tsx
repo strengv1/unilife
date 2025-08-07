@@ -24,11 +24,10 @@ export default function BracketPage() {
     setError(null);
   
     try {
-      const [tournamentRes, standingsRes, teamsRes, matchesRes] = await Promise.all([
+      const [tournamentRes, standingsRes, matchesRes] = await Promise.all([
         fetch(`/api/tournaments/${params.slug}`),
         fetch(`/api/tournaments/${params.slug}/standings`),
-        fetch(`/api/tournaments/${params.slug}/teams`),
-        fetch(`/api/tournaments/${params.slug}/matches`)
+        fetch(`/api/tournaments/${params.slug}/matches`),
       ]);
   
       if (tournamentRes.status === 404) {
@@ -42,10 +41,6 @@ export default function BracketPage() {
         const err = await standingsRes.json();
         throw new Error(err.error || 'Failed to fetch standings');
       }
-      if (!teamsRes.ok) {
-        const err = await teamsRes.json();
-        throw new Error(err.error || 'Failed to fetch standings');
-      }
   
       if (!matchesRes.ok) {
         const err = await matchesRes.json();
@@ -54,11 +49,7 @@ export default function BracketPage() {
   
       const tournamentData = await tournamentRes.json();
       const standingsData = await standingsRes.json();
-      const teamsData = await teamsRes.json();
       const matchesData = await matchesRes.json();
-  
-      console.log("standings: ",standingsData)
-      console.log("teams: ",teamsData)
 
       setTournament(tournamentData);
       setStandings(standingsData);

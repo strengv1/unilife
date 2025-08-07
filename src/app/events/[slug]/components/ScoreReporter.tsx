@@ -1,6 +1,7 @@
 'use client';
 
 import { Match } from '@/app/lib/db';
+import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
@@ -337,10 +338,10 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
       <div className="mt-10 flex flex-col md:flex-row gap-4 justify-center md:justify-start">
         <Link
           href={`/events/${tournamentSlug}/bracket`}
-          className="text-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+          className="flex items-center text-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
           target="_blank"
         >
-          View Public Bracket
+          View Public Bracket <ExternalLink className="ml-2 w-4 h-4" />
         </Link>
         <Link
           href={`/admin/tournaments/${tournamentSlug}`}

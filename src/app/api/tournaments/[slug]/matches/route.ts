@@ -225,8 +225,8 @@ export async function PUT(
         }
       }
       const winnerId = team1Score > team2Score ? match.team1Id : 
-      team2Score > team1Score ? match.team2Id : 
-      null;
+        team2Score > team1Score ? match.team2Id : 
+        null;
 
       if (!winnerId) {
         return NextResponse.json({ 

@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card"
 
 export const PrizesSection = () => {
 
-  const commonCardClass = "border-2 py-2 md:py-4 transform transition-transform hover:scale-105 shadow-md"
+  const commonCardClass = "border-2 py-2 md:py-4 shadow-md"
   const commonCardContentClass = "px-4 text-center flex flex-col h-full justify-between"
   const commonCardHeaderClass = "text:xl md:text-2xl font-bold"
   const commonCardDivClass = "my-6 text-3xl md:text-5xl font-bold"
@@ -16,7 +16,7 @@ export const PrizesSection = () => {
         </div>
 
         <div className="mt-4 md:mt-6 grid gap-2 md:gap-8 grid-cols-2 max-w-4xl mx-auto">
-          <Card className="border-2 col-span-full border-yellow-500 bg-gradient-to-b from-yellow-50 to-white transform transition-transform hover:scale-105 shadow-lg">
+          <Card className="border-2 col-span-full border-yellow-500 bg-gradient-to-b from-yellow-50 to-white shadow-lg">
             <CardContent className={`${commonCardContentClass}`}>
               <h3 className="text-2xl font-bold">1st Place</h3>
               <div className="my-6 text-5xl font-bold text-yellow-600">€600</div>

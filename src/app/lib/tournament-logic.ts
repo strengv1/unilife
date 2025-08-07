@@ -303,6 +303,28 @@ export class SwissSystem {
 }
 
 export class EliminationBracket {
+  static generateSeedingMap(numPlayers: number) {
+    function nextLayer(prevLayer: Array<number>) {
+      let nextLayer: Array<number> = [];
+      let length = prevLayer.length * 2 + 1;
+      prevLayer.forEach(function (d) {
+        nextLayer.push(d);
+        nextLayer.push(length - d);
+      });
+      return nextLayer;
+    }
+  
+    let rounds = Math.log(numPlayers) / Math.log(2) - 1;
+    let seedToBracketPosition = [1, 2];
+    for (let i = 0; i < rounds; i++) {
+      seedToBracketPosition = nextLayer(seedToBracketPosition);
+    }
+
+    return seedToBracketPosition
+      .splice(0, (seedToBracketPosition.length/2))
+      .concat(seedToBracketPosition.reverse());
+  }
+
   static async generateBracket(tournamentId: number) {
     const qualifiedTeams = await db
       .select()
@@ -316,12 +338,14 @@ export class EliminationBracket {
       .orderBy(asc(teams.seed));
   
     const rounds = Math.ceil(Math.log2(qualifiedTeams.length));
-    const totalSlots = Math.pow(2, rounds);
   
     // Create all matches first
     const allMatches: NewMatch[] = [];
     let matchCounter = 1;
-  
+      
+    const seedingMap = EliminationBracket.generateSeedingMap(qualifiedTeams.length);
+    const teamsOrdered = seedingMap.map(seed => qualifiedTeams[seed - 1]);
+    
     // Generate matches round by round
     for (let round = 1; round <= rounds; round++) {
       const matchesInRound = Math.pow(2, rounds - round);
@@ -344,15 +368,8 @@ export class EliminationBracket {
   
         // For first round, assign teams based on seeding
         if (round === 1) {
-          const topSeedIndex = i;
-          const bottomSeedIndex = totalSlots - 1 - i;
-  
-          if (topSeedIndex < qualifiedTeams.length) {
-            match.team1Id = qualifiedTeams[topSeedIndex].id;
-          }
-          if (bottomSeedIndex < qualifiedTeams.length) {
-            match.team2Id = qualifiedTeams[bottomSeedIndex].id;
-          }
+          if (teamsOrdered[i*2]) match.team1Id = teamsOrdered[i*2].id;
+          if (teamsOrdered[i*2 + 1]) match.team2Id = teamsOrdered[i*2 + 1].id;
   
           // Auto-complete if it's a bye
           if (match.team1Id && !match.team2Id) {
@@ -368,7 +385,7 @@ export class EliminationBracket {
       }
     }
   
-    // Insert all matches and get their IDs
+    // Insert all matches
     const insertedMatches = await db
       .insert(matches)
       .values(allMatches)
@@ -412,7 +429,9 @@ export class EliminationBracket {
       .where(eq(matches.id, matchId));
   
     if (!match) throw new Error('Match not found');
-    if (!match.team1Id || !match.team2Id) throw new Error('Match missing teams');
+
+    // If match is missing teams but is completed, it was won with BYE
+    if ((!match.team1Id || !match.team2Id) && match.status !== "completed") throw new Error('Match missing teams');
   
     // Update current match
     await db
@@ -458,8 +477,10 @@ export class EliminationBracket {
       }
     }
   
-    // Mark loser as eliminated
+    // Mark loser as eliminated, if this wasnt a bye
     const loserId = match.team1Id === winnerId ? match.team2Id : match.team1Id;
+    if(!loserId) return;
+
     await db
       .update(teams)
       .set({ eliminated: true })

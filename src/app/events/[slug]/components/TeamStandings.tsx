@@ -59,8 +59,8 @@ export function TeamStandings({
           <ol className="text-sm text-blue-800 space-y-1">
             <li>1. <strong>Swiss Points:</strong> 3 for win, 1 for draw, 0 for loss</li>
             <li>2. <strong>Goal Difference:</strong> Cups scored minus cups conceded</li>
-            <li>3. <strong>Median-Buchholz (MB):</strong> Sum of opponents&apos; points (excluding best and worst)</li>
-            <li>4. <strong>Opponents&apos; Buchholz (OMB):</strong> Sum of all opponents&apos; MB scores</li>
+            <li>3. <strong>Median-Buchholz (MB):</strong> Sum of opponents&apos; Swiss points (excluding best and worst)</li>
+            <li>4. <strong>Opponents&apos; Buchholz (OMB):</strong> Sum of opponents&apos; MB scores</li>
           </ol>
         </div>
       )}

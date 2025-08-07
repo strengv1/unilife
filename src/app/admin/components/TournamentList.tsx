@@ -1,6 +1,7 @@
 'use client';
 
 import { Tournament } from '@/app/lib/db';
+import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 interface TournamentListProps {
@@ -61,10 +62,10 @@ export function TournamentList({ tournaments, onRefresh, isLoading }: Tournament
                 <div className="flex space-x-2">
                   <Link
                     href={`/events/${tournament.slug}/bracket`}
-                    className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+                    className="flex items-center px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
                     target="_blank"
                   >
-                    View Bracket
+                    View Bracket <ExternalLink className="ml-2 w-4 h-4" />
                   </Link>
                   <Link
                     href={`/events/${tournament.slug}/bracket/admin`}

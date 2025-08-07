@@ -47,7 +47,7 @@ function BracketMatch({
               <span className="text-xs text-gray-500">#{match.team1.seed}</span>
             )}
             <span className="text-sm">
-              {match.team1?.name || 'TBD'}
+              {match.team1?.name || (match.winnerId ? 'BYE' : 'TBD')}
             </span>
           </div>
           <span className={`text-lg ${isTeam1Winner ? 'text-green-700' : ''}`}>
@@ -70,7 +70,7 @@ function BracketMatch({
               <span className="text-xs text-gray-500">#{match.team2.seed}</span>
             )}
             <span className="text-sm">
-              {match.team2?.name || 'TBD'}
+              {match.team2?.name || (match.winnerId ? 'BYE' : 'TBD')}
             </span>
           </div>
           <span className={`text-lg ${isTeam2Winner ? 'text-green-700' : ''}`}>
@@ -156,7 +156,6 @@ export function EliminationBracket({ matches }: { matches: Match[] }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const transformElementRef = useRef<HTMLDivElement>(null);
 
-
   const rounds = filteredMatches.reduce((acc, match) => {
     if (!acc[match.roundNumber]) {
       acc[match.roundNumber] = [];
@@ -170,6 +169,7 @@ export function EliminationBracket({ matches }: { matches: Match[] }) {
   const numFilteredRounds = filteredRoundNumbers.length;
   const roundNames = getRoundNames(numFilteredRounds);
 
+  console.log(rounds)
   const hasTeams = (match: Match) => {
     return (match.team1Id !== null && match.team1 !== null) &&
            (match.team2Id !== null && match.team2 !== null);
