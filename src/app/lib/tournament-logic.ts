@@ -305,8 +305,8 @@ export class SwissSystem {
 export class EliminationBracket {
   static generateSeedingMap(numPlayers: number) {
     function nextLayer(prevLayer: Array<number>) {
-      let nextLayer: Array<number> = [];
-      let length = prevLayer.length * 2 + 1;
+      const nextLayer: Array<number> = [];
+      const length = prevLayer.length * 2 + 1;
       prevLayer.forEach(function (d) {
         nextLayer.push(d);
         nextLayer.push(length - d);
@@ -314,7 +314,7 @@ export class EliminationBracket {
       return nextLayer;
     }
   
-    let rounds = Math.log(numPlayers) / Math.log(2) - 1;
+    const rounds = Math.log(numPlayers) / Math.log(2) - 1;
     let seedToBracketPosition = [1, 2];
     for (let i = 0; i < rounds; i++) {
       seedToBracketPosition = nextLayer(seedToBracketPosition);
