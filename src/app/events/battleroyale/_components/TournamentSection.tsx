@@ -31,8 +31,6 @@ export const TournamentSection = () => {
             <TabsContent value="format" className="mt-0 space-y-4">
               <div className="rounded-lg border p-4 md:p-8 shadow-sm">
                 <TournamentStructure />
-
-                
               </div>
             </TabsContent>
             <TabsContent value="rules" className="space-y-4">

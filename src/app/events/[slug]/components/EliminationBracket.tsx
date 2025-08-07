@@ -18,12 +18,13 @@ function BracketMatch({
 
   return (
     <div className={`
-      bg-white border-2 rounded-lg py-2 px-4 w-64 shadow-sm mb-1
+      bg-white border-2 rounded-lg py-2 px-4 shadow-sm
+      w-64 h-[156px] flex flex-col overflow-hidden
       ${match.status === 'completed' ? 'border-gray-300' : ''}
       ${hasTeams && match.status === 'pending' ? 'border-blue-400' : ''}
       ${!hasTeams ? 'border-gray-200 opacity-75' : ''}
     `}>
-      <div className="flex justify-between mb-1">
+      <div className="flex justify-between mb-1 flex-shrink-0">
         <span className="text-sm font-bold text-gray-900">Table {tableNumber}</span>
         <span className={`
           text-xs px-2 py-1 rounded-full font-medium
@@ -34,46 +35,46 @@ function BracketMatch({
           {matchStatus}
         </span>
       </div>
-      <div className="space-y-2">
+      <div className="flex-1 flex flex-col justify-center space-y-2 min-h-0">
         {/* Team 1 */}
         <div className={`
-          flex justify-between items-center p-2 rounded
+          flex justify-between items-center p-2 rounded min-h-[40px]
           ${isTeam1Winner ? 'bg-green-100 font-semibold' : ''}
           ${match.status === 'completed' && !isTeam1Winner && match.team1 ? 'opacity-60' : ''}
           ${!match.team1 ? 'text-gray-400' : ''}
         `}>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 min-w-0 flex-1">
             {match.team1?.seed && (
-              <span className="text-xs text-gray-500">#{match.team1.seed}</span>
+              <span className="text-xs text-gray-500 flex-shrink-0">#{match.team1.seed}</span>
             )}
-            <span className="text-sm">
+            <span className="text-sm truncate" title={match.team1?.name || ''}>
               {match.team1?.name || (match.winnerId ? 'BYE' : 'TBD')}
             </span>
           </div>
-          <span className={`text-lg ${isTeam1Winner ? 'text-green-700' : ''}`}>
+          <span className={`text-lg ml-2 flex-shrink-0 ${isTeam1Winner ? 'text-green-700' : ''}`}>
             {match.team1Score !== null ? match.team1Score : '-'}
           </span>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-200"></div>
+        <div className="border-t border-gray-200 flex-shrink-0"></div>
 
         {/* Team 2 */}
         <div className={`
-          flex justify-between items-center p-2 rounded
+          flex justify-between items-center p-2 rounded min-h-[40px]
           ${isTeam2Winner ? 'bg-green-100 font-semibold' : ''}
           ${match.status === 'completed' && !isTeam2Winner && match.team2 ? 'opacity-60' : ''}
           ${!match.team2 ? 'text-gray-400' : ''}
         `}>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 min-w-0 flex-1">
             {match.team2?.seed && (
-              <span className="text-xs text-gray-500">#{match.team2.seed}</span>
+              <span className="text-xs text-gray-500 flex-shrink-0">#{match.team2.seed}</span>
             )}
-            <span className="text-sm">
+            <span className="text-sm truncate" title={match.team2?.name || ''}>
               {match.team2?.name || (match.winnerId ? 'BYE' : 'TBD')}
             </span>
           </div>
-          <span className={`text-lg ${isTeam2Winner ? 'text-green-700' : ''}`}>
+          <span className={`text-lg ml-2 flex-shrink-0 ${isTeam2Winner ? 'text-green-700' : ''}`}>
             {match.team2Score !== null ? match.team2Score : '-'}
           </span>
         </div>
@@ -142,7 +143,7 @@ export function EliminationBracket({ matches }: { matches: Match[] }) {
   const filteredMatches = filterMatchesByBracketSize(matches, bracketSize);
   
   // Use refs to store transform values without triggering re-renders
-  const transformRef = useRef({ scale: 1, x: 0, y: 0 });
+  const transformRef = useRef({ scale: 0.7, x: 0, y: 0 });
   const [controlsKey, setControlsKey] = useState(0); // Force re-render only for controls
   
   const [isDragging, setIsDragging] = useState(false);
@@ -169,7 +170,6 @@ export function EliminationBracket({ matches }: { matches: Match[] }) {
   const numFilteredRounds = filteredRoundNumbers.length;
   const roundNames = getRoundNames(numFilteredRounds);
 
-  console.log(rounds)
   const hasTeams = (match: Match) => {
     return (match.team1Id !== null && match.team1 !== null) &&
            (match.team2Id !== null && match.team2 !== null);
@@ -374,6 +374,34 @@ export function EliminationBracket({ matches }: { matches: Match[] }) {
     applyTransform();
   }, [applyTransform]);
 
+  const LINE_WIDTH = 2
+  const LINE_COLOR = "#d1d5db"
+  const HorizontalLine = ({ color = LINE_COLOR }: { color?: string }) => (
+    <div
+      className="border-0"
+      style={{
+        backgroundColor: color,
+        height: LINE_WIDTH,
+        width: "100%",
+        minHeight: LINE_WIDTH,
+        flexShrink: 0
+      }}
+    />
+  );
+  const VerticalLine = ({ color = LINE_COLOR, height }: { color?: string, height: number }) => (
+    <div
+      className="border-0"
+      style={{
+        backgroundColor: color,
+        height: Math.round(height),
+        width: LINE_WIDTH,
+        minWidth: LINE_WIDTH,
+        minHeight: Math.round(height),
+        flexShrink: 0
+      }}
+    />
+  );
+  
   return (
     <>
       {/* Mobile View - Zoomable Bracket */}
@@ -450,36 +478,97 @@ export function EliminationBracket({ matches }: { matches: Match[] }) {
               cursor: isDragging ? 'grabbing' : 'grab'
             }}
           >
-            <div ref={contentRef} className="inline-flex space-x-4 p-4" style={{ minWidth: '800px' }}>
+            <div ref={contentRef} className="flex p-4" style={{ minWidth: '800px' }}>
               {filteredRoundNumbers.map((roundNumber, index) => {
                 // Calculate gaps to position parent match between child matches and form the bracket
-                const MATCH_CARD_HEIGHT = 155;
-                const multiplier = 2**index - 1;
+                const MATCH_CARD_HEIGHT = 156;
+                const TITLE_HEIGHT = 36;
+                const multiplier = Math.pow(2, index) - 1;
     
-                const topMarginPx = (multiplier * (MATCH_CARD_HEIGHT/2));
-                const gapPx = multiplier * MATCH_CARD_HEIGHT
+                const topMarginPx = Math.round(multiplier * (MATCH_CARD_HEIGHT/2));
+                const gapPx = Math.round(multiplier * MATCH_CARD_HEIGHT);
+
                 return (
-                <div key={roundNumber} className="flex flex-col">
-                  <h3 className="text-sm font-semibold text-center mb-1">
-                    {roundNames[index]}
-                  </h3>
-                  <div
-                    className={`flex flex-col justify-around`}
-                    style={{gap: gapPx, marginTop: topMarginPx}}
+                  <div key={roundNumber}
+                    className="inline-flex"
                   >
-                    {rounds[roundNumber]
-                      ?.sort((a, b) => a.matchNumber - b.matchNumber)
-                      .map(match => (
-                        <BracketMatch 
-                          key={match.id} 
-                          match={match} 
-                          hasTeams={hasTeams(match)}
-                          matchStatus={getMatchStatus(match)}
-                        />
-                      ))}
+                    {/* Line Before Box */}
+                    {roundNumber !== Math.min(...filteredRoundNumbers) &&
+                      <div
+                        className="flex flex-col"
+                        style={{
+                          width: 20,
+                          gap: Math.round(gapPx + MATCH_CARD_HEIGHT - LINE_WIDTH),
+                          marginTop: Math.round(topMarginPx + MATCH_CARD_HEIGHT/2 + LINE_WIDTH + TITLE_HEIGHT),
+                          flexShrink: 0
+                        }}
+                      >
+                        {rounds[roundNumber].map((_, idx) => (
+                          <HorizontalLine key={idx} />
+                        ))}
+                      </div>
+                    }
+                    <div className="flex flex-col">
+                      <h3 className="text-sm font-semibold text-center mb-1">
+                        {roundNames[index]}
+                      </h3>
+                      <div
+                        className={`flex flex-col justify-around`}
+                        style={{gap: gapPx, marginTop: topMarginPx}}
+                      >
+                        {rounds[roundNumber]
+                          ?.sort((a, b) => a.matchNumber - b.matchNumber)
+                          .map(match => (
+                            <BracketMatch 
+                              key={match.id} 
+                              match={match} 
+                              hasTeams={hasTeams(match)}
+                              matchStatus={getMatchStatus(match)}
+                            />
+                          ))}
+                      </div>
+                    </div>
+
+                    {/* Line After Box */}
+                    {roundNumber !== Math.max(...filteredRoundNumbers) && 
+                      <div
+                        className="flex flex-col"
+                        style={{
+                          width: 20,
+                          gap: Math.round(gapPx + MATCH_CARD_HEIGHT - LINE_WIDTH),
+                          marginTop: Math.round(topMarginPx + MATCH_CARD_HEIGHT/2 + TITLE_HEIGHT),
+                          flexShrink: 0
+                        }}
+                      >
+                        {rounds[roundNumber].map((_, idx) => (
+                          <HorizontalLine key={idx} />
+                        ))}
+                      </div>
+                    }
+
+                    {/* Vertical Line, after Box */}
+                    {(roundNumber !== Math.max(...filteredRoundNumbers)) &&
+                      <div
+                        className="flex flex-col"
+                        style={{
+                          width: LINE_WIDTH,
+                          marginTop: Math.round(topMarginPx + MATCH_CARD_HEIGHT/2 + TITLE_HEIGHT),
+                          flexShrink: 0
+                        }}
+                      >
+                        {rounds[roundNumber].map((_, index) => {
+                          const lineHeight = Math.round(gapPx + MATCH_CARD_HEIGHT + LINE_WIDTH);
+                          return (index % 2 === 0) ? (
+                            <VerticalLine key={index} height={lineHeight} />
+                          ) : (
+                            <VerticalLine key={index} color="transparent" height={lineHeight-LINE_WIDTH*2} />
+                          );
+                        })}
+                      </div>
+                    }
                   </div>
-                </div>
-              )})}
+                )
+              })}
             </div>
           </div>
         </div>
@@ -511,32 +600,91 @@ export function EliminationBracket({ matches }: { matches: Match[] }) {
         </div>
         
         <div className="overflow-x-auto pb-4">
-          <div className="inline-flex space-x-8 p-6 min-w-max">
+          <div className="flex p-6 min-w-max">
             {filteredRoundNumbers.map((roundNumber, index) => {
               // Calculate gaps to position parent match between child matches and form the bracket
               const MATCH_CARD_HEIGHT = 156;
-              const multiplier = 2**index - 1;
+              const TITLE_HEIGHT = 44;
+              const multiplier = Math.pow(2, index) - 1;
 
-              const topMarginPx = (multiplier * (MATCH_CARD_HEIGHT/2));
-              const gapPx = multiplier * MATCH_CARD_HEIGHT
-
+              const topMarginPx = Math.round(multiplier * (MATCH_CARD_HEIGHT/2));
+              const gapPx = multiplier * MATCH_CARD_HEIGHT;
+              
               return (
-                <div key={roundNumber} className="flex flex-col space-y-4">
-                  <h3 className="text-lg font-semibold text-center mb-2">
-                    {roundNames[index]}
-                  </h3>
-                  <div className="flex flex-col justify-around" style={{gap: gapPx, marginTop: topMarginPx}}>
-                    {rounds[roundNumber]
-                      ?.sort((a, b) => a.matchNumber - b.matchNumber)
-                      .map(match => (
-                        <BracketMatch 
-                          key={match.id} 
-                          match={match} 
-                          hasTeams={hasTeams(match)}
-                          matchStatus={getMatchStatus(match)}
-                        />
+                <div key={roundNumber} className="inline-flex">
+                  {/* Line Before Box */}
+                  {roundNumber !== Math.min(...filteredRoundNumbers) &&
+                    <div
+                      className="flex flex-col"
+                      style={{
+                        width: 20,
+                        gap: Math.round(gapPx + MATCH_CARD_HEIGHT - LINE_WIDTH),
+                        marginTop: Math.round(topMarginPx + MATCH_CARD_HEIGHT/2 + LINE_WIDTH + TITLE_HEIGHT),
+                        flexShrink: 0
+                      }}
+                    >
+                      {rounds[roundNumber].map((_, idx) => (
+                        <HorizontalLine key={idx} />
                       ))}
+                    </div>
+                  }
+
+
+                  <div className="flex flex-col space-y-4">
+                    <h3 className="text-lg font-semibold text-center mb-2">
+                      {roundNames[index]}
+                    </h3>
+                    <div className="flex flex-col justify-around" style={{gap: gapPx, marginTop: topMarginPx}}>
+                      {rounds[roundNumber]
+                        ?.sort((a, b) => a.matchNumber - b.matchNumber)
+                        .map(match => (
+                          <BracketMatch 
+                            key={match.id} 
+                            match={match} 
+                            hasTeams={hasTeams(match)}
+                            matchStatus={getMatchStatus(match)}
+                          />
+                        ))}
+                    </div>
                   </div>
+                  
+                  {/* Line After Box */}
+                  {roundNumber !== Math.max(...filteredRoundNumbers) && 
+                    <div
+                      className="flex flex-col"
+                      style={{
+                        width: 20,
+                        gap: Math.round(gapPx + MATCH_CARD_HEIGHT - LINE_WIDTH),
+                        marginTop: Math.round(topMarginPx + MATCH_CARD_HEIGHT/2 + TITLE_HEIGHT),
+                        flexShrink: 0
+                      }}
+                    >
+                      {rounds[roundNumber].map((_, idx) => (
+                        <HorizontalLine key={idx} />
+                      ))}
+                    </div>
+                  }
+
+                  {/* Vertical Line, after Box */}
+                  {(roundNumber !== Math.max(...filteredRoundNumbers)) &&
+                    <div
+                      className="flex flex-col"
+                      style={{
+                        width: LINE_WIDTH,
+                        marginTop: Math.round(topMarginPx + MATCH_CARD_HEIGHT/2 + TITLE_HEIGHT),
+                        flexShrink: 0
+                      }}
+                    >
+                      {rounds[roundNumber].map((_, index) => {
+                        const lineHeight = Math.round(gapPx + MATCH_CARD_HEIGHT + LINE_WIDTH);
+                        return (index % 2 === 0) ? (
+                          <VerticalLine key={index} height={lineHeight} />
+                        ) : (
+                          <VerticalLine key={index} color="transparent" height={lineHeight-LINE_WIDTH*2} />
+                        );
+                      })}
+                    </div>
+                  }
                 </div>
               )}
             )}

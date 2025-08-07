@@ -40,7 +40,6 @@ export const NewsletterForm = ({
     if (firstName !== "") {
       // This is likely a bot - silently "succeed" without actually submitting
       setTimeout(() => {
-        console.log("Honeypot triggered - likely bot submission");
         setEmail("");
         setStatus("success"); // Show success message to avoid tipping off the bot
         setIsSubmitting(false);
