@@ -1,4 +1,4 @@
-import { ArrowDown, Target, ArrowRight, Zap, Crown } from "lucide-react"
+import { ArrowDown, Target, ArrowRight, Crown } from "lucide-react"
 
 export default function TournamentStructure() {
   const SwissIllustration = () => (

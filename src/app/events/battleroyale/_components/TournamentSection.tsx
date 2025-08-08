@@ -5,8 +5,6 @@ import TournamentQuickRules from "./TournamentQuickRules"
 import TournamentSchedule from "./TournamentSchedule"
 
 export const TournamentSection = () => {
-
-  const checkCircleClass = "mt-1 h-5 w-5 flex-shrink-0 text-red-600"
   return (
     <section id="tournament" className="bg-slate-50 py-10 md:py-16">
       <div className="container mx-auto max-w-6xl px-4">
