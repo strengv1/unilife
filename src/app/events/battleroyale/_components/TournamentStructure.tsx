@@ -1,4 +1,4 @@
-import { ArrowDown, Target, ArrowRight, Crown } from "lucide-react"
+import { ArrowDown, Target, ArrowRight, Crown, Euro } from "lucide-react"
 
 export default function TournamentStructure() {
   const SwissIllustration = () => (
@@ -61,7 +61,7 @@ export default function TournamentStructure() {
 
   const BracketIllustration = () => (
     <div className="bg-white rounded-xl px-2 py-4 sm:p-4 lg:p-6 border-2 border-red-200 shadow-sm">
-      <div className="text-center mb-2 lg:mb-4">
+      <div className="text-center mb-2">
         <h5 className="font-bold text-gray-800 lg:mb-2">Single Elimination Playoff Bracket</h5>
       </div>
       
@@ -236,16 +236,17 @@ export default function TournamentStructure() {
                 </div>
               </div>
               
-              <div className="space-y-2 text-red-50 text-sm">
+              <div className="space-y-1 text-red-50 text-sm">
                 <div>- Single-elimination bracket</div>
                 <div>- Seeded by Swiss results</div>
-                <div className="ml-4 -mt-1">- #1 seed gets easiest path to finals</div>
-                <div className="ml-4 -mt-1">- Top seeds avoid each other early</div>
+                <div className="ml-4">- #1 seed gets easiest path to finals</div>
+                <div className="ml-4">- Top seeds avoid each other early</div>
 
                 <div>- Win or go home</div>
                 <div>- All games are best-of-1</div>
-                <div className="border-t border-red-400 pt-2 mt-5">
-                  <div className="font-semibold">💰 Cash prizes for Top 16</div>
+                <div className="flex items-center gap-2 border-t border-red-400 pt-2 mt-5">
+                  <Euro className="font-semibold"/>
+                  <div className="font-semibold">Cash prizes for Top 16</div>
                 </div>
               </div>
               
