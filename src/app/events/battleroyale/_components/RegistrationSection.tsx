@@ -46,19 +46,6 @@ export const RegistrationSection = () => {
                   </Button>
                 </Link>
               </div>
-
-              {/* <div className="mt-6 text-center">
-                <p className="text-sm text-muted-foreground">
-                  Registration is not yet open.
-                </p>
-                <a
-                  href="#newsletter"
-                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-red-100 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-200 transition"
-                >
-                  <CheckCircle className="h-4 w-4 text-red-600" />
-                  Notify me when it opens!
-                </a>
-              </div> */}
             </CardContent>
           </Card>
           <Card className="bg-white shadow-lg">
@@ -67,7 +54,7 @@ export const RegistrationSection = () => {
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Sponsor package (drinks and snacks provided by our sponsors)</span>
+                  <span>Sponsor package (drinks provided by our sponsors)</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
@@ -90,21 +77,6 @@ export const RegistrationSection = () => {
             </CardContent>
           </Card>
         </div>
-        
-        {/* <NewsletterForm
-          containerClassName="mt-10 bg-white text-black rounded-xl p-10"
-          title="Be first to know when it's time to drop in to battle! 🪂"
-          description={
-            <p className="mb-6 max-w-xl mx-auto text-balance">
-              Registration isn&apos;t open{" "}
-              <span className="underline">yet</span>{" "}
-              <ArrowRight className="inline-block -mt-0.5" size="1rem" />{" "}
-              <span className="font-bold">subscribe to our newsletter and we&apos;ll let you know when it&apos;s time to deploy!</span>{" "}
-              <span className="block">No spam, just raw information.</span>
-            </p>
-          }
-          disclaimerText="By subscribing, you agree to receive emails from UNI LIFE about Beer Pong Battle Royale and related events. You can unsubscribe at any time."
-        /> */}
       </div>
       
       {/* Add CSS for shine effect */}
