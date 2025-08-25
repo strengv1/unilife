@@ -3,6 +3,8 @@
 import { Tournament } from '@/app/lib/db';
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { useTransition } from 'react';
+import { startTournamentAction } from '@/app/lib/actions/tournament-actions';
 
 interface TournamentListProps {
   tournaments: Tournament[];
@@ -11,33 +13,31 @@ interface TournamentListProps {
 }
 
 export function TournamentList({ tournaments, onRefresh, isLoading }: TournamentListProps) {
-  
+  const [isPending, startTransition] = useTransition();
+
   const handleStartTournament = async (slug: string) => {
     if (!confirm('Start the Swiss rounds? This will generate the first round pairings.')) {
       return;
     }
 
-    try {
-      const res = await fetch(`/api/tournaments/${slug}/start`, {
-        method: 'POST',
-      });
-
-      if (res.ok) {
+    startTransition(async () => {
+      const result = await startTournamentAction(slug);
+      
+      if (result.error) {
+        alert(`Failed to start tournament: ${result.error}`);
+      } else {
         alert('Tournament started! First round pairings generated.');
         onRefresh();
-      } else {
-        alert('Failed to start tournament');
       }
-    } catch (error) {
-      alert('Error: ' + (error instanceof Error ? error.message : 'Internal Server Error'));
-    }
+    });
   };
 
-  if (isLoading){
+  if (isLoading) {
     return (
-      <div className="flex items-center justify-center">Loading tournament list.. </div>
+      <div className="flex items-center justify-center">Loading tournament list..</div>
     )
   }
+
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">
       <ul className="divide-y divide-gray-200">
@@ -82,9 +82,11 @@ export function TournamentList({ tournaments, onRefresh, isLoading }: Tournament
                   {tournament.status === 'registration' && (
                     <button
                       onClick={() => handleStartTournament(tournament.slug)}
-                      className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600 cursor-pointer"
+                      disabled={isPending}
+                      className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600
+                        cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Start Tournament
+                      {isPending ? 'Starting...' : 'Start Tournament'}
                     </button>
                   )}
                 </div>

@@ -1,5 +1,3 @@
-// components/EventSchema.tsx - Simplified version
-
 import Script from 'next/script';
 import React from 'react';
 

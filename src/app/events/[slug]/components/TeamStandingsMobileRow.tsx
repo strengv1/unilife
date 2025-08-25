@@ -77,7 +77,7 @@ const ExpandableTeam: React.FC<{
               <div className="text-xs text-gray-500">pts</div>
             </div>
             <div className="text-gray-500 text-xs md:text-sm mt-1">
-              Cup Diff:{" "}
+              <span className="whitespace-nowrap">Cup Diff:</span>
               <span
                 className={`
                   font-medium text-xs md:text-sm ml-1

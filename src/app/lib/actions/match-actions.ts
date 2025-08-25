@@ -1,28 +1,23 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/app/lib/db';
-import { matches, tournaments, teams } from '@/app/lib/schema';
-import { eq, and, asc } from 'drizzle-orm';
-import { alias } from 'drizzle-orm/pg-core';
-import { verifyAuth } from '@/app/lib/auth';
-import { EliminationBracket, SwissSystem } from '@/app/lib/tournament-logic';
+'use server'
 
-export async function GET(
-  request: NextRequest,
-  context: { params: Promise<{ slug: string }> }
-) {
+import { revalidatePath } from 'next/cache'
+import { db, Match } from '@/app/lib/db'
+import { matches, tournaments, teams } from '@/app/lib/schema'
+import { eq, and, asc } from 'drizzle-orm'
+import { alias } from 'drizzle-orm/pg-core'
+import { verifyAuth } from '@/app/lib/auth'
+import { EliminationBracket, SwissSystem } from '@/app/lib/tournament-logic'
+
+export async function fetchMatchesAction(tournamentSlug: string, status: string) {
   try {
-    const { searchParams } = new URL(request.url);
-    const status = searchParams.get('status');
-    const params = await context.params;
-
     // Find tournament
     const [tournament] = await db
       .select()
       .from(tournaments)
-      .where(eq(tournaments.slug, params.slug));
+      .where(eq(tournaments.slug, tournamentSlug));
 
     if (!tournament) {
-      return NextResponse.json({ error: 'Tournament not found' }, { status: 404 });
+      return { error: 'Tournament not found' }
     }
 
     // Create aliases for teams
@@ -37,7 +32,7 @@ export async function GET(
     }
 
     // Get matches with team information
-    const matchList = await db
+    const rawMatches = await db
       .select({
         id: matches.id,
         tournamentId: matches.tournamentId,
@@ -69,26 +64,41 @@ export async function GET(
       .where(and(...conditions))
       .orderBy(asc(matches.roundNumber), asc(matches.matchNumber));
 
-    return NextResponse.json(matchList);
+    // Transform to match the expected Match type
+    const matchList = rawMatches.map(match => ({
+      ...match,
+      team1: match.team1 ? {
+        id: match.team1.id!,
+        name: match.team1.name!,
+        seed: match.team1.seed!,
+      } : null,
+      team2: match.team2 ? {
+        id: match.team2.id!,
+        name: match.team2.name!,
+        seed: match.team2.seed!,
+      } : null,
+    })) as Match[];
+
+    return { success: true, matches: matchList }
   } catch (error) {
     console.error('Error fetching matches:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return { error: 'Failed to fetch matches' }
   }
 }
 
-export async function PUT(
-  request: NextRequest
+export async function updateMatchScoreAction(
+  tournamentSlug: string,
+  matchId: number,
+  team1Score: number,
+  team2Score: number
 ) {
   // Verify admin authentication
   const isAuthenticated = await verifyAuth();
   if (!isAuthenticated) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return { error: 'Unauthorized' }
   }
 
   try {
-    const body = await request.json();
-    const { matchId, team1Score, team2Score, action } = body;
-
     // Get the match with tournament info
     const [match] = await db
       .select()
@@ -96,16 +106,15 @@ export async function PUT(
       .where(eq(matches.id, matchId));
 
     if (!match) {
-      return NextResponse.json({ error: 'Match not found' }, { status: 404 });
+      return { error: 'Match not found' }
     }
-    if (action === 'reset') {
-      return await resetMatch(match);
-    }
+
     if (!match.tournamentId) {
-      return NextResponse.json({ error: 'Match has no tournament ID' }, { status: 400 });
+      return { error: 'Match has no tournament ID' }
     }
+
     if (!match.team1Id || !match.team2Id) {
-      return NextResponse.json({ error: 'Match is missing teams' }, { status: 400 });
+      return { error: 'Match is missing teams' }
     }
 
     const [tournament] = await db
@@ -114,7 +123,7 @@ export async function PUT(
       .where(eq(tournaments.id, match.tournamentId));
 
     if (!tournament) {
-      return NextResponse.json({ error: 'Tournament not found' }, { status: 404 });
+      return { error: 'Tournament not found' }
     }
 
     // Check if match was already completed
@@ -184,9 +193,9 @@ export async function PUT(
           );
 
         if (dependentMatches.length > 0) {
-          return NextResponse.json({ 
+          return { 
             error: 'Cannot edit this match because subsequent matches have been played. Reset those matches first.' 
-          }, { status: 400 });
+          }
         }
 
         // Reset the subsequent match if needed
@@ -224,14 +233,13 @@ export async function PUT(
             .where(eq(teams.id, previousLoserId));
         }
       }
+
       const winnerId = team1Score > team2Score ? match.team1Id : 
         team2Score > team1Score ? match.team2Id : 
         null;
 
       if (!winnerId) {
-        return NextResponse.json({ 
-          error: 'Elimination matches cannot end in a draw' 
-      }, { status: 400 });
+        return { error: 'Elimination matches cannot end in a draw' }
       }
 
       await db
@@ -266,80 +274,104 @@ export async function PUT(
       }
     }
 
-    return NextResponse.json({ 
+    // Revalidate the tournament pages
+    revalidatePath(`/events/${tournamentSlug}/bracket`)
+    revalidatePath(`/events/${tournamentSlug}/bracket/admin`)
+
+    return { 
       success: true, 
       message: wasAlreadyCompleted ? 'Score updated' : 'Score reported',
       edited: wasAlreadyCompleted 
-    });
+    }
   } catch (error) {
     console.error('Error updating match:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return { error: 'Internal server error' }
   }
 }
 
-async function resetMatch(match: typeof matches.$inferSelect) {
-  // TODO: Toimiiks matsin resettaus OIKEESTI oikein?
-  // Muuttaako swiss standings jos tää tehää ekalle kierrokselle toisen tai kolmannen kierroksen aikana??
-  //   -> Jos joo, pitäiskö estää?
-
-  if (match.phase === 'swiss' && match.status === 'completed' && 
-      match.team1Score !== null && match.team2Score !== null &&
-      match.team1Id && match.team2Id) 
-  {
-    await SwissSystem.reverseSwissStandings(
-      match.id,
-      match.team1Score,
-      match.team2Score,
-      match.team1Id,
-      match.team2Id
-    );
+export async function resetMatchAction(tournamentSlug: string, matchId: number) {
+  // Verify admin authentication
+  const isAuthenticated = await verifyAuth();
+  if (!isAuthenticated) {
+    return { error: 'Unauthorized' }
   }
 
-  // Reset the match itself
-  await db
-    .update(matches)
-    .set({
-      team1Score: null,
-      team2Score: null,
-      winnerId: null,
-      status: 'pending',
-      updatedAt: new Date()
-    })
-    .where(eq(matches.id, match.id));
+  try {
+    const [match] = await db
+      .select()
+      .from(matches)
+      .where(eq(matches.id, matchId));
 
-  // If it's an elimination match, handle bracket consequences
-  if (match.phase === 'elimination' && match.winnerId) {
-    // Remove winner from next match
-    if (match.nextMatchId) {
-      const [nextMatch] = await db
-        .select()
-        .from(matches)
-        .where(eq(matches.id, match.nextMatchId));
+    if (!match) {
+      return { error: 'Match not found' }
+    }
 
-      if (nextMatch) {
-        if (nextMatch.team1Id === match.winnerId) {
-          await db
-            .update(matches)
-            .set({ team1Id: null })
-            .where(eq(matches.id, match.nextMatchId));
-        } else if (nextMatch.team2Id === match.winnerId) {
-          await db
-            .update(matches)
-            .set({ team2Id: null })
-            .where(eq(matches.id, match.nextMatchId));
+    if (match.phase === 'swiss' && match.status === 'completed' && 
+        match.team1Score !== null && match.team2Score !== null &&
+        match.team1Id && match.team2Id) 
+    {
+      await SwissSystem.reverseSwissStandings(
+        match.id,
+        match.team1Score,
+        match.team2Score,
+        match.team1Id,
+        match.team2Id
+      );
+    }
+
+    // Reset the match itself
+    await db
+      .update(matches)
+      .set({
+        team1Score: null,
+        team2Score: null,
+        winnerId: null,
+        status: 'pending',
+        updatedAt: new Date()
+      })
+      .where(eq(matches.id, match.id));
+
+    // If it's an elimination match, handle bracket consequences
+    if (match.phase === 'elimination' && match.winnerId) {
+      // Remove winner from next match
+      if (match.nextMatchId) {
+        const [nextMatch] = await db
+          .select()
+          .from(matches)
+          .where(eq(matches.id, match.nextMatchId));
+
+        if (nextMatch) {
+          if (nextMatch.team1Id === match.winnerId) {
+            await db
+              .update(matches)
+              .set({ team1Id: null })
+              .where(eq(matches.id, match.nextMatchId));
+          } else if (nextMatch.team2Id === match.winnerId) {
+            await db
+              .update(matches)
+              .set({ team2Id: null })
+              .where(eq(matches.id, match.nextMatchId));
+          }
         }
+      }
+
+      // Un-eliminate the loser
+      const loserId = match.team1Id === match.winnerId ? match.team2Id : match.team1Id;
+      if (loserId) {
+        await db
+          .update(teams)
+          .set({ eliminated: false })
+          .where(eq(teams.id, loserId));
       }
     }
 
-    // Un-eliminate the loser
-    const loserId = match.team1Id === match.winnerId ? match.team2Id : match.team1Id;
-    if (loserId) {
-      await db
-        .update(teams)
-        .set({ eliminated: false })
-        .where(eq(teams.id, loserId));
-    }
-  }
+    // Revalidate the tournament pages
+    revalidatePath(`/events/${tournamentSlug}/bracket`)
+    revalidatePath(`/events/${tournamentSlug}/bracket/admin`)
 
-  return NextResponse.json({ success: true, message: 'Match reset successfully' });
+    return { success: true, message: 'Match reset successfully' }
+  } catch (error) {
+    console.error('Error resetting match:', error);
+    return { error: 'Failed to reset match' }
+  }
 }

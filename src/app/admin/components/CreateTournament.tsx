@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { useTeamValidation } from '@/hooks/useTeamValidation';
+import { createTournamentAction } from '@/app/lib/actions/tournament-actions';
 
 interface CreateTournamentProps {
   onSuccess: () => void;
@@ -15,8 +16,9 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
   const [numberOfTeams, setNumberOfTeams] = useState(150);
   const [eliminationTeams, setEliminationTeams] = useState(32);
   const [teamsText, setTeamsText] = useState('');
-  const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [error, setError] = useState('');
+  const [isPending, startTransition] = useTransition();
 
   // Initialize team validation (no existing teams for new tournament)
   const { validateMultipleTeams, getDuplicatesInfo } = useTeamValidation([]);
@@ -46,9 +48,7 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const handleSubmit = async (formData: FormData) => {
     // Final validation before submit
     const teamNames = teamsText
       .split('\n')
@@ -60,73 +60,52 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
       const invalid = validation.filter(v => !v.isValid);
       
       if (invalid.length > 0) {
-        alert('Please fix team name errors before submitting');
+        setError('Please fix team name errors before submitting');
         return;
       }
     }
 
-    setLoading(true);
+    setError('');
+    
+    // Add teams to form data
+    formData.append('teams', teamsText);
 
-    try {
-      const isValidSlug = /^[a-z0-9-]+$/.test(slug);
-      if (!isValidSlug) {
-        alert("Invalid slug: only lowercase letters, digits, and hyphens allowed.");
-        return;
+    startTransition(async () => {
+      const result = await createTournamentAction(formData);
+      
+      if (result.error) {
+        setError(result.error);
+      } else {
+        onSuccess();
       }
-
-      // Create tournament
-      const tournamentRes = await fetch('/api/tournaments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          slug,
-          type,
-          swissRounds,
-          eliminationTeams,
-        }),
-      });
-
-      if (!tournamentRes.ok) {
-        throw new Error('Failed to create tournament');
-      }
-
-      const tournament = await tournamentRes.json();
-
-      // Add teams if provided
-      for (const teamName of teamNames) {
-        await fetch(`/api/tournaments/${tournament.slug}/teams`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: teamName }),
-        });
-      }
-
-      alert('Tournament created successfully!');
-      onSuccess();
-    } catch (error) {
-      alert('Error creating tournament: ' + (error instanceof Error ? error.message : 'Internal Server Error'));
-    } finally {
-      setLoading(false);
-    }
+    });
   };
 
   const duplicatesInfo = getDuplicatesInfo(teamsText.split('\n'));
 
   return (
     <div className="max-w-2xl">
-      <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
+      <form action={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
+        {/* Error display */}
+        {error && (
+          <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
+            {error}
+          </div>
+        )}
+
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Tournament Name
           </label>
           <input
             type="text"
+            name="name"
             value={name}
             onChange={(e) => handleNameChange(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
             placeholder="Beer Pong Battle Royale 2024"
             required
+            disabled={isPending}
           />
         </div>
 
@@ -136,12 +115,13 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
           </label>
           <input
             type="text"
+            name="slug"
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
             placeholder="beer-pong-2024"
-            // pattern="[a-z0-9-]+"
             required
+            disabled={isPending}
           />
           <p className="mt-1 text-sm text-gray-500">
             URL will be: /events/{slug}/bracket
@@ -153,9 +133,11 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
             Tournament Type
           </label>
           <select
+            name="type"
             value={type}
             onChange={(e) => setType(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            disabled={isPending}
           >
             <option value="swiss_elimination">Swiss + Elimination</option>
             <option value="single_elimination">Single Elimination Only (TODO)</option>
@@ -175,6 +157,7 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 min="2"
                 required
+                disabled={isPending}
               />
             </div>
             <div>
@@ -183,12 +166,14 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
               </label>
               <input
                 type="number"
+                name="swissRounds"
                 value={swissRounds}
                 onChange={(e) => setSwissRounds(parseInt(e.target.value))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 min="1"
                 max="20"
                 required
+                disabled={isPending}
               />
               <p className="mt-1 text-sm text-gray-500">
                 Recommended Swiss Rounds for {numberOfTeams} teams: {Math.ceil(Math.log2(numberOfTeams))}
@@ -201,9 +186,11 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
                 Teams Advancing to Elimination
               </label>
               <select
+                name="eliminationTeams"
                 value={eliminationTeams}
                 onChange={(e) => setEliminationTeams(parseInt(e.target.value))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                disabled={isPending}
               >
                 <option value="8">Top 8</option>
                 <option value="16">Top 16</option>
@@ -226,6 +213,7 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
             }`}
             rows={10}
             placeholder={`Team Alpha\nTeam Bravo\nTeam Charlie\n...`}
+            disabled={isPending}
           />
           
           {/* Team count info */}
@@ -266,16 +254,17 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
           <button
             type="button"
             onClick={() => window.history.back()}
-            className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+            className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 disabled:opacity-50"
+            disabled={isPending}
           >
             Cancel
           </button>
           <button
             type="submit"
-            disabled={loading || validationErrors.length > 0}
+            disabled={isPending || validationErrors.length > 0}
             className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Creating...' : 'Create Tournament'}
+            {isPending ? 'Creating...' : 'Create Tournament'}
           </button>
         </div>
       </form>

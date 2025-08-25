@@ -3,8 +3,9 @@
 import { Match } from '@/app/lib/db';
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useTransition } from 'react';
 import { toast } from 'sonner';
+import { fetchMatchesAction, updateMatchScoreAction, resetMatchAction } from '@/app/lib/actions/match-actions';
 
 export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
   const [matches, setMatches] = useState<Match[] | null>([]);
@@ -12,13 +13,13 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
   const [team1Score, setTeam1Score] = useState('');
   const [team2Score, setTeam2Score] = useState('');
   const [filter, setFilter] = useState('pending');
-  const [submitting, setSubmitting] = useState(false);
   const [loadingMatches, setLoadingMatches] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetchMatches();
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tournamentSlug, filter]);
 
@@ -35,49 +36,53 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
   
   const fetchMatches = async () => {
     setLoadingMatches(true);
+    setError('');
     try {
-      const res = await fetch(`/api/tournaments/${tournamentSlug}/matches?status=${filter}`);
-      if (res.status == 200) {
-        const data = await res.json();
-        setMatches(data);
+      const result = await fetchMatchesAction(tournamentSlug, filter);
+      if (result.error) {
+        setError(result.error);
+        setMatches([]);
+      } else {
+        setMatches(result.matches || []);
       }
     } catch (error) {
       console.error('Failed to fetch matches:', error);
+      setError('Failed to fetch matches');
+      setMatches([]);
     } finally {
       setLoadingMatches(false);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const handleSubmit = async (formData: FormData) => {
     if (!selectedMatch) {
-      alert('Please select a match');
+      setError('Please select a match');
       return;
     }
 
-    setSubmitting(true);
-    try {
-      const res = await fetch(`/api/tournaments/${tournamentSlug}/matches`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          matchId: selectedMatch.id,
-          team1Score: parseInt(team1Score),
-          team2Score: parseInt(team2Score)
-        }),
-        credentials: 'include'
-      });
+    setError('');
+    const team1ScoreValue = parseInt(formData.get('team1Score') as string);
+    const team2ScoreValue = parseInt(formData.get('team2Score') as string);
 
-      if (res.ok) {
+    startTransition(async () => {
+      const result = await updateMatchScoreAction(
+        tournamentSlug,
+        selectedMatch.id,
+        team1ScoreValue,
+        team2ScoreValue
+      );
+
+      if (result.error) {
+        setError(result.error);
+      } else {
         toast('Score Submitted', {
           description: (
             <>
               <span className="block text-gray-700">
-                {selectedMatch.team1?.name} <strong>{team1Score}</strong> – <strong>{team2Score}</strong> {selectedMatch.team2?.name}
+                {selectedMatch.team1?.name} <strong>{team1ScoreValue}</strong> – <strong>{team2ScoreValue}</strong> {selectedMatch.team2?.name}
               </span>
               <span className="text-xs text-green-600">
-                Winner: {parseInt(team1Score) < parseInt(team2Score) ?
+                Winner: {team1ScoreValue < team2ScoreValue ?
                   selectedMatch.team2?.name :
                   selectedMatch.team1?.name}
               </span>
@@ -88,17 +93,9 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
         setSelectedMatch(null);
         setTeam1Score('');
         setTeam2Score('');
-        fetchMatches();
-      } else {
-        const errorData = await res.json();
-        alert(`Error reporting score: ${errorData.message || 'Unknown error'}`);
+        await fetchMatches();
       }
-    } catch (error) {
-      console.error('Error submitting score:', error);
-      alert('Error reporting score');
-    } finally {
-      setSubmitting(false);
-    }
+    });
   };
 
   const handleReset = async () => {
@@ -108,26 +105,20 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
       return;
     }
 
-    const res = await fetch(`/api/tournaments/${tournamentSlug}/matches`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        matchId: selectedMatch.id,
-        action: 'reset'
-      }),
-      credentials: 'include'
+    setError('');
+    startTransition(async () => {
+      const result = await resetMatchAction(tournamentSlug, selectedMatch.id);
+      
+      if (result.error) {
+        setError(result.error);
+      } else {
+        toast('Match reset successfully!');
+        setSelectedMatch(null);
+        setTeam1Score('');
+        setTeam2Score('');
+        await fetchMatches();
+      }
     });
-
-    if (res.ok) {
-      toast('Match reset successfully!');
-      setSelectedMatch(null);
-      setTeam1Score('');
-      setTeam2Score('');
-      fetchMatches();
-    } else {
-      const error = await res.json();
-      alert('Error resetting match: ' + error.error);
-    }
   };
 
   if (!matches) {
@@ -142,6 +133,30 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
         Score Reporter – Admin
       </h1>
 
+      {/* Error display */}
+      {error && (
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
+          {error}
+        </div>
+      )}
+
+      {/* Links */}
+      <div className="my-10 flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+        <Link
+          href={`/events/${tournamentSlug}/bracket`}
+          className="flex items-center text-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+          target="_blank"
+        >
+          View Public Bracket <ExternalLink className="ml-2 w-4 h-4" />
+        </Link>
+        <Link
+          href={`/admin/tournaments/${tournamentSlug}`}
+          className="text-center bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition"
+        >
+          Back to Admin
+        </Link>
+      </div>
+      
       {/* Filter */}
       <div className="mb-6">
         <label className="block text-sm font-medium mb-2 text-gray-700">
@@ -151,6 +166,7 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           className="w-full md:w-64 p-2 border rounded-md"
+          disabled={isPending || loadingMatches}
         >
           <option value="pending">Not Played</option>
           <option value="completed">Completed</option>
@@ -173,6 +189,7 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full p-2 pr-10 border rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                disabled={isPending || loadingMatches}
               />
               {searchTerm && (
                 <button
@@ -206,10 +223,10 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
                 .map((match) => (
                   <div
                     key={match.id}
-                    onClick={() => setSelectedMatch(match)}
+                    onClick={() => !isPending && setSelectedMatch(match)}
                     className={`p-4 border rounded cursor-pointer hover:bg-gray-50 transition ${
                       selectedMatch?.id === match.id ? 'border-blue-500 bg-blue-50' : ''
-                    }`}
+                    } ${isPending ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <div className="font-semibold text-sm md:text-base">
                       {match.phase === 'swiss'
@@ -249,7 +266,7 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
 
           {selectedMatch ? (
             <form
-              onSubmit={handleSubmit}
+              action={handleSubmit}
               className="bg-gray-50 p-6 rounded-lg space-y-4"
             >
               <h3 className="font-medium text-sm text-gray-700">
@@ -264,6 +281,7 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
                 </label>
                 <input
                   type="number"
+                  name="team1Score"
                   value={team1Score}
                   onChange={(e) => setTeam1Score(e.target.value)}
                   className="w-full p-2 border rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -271,7 +289,7 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
                   max="10"
                   placeholder="Enter score"
                   required
-                  disabled={!selectedMatch.team1}
+                  disabled={!selectedMatch.team1 || isPending}
                 />
               </div>
 
@@ -281,6 +299,7 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
                 </label>
                 <input
                   type="number"
+                  name="team2Score"
                   value={team2Score}
                   onChange={(e) => setTeam2Score(e.target.value)}
                   className="w-full p-2 border rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -288,7 +307,7 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
                   max="10"
                   placeholder="Enter score"
                   required
-                  disabled={!selectedMatch.team2}
+                  disabled={!selectedMatch.team2 || isPending}
                 />
               </div>
 
@@ -305,9 +324,9 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
                     flex-1 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 cursor-pointer
                     disabled:cursor-not-allowed disabled:bg-gray-400
                   "
-                  disabled={submitting || !selectedMatch.team1 || !selectedMatch.team2}
+                  disabled={isPending || !selectedMatch.team1 || !selectedMatch.team2}
                 >
-                  {submitting
+                  {isPending
                     ? 'Submitting...'
                     : selectedMatch.status === 'completed'
                     ? 'Edit Score'
@@ -318,9 +337,10 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="flex-1 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+                    className="flex-1 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 disabled:opacity-50"
+                    disabled={isPending}
                   >
-                    Reset Match
+                    {isPending ? 'Resetting...' : 'Reset Match'}
                   </button>
                 )}
               </div>
@@ -332,23 +352,6 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
             </div>
           )}
         </div>
-      </div>
-
-      {/* Links */}
-      <div className="mt-10 flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-        <Link
-          href={`/events/${tournamentSlug}/bracket`}
-          className="flex items-center text-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-          target="_blank"
-        >
-          View Public Bracket <ExternalLink className="ml-2 w-4 h-4" />
-        </Link>
-        <Link
-          href={`/admin/tournaments/${tournamentSlug}`}
-          className="text-center bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition"
-        >
-          Back to Admin
-        </Link>
       </div>
     </div>
   );

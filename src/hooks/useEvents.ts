@@ -19,7 +19,7 @@ const events: Event[] = [
     subtitle: "Don't miss your chance to win!",
     coverText: "€2,500 Prize Pool",
     date: "September 14th, 2025",
-    time: "12:00 - 19:00",
+    time: "11:00 - 19:00",
     location: "Alvarinaukio, Otaniemi",
     image: "/abp_festarit_thumb.png",
     category: "Party / Festival",

@@ -69,7 +69,7 @@ export default function BeerPongBattleRoyale() {
         title="Beer Pong Battle Royale"
         description="Join Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool."
         image="/abp_festarit_full.JPG"
-        startDate="2025-09-14T12:00:00"
+        startDate="2025-09-14T11:00:00"
         endDate="2025-09-14T19:00:00"
         location="Alvarinaukio, Otaniemi"
         performers="Student Teams from across Finland"
