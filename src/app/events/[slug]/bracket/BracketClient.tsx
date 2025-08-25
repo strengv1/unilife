@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { SwissBracket } from '../components/SwissBracket';
 import { EliminationBracket } from '../components/EliminationBracket';
 import { TeamStandings } from '../components/TeamStandings';
@@ -28,6 +28,10 @@ export function BracketClient({
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
+  useEffect(() => {
+    setLastUpdated(new Date().toLocaleTimeString())
+  }, [])
+
   const refreshData = async () => {
     startTransition(async () => {
       try {
@@ -54,7 +58,7 @@ export function BracketClient({
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm sticky top-0 h-[56px] z-40">
+      <div className="bg-white shadow-sm sticky top-0 h-[76px] z-40">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <h1 className="text-lg md:text-2xl font-bold truncate mr-2">{tournament.name}</h1>
@@ -69,14 +73,16 @@ export function BracketClient({
               {isPending ? 'Updating' : 'Refresh'}
             </button>
           </div>
-          {lastUpdated && (
+          {lastUpdated && !isPending ?
             <p className="text-xs text-gray-500 mt-1">Updated: {lastUpdated}</p>
-          )}
+          :
+            <div className="text-xs text-gray-500 mt-1 flex items-center">Updated: <div className="w-12 h-4 bg-gray-200 rounded-full animate-pulse"></div></div>
+          }
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="bg-white border-b sticky top-[40px] md:top-[56px] z-30">
+      <div className="bg-white border-b sticky top-[76px] z-30">
         <div className="container mx-auto px-4">
           <div className="flex overflow-x-auto">
             <button

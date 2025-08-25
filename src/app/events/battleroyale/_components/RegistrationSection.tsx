@@ -23,16 +23,13 @@ export const RegistrationSection = () => {
               <h3 className="text-2xl font-bold">Registration Details</h3>
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>€40 per team (2 players)</span>
+                  - <span>€40 per team (2 players)</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Limited to 150 teams - first come, first served</span>
+                  - <span>Limited to 150 teams - first come, first served</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Ticket sales close 24 hours before the event! (13.09. 12:00)</span>
+                  - <span>Ticket sales close 24 hours before the event! (13.09. 12:00)</span>
                 </li>
               </ul>
               

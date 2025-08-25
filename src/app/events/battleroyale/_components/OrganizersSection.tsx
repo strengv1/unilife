@@ -21,7 +21,7 @@ export const OrganizersSection = () => {
                 style={{ maxWidth: '100%' }}
               />
             </div>
-            <h3 className="mt-4 md:mt-6 text-2xl font-bold">UNI LIFE</h3>
+            {/* <h3 className="mt-4 md:mt-6 text-2xl font-bold">UNI LIFE</h3> */}
             <p className="mt-3 max-w-md text-lg text-balance text-muted-foreground">
               Professionally organized student events that are unlike anything you&apos;ve seen before.
               <br /><br />
@@ -46,7 +46,7 @@ export const OrganizersSection = () => {
                 />
               </Link>
             </div>
-            <h3 className="mt-4 md:mt-6 text-2xl font-bold">Aalto Beer Pong</h3>
+            {/* <h3 className="mt-4 md:mt-6 text-2xl font-bold">Aalto Beer Pong</h3> */}
             <p className="mt-3 max-w-md text-lg text-muted-foreground">
               The original beer pong organization from Aalto University.
               <br /><br />

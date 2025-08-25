@@ -43,48 +43,59 @@ export function TournamentList({ tournaments, onRefresh, isLoading }: Tournament
       <ul className="divide-y divide-gray-200">
         {tournaments.map((tournament) => (
           <li key={tournament.id}>
-            <div className="px-4 py-4 sm:px-6">
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <h3 className="text-lg font-medium text-gray-900">
-                    {tournament.name}
-                  </h3>
-                  <p className="text-sm text-gray-500">
-                    Type: {tournament.type.replace('_', ' + ')} | Status: {tournament.status}
-                  </p>
-                  <p className="text-xs text-gray-400 mt-1">
-                    {
-                      tournament.createdAt &&
-                        `Created: ${new Date(tournament.createdAt).toLocaleDateString()}`
-                    }
-                  </p>
+            <div className="px-3 py-4 sm:px-6">
+              {/* Tournament Info */}
+              <div className="mb-4">
+                <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-1">
+                  {tournament.name}
+                </h3>
+                <div className="text-sm text-gray-500 space-y-1">
+                  <p>Type: {tournament.type.replace('_', ' + ')} | Status: {tournament.status}</p>
+                  {tournament.createdAt && (
+                    <p className="text-xs text-gray-400">
+                      Created: {new Date(tournament.createdAt).toLocaleDateString()}
+                    </p>
+                  )}
                 </div>
-                <div className="flex space-x-2">
-                  <Link
+              </div>
+
+              {/* Mobile-First Button Layout */}
+              <div className="space-y-2 sm:space-y-0 sm:flex sm:flex-wrap sm:gap-2">
+                {/* Primary Actions - Full width on mobile */}
+                <div className="flex flex-col sm:flex-row gap-2 sm:flex-1">
+                  <a
                     href={`/events/${tournament.slug}/bracket`}
-                    className="flex items-center px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+                    className="flex items-center justify-center px-3 py-2 text-sm bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    View Bracket <ExternalLink className="ml-2 w-4 h-4" />
-                  </Link>
-                  <Link
+                    View Bracket 
+                    <ExternalLink className="ml-2 w-4 h-4 flex-shrink-0" />
+                  </a>
+                  
+                  <a
                     href={`/events/${tournament.slug}/bracket/admin`}
-                    className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+                    className="flex items-center justify-center px-3 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
                   >
                     Score Reporter
-                  </Link>
-                  <Link
+                  </a>
+                </div>
+
+                {/* Secondary Actions */}
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <a
                     href={`/admin/tournaments/${tournament.slug}`}
-                    className="px-3 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600"
+                    className="flex items-center justify-center px-3 py-2 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
                   >
                     Manage
-                  </Link>
+                  </a>
+                  
                   {tournament.status === 'registration' && (
                     <button
                       onClick={() => handleStartTournament(tournament.slug)}
                       disabled={isPending}
-                      className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600
-                        cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex items-center justify-center px-3 py-2 text-sm bg-yellow-500 text-white rounded-md
+                      hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
                     >
                       {isPending ? 'Starting...' : 'Start Tournament'}
                     </button>
@@ -95,9 +106,11 @@ export function TournamentList({ tournaments, onRefresh, isLoading }: Tournament
           </li>
         ))}
       </ul>
+      
       {tournaments.length === 0 && (
         <div className="text-center py-12 text-gray-500">
-          No tournaments yet. Create one to get started!
+          <p className="text-base">No tournaments yet.</p>
+          <p className="text-sm mt-1">Create one to get started!</p>
         </div>
       )}
     </div>
