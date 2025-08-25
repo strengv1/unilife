@@ -6,9 +6,10 @@ import { CheckCircle } from "lucide-react"
 import Link from "next/link"
 
 export const RegistrationSection = () => {
+  const emojiClasses = "text-xl"
   return (
     <section id="registration" className="bg-red-600 py-10 md:py-16 text-white">
-      <div className="container mx-auto max-w-6xl px-4">
+      <div className="container mx-auto max-w-6xl px-2 xs:px-4">
         <div className="mx-auto text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Register Your Team</h2>
           <p className="mt-4 md:mt-6 text-lg text-red-100">
@@ -18,7 +19,7 @@ export const RegistrationSection = () => {
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           <Card className="bg-white shadow-lg">
-            <CardContent className="pt-4 md:pt-8 pb-6 px-6">
+            <CardContent className="pt-4 md:pt-8 pb-6 px-4 xs:px-6">
               <h3 className="text-2xl font-bold">Registration Details</h3>
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
@@ -49,24 +50,23 @@ export const RegistrationSection = () => {
             </CardContent>
           </Card>
           <Card className="bg-white shadow-lg">
-            <CardContent className="pt-4 md:pt-8 pb-6 px-6">
+            <CardContent className="pt-4 md:pt-8 pb-6 px-4 xs:px-6">
               <h3 className="text-2xl font-bold">What&apos;s Included</h3>
-              <ul className="mt-6 space-y-4">
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Sponsor package (drinks provided by our sponsors)</span>
+              <ul className="mt-6 space-y-3">
+                <li className="flex items-center gap-3">
+                  <span className={emojiClasses} >🎯</span> Tournament entry for both players
                 </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Exclusive Beer Pong Battle Royale patch</span>
+                <li className="flex items-center gap-3">
+                  <span className={emojiClasses} >🍻</span> 2x Beers
                 </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Afterparty at OK20 with sauna, music and casual beer pong</span>
+                <li className="flex items-center gap-3">
+                  <span className={emojiClasses} >⚡</span> 2x Red Bulls
                 </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-red-600" />
-                  <span>Guaranteed good time with friends, old and new!</span>
+                <li className="flex items-center gap-3">
+                  <span className={emojiClasses} >🏆</span> 2x Beer Pong Battle Royale Patches
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className={emojiClasses} >🔥</span> OK20 Sauna afterparty with music and casual Beer Pong
                 </li>
               </ul>
               {/* <div className="mt-8 rounded-md bg-red-50 p-6 text-red-800">

@@ -139,7 +139,7 @@ export default function TournamentStructure() {
   return (
     <div className="mx-auto">
       {/* Header */}
-      <div className="mb-4 lg:mb-6">
+      <div className="mx-2 xs:mx-0 mb-4 lg:mb-6">
         <h2 className="text-xl lg:text-3xl font-bold text-gray-900 mb-2">Tournament consists of <u>two phases</u>:</h2>
         <p className="text-md lg:text-xl text-gray-600">
           <strong>Swiss preliminaries</strong> followed by <strong>single-elimination playoffs</strong>

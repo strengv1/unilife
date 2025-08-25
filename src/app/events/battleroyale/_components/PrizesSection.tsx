@@ -1,56 +1,80 @@
-import { Card, CardContent } from "@/components/ui/card"
+import { Award, Crown, Trophy } from "lucide-react";
 
-export const PrizesSection = () => {
-
-  const commonCardClass = "border-2 py-2 md:py-4 shadow-md"
-  const commonCardContentClass = "px-4 text-center flex flex-col h-full justify-between"
-  const commonCardHeaderClass = "text:xl md:text-2xl font-bold"
-  const commonCardDivClass = "my-6 text-3xl md:text-5xl font-bold"
+export default function PrizePodium() {
   return (
-    <section id="prizes" className="py-10 md:py-16">
+    <section className="py-10 md:py-16">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="flex flex-col mx-auto max-w-4xl text-center items-center justify-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Massive Prize Pool</h2>
-          
-          <p className="mt-4 md:mt-6 text-3xl">Total of €2,500</p>
+        {/* Header */}
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-3xl mb-2 font-bold tracking-tight sm:text-4xl md:text-5xl">
+            Massive Prize Pool
+          </h2>
+          <div className="text-xl md:text-2xl text-gray-700 font-medium">
+            Total of €2,500
+          </div>
         </div>
 
-        <div className="mt-4 md:mt-6 grid gap-2 md:gap-8 grid-cols-2 max-w-4xl mx-auto">
-          <Card className="border-2 col-span-full border-yellow-500 bg-gradient-to-b from-yellow-50 to-white shadow-lg">
-            <CardContent className={`${commonCardContentClass}`}>
-              <h3 className="text-2xl font-bold">1st Place</h3>
-              <div className="my-6 text-5xl font-bold text-yellow-600">€600</div>
-              <p className="text-muted-foreground">
-                Your very own <strong>Beer Pong table</strong>, a Championship trophy, and the title of Beer Pong Battle Royale Champions
-              </p>
-            </CardContent>
-          </Card>
-          <Card className={`${commonCardClass} border-slate-400 bg-gradient-to-b from-slate-50 to-white`} >
-            <CardContent className={`${commonCardContentClass}`}>
-              <h3 className={`${commonCardHeaderClass}`}>2nd Place</h3>
-              <div className={`${commonCardDivClass} text-slate-600`}>€400</div>
-            </CardContent>
-          </Card>
-          <Card className={`${commonCardClass} border-amber-700 bg-gradient-to-b from-amber-50 to-white`}>
-            <CardContent className={`${commonCardContentClass}`}>
-              <h3 className={`${commonCardHeaderClass}`}>3rd-4th Place</h3>
-              <div className={`${commonCardDivClass} text-amber-700`}>€250</div>
-            </CardContent>
-          </Card>
-          <Card className={commonCardClass}>
-            <CardContent className={`${commonCardContentClass}`}>
-              <h3 className={`${commonCardHeaderClass}`}>5th-8th Place</h3>
-              <div className={`${commonCardDivClass} text-amber-800`}>€150</div>
-            </CardContent>
-          </Card>
-          <Card className={commonCardClass}>
-            <CardContent className={`${commonCardContentClass}`}>
-              <h3 className={`${commonCardHeaderClass}`}>9th-16th Place</h3>
-              <div className={`${commonCardDivClass} text-amber-800`}>€50</div>
-            </CardContent>
-          </Card>
+        {/* Podium */}
+        <div className="relative flex items-end justify-center gap-1 xs:gap-4 md:gap-12 mb-12 md:mb-20">
+          
+          {/* 2nd Place */}
+          <div className="text-center">
+            <div className="mb-6">
+              <Trophy className="w-8 xs:w-12 md:w-16 h-12 md:h-16 text-slate-500 mx-auto mb-3" />
+              <div className="text-lg xs:text-2xl md:text-4xl font-bold text-gray-900 mb-1">€400</div>
+              <div className="text-sm sm:text-base text-slate-600 font-medium">2nd Place</div>
+            </div>
+            <div className="w-18 xs:w-24 md:w-32 h-22 md:h-28 bg-slate-400 mx-auto"></div>
+          </div>
+
+          {/* 1st Place */}
+          <div className="text-center">
+            <div className="mb-8">
+              <Crown className="w-12 xs:w-16 md:w-20 h-16 md:h-20 text-yellow-500 mx-auto mb-4" />
+              <div className="text-xl xs:text-3xl md:text-5xl font-bold text-gray-900 mb-2">€600</div>
+              <div className="text-yellow-600 font-semibold text-base sm:text-lg">1st Place</div>
+              <div className="text-xs xs:text-sm text-gray-600 mt-1">+ Beer Pong Table</div>
+              <div className="text-xs xs:text-sm text-gray-600 mt-1"><span className="text-nowrap">+ Championship</span> Trophy</div>
+            </div>
+            <div className="w-20 xs:w-28 md:w-36 h-36 md:h-42 bg-yellow-400 mx-auto"></div>
+          </div>
+
+          {/* 3rd-4th Place */}
+          <div className="text-center">
+            <div className="mb-6">
+              <Award className="w-8 xs:w-12 md:w-16 h-12 md:h-16 text-amber-600 mx-auto mb-3" />
+              <div className="text-lg xs:text-2xl md:text-4xl font-bold text-gray-900 mb-1">€250</div>
+              <div className="text-sm sm:text-base text-amber-700 font-medium">3rd-4th Place</div>
+            </div>
+            <div className="w-18 xs:w-24 md:w-32 h-16 md:h-20 bg-amber-500 mx-auto"></div>
+          </div>
+        </div>
+
+        {/* Additional Prizes */}
+        <div className="max-w-2xl mx-auto space-y-4">
+          {/* 5th–8th Place */}
+          <div className="flex items-center bg-orange-50 rounded-lg p-4 border-l-4 border-orange-400">
+            <div className="flex-shrink-0 w-10 xs:w-12 h-10 xs:h-12 bg-orange-400/85 rounded-lg flex items-center justify-center mr-2 xs:mr-4">
+              <span className="text-white font-bold text-sm">5-8</span>
+            </div>
+            <div className="flex-grow">
+              <div className="xs:text-lg xs:font-semibold text-gray-900 mr-2 xs:mr-4">5th-8th Place</div>
+            </div>
+            <div className="text-lg xs:text-2xl font-bold text-gray-900">€150</div>
+          </div>
+
+          {/* 9th–16th Place */}
+          <div className="flex items-center bg-slate-100 rounded-lg p-4 border-l-4 border-slate-400">
+            <div className="flex-shrink-0 w-10 xs:w-12 h-10 xs:h-12 bg-slate-400/85 rounded-lg flex items-center justify-center mr-2 xs:mr-4">
+              <span className="text-white font-bold text-xs">9-16</span>
+            </div>
+            <div className="flex-grow">
+              <div className="xs:text-lg xs:font-semibold text-gray-900 mr-2 xs:mr-4">9th-16th Place</div>
+            </div>
+            <div className="text-lg xs:text-2xl font-bold text-gray-900">€50</div>
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

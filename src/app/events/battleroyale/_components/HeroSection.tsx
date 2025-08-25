@@ -50,7 +50,9 @@ export const HeroSection = () => {
             </div>
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-6 mt-10 mx-10">
               <Button asChild size="lg" className="bg-red-600 hover:bg-red-700">
-                <Link href="#registration">Register Your Team</Link>
+                <Link href="https://kide.app/events/be966048-0eb5-464e-a389-fd7caae8d4dd" target="_blank" rel="noopener noreferrer">
+                  Register Your Team
+                </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white text-white bg-transparent">
                 <Link href="#tournament">Tournament Details</Link>

@@ -76,9 +76,10 @@ const TournamentSchedule: React.FC = () => {
 
   return (
     <>
-      <h3 className="text-2xl font-bold mb-2">Event Schedule</h3>
-      <p className="text-gray-600 mb-8">Tournament timeline from check-in to championship finals</p>
-      
+      <div className="mx-2 xs:mx-0 ">
+        <h3 className="text-2xl font-bold mb-2">Event Schedule</h3>
+        <p className="text-gray-600 mb-8">Tournament timeline from check-in to championship finals</p>
+      </div>
       <div className="relative">
         {/* Timeline line */}
         <div className="absolute left-2 sm:left-7 top-5 bottom-5 w-0.5 bg-gradient-to-b from-blue-200 via-blue-600 via-10% to-red-500 rounded-full"></div>

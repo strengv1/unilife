@@ -4,7 +4,7 @@ import { CTASection } from "./_components/CTASection";
 import { FAQSection } from "./_components/FAQSection";
 import { HeroSection } from "./_components/HeroSection";
 import { OrganizersSection } from "./_components/OrganizersSection";
-import { PrizesSection } from "./_components/PrizesSection";
+import PrizePodium from "./_components/PrizesSection";
 import { RegistrationSection } from "./_components/RegistrationSection";
 import { TournamentSection } from "./_components/TournamentSection";
 import { Footer } from "@/components/footer";
@@ -91,7 +91,7 @@ export default function BeerPongBattleRoyale() {
 
         <HeroSection />
         <AboutSection />
-        <PrizesSection />
+        <PrizePodium />
         <RegistrationSection />
         <TournamentSection />
         <OrganizersSection />
