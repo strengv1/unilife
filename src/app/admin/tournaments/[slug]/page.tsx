@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { TournamentManageClient } from './TournamentManageClient';
 import { 
@@ -12,6 +11,25 @@ interface TournamentManagePageProps {
   }>;
 }
 
+function TournamentNotFound (){
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-8 max-w-screen-lg">
+        <div className="mb-6">
+          <Link href="/admin" className="text-blue-500 hover:underline">
+            ← Back to Admin
+          </Link>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6 text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">Tournament Not Found</h1>
+          <p className="mb-4">The tournament you&apos;re looking for doesn&apos;t exist or has been removed.</p>
+          <Link href="/admin" className="text-blue-600 hover:underline">Go back to Admin</Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default async function TournamentManagePage({ params }: TournamentManagePageProps) {
   const { slug } = await params;
   
@@ -22,11 +40,10 @@ export default async function TournamentManagePage({ params }: TournamentManageP
     ]);
 
     // Handle tournament result
-    if (tournamentResult.error || !tournamentResult.tournament) {
-      if (tournamentResult.error === 'Tournament not found') {
-        notFound();
-      }
-      throw new Error(tournamentResult.error || 'Tournament not found');
+    if (tournamentResult.error === 'Tournament not found' || !tournamentResult.tournament) {
+      return (
+        <TournamentNotFound />
+      );
     }
 
     // Handle teams result
@@ -67,23 +84,4 @@ export default async function TournamentManagePage({ params }: TournamentManageP
       </div>
     );
   }
-}
-
-export function NotFound() {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8 max-w-screen-lg">
-        <div className="mb-6">
-          <Link href="/admin" className="text-blue-500 hover:underline">
-            ← Back to Admin
-          </Link>
-        </div>
-        <div className="bg-white rounded-lg shadow p-6 text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Tournament Not Found</h1>
-          <p className="mb-4">The tournament you&apos;re looking for doesn&apos;t exist or has been removed.</p>
-          <Link href="/admin" className="text-blue-600 hover:underline">Go back to Admin</Link>
-        </div>
-      </div>
-    </div>
-  );
 }

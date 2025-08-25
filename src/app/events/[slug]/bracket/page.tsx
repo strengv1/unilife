@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { BracketClient } from './BracketClient';
 import { 
@@ -12,6 +11,15 @@ interface BracketPageProps {
     slug: string;
   }>;
 }
+function TournamentNotFound() {
+  return (
+    <div className="container mx-auto px-4 py-8 text-center">
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">Tournament Not Found</h1>
+      <p className="mb-4">The tournament you&apos;re looking for doesn&apos;t exist or has been removed.</p>
+      <Link href="/" className="text-blue-600 hover:underline">Go back home</Link>
+    </div>
+  );
+}
 
 export default async function BracketPage({ params }: BracketPageProps) {
   const { slug } = await params;
@@ -24,13 +32,11 @@ export default async function BracketPage({ params }: BracketPageProps) {
     ]);
 
     // Handle tournament result
-    if (tournamentResult.error || !tournamentResult.tournament) {
-      if (tournamentResult.error === 'Tournament not found') {
-        notFound();
-      }
-      throw new Error(tournamentResult.error || 'Tournament not found');
+    if (tournamentResult.error === 'Tournament not found' || !tournamentResult.tournament) {
+      return (
+        <TournamentNotFound />
+      );
     }
-
     // Handle other errors
     if (standingsResult.error) {
       throw new Error(standingsResult.error);
@@ -64,15 +70,4 @@ export default async function BracketPage({ params }: BracketPageProps) {
       </div>
     );
   }
-}
-
-// Create a not-found.tsx file in the same directory
-export function NotFound() {
-  return (
-    <div className="container mx-auto px-4 py-8 text-center">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Tournament Not Found</h1>
-      <p className="mb-4">The tournament you&apos;re looking for doesn&apos;t exist or has been removed.</p>
-      <Link href="/" className="text-blue-600 hover:underline">Go back home</Link>
-    </div>
-  );
 }
