@@ -2,7 +2,6 @@
 
 import { Tournament } from '@/app/lib/db';
 import { ExternalLink } from 'lucide-react';
-import Link from 'next/link';
 import { useTransition } from 'react';
 import { startTournamentAction } from '@/app/lib/actions/tournament-actions';
 
