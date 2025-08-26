@@ -71,7 +71,7 @@ export const FAQSection = () => {
             Frequently Asked Questions
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Everything you need to know about the Beer Pong Battle Royale.
+            Everything you need to know about the upcoming Beer Pong Battle Royale.
           </p>
         </div>
 

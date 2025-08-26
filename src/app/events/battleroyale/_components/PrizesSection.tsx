@@ -5,7 +5,7 @@ export default function PrizePodium() {
     <section className="py-10 md:py-16">
       <div className="container mx-auto max-w-6xl px-4">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
+        <div className="text-center mb-4 md:mb-6">
           <h2 className="text-3xl mb-2 font-bold tracking-tight sm:text-4xl md:text-5xl">
             Massive Prize Pool
           </h2>
