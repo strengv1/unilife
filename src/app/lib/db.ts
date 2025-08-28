@@ -30,7 +30,7 @@ export { db };
 // Export types for use in your application
 export type Tournament = typeof schema.tournaments.$inferSelect;
 export type Team = typeof schema.teams.$inferSelect;
-export type Match = typeof schema.matches.$inferSelect& {
+export type Match = typeof schema.matches.$inferSelect & {
   team1: Team | null;
   team2: Team | null;
   winner: Team | null;

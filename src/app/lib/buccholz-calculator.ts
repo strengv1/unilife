@@ -1,5 +1,5 @@
 import { and, eq, ne } from 'drizzle-orm';
-import { db, Team, TeamWithBuchholz } from './db';
+import { db, Match, Team, TeamWithBuchholz } from './db';
 import { matches, teams } from './schema';
 
 interface OpponentRecord {
@@ -26,7 +26,7 @@ interface DetailedBuchholzResult {
 
 export class BuchholzCalculator {
   private static teamOpponentsCache = new Map<string, OpponentRecord[]>();
-  private static matchesCache = new Map<number, any[]>();
+  private static matchesCache = new Map<number, Match[]>();
   
   /**
    * Clear all caches - call this when matches are updated
@@ -49,7 +49,12 @@ export class BuchholzCalculator {
         eq(matches.tournamentId, tournamentId),
         eq(matches.phase, 'swiss'),
         ne(matches.status, 'pending')
-      )
+      ),
+      with: {
+        team1: true,
+        team2: true,
+        winner: true
+      }
     });
     
     this.matchesCache.set(tournamentId, allMatches);
