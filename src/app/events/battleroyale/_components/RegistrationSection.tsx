@@ -12,7 +12,7 @@ export const RegistrationSection = () => {
         <div className="mx-auto text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Register Your Team</h2>
           <p className="mt-4 md:mt-6 text-lg text-red-100">
-            Secure your spot in Finland&apos;s biggest beer pong tournament before all slots are filled!
+            Secure your spot in Finland&apos;s largest beer pong tournament before all slots are filled!
           </p>
         </div>
 

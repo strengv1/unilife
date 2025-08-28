@@ -7,7 +7,7 @@ export const CTASection = () => {
       <div className="container mx-auto max-w-6xl px-4 text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Ready to Become a Champion?</h2>
         <p className="mt-4 md:mt-6 mx-auto max-w-xl text-lg text-red-100">
-          Don&apos;t miss your chance to compete in Finland&apos;s biggest beer pong tournament and win amazing prizes!
+          Don&apos;t miss your chance to compete in Finland&apos;s largest beer pong tournament and win amazing prizes!
         </p>
         <Button
           asChild

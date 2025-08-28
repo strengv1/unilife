@@ -64,7 +64,23 @@ export function Footer() {
                 </svg>
                 <span className="sr-only">Instagram</span>
               </Link>
-
+              
+              <Link
+                href="https://www.tiktok.com/@unilife.fi?_t=ZN-8zEJpqstao2&_r=1"
+                target="_blank"
+                className="text-muted-foreground hover:text-red-500 transition-colors"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="40" 
+                  height="40"
+                  viewBox="0 0 24 24" 
+                  fill="currentColor"
+                >
+                  <path d="M19.321 5.562a5.124 5.124 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.849-1.289-1.99-1.289-3.338h-3.67v11.866a2.717 2.717 0 1 1-1.945-2.618V6.842a6.204 6.204 0 0 0-.87-.063 6.233 6.233 0 1 0 6.233 6.234V8.987a9.638 9.638 0 0 0 3.121.516z"/>
+                </svg>
+                <span className="sr-only">Tiktok</span>
+              </Link>
             </div>
             <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} UNI LIFE. All rights reserved.</p>
           </div>

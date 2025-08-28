@@ -14,7 +14,7 @@ import { SimpleParnersSection } from "./_components/SimplePartnerSection";
 
 export const metadata = {
   title: "Beer Pong Battle Royale 2025",
-  description: "Join Finland's biggest Beer Pong tournament at Alvarinaukio, Otaniemi on September 14th, 2025. 150 teams compete for a €2,500 prize pool. Register now!",
+  description: "Join Finland's largest Beer Pong tournament at Alvarinaukio, Otaniemi on September 14th, 2025. 150 teams compete for a €2,500 prize pool. Register now!",
   keywords: [
     "beer pong finland",
     "beer pong suomi",
@@ -36,7 +36,7 @@ export const metadata = {
   ],
   openGraph: {
     title: "Beer Pong Battle Royale 2025",
-    description: "Join Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool",
+    description: "Join Finland's largest Beer Pong tournament with 150 teams competing for a €2,500 prize pool",
     images: [
       {
         url: "https://unilife.fi/abp_festarit_full.JPG",
@@ -52,7 +52,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Beer Pong Battle Royale 2025 | UNI LIFE Finland",
-    description: "Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool",
+    description: "Finland's largest Beer Pong tournament with 150 teams competing for a €2,500 prize pool",
     images: ["https://unilife.fi/abp_festarit_full.JPG"]
   },
   alternates: {
@@ -67,7 +67,7 @@ export default function BeerPongBattleRoyale() {
       {/* Add comprehensive Event schema */}
       <EventSchema
         title="Beer Pong Battle Royale"
-        description="Join Finland's biggest Beer Pong tournament with 150 teams competing for a €2,500 prize pool."
+        description="Join Finland's largest Beer Pong tournament with 150 teams competing for a €2,500 prize pool."
         image="/abp_festarit_full.JPG"
         startDate="2025-09-14T11:00:00"
         endDate="2025-09-14T19:00:00"
