@@ -137,7 +137,6 @@ export async function updateMatchScoreAction(
       if (wasAlreadyCompleted && isScoreChanging) {
         // Reverse the old scores
         await SwissSystem.reverseSwissStandings(
-          matchId, 
           match.team1Score!, 
           match.team2Score!,
           match.team1Id,
@@ -311,7 +310,6 @@ export async function resetMatchAction(tournamentSlug: string, matchId: number) 
         match.team1Id && match.team2Id) 
     {
       await SwissSystem.reverseSwissStandings(
-        match.id,
         match.team1Score,
         match.team2Score,
         match.team1Id,

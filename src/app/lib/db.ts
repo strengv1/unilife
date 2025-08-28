@@ -40,6 +40,9 @@ export type TeamWithBuchholz = Team & {
   buchholzScore?: number;
   opponentsBuchholzScore?: number;
 }
+export type StandingWithPosition = TeamWithBuchholz & {
+  position: number;
+}
 
 // Export insert types for creating new records
 export type NewTournament = typeof schema.tournaments.$inferInsert;

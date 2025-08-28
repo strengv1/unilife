@@ -4,7 +4,7 @@ import { useEffect, useState, useTransition } from 'react';
 import { SwissBracket } from '../components/SwissBracket';
 import { EliminationBracket } from '../components/EliminationBracket';
 import { TeamStandings } from '../components/TeamStandings';
-import { Match, TeamWithBuchholz, Tournament } from '@/app/lib/db';
+import { Match, StandingWithPosition, Tournament } from '@/app/lib/db';
 import { 
   getStandingsAction,
   fetchMatchesAction 
@@ -12,7 +12,7 @@ import {
 
 interface BracketClientProps {
   tournament: Tournament;
-  standings: TeamWithBuchholz[];
+  standings: StandingWithPosition[];
   matches: Match[];
 }
 
@@ -21,7 +21,7 @@ export function BracketClient({
   standings: initialStandings, 
   matches: initialMatches 
 }: BracketClientProps) {
-  const [tournament] = useState(initialTournament); // Tournament rarely changes
+  const [tournament] = useState(initialTournament);
   const [standings, setStandings] = useState(initialStandings);
   const [matches, setMatches] = useState(initialMatches);
   const [activeTab, setActiveTab] = useState('standings');

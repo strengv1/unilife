@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from "react";
-import { TeamWithBuchholz } from "@/app/lib/db";
-import { ChevronDown } from "lucide-react";
+import { StandingWithPosition } from "@/app/lib/db";
+import { ChevronDown, Search, X } from "lucide-react";
 import TeamRowMobile from "./TeamStandingsMobileRow";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 interface TeamStandingsProps {
-  standings: TeamWithBuchholz[];
+  standings: StandingWithPosition[];
   showElimination?: boolean;
 }
 
@@ -15,6 +17,12 @@ export function TeamStandings({
   showElimination = false
 }: TeamStandingsProps) {
   const [showBuchholzInfo, setShowBuchholzInfo] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const params = useParams();
+  const tournamentSlug = params.slug as string;
+  
+  const clearSearch = () => setSearchTerm("")
 
   const sortedTeams = [...standings].sort((a, b) => {
     // 1. Swiss Points
@@ -33,6 +41,8 @@ export function TeamStandings({
     // 4. Opponents' Buchholz Score
     return (b.opponentsBuchholzScore || 0) - (a.opponentsBuchholzScore || 0);
   });
+
+  const filteredTeams = sortedTeams.filter((team) => team.name.toLowerCase().startsWith(searchTerm.toLowerCase().trim()))
 
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -54,19 +64,60 @@ export function TeamStandings({
 
       {/* Buchholz Explanation */}
       {showBuchholzInfo && (
-        <div className="bg-blue-50 border-b border-blue-200 p-4">
-          <h4 className="font-medium text-blue-900 mb-2">Tie-Breaking System</h4>
-          <ol className="text-sm text-blue-800 space-y-1">
-            <li>1. <strong>Swiss Points:</strong> 3 for win, 1 for draw, 0 for loss</li>
-            <li>2. <strong>Goal Difference:</strong> Cups scored minus cups conceded</li>
-            <li>3. <strong>Median-Buchholz (MB):</strong> Sum of opponents&apos; Swiss points (excluding best and worst)</li>
-            <li>4. <strong>Opponents&apos; Buchholz (OMB):</strong> Sum of opponents&apos; MB scores</li>
-          </ol>
+        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+          <div className="text-sm text-gray-700 space-y-2">
+            <p>Teams are ranked using the following tie-breaking system:</p>
+            <ol className="list-decimal list-inside space-y-1 ml-4">
+              <li><strong>Swiss Points:</strong> 3 for win, 1 for draw, 0 for loss</li>
+              <li><strong>Cup Difference:</strong> Cups scored minus cups conceded</li>
+              <li><strong>Median-Buchholz (MB):</strong> Sum of opponents&apos; Swiss points (excluding best and worst if 3+ opponents)</li>
+              <li><strong>Opponents&apos; Buchholz (OMB):</strong> Sum of opponents&apos; MB scores</li>
+            </ol>
+            <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+              <p className="text-xs text-gray-600">
+                <strong>Note:</strong> Median-Buchholz helps differentiate between teams with the same points by considering the strength of their opponents. 
+                A higher MB score indicates you played against stronger opponents overall.
+              </p>
+            </div>
+          </div>
         </div>
       )}
-
+      
+      {/* Search Input */}
+      <div className="p-4 border-b bg-gray-50">
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Search className="h-4 w-4 text-gray-400" />
+          </div>
+          <input
+            type="text"
+            placeholder="Search teams by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md 
+              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+              text-sm"
+          />
+          {searchTerm && (
+            <button
+              onClick={clearSearch}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-gray-600"
+            >
+              <X className="h-4 w-4 text-gray-400" />
+            </button>
+          )}
+        </div>
+        
+        {/* Search Results Info */}
+        {searchTerm.trim() && (
+          <div className="mt-2 text-xs text-gray-600">
+            Showing {filteredTeams.length} of {filteredTeams.length} teams
+          </div>
+        )}
+      </div>
+      
       {/* Mobile View */}
-      <TeamRowMobile sortedTeams={sortedTeams} showElimination={showElimination} />
+      <TeamRowMobile sortedTeams={filteredTeams} showElimination={showElimination} />
 
       {/* Desktop View */}
       <div className="hidden md:block overflow-x-auto">
@@ -86,15 +137,22 @@ export function TeamStandings({
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {sortedTeams.map((team, index) => {
+            {filteredTeams.map((team) => {
               const pointDiff = (team.swissGamePointsFor || 0) - (team.swissGamePointsAgainst || 0);
               return (
                 <tr 
                   key={team.id} 
                   className={team.qualifiedForElimination ? 'bg-green-50' : ''}
                 >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{team.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{team.position}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <Link
+                      href={`/events/${tournamentSlug}/team/${team.id}`}
+                      className="text-blue-500"
+                    >
+                      {team.name}
+                    </Link>
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center font-semibold">{team.swissPoints}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
                     {team.swissWins}-{team.swissLosses}-{team.swissDraws}

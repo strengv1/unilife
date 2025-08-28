@@ -164,7 +164,10 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
         </label>
         <select
           value={filter}
-          onChange={(e) => setFilter(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm("")
+            setFilter(e.target.value)
+          }}
           className="w-full md:w-64 p-2 border rounded-md"
           disabled={isPending || loadingMatches}
         >

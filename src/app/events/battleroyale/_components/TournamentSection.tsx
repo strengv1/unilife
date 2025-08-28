@@ -1,5 +1,4 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Link from "next/link"
 import TournamentStructure from "./TournamentStructure"
 import TournamentQuickRules from "./TournamentQuickRules"
 import TournamentSchedule from "./TournamentSchedule"
@@ -11,12 +10,9 @@ export const TournamentSection = () => {
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Tournament Structure</h2>
           <p className="mt-4 md:mt-6 text-lg text-muted-foreground">
-            Designed for fair play and maximum excitement for everybody.
+            Designed for fair play and <b>maximum excitement</b>.
             <br/>
-            <Link href="#prizes" className="text-red-600 hover:underline">
-              Cash Prizes
-            </Link>{" "}
-            for the Top 16 best performing teams.
+            All teams play six preliminary rounds, with the Top 64 teams advancing to the playoffs.
           </p>
         </div>
 

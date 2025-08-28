@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { db, Match, Team } from '@/app/lib/db'
+import { db, Match, StandingWithPosition, Team } from '@/app/lib/db'
 import { tournaments, teams, matches } from '@/app/lib/schema'
 import { verifyAuth } from '@/app/lib/auth'
 import { desc, eq, and, asc } from 'drizzle-orm'
@@ -131,65 +131,6 @@ export async function validateTeamNamesAction(tournamentSlug: string, teamNames:
   } catch (error) {
     console.error('Error validating teams:', error);
     return { error: 'Failed to validate teams' }
-  }
-}
-
-export async function addTeamAction(tournamentSlug: string, teamName: string) {
-  const isAuthenticated = await verifyAuth();
-  if (!isAuthenticated) {
-    return { error: 'Unauthorized' }
-  }
-
-  try {
-    // Validate team name
-    if (!teamName || teamName.trim().length === 0) {
-      return { error: 'Team name is required' }
-    }
-
-    const trimmedName = teamName.trim();
-
-    // Find tournament
-    const [tournament] = await db
-      .select()
-      .from(tournaments)
-      .where(eq(tournaments.slug, tournamentSlug));
-
-    if (!tournament) {
-      return { error: 'Tournament not found' }
-    }
-
-    // Check for duplicate team name in this tournament
-    const existingTeam = await db
-      .select()
-      .from(teams)
-      .where(
-        and(
-          eq(teams.tournamentId, tournament.id),
-          eq(teams.name, trimmedName)
-        )
-      );
-
-    if (existingTeam.length > 0) {
-      return { error: 'A team with this name already exists in the tournament' }
-    }
-
-    // Add team
-    const [team] = await db
-      .insert(teams)
-      .values({
-        tournamentId: tournament.id,
-        name: trimmedName,
-      })
-      .returning();
-
-    // Revalidate relevant pages
-    revalidatePath(`/admin/tournaments/${tournamentSlug}`)
-    revalidatePath(`/events/${tournamentSlug}/bracket`)
-
-    return { success: true, team }
-  } catch (error) {
-    console.error('Error adding team:', error);
-    return { error: 'Failed to add team' }
   }
 }
 
@@ -457,7 +398,7 @@ export async function getStandingsAction(slug: string) {
     const standings = await SwissSystem.getStandings(tournament.id);
 
     // Add position for each team
-    const standingsWithPosition = standings.map((team, index) => ({
+    const standingsWithPosition: StandingWithPosition[] = standings.map((team, index) => ({
       ...team,
       position: index + 1
     }));

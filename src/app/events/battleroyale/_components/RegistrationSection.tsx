@@ -22,7 +22,7 @@ export const RegistrationSection = () => {
               <h3 className="text-2xl font-bold">Registration Details</h3>
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3">
-                  - <span>€40 per team (2 players)</span>
+                  - <span>€40 per team (=20€ per player)</span>
                 </li>
                 <li className="flex items-start gap-3">
                   - <span>Limited to 150 teams - first come, first served</span>
@@ -53,13 +53,13 @@ export const RegistrationSection = () => {
                   <span className={emojiClasses} >🎯</span> Tournament entry for both players
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className={emojiClasses} >🍻</span> 2x Beers
+                  <span className={emojiClasses} >🍻</span> includes you & your partner&apos;s first beers!
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className={emojiClasses} >⚡</span> 2x Red Bulls
+                  <span className={emojiClasses} >⚡</span> Two Red Bulls
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className={emojiClasses} >🏆</span> 2x Beer Pong Battle Royale Patches
+                  <span className={emojiClasses} >🏆</span> Two Beer Pong Battle Royale Patches
                 </li>
                 <li className="flex items-center gap-3">
                   <span className={emojiClasses} >🔥</span> OK20 Sauna afterparty with music and casual Beer Pong

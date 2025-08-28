@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { TeamWithBuchholz } from "@/app/lib/db";
+import { ChartBar, ChevronDown, ChevronUp } from "lucide-react";
+import { StandingWithPosition } from "@/app/lib/db";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 interface Props {
-  sortedTeams: TeamWithBuchholz[];
+  sortedTeams: StandingWithPosition[];
   showElimination: boolean;
 }
 
@@ -11,11 +14,10 @@ const TeamRowMobile: React.FC<Props> = ({ sortedTeams, showElimination }) => {
   return (
     <div className="md:hidden">
       <div className="divide-y divide-gray-200">
-        {sortedTeams.map((team, index) => (
+        {sortedTeams.map((team) => (
           <ExpandableTeam
             key={team.id}
             team={team}
-            rank={index + 1}
             showElimination={showElimination}
           />
         ))}
@@ -25,14 +27,16 @@ const TeamRowMobile: React.FC<Props> = ({ sortedTeams, showElimination }) => {
 };
 
 const ExpandableTeam: React.FC<{
-  team: TeamWithBuchholz;
-  rank: number;
+  team: StandingWithPosition;
   showElimination: boolean;
-}> = ({ team, rank, showElimination }) => {
+}> = ({ team, showElimination }) => {
   const [expanded, setExpanded] = useState(false);
   const pointDiff =
     (team.swissGamePointsFor || 0) - (team.swissGamePointsAgainst || 0);
 
+  const params = useParams();
+  const tournamentSlug = params.slug as string;
+  
   return (
     <div
       className={`
@@ -49,7 +53,7 @@ const ExpandableTeam: React.FC<{
         aria-label={`Toggle details for ${team.name}`}
       >
         <div className="flex items-center gap-3">
-          <span className="md:text-lg font-bold text-gray-900">#{rank}</span>
+          <span className="md:text-lg font-bold text-gray-900">#{team.position}</span>
           <div className="flex flex-col">
             <div className="font-semibold text-gray-900">
               {team.name}
@@ -101,21 +105,31 @@ const ExpandableTeam: React.FC<{
 
       {/* Extra info */}
       {expanded && (
-        <div className="flex justify-between pr-7">
-          <div className="text-xs text-gray-500 mt-1">
-            <div>
-              Median Buccholz (MB): {team.buchholzScore?.toFixed(1) || "0.0"}
-            </div>
-            <div>
-              Opponents&apos; MB: {team.opponentsBuchholzScore?.toFixed(1) || "0.0"}
-            </div>
-          </div>  
+        <>
+          <div className="flex justify-between pr-7">
+            <div className="text-xs text-gray-500 mt-1">
+              <div>
+                Median Buchholz (MB): {team.buchholzScore?.toFixed(1) || "0.0"}
+              </div>
+              <div>
+                Opponents&apos; MB: {team.opponentsBuchholzScore?.toFixed(1) || "0.0"}
+              </div>
+            </div>  
+            
           
-        
-          <div className="text-xs md:text-sm text-gray-500 mt-1">
-            ({team.swissGamePointsFor}:{team.swissGamePointsAgainst})
+            <div className="text-xs md:text-sm text-gray-500 mt-1">
+              ({team.swissGamePointsFor}:{team.swissGamePointsAgainst})
+            </div>
           </div>
-      </div>
+          <Link href={`/events/${tournamentSlug}/team/${team.id}`}>
+            <Button
+              variant="ghost"
+              className="mt-3 w-full px-4 py-2.5 text-sm font-medium rounded-lg border border-blue-200 hover:bg-blue-100 text-blue-700 cursor-pointer"
+            >
+              <ChartBar /> View Team Details
+            </Button>
+          </Link>
+        </>
       )}
     </div>
   );

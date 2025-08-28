@@ -12,8 +12,8 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
   const [type, setType] = useState('swiss_elimination');
-  const [swissRounds, setSwissRounds] = useState(6);
-  const [numberOfTeams, setNumberOfTeams] = useState(150);
+  const [swissRounds, setSwissRounds] = useState<number | string>(6);
+  const [numberOfTeams, setNumberOfTeams] = useState<number | string>(150);
   const [eliminationTeams, setEliminationTeams] = useState(32);
   const [teamsText, setTeamsText] = useState('');
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -82,7 +82,8 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
   };
 
   const duplicatesInfo = getDuplicatesInfo(teamsText.split('\n'));
-
+  const teams = Number(numberOfTeams) || 0;
+  
   return (
     <div className="max-w-2xl">
       <form action={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
@@ -153,7 +154,10 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
               <input
                 type="number"
                 value={numberOfTeams}
-                onChange={(e) => setNumberOfTeams(parseInt(e.target.value))}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setNumberOfTeams(val === "" ? "" : parseInt(val));
+                }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 min="2"
                 required
@@ -168,7 +172,10 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
                 type="number"
                 name="swissRounds"
                 value={swissRounds}
-                onChange={(e) => setSwissRounds(parseInt(e.target.value))}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setSwissRounds(val === "" ? "" : parseInt(val));
+                }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 min="1"
                 max="20"
@@ -176,7 +183,8 @@ export function CreateTournament({ onSuccess }: CreateTournamentProps) {
                 disabled={isPending}
               />
               <p className="mt-1 text-sm text-gray-500">
-                Recommended Swiss Rounds for {numberOfTeams} teams: {Math.ceil(Math.log2(numberOfTeams))}
+                Recommended Swiss Rounds for {teams} teams:{" "}
+                {teams > 1 ? Math.ceil(Math.log2(teams)) : "—"}
               </p>
 
             </div>

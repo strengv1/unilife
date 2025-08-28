@@ -81,15 +81,17 @@ export function TournamentList({ tournaments, onRefresh, isLoading }: Tournament
                 </div>
 
                 {/* Secondary Actions */}
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <a
-                    href={`/admin/tournaments/${tournament.slug}`}
-                    className="flex items-center justify-center px-3 py-2 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
-                  >
-                    Manage
-                  </a>
+                {tournament.status === 'registration' && (
+                  <div className="flex flex-col sm:flex-row gap-2">
                   
-                  {tournament.status === 'registration' && (
+                    <a
+                      href={`/admin/tournaments/${tournament.slug}`}
+                      className="flex items-center justify-center px-3 py-2 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+                    >
+                      Manage
+                    </a>
+                  
+                  
                     <button
                       onClick={() => handleStartTournament(tournament.slug)}
                       disabled={isPending}
@@ -98,8 +100,8 @@ export function TournamentList({ tournaments, onRefresh, isLoading }: Tournament
                     >
                       {isPending ? 'Starting...' : 'Start Tournament'}
                     </button>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </li>

@@ -142,7 +142,7 @@ export default function TournamentStructure() {
       <div className="mx-2 xs:mx-0 mb-4 lg:mb-6">
         <h2 className="text-xl lg:text-3xl font-bold text-gray-900 mb-2">Tournament consists of <u>two phases</u>:</h2>
         <p className="text-md lg:text-xl text-gray-600">
-          <strong>Swiss preliminaries</strong> followed by <strong>single-elimination playoffs</strong>
+          <strong className="text-blue-700">Swiss preliminaries</strong> followed by <strong className="text-red-600">single-elimination playoffs</strong>
         </p>
       </div>
 
@@ -176,8 +176,8 @@ export default function TournamentStructure() {
                   {[
                     { num: "1", title: "Swiss Points", desc: "Win-Loss-Draw record" },
                     { num: "2", title: "Cup Differential", desc: "Cups won minus cups lost" },
-                    { num: "3", title: "Median Buccholz (MB)", desc: "Sum of opponents' Swiss points (excl. best and worst)" },
-                    { num: "4", title: "Opponents' Median Buccholz (OMB)", desc: "Sum of opponents' MB scores" }
+                    { num: "3", title: "Median Buchholz (MB)", desc: "Sum of opponents' Swiss points (excl. best and worst)" },
+                    { num: "4", title: "Opponents' Median Buchholz (OMB)", desc: "Sum of opponents' MB scores" }
                   ].map((item) => (
                     <div key={item.num} className="flex gap-3">
                       <div className={` text-blue-white border border-white  w-5 h-5 mt-1 rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0`}>

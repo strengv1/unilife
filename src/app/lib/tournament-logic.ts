@@ -30,7 +30,7 @@ export class SwissSystem {
       return (b.opponentsBuchholzScore || 0) - (a.opponentsBuchholzScore || 0);
     });
 
-    const roundMatches = [];
+    const roundMatches: NewMatch[] = [];
     const paired = new Set<number>();
 
     // Swiss pairing: match teams with similar points
@@ -59,7 +59,12 @@ export class SwissSystem {
             phase: 'swiss',
             team1Id: tournamentTeams[i].id,
             team2Id: tournamentTeams[j].id,
-            status: 'pending'
+            status: 'pending',
+            team1Score: null,
+            team2Score: null,
+            winnerId: null,
+            bracketPosition: null,
+            nextMatchId: null
           });
           paired.add(tournamentTeams[i].id);
           paired.add(tournamentTeams[j].id);
@@ -71,10 +76,29 @@ export class SwissSystem {
     // Handle bye - give it to the lowest-ranked unpaired team
     const unpaired = tournamentTeams.find((team) => !paired.has(team.id));
     if (unpaired) {
+      // Create a bye match (team vs null opponent, 0 cups)
+      const byeMatch: NewMatch = {
+        tournamentId,
+        roundNumber,
+        matchNumber: roundMatches.length + 1,
+        phase: 'swiss',
+        team1Id: unpaired.id,
+        team2Id: null, // No opponent for bye
+        team1Score: 0,
+        team2Score: 0,
+        winnerId: unpaired.id,
+        status: 'completed', // Bye matches are automatically completed
+        bracketPosition: null,
+        nextMatchId: null
+      };
+      
+      roundMatches.push(byeMatch);
+
+      // Update team stats for the bye (Win with 0 cups)
       await db.update(teams)
         .set({ 
           swissPoints: (unpaired.swissPoints || 0) + 3,
-          swissWins: (unpaired.swissWins || 0) + 1
+          swissWins: (unpaired.swissWins || 0) + 1,
         })
         .where(eq(teams.id, unpaired.id));
     }
@@ -90,7 +114,12 @@ export class SwissSystem {
       where: eq(matches.id, matchId)
     });
 
-    if (!match || !match.team1Id || !match.team2Id) throw new Error('Match not found');
+    if (!match || !match.team1Id) throw new Error('Match not found or invalid');
+
+    // Don't allow updating bye matches
+    if (!match.team2Id) {
+      throw new Error('Cannot update a bye match');
+    }
 
     const [team1, team2] = await Promise.all([
       db.query.teams.findFirst({ where: eq(teams.id, match.team1Id) }),
@@ -162,12 +191,16 @@ export class SwissSystem {
   }
 
   static async reverseSwissStandings(
-    matchId: number, 
     oldTeam1Score: number, 
     oldTeam2Score: number,
     team1Id: number,
     team2Id: number
   ) {
+    // Don't allow reversing bye matches
+    if (!team2Id) {
+      throw new Error('Cannot reverse a bye match');
+    }
+
     const [team1Data, team2Data] = await Promise.all([
       db.select().from(teams).where(eq(teams.id, team1Id)),
       db.select().from(teams).where(eq(teams.id, team2Id))
@@ -299,6 +332,13 @@ export class SwissSystem {
       // 4. Opponents' Buchholz score
       return (b.opponentsBuchholzScore || 0) - (a.opponentsBuchholzScore || 0);
     });
+  }
+
+  /**
+   * Helper method to check if a match is a bye match
+   */
+  static isByeMatch(match: { team1Id: number | null; team2Id: number | null }): boolean {
+    return match.team1Id !== null && match.team2Id === null;
   }
 }
 
