@@ -53,7 +53,7 @@ export const RegistrationSection = () => {
                   <span className={emojiClasses} >🎯</span> Tournament entry for both players
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className={emojiClasses} >🍻</span> includes you & your partner&apos;s first beers!
+                  <span className={emojiClasses} >🍻</span> includes you & your partner&apos;s first drinks!
                 </li>
                 <li className="flex items-center gap-3">
                   <span className={emojiClasses} >⚡</span> Two Red Bulls
@@ -63,6 +63,12 @@ export const RegistrationSection = () => {
                 </li>
                 <li className="flex items-center gap-3">
                   <span className={emojiClasses} >🔥</span> OK20 Sauna afterparty with music and casual Beer Pong
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className={emojiClasses} >🦘</span> Australian surprise DJ!
+                </li>
+                <li className="flex items-center gap-3">
+                  And a guaranteed good time!
                 </li>
               </ul>
               {/* <div className="mt-8 rounded-md bg-red-50 p-6 text-red-800">
