@@ -8,13 +8,21 @@ import { db } from '@/app/lib/db'
 
 const TEST_DATABASE_URL = process.env.DATABASE_URL
 
-// Use a global flag to ensure setup only runs once
-const globalSetupKey = Symbol.for('test.database.setup')
-const global = globalThis as any
+// Typescript magic?? (or bs?)
+const testDatabaseSetup = Symbol.for("test.database.setup");
+declare global {
+  interface Global {
+    [testDatabaseSetup]?: boolean;
+  }
+}
+const global = globalThis as typeof globalThis & {
+  [testDatabaseSetup]?: boolean;
+};
+
 
 beforeAll(async () => {
   // Check if setup has already been done by another test file
-  if (global[globalSetupKey]) {
+  if (global[testDatabaseSetup]) {
     console.log('Database already set up by another test file')
     return
   }
@@ -31,11 +39,15 @@ beforeAll(async () => {
   try {
     await setupConnection`CREATE DATABASE tournament_test`
     console.log('Created tournament_test database')
-  } catch (e: any) {
-    if (e.message?.includes('already exists')) {
-      console.log('tournament_test database already exists')
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      if (e.message.includes('already exists')) {
+        console.log('tournament_test database already exists')
+      } else {
+        console.error('Error creating database:', e)
+      }
     } else {
-      console.error('Error creating database:', e)
+      console.error('Unknown error creating database:', e)
     }
   }
   await setupConnection.end()
@@ -56,9 +68,9 @@ beforeAll(async () => {
     // Create schema if it doesn't exist
     try {
       await db.execute(sql`CREATE SCHEMA IF NOT EXISTS public`)
-    } catch (e) {
+    } catch {
       // Schema might already exist from another test run
-      console.log('Schema already exists, continuing...')
+      console.log('Schema already exists, continuing...', )
     }
     
     // Drop existing tables if they exist
@@ -120,7 +132,7 @@ beforeAll(async () => {
     `)
     
     // Mark setup as complete globally
-    global[globalSetupKey] = true
+    global[testDatabaseSetup] = true
     console.log('Test database setup complete')
   } catch (error) {
     console.error('Error setting up database schema:', error)

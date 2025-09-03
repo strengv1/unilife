@@ -6,32 +6,30 @@ type DatabaseType = PostgresJsDatabase<typeof schema> | NeonHttpDatabase<typeof 
 
 let db: DatabaseType;
 
-// Synchronous initialization for test environment
-if (process.env.NODE_ENV === 'test') {
-  // Test environment: Use regular PostgreSQL synchronously
-  const { drizzle } = require('drizzle-orm/postgres-js');
-  const postgres = require('postgres');
-  const client = postgres.default ? postgres.default(process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/tournament_test') : postgres(process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/tournament_test');
-  db = drizzle(client, { schema });
-} else if (process.env.NODE_ENV === 'production') {
-  // Production: Use Neon (async)
-  import('@neondatabase/serverless').then(({ neon }) => {
-    import('drizzle-orm/neon-http').then(({ drizzle }) => {
-      const sql = neon(process.env.DATABASE_URL!);
-      db = drizzle(sql, { schema });
-    });
-  });
-} else {
-  // Development: Use regular PostgreSQL (async)
-  import('drizzle-orm/postgres-js').then(({ drizzle }) => {
-    import('postgres').then(({ default: postgres }) => {
-      const client = postgres(process.env.DATABASE_URL!);
-      db = drizzle(client, { schema });
-    });
-  });
+async function initDb() {
+  if (process.env.NODE_ENV === 'test') {
+    // Test environment: Use postgres-js
+    const { drizzle } = await import('drizzle-orm/postgres-js');
+    const postgres = (await import('postgres')).default;
+    const client = postgres(process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/tournament_test');
+    db = drizzle(client, { schema });
+  } else if (process.env.NODE_ENV === 'production') {
+    // Production: Use Neon
+    const { neon } = await import('@neondatabase/serverless');
+    const { drizzle } = await import('drizzle-orm/neon-http');
+    const sql = neon(process.env.DATABASE_URL!);
+    db = drizzle(sql, { schema });
+  } else {
+    // Development: Use postgres-js
+    const { drizzle } = await import('drizzle-orm/postgres-js');
+    const postgres = (await import('postgres')).default;
+    const client = postgres(process.env.DATABASE_URL!);
+    db = drizzle(client, { schema });
+  }
 }
 
-// Export with proper typing
+await initDb();
+
 export { db };
 
 // Export types for use in your application

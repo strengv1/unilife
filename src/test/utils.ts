@@ -1,6 +1,6 @@
-import { db } from '@/app/lib/db'
+import { db, Match, Team } from '@/app/lib/db'
 import { tournaments, teams, matches } from '@/app/lib/schema'
-import { eq, and } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import { faker } from '@faker-js/faker'
 
 export interface TestTournamentOptions {
@@ -62,11 +62,18 @@ export async function createTestTournament(options: TestTournamentOptions = {}) 
  * Get all matches for a tournament
  */
 export async function getTournamentMatches(tournamentId: number) {
-  return db
+  const rows = await db
     .select()
     .from(matches)
     .where(eq(matches.tournamentId, tournamentId))
     .orderBy(matches.roundNumber, matches.matchNumber)
+
+  return rows.map(row => ({
+    ...row,
+    team1: null,
+    team2: null,
+    winner: null,
+  }));
 }
 
 /**
@@ -84,8 +91,8 @@ export async function getTournamentTeams(tournamentId: number) {
  * Assert Swiss pairing invariants
  */
 export function assertSwissInvariants(
-  matchList: any[],
-  teamList: any[]
+  matchList: Match[],
+  teamList: Team[]
 ): {
   noRepeatedPairings: boolean
   allTeamsPlaying: boolean
