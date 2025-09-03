@@ -69,7 +69,16 @@ export default function TournamentQuickRules() {
           - <u>Rebound</u>: If the ball remains on the table after a throw, it can be caught by the throwing team for a Trickshot opportunity
         </li>
         <li className={listItemClass}>
-          - Special rules <u>The Gulag</u> and <u>Tactical Nuke</u>! <b>Read full rules</b> for more information.
+          - <b>Tactical Nuke</b>. Commonly known as <b>Miracle</b>. Landing a ball between and on top of 3 cups wins you the game automatically.
+        </li>
+        <li className={listItemClass}>
+          - If the middle cup has been removed, a ball thrown into the empty space in the hexagon formation sends the shooter to <b>the Gulag</b>. Read{` `}
+          <a href="/BPBR_official_rules.pdf" 
+            download 
+            className="text-blue-500 hover:text-blue-700 underline"
+          >
+            Full rules
+          </a>{` `} for details
         </li>
         <li className={listItemClass}>
           - No redemption round. First team to drop the last cup wins

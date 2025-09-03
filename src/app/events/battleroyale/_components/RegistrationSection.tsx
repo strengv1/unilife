@@ -3,9 +3,61 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export const RegistrationSection = () => {
   const emojiClasses = "text-xl"
+  
+  const registeredTeams = [
+    { name: "Sub Musmo" },
+    { name: "Eero" },
+    { name: "Kossun rakastelijat" },
+    { name: "Ponteva" },
+    { name: "Tulokkaat" },
+    { name: "Skene" },
+    { name: "Swiss Cheese" },
+    { name: "Bileinsinöörit" },
+    { name: "Beeragraaf" },
+    { name: "Pulmia" },
+    { name: "Myskääjät" },
+    { name: "jos me pelleillään ni meidät voi pistää kylmäks" },
+    { name: "KiviKova" },
+    { name: "Ballers" },
+    { name: "BPC Vaasankatu" },
+    { name: "VUOHET" },
+    { name: "Herrasmiehet" },
+    { name: "Border Between England and Irland" },
+    { name: "LECLEEERC" },
+    { name: "Patteman City" },
+    { name: "The underdogs" },
+    { name: "Broskis" },
+    { name: "Bileinsinöörit 2" },
+    { name: "Team Luttista" },
+    { name: "Laihia Finest" },
+    { name: "For chief" },
+    { name: "BeerPongMyrsky" },
+    { name: "Nökki" },
+    { name: "Darrasstars" },
+    { name: "Stay Frosty" },
+    { name: "LuLa" },
+    { name: "NOOT NOOT !" },
+    { name: "RuoRi" },
+  ];
+  const [shuffledTeams, setShuffledTeams] = useState(registeredTeams);
+  
+  const shuffleArray = (array: { name: string }[]) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+  
+  useEffect(() => {
+    setShuffledTeams(shuffleArray(registeredTeams));
+  }, []);
+
   return (
     <section id="registration" className="bg-red-600 py-10 md:py-16 text-white">
       <div className="container mx-auto max-w-6xl px-2 xs:px-4">
@@ -14,6 +66,36 @@ export const RegistrationSection = () => {
           <p className="mt-4 md:mt-6 text-lg text-red-100">
             Secure your spot in Finland&apos;s largest beer pong tournament before all slots are filled!
           </p>
+        </div>
+
+        {/* Teams Carousel Section */}
+        <div className="mt-8 mb-8 motion-reduce:hidden">
+          <div className="text-center mb-1">
+            <h3 className="text-lg font-bold text-white">
+              🏆 Recently Registered Teams
+            </h3>
+          </div>
+
+          <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+            <div className="flex items-center justify-center md:justify-start animate-infinite-scroll">
+              {/* First set of teams */}
+              {shuffledTeams.map((team, index) => (
+                <div key={`first-${index}`} className="flex-shrink-0 mx-8">
+                  <span className="text-white font-semibold text-lg px-4 py-2 rounded-lg whitespace-nowrap">
+                    {team.name}
+                  </span>
+                </div>
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {shuffledTeams.map((team, index) => (
+                <div key={`second-${index}`} className="flex-shrink-0 mx-8">
+                  <span className="text-white font-semibold text-lg px-4 py-2 rounded-lg whitespace-nowrap">
+                    {team.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -43,6 +125,12 @@ export const RegistrationSection = () => {
                   </Button>
                 </Link>
               </div>
+              
+              {/* <div className="mt-8 rounded-md bg-red-50 p-6 text-red-800">
+                <p className="text-base font-medium">
+                  Only a few spots remaining! Register today to secure your place.
+                </p>
+              </div> */}
             </CardContent>
           </Card>
           <Card className="bg-white shadow-lg">
@@ -71,11 +159,6 @@ export const RegistrationSection = () => {
                   And a guaranteed good time!
                 </li>
               </ul>
-              {/* <div className="mt-8 rounded-md bg-red-50 p-6 text-red-800">
-                <p className="text-base font-medium">
-                  Only a few spots remaining! Register today to secure your place.
-                </p>
-              </div> */}
             </CardContent>
           </Card>
         </div>
@@ -101,6 +184,15 @@ export const RegistrationSection = () => {
           0% { left: -30px; }
           20% { left: 110%; }
           100% { left: 110%; }
+        }
+        
+        @keyframes infinite-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        
+        .animate-infinite-scroll {
+          animation: infinite-scroll 300s linear infinite;
         }
       `}</style>
     </section>
