@@ -9,7 +9,7 @@ export default function TournamentQuickRules() {
       <div className="mx-2 xs:mx-0">
         <h3 className="text-2xl font-bold">Quick Rules</h3>
         <a 
-          href="/BPBR_official_rules.pdf" 
+          href="/BPBR_official_rules-1.pdf" 
           download 
           className="text-blue-500 hover:text-blue-700 underline flex items-center gap-2"
         >
@@ -73,7 +73,7 @@ export default function TournamentQuickRules() {
         </li>
         <li className={listItemClass}>
           - If the middle cup has been removed, a ball thrown into the empty space in the hexagon formation sends the shooter to <b>the Gulag</b>. Read{` `}
-          <a href="/BPBR_official_rules.pdf" 
+          <a href="/BPBR_official_rules-1.pdf" 
             download 
             className="text-blue-500 hover:text-blue-700 underline"
           >
