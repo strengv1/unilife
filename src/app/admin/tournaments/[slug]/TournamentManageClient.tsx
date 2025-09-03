@@ -155,8 +155,8 @@ export function TournamentManageClient({
         setValidationErrors([]);
         await refreshTeams();
         
-        if (result.errors && result.errors.length > 0) {
-          setError(`Some teams could not be added: ${result.errors.join(', ')}`);
+        if (result.error ) {
+          setError(`Some teams could not be added: ${result.error}`);
         }
       }
     });

@@ -79,6 +79,18 @@ npm run dev
 
 ## Common Tasks
 
+### Running tests
+
+For now, tests only work when run one at a time, working on a solution to this!
+
+```bash
+npx vitest run __tests__/unit/
+npx vitest run __tests__/integration/swiss-system.test.ts
+npx vitest run __tests__/integration/buchholz.test.ts
+npx vitest run __tests__/integration/team-actions.test.ts
+npx vitest run __tests__/integration/tournament-actions.test.ts
+```
+
 ### Managing Tournaments
 
 1. **Access admin panel**: http://localhost:3000/admin

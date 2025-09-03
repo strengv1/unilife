@@ -62,6 +62,13 @@ export async function createTournamentAction(formData: FormData) {
         .map(t => t.trim())
         .filter(t => t.length > 0);
 
+      // Check for duplicate names
+      const teamValidation = await validateTeamNamesAction(slug, teamNames);
+      const invalid = teamValidation.validation?.filter(v => !v.isValid);
+      if (invalid && invalid.length > 0) {
+        return { error: 'Invalid team names: ' + invalid.map(v => v.name).join(', ') };
+      }
+
       for (const teamName of teamNames) {
         await db
           .insert(teams)
@@ -258,7 +265,7 @@ export async function deleteTeamAction(tournamentSlug: string, teamId: number) {
 export async function addMultipleTeamsAction(tournamentSlug: string, teamNames: string[]) {
   const isAuthenticated = await verifyAuth();
   if (!isAuthenticated) {
-    return { error: 'Unauthorized' }
+    return { error: 'Unauthorized' };
   }
 
   try {
@@ -269,66 +276,49 @@ export async function addMultipleTeamsAction(tournamentSlug: string, teamNames: 
       .where(eq(tournaments.slug, tournamentSlug));
 
     if (!tournament) {
-      return { error: 'Tournament not found' }
+      return { error: 'Tournament not found' };
     }
 
+    // Validate team names using the shared action
+    const validationResult = await validateTeamNamesAction(tournamentSlug, teamNames);
+
+    if (!validationResult.success) {
+      return { error: validationResult.error || 'Failed to validate team names' };
+    }
+
+    const validation = validationResult.validation!;
+    const invalid = validation.filter(v => !v.isValid);
+
+    if (invalid.length > 0) {
+      // Return human-readable errors for all invalid names
+      return { error: invalid.map(v => `${v.name || '(empty)'}: ${v.error}`).join(', ') };
+    }
+
+    // Only add valid names
     const results = [];
-    const errors = [];
-
-    for (const name of teamNames) {
-      const trimmedName = name.trim();
-      if (!trimmedName) continue;
-
-      try {
-        // Check for duplicate
-        const existingTeam = await db
-          .select()
-          .from(teams)
-          .where(
-            and(
-              eq(teams.tournamentId, tournament.id),
-              eq(teams.name, trimmedName)
-            )
-          );
-
-        if (existingTeam.length > 0) {
-          errors.push(`Team "${trimmedName}" already exists`);
-          continue;
-        }
-
-        // Add team
-        const [team] = await db
-          .insert(teams)
-          .values({
-            tournamentId: tournament.id,
-            name: trimmedName,
-          })
-          .returning();
-
-        results.push(team);
-      } catch (error) {
-        console.error(`Error adding team ${trimmedName}:`, error);
-        errors.push(`Failed to add team "${trimmedName}"`);
-      }
+    for (const v of validation) {
+      const [team] = await db
+        .insert(teams)
+        .values({
+          tournamentId: tournament.id,
+          name: v.name,
+        })
+        .returning();
+      results.push(team);
     }
 
     // Revalidate relevant pages
-    revalidatePath(`/admin/tournaments/${tournamentSlug}`)
-    revalidatePath(`/events/${tournamentSlug}/bracket`)
+    revalidatePath(`/admin/tournaments/${tournamentSlug}`);
+    revalidatePath(`/events/${tournamentSlug}/bracket`);
 
-    if (results.length === 0 && errors.length > 0) {
-      return { error: errors.join(', ') }
-    }
-
-    return { 
-      success: true, 
+    return {
+      success: true,
       teams: results,
-      message: `Added ${results.length} team(s)`,
-      errors: errors.length > 0 ? errors : undefined
-    }
+      message: `Added ${results.length} team(s)`
+    };
   } catch (error) {
     console.error('Error adding teams:', error);
-    return { error: 'Failed to add teams' }
+    return { error: 'Failed to add teams' };
   }
 }
 

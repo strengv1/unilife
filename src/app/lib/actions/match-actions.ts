@@ -164,6 +164,7 @@ export async function updateMatchScoreAction(
 
       const swissRounds = tournament.swissRounds ?? 6;
 
+      // Automagically generate next Swiss Round, or Elimination Bracket, when last match is scored.
       // Only generate next round if this wasn't already processed
       if (!wasAlreadyCompleted && pendingMatches.length === 0 && match.roundNumber < swissRounds) {
         await SwissSystem.generateSwissRound(match.tournamentId, match.roundNumber + 1);

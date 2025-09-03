@@ -6,8 +6,15 @@ type DatabaseType = PostgresJsDatabase<typeof schema> | NeonHttpDatabase<typeof 
 
 let db: DatabaseType;
 
-if (process.env.NODE_ENV === 'production') {
-  // Production: Use Neon
+// Synchronous initialization for test environment
+if (process.env.NODE_ENV === 'test') {
+  // Test environment: Use regular PostgreSQL synchronously
+  const { drizzle } = require('drizzle-orm/postgres-js');
+  const postgres = require('postgres');
+  const client = postgres.default ? postgres.default(process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/tournament_test') : postgres(process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/tournament_test');
+  db = drizzle(client, { schema });
+} else if (process.env.NODE_ENV === 'production') {
+  // Production: Use Neon (async)
   import('@neondatabase/serverless').then(({ neon }) => {
     import('drizzle-orm/neon-http').then(({ drizzle }) => {
       const sql = neon(process.env.DATABASE_URL!);
@@ -15,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
     });
   });
 } else {
-  // Development: Use regular PostgreSQL
+  // Development: Use regular PostgreSQL (async)
   import('drizzle-orm/postgres-js').then(({ drizzle }) => {
     import('postgres').then(({ default: postgres }) => {
       const client = postgres(process.env.DATABASE_URL!);
@@ -23,9 +30,9 @@ if (process.env.NODE_ENV === 'production') {
     });
   });
 }
+
 // Export with proper typing
 export { db };
-
 
 // Export types for use in your application
 export type Tournament = typeof schema.tournaments.$inferSelect;
@@ -40,6 +47,7 @@ export type TeamWithBuchholz = Team & {
   buchholzScore?: number;
   opponentsBuchholzScore?: number;
 }
+
 export type StandingWithPosition = TeamWithBuchholz & {
   position: number;
 }
