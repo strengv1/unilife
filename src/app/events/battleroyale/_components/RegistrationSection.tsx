@@ -42,6 +42,8 @@ export const RegistrationSection = () => {
     { name: "LuLa" },
     { name: "NOOT NOOT !" },
     { name: "RuoRi" },
+    { name: "Kontulan Vetelät" },
+    { name: "Sjundeåregattan" },
   ];
   const [shuffledTeams, setShuffledTeams] = useState(registeredTeams);
   
@@ -56,7 +58,7 @@ export const RegistrationSection = () => {
   
   useEffect(() => {
     setShuffledTeams(shuffleArray(registeredTeams));
-  }, []);
+  }, [registeredTeams]);
 
   return (
     <section id="registration" className="bg-red-600 py-10 md:py-16 text-white">
