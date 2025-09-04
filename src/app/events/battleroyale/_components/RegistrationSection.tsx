@@ -58,7 +58,7 @@ export const RegistrationSection = () => {
   
   useEffect(() => {
     setShuffledTeams(shuffleArray(registeredTeams));
-  }, [registeredTeams]);
+  }, []);
 
   return (
     <section id="registration" className="bg-red-600 py-10 md:py-16 text-white">
