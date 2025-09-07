@@ -110,27 +110,27 @@ export const RegistrationSection = () => {
             {/* Pricing Tiers */}
             <div className="mt-6 space-y-4">
               {/* Premium Tier */}
-              <div className="relative border-2 border-red-500 bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-5">
-                <div className="absolute -top-2.5 left-5 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+              <div className="relative border-2 border-red-500 bg-gradient-to-br from-red-50 to-red-100 rounded-xl px-3 py-5 xs:p-5">
+                <div className="absolute -top-2.5 left-5 bg-red-600 text-white px-3 py-1 rounded-full text-xs xs:font-semibold">
                   MOST POPULAR
                 </div>
-                <div className="flex justify-between items-center mb-2">
-                  <div className="font-semibold text-lg text-gray-800">Standard Ticket</div>
+                <div className="flex justify-between items-center mb-3">
+                  <div className="font-semibold xs:text-base md:text-lg text-gray-800">Standard Ticket</div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-red-600">€40</div>
-                    <div className="text-sm text-gray-600">€20 per player</div>
+                    <div className="xs:text-lg md:text-2xl font-bold text-red-600">€40</div>
+                    <div className="text-xs xs:text-sm text-gray-600">€20 per player</div>
                   </div>
                 </div>
                 <p className="text-sm text-gray-600 mt-2">Includes first drinks for both players</p>
               </div>
               
               {/* Standard Tier */}
-              <div className="border-2 border-gray-200 bg-white rounded-xl p-5">
-                <div className="flex justify-between items-center mb-2">
-                  <div className="font-semibold text-lg text-gray-800">Stripped Ticket</div>
+              <div className="border-2 border-gray-200 bg-white rounded-xl px-3 py-5 xs:p-5">
+                <div className="flex justify-between items-center mb-3">
+                  <div className="font-semibold xs:text-base md:text-lg text-gray-800">Stripped Ticket</div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-red-600">€32</div>
-                    <div className="text-sm text-gray-600">€16 per player</div>
+                    <div className="xs:text-lg md:text-2xl font-bold text-red-600">€32</div>
+                    <div className="text-xs xs:text-sm text-gray-600">€16 per player</div>
                   </div>
                 </div>
                 <p className="text-sm text-gray-600 mt-2">Tournament entry only</p>
@@ -177,12 +177,12 @@ export const RegistrationSection = () => {
           <Card className="bg-white shadow-lg">
             <CardContent className="pt-4 md:pt-8 pb-6 px-4 xs:px-6">
               <h3 className="text-2xl font-bold">What&apos;s Included</h3>
-              <ul className="mt-6 space-y-3">
+              <ul className="mt-6 space-y-3 text-sm sm:text-base">
                 <li className="flex items-center gap-3">
                   <span className={emojiClasses} >🎯</span> Tournament entry for both players
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className={emojiClasses} >🍻</span> you & your partner&apos;s first drinks! <span className="text-red-600">(standard only)</span>
+                  <span className={emojiClasses} >🍻</span> you & your partner&apos;s first drinks! <span className="text-red-600 text-xs md:text-sm">(standard only)</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <span className={emojiClasses} >⚡</span> Two Red Bulls
