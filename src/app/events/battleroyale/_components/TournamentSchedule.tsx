@@ -49,6 +49,13 @@ const TournamentSchedule: React.FC = () => {
       details: "Crown the champions • Prize ceremony",
       phase: "finals",
       phaseLabel: "Finals"
+    },
+    {
+      time: "18:30",
+      title: "Afterparty Begins",
+      details: "Warm Sauna and casual games at Otakaari 20",
+      phase: "finals",
+      phaseLabel: "Afterparty"
     }
   ];
 
@@ -82,7 +89,7 @@ const TournamentSchedule: React.FC = () => {
       </div>
       <div className="relative">
         {/* Timeline line */}
-        <div className="absolute left-2 sm:left-7 top-5 bottom-5 w-0.5 bg-gradient-to-b from-blue-200 via-blue-600 via-10% to-red-500 rounded-full"></div>
+        <div className="absolute left-2 sm:left-7 top-5 bottom-5 w-0.5 bg-gradient-to-b from-blue-200 from-[0%] via-blue-600 via-[33%] to-red-500 to-[60%] rounded-full"></div>
         
         <div>
           {events.map((event, index) => {
