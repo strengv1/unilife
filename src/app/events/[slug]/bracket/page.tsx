@@ -1,16 +1,18 @@
 import Link from 'next/link';
 import { BracketClient } from './BracketClient';
-import { 
+import {
   getTournamentBySlugAction,
   getStandingsAction,
-  fetchMatchesAction 
+  fetchMatchesAction
 } from '@/app/lib/actions/tournament-actions';
+import { getComments } from '@/app/lib/actions/comment-actions';
 
 interface BracketPageProps {
   params: Promise<{
     slug: string;
   }>;
 }
+
 function TournamentNotFound() {
   return (
     <div className="container mx-auto px-4 py-8 text-center">
@@ -23,7 +25,7 @@ function TournamentNotFound() {
 
 export default async function BracketPage({ params }: BracketPageProps) {
   const { slug } = await params;
-  
+ 
   try {
     const [tournamentResult, standingsResult, matchesResult] = await Promise.all([
       getTournamentBySlugAction(slug),
@@ -33,10 +35,9 @@ export default async function BracketPage({ params }: BracketPageProps) {
 
     // Handle tournament result
     if (tournamentResult.error === 'Tournament not found' || !tournamentResult.tournament) {
-      return (
-        <TournamentNotFound />
-      );
+      return <TournamentNotFound />;
     }
+
     // Handle other errors
     if (standingsResult.error) {
       throw new Error(standingsResult.error);
@@ -49,11 +50,17 @@ export default async function BracketPage({ params }: BracketPageProps) {
     const standings = standingsResult.standings || [];
     const matches = matchesResult.matches || [];
 
+    // Fetch comments with pagination and stats
+    const commentsPerPage = 20
+    const pageNumber = 1
+    const commentsResult = await getComments(tournament.id, pageNumber, commentsPerPage);
     return (
-      <BracketClient 
+      <BracketClient
         tournament={tournament}
         standings={standings}
         matches={matches}
+        comments={commentsResult.comments}
+        commentStats={commentsResult.stats}
       />
     );
   } catch (error) {

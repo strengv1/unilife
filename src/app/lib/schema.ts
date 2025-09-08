@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, serial, varchar, integer, boolean, timestamp, AnyPgColumn } from 'drizzle-orm/pg-core';
+import { pgTable, serial, varchar, integer, boolean, timestamp, AnyPgColumn, text } from 'drizzle-orm/pg-core';
 
 export const tournaments = pgTable('tournaments', {
   id: serial('id').primaryKey(),
@@ -47,6 +47,15 @@ export const matches = pgTable('matches', {
   updatedAt: timestamp('updated_at').defaultNow(),
 });
 
+export const comments = pgTable('comments', {
+  id: serial('id').primaryKey(),
+  tournamentId: integer('tournament_id').references(() => tournaments.id).notNull(),
+  nickname: varchar('nickname', { length: 50 }).notNull(),
+  message: text('message').notNull(),
+  isDeleted: boolean('is_deleted').default(false),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  ipAddress: varchar('ip_address', { length: 45 }),
+});
 
 export const matchRelations = relations(matches, ({ one }) => ({
   team1: one(teams, {
@@ -65,3 +74,4 @@ export const matchRelations = relations(matches, ({ one }) => ({
     relationName: 'winner',
   }),
 }));
+

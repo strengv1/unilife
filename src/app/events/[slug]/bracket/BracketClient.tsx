@@ -4,7 +4,9 @@ import { useEffect, useState, useTransition } from 'react';
 import { SwissBracket } from '../components/SwissBracket';
 import { EliminationBracket } from '../components/EliminationBracket';
 import { TeamStandings } from '../components/TeamStandings';
+import CommentSection from '../components/CommentSection';
 import { Match, StandingWithPosition, Tournament } from '@/app/lib/db';
+import { Comment, CommentStats, getComments } from '@/app/lib/actions/comment-actions';
 import { 
   getStandingsAction,
   fetchMatchesAction 
@@ -14,16 +16,22 @@ interface BracketClientProps {
   tournament: Tournament;
   standings: StandingWithPosition[];
   matches: Match[];
+  comments: Comment[];
+  commentStats: CommentStats;
 }
 
 export function BracketClient({ 
   tournament: initialTournament, 
   standings: initialStandings, 
-  matches: initialMatches 
+  matches: initialMatches,
+  comments: initialComments,
+  commentStats: initialCommentStats
 }: BracketClientProps) {
   const [tournament] = useState(initialTournament);
   const [standings, setStandings] = useState(initialStandings);
   const [matches, setMatches] = useState(initialMatches);
+  const [comments, setComments] = useState(initialComments);
+  const [commentStats, setCommentStats] = useState(initialCommentStats);
   const [activeTab, setActiveTab] = useState('standings');
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -35,9 +43,10 @@ export function BracketClient({
   const refreshData = async () => {
     startTransition(async () => {
       try {
-        const [standingsResult, matchesResult] = await Promise.all([
+        const [standingsResult, matchesResult, commentsResult] = await Promise.all([
           getStandingsAction(tournament.slug),
           fetchMatchesAction(tournament.slug, 'all'),
+          getComments(tournament.id),
         ]);
 
         if (!standingsResult.error) {
@@ -47,13 +56,27 @@ export function BracketClient({
           setMatches(matchesResult.matches || []);
         }
         
+        setComments(commentsResult.comments);
+        setCommentStats(commentsResult.stats);
+        
         setLastUpdated(new Date().toLocaleTimeString());
       } catch (error) {
         console.error('Error refreshing data:', error);
-        // Could show a toast notification here
       }
     });
   };
+
+  const refreshComments = async () => {
+    startTransition(async () => {
+      try {
+        const commentsResult = await getComments(tournament.id);
+        setComments(commentsResult.comments);
+        setCommentStats(commentsResult.stats);
+      } catch (error) {
+        console.error('Error refreshing comments:', error);
+      }
+    });
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -76,7 +99,10 @@ export function BracketClient({
           {lastUpdated && !isPending ?
             <p className="text-xs text-gray-500 mt-1">Updated: {lastUpdated}</p>
           :
-            <div className="text-xs text-gray-500 mt-1 flex items-center">Updated: <div className="w-12 h-4 bg-gray-200 rounded-full animate-pulse"></div></div>
+            <div className="text-xs text-gray-500 mt-1 flex items-center gap-1">
+              Updated: 
+              <div className="w-12 h-3 bg-gray-200 rounded animate-pulse"></div>
+            </div>
           }
         </div>
       </div>
@@ -122,12 +148,34 @@ export function BracketClient({
             >
               Elimination
             </button>
+            {/* Enhanced Lobby Tab */}
+            <button
+              className={`pb-3 pt-3 px-4 whitespace-nowrap text-sm md:text-base font-medium transition-colors relative ${
+                activeTab === 'lobby' 
+                  ? 'border-b-2 border-blue-500 text-blue-600' 
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+              onClick={() => setActiveTab('lobby')}
+              disabled={isPending}
+            >
+              Lobby
+              {/* Enhanced comment count badge */}
+              {commentStats.total > 0 && (
+                <span className={`ml-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none rounded-full ${
+                  activeTab === 'lobby' 
+                    ? 'text-blue-600 bg-blue-100' 
+                    : 'text-gray-600 bg-gray-100'
+                }`}>
+                  {commentStats.total > 99 ? '99+' : commentStats.total}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4 py-4">
         {activeTab === 'standings' && (
           <TeamStandings 
             standings={standings}
@@ -139,6 +187,14 @@ export function BracketClient({
         )}
         {activeTab === 'elimination' && (
           <EliminationBracket matches={matches.filter(m => m.phase === 'elimination')} />
+        )}
+        {activeTab === 'lobby' && (
+          <CommentSection
+            tournamentId={tournament.id}
+            initialComments={comments}
+            initialStats={commentStats}
+            onSuccess={refreshComments}
+          />
         )}
       </div>
     </div>
