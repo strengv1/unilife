@@ -396,7 +396,7 @@ export class EliminationBracket {
           roundNumber: round,
           matchNumber: matchCounter++,
           phase: 'elimination',
-          bracketPosition: `R${round}M${i + 1}`,
+          bracketPosition: `Round ${round}, Match ${i + 1}`,
           status: 'pending',
           team1Id: null,
           team2Id: null,

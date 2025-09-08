@@ -107,7 +107,10 @@ describe('Team Actions Integration Tests', () => {
       expect(result.team!.nextMatch!.opponent).toBeDefined()
       expect(result.team!.nextMatch!.tableNumber).toBeDefined()
       expect(result.team!.nextMatch!.tableNumber).toBeGreaterThanOrEqual(1)
-      expect(result.team!.nextMatch!.tableNumber).toBeLessThanOrEqual(37) // Based on TABLES_COUNT
+      expect(result.team!.nextMatch!.tableNumber).toBeLessThanOrEqual(38)
+      expect(result.team!.nextMatch!.turnNumber).toBeDefined()
+      expect(result.team!.nextMatch!.turnNumber).toBeGreaterThanOrEqual(1)
+      expect(result.team!.nextMatch!.turnNumber).toBeLessThanOrEqual(3)
     })
 
     it('should calculate Buchholz details', async () => {
@@ -270,10 +273,10 @@ describe('Team Actions Integration Tests', () => {
       // All teams should have table numbers
       expect(tableNumbers.length).toBe(4)
       
-      // Table numbers should be between 1 and 37
+      // Table numbers should be between 1 and 38
       tableNumbers.forEach(tableNum => {
         expect(tableNum).toBeGreaterThanOrEqual(1)
-        expect(tableNum).toBeLessThanOrEqual(37)
+        expect(tableNum).toBeLessThanOrEqual(38)
       })
       
       // Teams playing each other should have same table number

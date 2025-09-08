@@ -1,4 +1,4 @@
-import { and, eq, or } from 'drizzle-orm';
+import { and, eq, or, desc } from 'drizzle-orm';
 import { db, Team, Tournament } from '../db';
 import { teams, tournaments, matches } from '../schema';
 import { BuchholzCalculator } from '../buccholz-calculator';
@@ -21,6 +21,7 @@ interface NextMatch {
   phase: string;
   opponent: Pick<Team, 'id' | 'name'> | null;
   tableNumber: number;
+  turnNumber: number;
 }
 
 interface BuchholzDetails {
@@ -134,7 +135,7 @@ export async function getTeamDetailsAction(
           eq(matches.status, 'completed')
         )
       )
-      .orderBy(matches.roundNumber); // Order by round
+      .orderBy(desc(matches.createdAt));
 
     // Batch fetch all opponent data
     const opponentIds = new Set<number>();
@@ -180,6 +181,7 @@ export async function getTeamDetailsAction(
         team1Id: matches.team1Id,
         team2Id: matches.team2Id,
         matchNumber: matches.matchNumber,
+        bracketPosition: matches.bracketPosition,
       })
       .from(matches)
       .where(
@@ -209,15 +211,24 @@ export async function getTeamDetailsAction(
         opponent = opponentResult[0] || null;
       }
 
-      const TABLES_COUNT = 37; // Make this configurable
-      const tableNumber = ((match.matchNumber - 1) % TABLES_COUNT) + 1;
+      const AMOUNT_OF_TABLES = 38;
+      let turnNumber = 0
+      let tableNumber = 0
 
+      if (match.phase=="elimination"){
+        tableNumber = Number(match.bracketPosition?.match(/\d+$/)?.[0]) || 0;
+      } else {
+        turnNumber = Math.floor((match.matchNumber - 1) / AMOUNT_OF_TABLES) + 1;
+        tableNumber = ((match.matchNumber - 1) % AMOUNT_OF_TABLES) + 1;
+      }
+    
       nextMatch = {
         id: match.id,
         roundNumber: match.roundNumber,
         phase: match.phase,
         opponent,
         tableNumber,
+        turnNumber
       };
     }
 

@@ -97,7 +97,8 @@ function MatchCard({ match }: { match: Match }) {
   const isTeam2Winner = match.winnerId === match.team2Id;
   const isDraw = match.status === 'completed' && !match.winnerId && match.team1Score === match.team2Score;
 
-  const AMOUNT_OF_TABLES = 37;
+  const AMOUNT_OF_TABLES = 38;
+  const turnNumber = Math.floor((match.matchNumber - 1) / AMOUNT_OF_TABLES) + 1;
   const tableNumber = ((match.matchNumber - 1) % AMOUNT_OF_TABLES) + 1;
 
   return (
@@ -108,7 +109,7 @@ function MatchCard({ match }: { match: Match }) {
     `}>
       {/* Match Number (Table Number) */}
       <div className="flex items-center justify-between mb-2 md:mb-3">
-        <span className="text-xs font-medium text-gray-500 uppercase">Table {tableNumber}</span>
+        <span className="text-xs font-medium text-gray-500 uppercase">Table {tableNumber} {turnNumber>0 && <span className="ml-1">(Turn {turnNumber})</span>}</span>
         <span className={`
           text-xs px-2 py-1 rounded-full font-medium
           ${match.status === 'completed' ? 'bg-gray-200 text-gray-700' : ''}

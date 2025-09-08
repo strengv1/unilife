@@ -529,7 +529,7 @@ export function TournamentManageClient({
               <div className="flex flex-wrap gap-4">
                 <span>Total: {teams.length} teams</span>
                 {searchQuery && <span>Filtered: {displayedTeams.length} teams</span>}
-                <span>Swiss rounds needed: {Math.ceil(Math.log2(teams.length))}</span>
+                <span>Swiss rounds recommended: {Math.ceil(Math.log2(teams.length))}</span>
               </div>
             </div>
           )}

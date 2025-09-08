@@ -290,7 +290,7 @@ export function TeamDetailsClient({ team }: TeamDetailsClientProps) {
                 <span className="text-blue-800">Round</span>
                 <span className="font-semibold text-blue-900">
                   {team.nextMatch.phase === 'swiss' ? `Swiss Round ${team.nextMatch.roundNumber}` : 
-                   team.nextMatch.phase === 'elimination' ? `${team.nextMatch.phase} Round ${team.nextMatch.roundNumber}` :
+                   team.nextMatch.phase === 'elimination' ? `Elimination Round ${team.nextMatch.roundNumber}` :
                    `Round ${team.nextMatch.roundNumber}`}
                 </span>
               </div>
@@ -308,7 +308,7 @@ export function TeamDetailsClient({ team }: TeamDetailsClientProps) {
               {team.nextMatch.tableNumber && (
                 <div className="flex justify-between items-center">
                   <span className="text-blue-800">Table</span>
-                  <span className="font-semibold text-blue-900">#{team.nextMatch.tableNumber}</span>
+                  <span className="font-semibold text-blue-900">Table {team.nextMatch.tableNumber} {team.nextMatch.turnNumber>0 && `(Turn ${team.nextMatch.turnNumber})`}</span>
                 </div>
               )}
             </div>
