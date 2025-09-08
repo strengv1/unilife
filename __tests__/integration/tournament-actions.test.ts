@@ -10,7 +10,8 @@ import {
   addMultipleTeamsAction,
   startTournamentAction,
   getStandingsAction,
-  validateTeamNamesAction
+  validateTeamNamesAction,
+  deleteTournamentAction
 } from '@/app/lib/actions/tournament-actions'
 import { db } from '@/app/lib/db'
 import { teams, matches, tournaments } from '@/app/lib/schema'
@@ -110,6 +111,138 @@ describe('Tournament Actions Integration Tests', () => {
       expect(result.error).toContain('Unauthorized')
     })
   })
+
+  describe('deleteTournamentAction', () => {
+    it('should successfully delete a tournament and all related data', async () => {
+      // First create a tournament with teams and matches
+      const formData = new FormData()
+      formData.set('name', 'Test Tournament')
+      formData.set('slug', 'test-tournament')
+      formData.set('type', 'swiss_elimination')
+      formData.set('swissRounds', '5')
+      formData.set('eliminationTeams', '16')
+      
+      const createResult = await createTournamentAction(formData)
+      
+      expect(createResult.success).toBe(true);
+      const tournamentId = createResult.tournament!.id;
+  
+      // Add some teams
+      await db.insert(teams).values([
+        { tournamentId, name: 'Team 1' },
+        { tournamentId, name: 'Team 2' }
+      ]);
+  
+      // Add some matches
+      await db.insert(matches).values([
+        { 
+          tournamentId, 
+          roundNumber: 1, 
+          matchNumber: 1, 
+          phase: 'swiss',
+          team1Id: 1,
+          team2Id: 2
+        }
+      ]);
+  
+      // Delete the tournament
+      const deleteResult = await deleteTournamentAction(tournamentId);
+  
+      expect(deleteResult).toEqual({
+        success: true,
+        message: 'Tournament deleted successfully'
+      });
+  
+      // Verify tournament is deleted
+      const tournamentCheck = await db
+        .select()
+        .from(tournaments)
+        .where(eq(tournaments.id, tournamentId));
+      expect(tournamentCheck).toHaveLength(0);
+  
+      // Verify teams are deleted
+      const teamsCheck = await db
+        .select()
+        .from(teams)
+        .where(eq(teams.tournamentId, tournamentId));
+      expect(teamsCheck).toHaveLength(0);
+  
+      // Verify matches are deleted
+      const matchesCheck = await db
+        .select()
+        .from(matches)
+        .where(eq(matches.tournamentId, tournamentId));
+      expect(matchesCheck).toHaveLength(0);
+    });
+  
+    it('should handle deleting non-existent tournament', async () => {
+      const result = await deleteTournamentAction(99999);
+  
+      // Should still return success even if tournament doesn't exist
+      expect(result).toEqual({
+        success: true,
+        message: 'Tournament deleted successfully'
+      });
+    });
+  
+    it('should handle database errors gracefully', async () => {
+      // Create a spy to simulate database error
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      
+      // Mock db.transaction to throw an error
+      const originalTransaction = db.transaction;
+      db.transaction = vi.fn().mockRejectedValue(new Error('Database error'));
+  
+      const result = await deleteTournamentAction(1);
+  
+      expect(result).toEqual({
+        error: 'Failed to delete tournament'
+      });
+      expect(consoleSpy).toHaveBeenCalledWith('Error deleting tournament:', expect.any(Error));
+  
+      // Restore original transaction
+      db.transaction = originalTransaction;
+      consoleSpy.mockRestore();
+    });
+  
+    it('should delete tournament with no related data', async () => {
+      // Create a tournament without teams or matches
+      const formData = new FormData()
+      formData.set('name', 'Empty Tournament')
+      formData.set('slug', 'empty-tournament')
+      formData.set('type', 'swiss_elimination')
+      formData.set('swissRounds', '5')
+      formData.set('eliminationTeams', '16')
+      
+      const createResult = await createTournamentAction(formData)
+      
+      expect(createResult.success).toBe(true);
+      const tournamentId = createResult.tournament!.id;
+  
+      const deleteResult = await deleteTournamentAction(tournamentId);
+  
+      expect(deleteResult).toEqual({
+        success: true,
+        message: 'Tournament deleted successfully'
+      });
+  
+      // Verify tournament is deleted
+      const tournamentCheck = await db
+        .select()
+        .from(tournaments)
+        .where(eq(tournaments.id, tournamentId));
+      expect(tournamentCheck).toHaveLength(0);
+    });
+  
+    it('should handle invalid tournament ID types', async () => {
+      const result = await deleteTournamentAction(0);
+  
+      expect(result).toEqual({
+        success: true,
+        message: 'Tournament deleted successfully'
+      });
+    });
+  });
 
   describe('getTournamentsAction', () => {
     it('should return all tournaments', async () => {
@@ -476,6 +609,28 @@ describe('Tournament Actions Integration Tests', () => {
       vi.mocked(verifyAuth).mockResolvedValueOnce(false)
       
       const deleteResult = await deleteTeamAction(tournamentSlug, teamId)
+      
+      expect(deleteResult.error).toBe('Unauthorized')
+    })
+
+    it('should reject unauthorized tournament deletion', async () => {
+      // First create a tournament with auth enabled
+      const formData = new FormData()
+      formData.set('name', 'Auth Test')
+      formData.set('slug', `auth-test-${Date.now()}`)
+      formData.set('type', 'swiss_elimination')
+      formData.set('swissRounds', '3')
+      formData.set('eliminationTeams', '8')
+      formData.set('teams', 'Team to Delete')
+      
+      const createResult = await createTournamentAction(formData)
+      const tournamentId = createResult.tournament!.id
+      
+      // Now disable auth and try to delete
+      const { verifyAuth } = await import('@/app/lib/auth')
+      vi.mocked(verifyAuth).mockResolvedValueOnce(false)
+      
+      const deleteResult = await deleteTournamentAction(tournamentId)
       
       expect(deleteResult.error).toBe('Unauthorized')
     })

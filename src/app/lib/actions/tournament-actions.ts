@@ -90,6 +90,11 @@ export async function createTournamentAction(formData: FormData) {
 }
 
 export async function deleteTournamentAction(tournamentId: number) {
+  const isAuthenticated = await verifyAuth();
+  if (!isAuthenticated) {
+    return { error: 'Unauthorized' }
+  }
+
   try {
     // Start a transaction to ensure all deletes happen atomically
     await db.transaction(async (tx) => {

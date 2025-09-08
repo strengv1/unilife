@@ -3,7 +3,7 @@
 import { Tournament } from '@/app/lib/db';
 import { ExternalLink } from 'lucide-react';
 import { useTransition } from 'react';
-import { startTournamentAction } from '@/app/lib/actions/tournament-actions';
+import { deleteTournamentAction, startTournamentAction } from '@/app/lib/actions/tournament-actions';
 
 interface TournamentListProps {
   tournaments: Tournament[];
@@ -31,6 +31,20 @@ export function TournamentList({ tournaments, onRefresh, isLoading }: Tournament
     });
   };
 
+  const handleDeleteTournament = async (id: number) => {
+    if (!confirm('Are you sure, you want to DELETE this tournament?')) return;
+
+    startTransition(async () => {
+      const result = await deleteTournamentAction(id);
+
+      if (result.error) {
+        alert(`Failed to delete tournament: ${result.error}`);
+      } else {
+        alert('Tournament deleted successfully!');
+        onRefresh();
+      }
+    })
+  }
   if (isLoading) {
     return (
       <div className="flex items-center justify-center">Loading tournament list..</div>
@@ -86,7 +100,9 @@ export function TournamentList({ tournaments, onRefresh, isLoading }: Tournament
                   
                     <a
                       href={`/admin/tournaments/${tournament.slug}`}
-                      className="flex items-center justify-center px-3 py-2 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+                      className="px-3 py-2 text-sm bg-green-500 text-white rounded-md text-center
+                        hover:bg-green-600 transition-colors
+                      "
                     >
                       Manage
                     </a>
@@ -95,13 +111,23 @@ export function TournamentList({ tournaments, onRefresh, isLoading }: Tournament
                     <button
                       onClick={() => handleStartTournament(tournament.slug)}
                       disabled={isPending}
-                      className="flex items-center justify-center px-3 py-2 text-sm bg-yellow-500 text-white rounded-md
-                      hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                      className="px-3 py-2 text-sm bg-yellow-500 text-white rounded-md
+                        hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer
+                      "
                     >
                       {isPending ? 'Starting...' : 'Start Tournament'}
                     </button>
                   </div>
                 )}
+                <button
+                  onClick={() => handleDeleteTournament(tournament.id)}
+                  disabled={isPending}
+                  className="px-3 py-2 text-sm bg-red-500 text-white rounded-md w-full sm:w-fit
+                    hover:bg-red-700 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed
+                  "
+                >
+                  Delete Tournament
+                </button>
               </div>
             </div>
           </li>
