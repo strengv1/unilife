@@ -1,24 +1,23 @@
 'use client';
 
-import { useState, useEffect, useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { CreateTournament } from './CreateTournament';
 import { TournamentList } from './TournamentList';
 import { getTournamentsAction } from '@/app/lib/actions/tournament-actions';
 import { Tournament } from '@/app/lib/db';
 
-export function TournamentManager() {
-  const [tournaments, setTournaments] = useState<Tournament[]>([]);
+interface TournamentManagerProps {
+  initialTournaments: Tournament[];
+  initialError?: string;
+}
+
+export function TournamentManager({ initialTournaments, initialError }: TournamentManagerProps) {
+  const [tournaments, setTournaments] = useState<Tournament[]>(initialTournaments);
   const [activeTab, setActiveTab] = useState<'list' | 'create'>('list');
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(initialError || '');
   const [isPending, startTransition] = useTransition();
 
-  useEffect(() => {
-    fetchTournaments();
-  }, []);
-
-  const fetchTournaments = async () => {
-    setIsLoading(true);
+  const refreshTournaments = () => {
     setError('');
     
     startTransition(async () => {
@@ -27,16 +26,13 @@ export function TournamentManager() {
         
         if (result.error) {
           setError(result.error);
-          setTournaments([]);
         } else {
           setTournaments(result.tournaments || []);
+          setError('');
         }
       } catch (error) {
-        console.error('Error fetching tournaments:', error);
-        setError('Failed to fetch tournaments');
-        setTournaments([]);
-      } finally {
-        setIsLoading(false);
+        console.error('Error refreshing tournaments:', error);
+        setError('Failed to refresh tournaments');
       }
     });
   };
@@ -49,7 +45,7 @@ export function TournamentManager() {
           {error}
         </div>
       )}
-
+      
       <div className="mb-6">
         <div className="border-b border-gray-200">
           <nav className="-mb-px flex space-x-8">
@@ -78,16 +74,16 @@ export function TournamentManager() {
           </nav>
         </div>
       </div>
-
+      
       {activeTab === 'list' ? (
-        <TournamentList 
-          tournaments={tournaments} 
-          onRefresh={fetchTournaments} 
-          isLoading={isLoading || isPending}
+        <TournamentList
+          tournaments={tournaments}
+          onRefresh={refreshTournaments}
+          isLoading={isPending}
         />
       ) : (
         <CreateTournament onSuccess={() => {
-          fetchTournaments();
+          refreshTournaments();
           setActiveTab('list');
         }} />
       )}

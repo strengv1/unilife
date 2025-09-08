@@ -89,6 +89,33 @@ export async function createTournamentAction(formData: FormData) {
   }
 }
 
+export async function deleteTournamentAction(tournamentId: number) {
+  try {
+    // Start a transaction to ensure all deletes happen atomically
+    await db.transaction(async (tx) => {
+      // First, delete all matches for this tournament
+      await tx
+        .delete(matches)
+        .where(eq(matches.tournamentId, tournamentId));
+      
+      // Then, delete all teams for this tournament
+      await tx
+        .delete(teams)
+        .where(eq(teams.tournamentId, tournamentId));
+      
+      // Finally, delete the tournament itself
+      await tx
+        .delete(tournaments)
+        .where(eq(tournaments.id, tournamentId));
+    });
+
+    return { success: true, message: 'Tournament deleted successfully' };
+  } catch (error) {
+    console.error('Error deleting tournament:', error);
+    return { error: 'Failed to delete tournament' };
+  }
+}
+
 export async function validateTeamNamesAction(tournamentSlug: string, teamNames: string[]) {
   try {
     // Find tournament
