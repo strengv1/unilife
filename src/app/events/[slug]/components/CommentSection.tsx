@@ -198,7 +198,7 @@ export default function CommentSection({
                   maxLength={1000}
                   rows={3}
                   className="w-full px-3 py-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none min-h-[80px] max-h-[200px] overflow-y-auto"
-                  placeholder="Share your thoughts..."
+                  placeholder="Say something nice..."
                   disabled={isPending}
                   style={{ height: 'auto' }}
                 />
