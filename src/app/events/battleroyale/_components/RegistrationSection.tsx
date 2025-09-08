@@ -60,6 +60,8 @@ export const RegistrationSection = () => {
   
   useEffect(() => {
     setShuffledTeams(shuffleArray(registeredTeams));
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

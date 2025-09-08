@@ -59,6 +59,8 @@ export default function CommentSection({
     if (isIntersecting && hasMore && !isLoadingMore) {
       loadMoreComments()
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isIntersecting, hasMore, isLoadingMore])
 
   const loadMoreComments = async () => {
@@ -104,7 +106,7 @@ export default function CommentSection({
           setShowForm(false)
           onSuccess?.()
         }
-      } catch (error) {
+      } catch {
         setError('Network error. Please try again.')
       }
     })
