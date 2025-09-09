@@ -9,6 +9,9 @@ interface TeamPageProps {
   }>;
 }
 
+// Cache page for 1 min
+export const revalidate = 60;
+
 export default async function TeamPage({ params }: TeamPageProps) {
   const { slug, teamId: teamIdParam } = await params;
   const teamId = parseInt(teamIdParam);
