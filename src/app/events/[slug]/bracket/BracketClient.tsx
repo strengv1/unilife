@@ -6,7 +6,8 @@ import { EliminationBracket } from '../components/EliminationBracket';
 import { TeamStandings } from '../components/TeamStandings';
 import CommentSection from '../components/CommentSection';
 import { Match, StandingWithPosition, Tournament } from '@/lib/db';
-import { Comment, CommentStats, getComments } from '@/lib/actions/comment-actions';
+import { Comment, CommentStats, getCachedComments } from '@/lib/actions/comment-actions';
+import { getCachedMatches, getCachedStandings } from '@/lib/actions/tournament-actions';
 // import {
 //   getStandingsAction,
 //   fetchMatchesAction
@@ -28,8 +29,8 @@ export function BracketClient({
   commentStats: initialCommentStats
 }: BracketClientProps) {
   const [tournament] = useState(initialTournament);
-  // const [standings, setStandings] = useState(initialStandings);
-  // const [matches, setMatches] = useState(initialMatches);
+  const [standings, setStandings] = useState(initialStandings);
+  const [matches, setMatches] = useState(initialMatches);
   const [comments, setComments] = useState(initialComments);
   const [commentStats, setCommentStats] = useState(initialCommentStats);
   const [activeTab, setActiveTab] = useState('standings');
@@ -43,36 +44,36 @@ export function BracketClient({
   const refreshData = async () => {
     // Refresh to take advantage of page Caching!
     // With this we reduce the request amount from 3*amt_of_refreshes to 1!
-    window.location.reload();
-    // startTransition(async () => {
-    //   try {
-    //     const [standingsResult, matchesResult, commentsResult] = await Promise.all([
-    //       getStandingsAction(tournament.slug),
-    //       fetchMatchesAction(tournament.slug, 'all'),
-    //       getComments(tournament.id),
-    //     ]);
+    // window.location.reload();
+    startTransition(async () => {
+      try {
+        const [standingsResult, matchesResult, commentsResult] = await Promise.all([
+          getCachedStandings(tournament.slug),
+          getCachedMatches(tournament.slug),
+          getCachedComments(tournament.id),
+        ]);
 
-    //     if (!standingsResult.error) {
-    //       setStandings(standingsResult.standings || []);
-    //     }
-    //     if (!matchesResult.error) {
-    //       setMatches(matchesResult.matches || []);
-    //     }
+        if (!standingsResult.error) {
+          setStandings(standingsResult.standings || []);
+        }
+        if (!matchesResult.error) {
+          setMatches(matchesResult.matches || []);
+        }
         
-    //     setComments(commentsResult.comments);
-    //     setCommentStats(commentsResult.stats);
+        setComments(commentsResult.comments);
+        setCommentStats(commentsResult.stats);
         
-    //     setLastUpdated(new Date().toLocaleTimeString());
-    //   } catch (error) {
-    //     console.error('Error refreshing data:', error);
-    //   }
-    // });
+        setLastUpdated(new Date().toLocaleTimeString());
+      } catch (error) {
+        console.error('Error refreshing data:', error);
+      }
+    });
   };
 
   const refreshComments = async () => {
     startTransition(async () => {
       try {
-        const commentsResult = await getComments(tournament.id);
+        const commentsResult = await getCachedComments(tournament.id);
         setComments(commentsResult.comments);
         setCommentStats(commentsResult.stats);
       } catch (error) {
@@ -181,15 +182,15 @@ export function BracketClient({
       <div className="container mx-auto px-4 py-4">
         {activeTab === 'standings' && (
           <TeamStandings 
-            standings={initialStandings}
+            standings={standings}
             showElimination={tournament.status === 'elimination' || tournament.status === 'completed'}
           />
         )}
         {activeTab === 'swiss' && (
-          <SwissBracket matches={initialMatches.filter(m => m.phase === 'swiss')} />
+          <SwissBracket matches={matches.filter(m => m.phase === 'swiss')} />
         )}
         {activeTab === 'elimination' && (
-          <EliminationBracket matches={initialMatches.filter(m => m.phase === 'elimination')} />
+          <EliminationBracket matches={matches.filter(m => m.phase === 'elimination')} />
         )}
         {activeTab === 'lobby' && (
           <CommentSection

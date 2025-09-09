@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, unstable_cache } from 'next/cache'
 import { db, Match, StandingWithPosition, Team } from '@/lib/db'
 import { tournaments, teams, matches } from '@/lib/schema'
 import { verifyAuth } from '@/lib/auth'
@@ -214,6 +214,34 @@ export async function getTeamsByTournamentSlugAction(slug: string) {
     return { error: 'Failed to fetch teams' }
   }
 }
+
+// Cached versions of your server actions
+export const getCachedTournament = unstable_cache(
+  async (slug: string) => getTournamentBySlugAction(slug),
+  ['tournament-by-slug'],
+  { 
+    revalidate: 60,
+    tags: ['tournament']
+  }
+);
+
+export const getCachedStandings = unstable_cache(
+  async (slug: string) => getStandingsAction(slug),
+  ['standings-by-slug'],
+  { 
+    revalidate: 60,
+    tags: ['standings']
+  }
+);
+
+export const getCachedMatches = unstable_cache(
+  async (slug: string) => fetchMatchesAction(slug, 'all'),
+  ['matches-by-slug'],
+  { 
+    revalidate: 60,
+    tags: ['matches']
+  }
+);
 
 export async function updateTournamentSettingsAction(
   slug: string,

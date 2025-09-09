@@ -3,7 +3,7 @@
 import { db } from '@/lib/db'
 import { comments, tournaments } from '@/lib/schema'
 import { desc, eq, and, count } from 'drizzle-orm'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, unstable_cache } from 'next/cache'
 import { headers } from 'next/headers'
 import { verifyAuth } from '@/lib/auth'
 
@@ -36,6 +36,16 @@ function containsProfanity(text: string): boolean {
 
   return PROFANITY_WORDS.some(word => normalized.includes(word))
 }
+
+export const getCachedComments = unstable_cache(
+  async (tournamentId: number, page: number = 1, limit: number = 20) => 
+    getComments(tournamentId, page, limit),
+  ['comments'],
+  { 
+    revalidate: 10,
+    tags: ['comments']
+  }
+);
 
 // Get comments with pagination and stats
 export async function getComments(

@@ -6,7 +6,7 @@ import {
   getStandingsAction,
   fetchMatchesAction
 } from '@/lib/actions/tournament-actions';
-import { getComments } from '@/lib/actions/comment-actions';
+import { getCachedComments } from '@/lib/actions/comment-actions';
 
 interface BracketPageProps {
   params: Promise<{
@@ -49,16 +49,6 @@ const getCachedMatches = unstable_cache(
   { 
     revalidate: 60,
     tags: ['matches']
-  }
-);
-
-const getCachedComments = unstable_cache(
-  async (tournamentId: number, pageNumber: number, commentsPerPage: number) => 
-    getComments(tournamentId, pageNumber, commentsPerPage),
-  ['comments'],
-  { 
-    revalidate: 10, // Comments might need faster updates
-    tags: ['comments']
   }
 );
 
