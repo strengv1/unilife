@@ -28,8 +28,8 @@ export function BracketClient({
   commentStats: initialCommentStats
 }: BracketClientProps) {
   const [tournament] = useState(initialTournament);
-  const [standings, setStandings] = useState(initialStandings);
-  const [matches, setMatches] = useState(initialMatches);
+  // const [standings, setStandings] = useState(initialStandings);
+  // const [matches, setMatches] = useState(initialMatches);
   const [comments, setComments] = useState(initialComments);
   const [commentStats, setCommentStats] = useState(initialCommentStats);
   const [activeTab, setActiveTab] = useState('standings');
@@ -181,15 +181,15 @@ export function BracketClient({
       <div className="container mx-auto px-4 py-4">
         {activeTab === 'standings' && (
           <TeamStandings 
-            standings={standings}
+            standings={initialStandings}
             showElimination={tournament.status === 'elimination' || tournament.status === 'completed'}
           />
         )}
         {activeTab === 'swiss' && (
-          <SwissBracket matches={matches.filter(m => m.phase === 'swiss')} />
+          <SwissBracket matches={initialMatches.filter(m => m.phase === 'swiss')} />
         )}
         {activeTab === 'elimination' && (
-          <EliminationBracket matches={matches.filter(m => m.phase === 'elimination')} />
+          <EliminationBracket matches={initialMatches.filter(m => m.phase === 'elimination')} />
         )}
         {activeTab === 'lobby' && (
           <CommentSection
