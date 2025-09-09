@@ -1,5 +1,5 @@
-import { checkAuthAction } from '@/app/lib/actions/auth-actions';
-import { getTournamentsAction } from '@/app/lib/actions/tournament-actions';
+import { checkAuthAction } from '@/lib/actions/auth-actions';
+import { getTournamentsAction } from '@/lib/actions/tournament-actions';
 import { AdminClient } from './AdminClient';
 
 export default async function AdminPage() {

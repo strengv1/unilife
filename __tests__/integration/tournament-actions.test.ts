@@ -12,14 +12,14 @@ import {
   getStandingsAction,
   validateTeamNamesAction,
   deleteTournamentAction
-} from '@/app/lib/actions/tournament-actions'
-import { db } from '@/app/lib/db'
-import { teams, matches, tournaments } from '@/app/lib/schema'
+} from '@/lib/actions/tournament-actions'
+import { db } from '@/lib/db'
+import { teams, matches, tournaments } from '@/lib/schema'
 import { eq, and } from 'drizzle-orm'
-import { verifyAuth } from '@/app/lib/auth'
+import { verifyAuth } from '@/lib/auth'
 
 // Mock the auth verification for testing
-vi.mock('@/app/lib/auth', () => ({
+vi.mock('@/lib/auth', () => ({
   verifyAuth: vi.fn().mockResolvedValue(true),
   checkPassword: vi.fn().mockReturnValue(true),
   createToken: vi.fn().mockReturnValue('test-token'),
@@ -544,7 +544,7 @@ describe('Tournament Actions Integration Tests', () => {
 
   describe('Authorization checks', () => {
     it('should reject unauthorized tournament creation', async () => {
-      const { verifyAuth } = await import('@/app/lib/auth')
+      const { verifyAuth } = await import('@/lib/auth')
       vi.mocked(verifyAuth).mockResolvedValueOnce(false)
       
       const formData = new FormData()
@@ -573,7 +573,7 @@ describe('Tournament Actions Integration Tests', () => {
       const tournamentSlug = createResult.tournament!.slug
 
       // Now disable auth and try to update
-      const { verifyAuth } = await import('@/app/lib/auth')
+      const { verifyAuth } = await import('@/lib/auth')
       vi.mocked(verifyAuth).mockResolvedValueOnce(false)
       
       const updateTournamentResult = await updateTournamentSettingsAction(tournamentSlug, 6, 32);
@@ -605,7 +605,7 @@ describe('Tournament Actions Integration Tests', () => {
       const teamId = teamsResult.teams![0].id
       
       // Now disable auth and try to delete
-      const { verifyAuth } = await import('@/app/lib/auth')
+      const { verifyAuth } = await import('@/lib/auth')
       vi.mocked(verifyAuth).mockResolvedValueOnce(false)
       
       const deleteResult = await deleteTeamAction(tournamentSlug, teamId)
@@ -627,7 +627,7 @@ describe('Tournament Actions Integration Tests', () => {
       const tournamentId = createResult.tournament!.id
       
       // Now disable auth and try to delete
-      const { verifyAuth } = await import('@/app/lib/auth')
+      const { verifyAuth } = await import('@/lib/auth')
       vi.mocked(verifyAuth).mockResolvedValueOnce(false)
       
       const deleteResult = await deleteTournamentAction(tournamentId)

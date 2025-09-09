@@ -4,8 +4,8 @@ import {
   getTournamentBySlugAction,
   getStandingsAction,
   fetchMatchesAction
-} from '@/app/lib/actions/tournament-actions';
-import { getComments } from '@/app/lib/actions/comment-actions';
+} from '@/lib/actions/tournament-actions';
+import { getComments } from '@/lib/actions/comment-actions';
 
 interface BracketPageProps {
   params: Promise<{

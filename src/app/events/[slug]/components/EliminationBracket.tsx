@@ -1,6 +1,6 @@
 'use client';
 
-import { Match } from "@/app/lib/db";
+import { Match } from "@/lib/db";
 import { useEffect, useRef, useState, useCallback } from "react";
 
 function BracketMatch({

@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import '../../src/test/setup'  // Import setup first to ensure tables are created
-import { BuchholzCalculator } from '@/app/lib/buccholz-calculator'
-import { db } from '@/app/lib/db'  // Use the main db connection
-import { teams, matches, tournaments } from '@/app/lib/schema'
+import '../../src/test/setup'
+import { BuchholzCalculator } from '@/lib/buccholz-calculator'
+import { db } from '@/lib/db'
+import { teams, matches, tournaments } from '@/lib/schema'
 
 describe('BuchholzCalculator Integration Tests', () => {
   let tournamentId: number

@@ -1,12 +1,12 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { db, Match } from '@/app/lib/db'
-import { matches, tournaments, teams } from '@/app/lib/schema'
+import { db, Match } from '@/lib/db'
+import { matches, tournaments, teams } from '@/lib/schema'
 import { eq, and, asc } from 'drizzle-orm'
 import { alias } from 'drizzle-orm/pg-core'
-import { verifyAuth } from '@/app/lib/auth'
-import { EliminationBracket, SwissSystem } from '@/app/lib/tournament-logic'
+import { verifyAuth } from '@/lib/auth'
+import { EliminationBracket, SwissSystem } from '@/lib/tournament-logic'
 
 export async function fetchMatchesAction(tournamentSlug: string, status: string) {
   try {

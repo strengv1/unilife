@@ -2,7 +2,7 @@
 import { useState, useEffect, useTransition } from 'react';
 import { useParams } from 'next/navigation';
 import { ScoreReporter } from '../../components/ScoreReporter';
-import { loginAction, checkAuthAction } from '@/app/lib/actions/auth-actions';
+import { loginAction, checkAuthAction } from '@/lib/actions/auth-actions';
 
 export default function AdminPage() {
   const params = useParams();

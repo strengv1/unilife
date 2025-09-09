@@ -4,7 +4,7 @@ import { beforeAll, afterAll, beforeEach } from 'vitest'
 import postgres from 'postgres'
 import { sql } from 'drizzle-orm'
 // Import db AFTER setting environment variables so it uses test database
-import { db } from '@/app/lib/db'
+import { db } from '@/lib/db'
 
 const TEST_DATABASE_URL = process.env.DATABASE_URL
 

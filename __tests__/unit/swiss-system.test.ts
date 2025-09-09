@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { SwissSystem } from '@/app/lib/tournament-logic'
+import { SwissSystem } from '@/lib/tournament-logic'
 
 // Mock the dependencies at the module level
-vi.mock('@/app/lib/db', () => ({
+vi.mock('@/lib/db', () => ({
   db: {
     query: {
       matches: {
@@ -33,7 +33,7 @@ vi.mock('@/app/lib/db', () => ({
   NewMatch: class {}
 }))
 
-vi.mock('@/app/lib/buccholz-calculator', () => ({
+vi.mock('@/lib/buccholz-calculator', () => ({
   BuchholzCalculator: {
     calculateAllBuchholzScores: vi.fn(),
     clearCache: vi.fn()

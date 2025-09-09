@@ -1,11 +1,11 @@
 'use server'
 
-import { db } from '@/app/lib/db'
-import { comments, tournaments } from '@/app/lib/schema'
+import { db } from '@/lib/db'
+import { comments, tournaments } from '@/lib/schema'
 import { desc, eq, and, count } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
-import { verifyAuth } from '../auth'
+import { verifyAuth } from '@/lib/auth'
 
 export type Comment = {
   id: number

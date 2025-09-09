@@ -1,11 +1,11 @@
 'use client';
 
-import { Match } from '@/app/lib/db';
+import { Match } from '@/lib/db';
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect, useTransition } from 'react';
 import { toast } from 'sonner';
-import { fetchMatchesAction, updateMatchScoreAction, resetMatchAction } from '@/app/lib/actions/match-actions';
+import { fetchMatchesAction, updateMatchScoreAction, resetMatchAction } from '@/lib/actions/match-actions';
 
 export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
   const [matches, setMatches] = useState<Match[] | null>([]);
@@ -148,12 +148,6 @@ export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
           target="_blank"
         >
           View Public Bracket <ExternalLink className="ml-2 w-4 h-4" />
-        </Link>
-        <Link
-          href={`/admin/tournaments/${tournamentSlug}`}
-          className="text-center bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition"
-        >
-          Back to Admin
         </Link>
       </div>
       

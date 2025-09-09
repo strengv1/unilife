@@ -1,9 +1,9 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { db, Match, StandingWithPosition, Team } from '@/app/lib/db'
-import { tournaments, teams, matches } from '@/app/lib/schema'
-import { verifyAuth } from '@/app/lib/auth'
+import { db, Match, StandingWithPosition, Team } from '@/lib/db'
+import { tournaments, teams, matches } from '@/lib/schema'
+import { verifyAuth } from '@/lib/auth'
 import { desc, eq, and, asc } from 'drizzle-orm'
 import { SwissSystem } from '../tournament-logic'
 import { alias } from 'drizzle-orm/pg-core'

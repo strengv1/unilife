@@ -2,7 +2,7 @@
 
 import { ArrowLeft, Users, Target, TrendingUp, Info, X, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
-import { TeamWithMatches } from '@/app/lib/actions/team-actions';
+import { TeamWithMatches } from '@/lib/actions/team-actions';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 

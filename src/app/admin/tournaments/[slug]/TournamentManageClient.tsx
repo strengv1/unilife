@@ -2,14 +2,14 @@
 
 import { useState, useEffect, useMemo, useTransition } from 'react';
 import Link from 'next/link';
-import { Team, Tournament } from '@/app/lib/db';
+import { Team, Tournament } from '@/lib/db';
 import { useTeamValidation } from '@/hooks/useTeamValidation';
 import { 
   getTeamsByTournamentSlugAction,
   updateTournamentSettingsAction,
   deleteTeamAction,
   addMultipleTeamsAction
-} from '@/app/lib/actions/tournament-actions';
+} from '@/lib/actions/tournament-actions';
 
 interface TournamentManageClientProps {
   tournament: Tournament;

@@ -1,17 +1,17 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import '../../src/test/setup'
-import { getTeamDetailsAction } from '@/app/lib/actions/team-actions'
+import { getTeamDetailsAction } from '@/lib/actions/team-actions'
 import { 
   createTournamentAction, 
   startTournamentAction 
-} from '@/app/lib/actions/tournament-actions'
-import { updateMatchScoreAction } from '@/app/lib/actions/match-actions'
-import { db } from '@/app/lib/db'
-import { teams, matches } from '@/app/lib/schema'
+} from '@/lib/actions/tournament-actions'
+import { updateMatchScoreAction } from '@/lib/actions/match-actions'
+import { db } from '@/lib/db'
+import { teams, matches } from '@/lib/schema'
 import { eq, and } from 'drizzle-orm'
 
 
-vi.mock('@/app/lib/auth', () => ({
+vi.mock('@/lib/auth', () => ({
   verifyAuth: vi.fn().mockResolvedValue(true),
   checkPassword: vi.fn().mockReturnValue(true),
   createToken: vi.fn().mockReturnValue('test-token'),

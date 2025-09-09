@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import '../../src/test/setup'  // Import setup first to ensure tables are created
-import { EliminationBracket, SwissSystem } from '@/app/lib/tournament-logic'
-import { BuchholzCalculator } from '@/app/lib/buccholz-calculator'
-import { db } from '@/app/lib/db'  // Use the main db connection
+import '../../src/test/setup'
+import { EliminationBracket, SwissSystem } from '@/lib/tournament-logic'
+import { BuchholzCalculator } from '@/lib/buccholz-calculator'
+import { db } from '@/lib/db'
 import { createTestTournament, getTournamentMatches, getTournamentTeams, assertSwissInvariants } from '../../src/test/utils'
 import { eq, and } from 'drizzle-orm'
-import { matches, teams } from '@/app/lib/schema'
+import { matches, teams } from '@/lib/schema'
 
 describe('SwissSystem Integration Tests', () => {
   beforeEach(() => {

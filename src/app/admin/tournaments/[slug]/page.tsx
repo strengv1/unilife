@@ -3,7 +3,7 @@ import { TournamentManageClient } from './TournamentManageClient';
 import { 
   getTournamentBySlugAction,
   getTeamsByTournamentSlugAction 
-} from '@/app/lib/actions/tournament-actions';
+} from '@/lib/actions/tournament-actions';
 
 interface TournamentManagePageProps {
   params: Promise<{

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { StandingWithPosition } from "@/app/lib/db";
+import { StandingWithPosition } from "@/lib/db";
 import { ChevronDown, Search, X } from "lucide-react";
 import TeamRowMobile from "./TeamStandingsMobileRow";
 import Link from "next/link";

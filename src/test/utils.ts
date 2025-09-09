@@ -1,5 +1,5 @@
-import { db, Match, Team } from '@/app/lib/db'
-import { tournaments, teams, matches } from '@/app/lib/schema'
+import { db, Match, Team } from '@/lib/db'
+import { tournaments, teams, matches } from '@/lib/schema'
 import { eq } from 'drizzle-orm'
 import { faker } from '@faker-js/faker'
 

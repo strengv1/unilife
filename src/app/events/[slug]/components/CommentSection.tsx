@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useTransition, useCallback, useRef, useEffect } from 'react'
-import { addComment, getComments, type Comment, type CommentStats } from '@/app/lib/actions/comment-actions'
+import { addComment, getComments, type Comment, type CommentStats } from '@/lib/actions/comment-actions'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { formatDistanceToNow } from 'date-fns'
 

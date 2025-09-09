@@ -5,12 +5,12 @@ import { SwissBracket } from '../components/SwissBracket';
 import { EliminationBracket } from '../components/EliminationBracket';
 import { TeamStandings } from '../components/TeamStandings';
 import CommentSection from '../components/CommentSection';
-import { Match, StandingWithPosition, Tournament } from '@/app/lib/db';
-import { Comment, CommentStats, getComments } from '@/app/lib/actions/comment-actions';
-import { 
+import { Match, StandingWithPosition, Tournament } from '@/lib/db';
+import { Comment, CommentStats, getComments } from '@/lib/actions/comment-actions';
+import {
   getStandingsAction,
-  fetchMatchesAction 
-} from '@/app/lib/actions/tournament-actions';
+  fetchMatchesAction
+} from '@/lib/actions/tournament-actions';
 
 interface BracketClientProps {
   tournament: Tournament;
@@ -82,7 +82,7 @@ export function BracketClient({
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm sticky top-0 h-[76px] z-40">
-        <div className="container mx-auto px-4 py-3">
+        <div className="px-4 py-3">
           <div className="flex items-center justify-between">
             <h1 className="text-lg md:text-2xl font-bold truncate mr-2">{tournament.name}</h1>
             <button
@@ -109,7 +109,7 @@ export function BracketClient({
 
       {/* Tabs */}
       <div className="bg-white border-b sticky top-[76px] z-30">
-        <div className="container mx-auto px-4">
+        <div className="">
           <div className="flex overflow-x-auto">
             <button
               className={`pb-3 pt-3 px-4 whitespace-nowrap text-sm md:text-base font-medium transition-colors ${
@@ -132,7 +132,7 @@ export function BracketClient({
                 onClick={() => setActiveTab('swiss')}
                 disabled={isPending}
               >
-                Swiss Rounds
+                Swiss
               </button>
             )}
             <button

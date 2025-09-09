@@ -2,8 +2,8 @@
 
 import { useState, useTransition } from 'react';
 import { TournamentManager } from './components/TournamentManager';
-import { loginAction, logoutAction } from '@/app/lib/actions/auth-actions';
-import { Tournament } from '@/app/lib/db';
+import { loginAction, logoutAction } from '@/lib/actions/auth-actions';
+import { Tournament } from '@/lib/db';
 
 interface AdminClientProps {
   initialAuth: boolean;

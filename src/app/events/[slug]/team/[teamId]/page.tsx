@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getTeamDetailsAction } from '@/app/lib/actions/team-actions';
+import { getTeamDetailsAction } from '@/lib/actions/team-actions';
 import { TeamDetailsClient } from './TeamDetailsClient';
 
 interface TeamPageProps {

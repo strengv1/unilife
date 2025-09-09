@@ -1,7 +1,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import { checkPassword, createToken, verifyAuth, setAuthCookie, clearAuthCookie } from '@/app/lib/auth'
+import { checkPassword, createToken, verifyAuth, setAuthCookie, clearAuthCookie } from '@/lib/auth'
 
 export async function loginAction(formData: FormData) {
   const password = formData.get('password') as string

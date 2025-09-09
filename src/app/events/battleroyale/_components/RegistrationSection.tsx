@@ -46,6 +46,9 @@ export const RegistrationSection = () => {
     { name: "Sjundeåregattan" },
     { name: "SAUCED" },
     { name: "Virma" },
+    { name: "Oikeevasen" },
+    { name: "Stüre" },
+    { name: "Lonkero Enjoyers" },
   ];
   const [shuffledTeams, setShuffledTeams] = useState(registeredTeams);
   

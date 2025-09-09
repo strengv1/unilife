@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react';
 import { useTeamValidation } from '@/hooks/useTeamValidation';
-import { createTournamentAction } from '@/app/lib/actions/tournament-actions';
+import { createTournamentAction } from '@/lib/actions/tournament-actions';
 
 interface CreateTournamentProps {
   onSuccess: () => void;

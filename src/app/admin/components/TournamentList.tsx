@@ -1,9 +1,9 @@
 'use client';
 
-import { Tournament } from '@/app/lib/db';
+import { Tournament } from '@/lib/db';
 import { ExternalLink } from 'lucide-react';
 import { useTransition } from 'react';
-import { deleteTournamentAction, startTournamentAction } from '@/app/lib/actions/tournament-actions';
+import { deleteTournamentAction, startTournamentAction } from '@/lib/actions/tournament-actions';
 
 interface TournamentListProps {
   tournaments: Tournament[];

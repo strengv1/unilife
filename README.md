@@ -12,7 +12,7 @@ A serverless tournament management system for organizing Swiss-system and elimin
 ## Tech Stack
 
 - **Frontend**: Next.js 15 (App Router), React, TypeScript, Tailwind CSS
-- **Backend**: Next.js API Routes (Serverless Functions)
+- **Backend**: Next.js Server Actions (Serverless Functions)
 - **Database**: 
   - Production: Neon (Serverless PostgreSQL)
   - Development: Docker PostgreSQL
@@ -24,18 +24,16 @@ A serverless tournament management system for organizing Swiss-system and elimin
 
 1. **Serverless**: Perfect for infrequent use
 2. **Neon**: Working free tier
-3. **Swiss System**: Fair format for casual tournaments
-4. **No WebSockets**: Refresh-based updates sufficient
-5. **Simple Auth**: JWT in httpOnly cookies
+3. **No WebSockets**: Refresh-based updates sufficient
+4. **Simple Auth**: JWT in httpOnly cookies
 
 ## Project Structure
 
 - `/src/app/admin/` - Admin dashboard and tournament management
 - `/src/app/events/[slug]/bracket/` - Public bracket views
 - `/src/app/events/[slug]/bracket/admin/` - Score reporting interface
-- `/src/app/api/` - API routes for tournament operations
-- `/src/app/lib/` - Core logic (database, auth, tournament algorithms)
 - `/src/app/components/` - Reusable React components
+- `/src/lib/` - Core logic (database, auth, tournament algorithms)
 - `/docker-compose.yml` - Local PostgreSQL setup
 
 ## Development Setup

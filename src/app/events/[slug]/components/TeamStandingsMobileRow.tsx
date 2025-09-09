@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChartBar, ChevronDown, ChevronUp } from "lucide-react";
-import { StandingWithPosition } from "@/app/lib/db";
+import { StandingWithPosition } from "@/lib/db";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";

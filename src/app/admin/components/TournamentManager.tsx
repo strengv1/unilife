@@ -3,8 +3,8 @@
 import { useState, useTransition } from 'react';
 import { CreateTournament } from './CreateTournament';
 import { TournamentList } from './TournamentList';
-import { getTournamentsAction } from '@/app/lib/actions/tournament-actions';
-import { Tournament } from '@/app/lib/db';
+import { getTournamentsAction } from '@/lib/actions/tournament-actions';
+import { Tournament } from '@/lib/db';
 
 interface TournamentManagerProps {
   initialTournaments: Tournament[];
