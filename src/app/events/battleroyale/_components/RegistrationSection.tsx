@@ -202,7 +202,7 @@ export const RegistrationSection = () => {
                   <span className={emojiClasses} >🦘</span> Australian surprise DJ!
                 </li>
                 <li>
-                  <span className={emojiClasses} >⚡🐂</span>The guys from Red Bull will host a special Red Bull Tetris checkpoint.
+                  <span className={`tracking-[-0.5rem] ${emojiClasses} mr-4`} >⚡🐂</span>The guys from Red Bull will host a special Red Bull Tetris checkpoint.
                 </li>
                 <li className="flex items-center gap-3">
                   And a guaranteed good time!
