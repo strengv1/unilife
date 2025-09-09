@@ -1,12 +1,11 @@
 import Link from 'next/link';
-import { unstable_cache } from 'next/cache';
 import { BracketClient } from './BracketClient';
 import {
   getTournamentBySlugAction,
   getStandingsAction,
   fetchMatchesAction
 } from '@/lib/actions/tournament-actions';
-import { getCachedComments } from '@/lib/actions/comment-actions';
+import { getComments } from '@/lib/actions/comment-actions';
 
 interface BracketPageProps {
   params: Promise<{
@@ -24,45 +23,20 @@ function TournamentNotFound() {
   );
 }
 
-// Create cached versions of your server actions
-const getCachedTournament = unstable_cache(
-  async (slug: string) => getTournamentBySlugAction(slug),
-  ['tournament-by-slug'],
-  { 
-    revalidate: 60,
-    tags: ['tournament']
-  }
-);
-
-const getCachedStandings = unstable_cache(
-  async (slug: string) => getStandingsAction(slug),
-  ['standings-by-slug'],
-  { 
-    revalidate: 60,
-    tags: ['standings']
-  }
-);
-
-const getCachedMatches = unstable_cache(
-  async (slug: string) => fetchMatchesAction(slug, 'all'),
-  ['matches-by-slug'],
-  { 
-    revalidate: 60,
-    tags: ['matches']
-  }
-);
-
+// This tells Next.js to cache this page for 60 seconds
 export const revalidate = 60;
+
+// Force static generation and avoid dynamic rendering
+export const dynamic = 'force-static';
 
 export default async function BracketPage({ params }: BracketPageProps) {
   const { slug } = await params;
  
   try {
-    // Use cached versions instead of direct server actions
     const [tournamentResult, standingsResult, matchesResult] = await Promise.all([
-      getCachedTournament(slug),
-      getCachedStandings(slug),
-      getCachedMatches(slug),
+      getTournamentBySlugAction(slug),
+      getStandingsAction(slug),
+      fetchMatchesAction(slug, 'all'),
     ]);
 
     // Handle tournament result
@@ -85,7 +59,7 @@ export default async function BracketPage({ params }: BracketPageProps) {
     // Fetch comments with pagination and stats
     const commentsPerPage = 20;
     const pageNumber = 1;
-    const commentsResult = await getCachedComments(tournament.id, pageNumber, commentsPerPage);
+    const commentsResult = await getComments(tournament.id, pageNumber, commentsPerPage);
 
     return (
       <BracketClient

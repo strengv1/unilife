@@ -3,7 +3,6 @@ import '../../src/test/setup'
 import { 
   createTournamentAction,
   getTournamentsAction,
-  getTournamentBySlugAction,
   getTeamsByTournamentSlugAction,
   updateTournamentSettingsAction,
   deleteTeamAction,

@@ -3,7 +3,7 @@
 import { db } from '@/lib/db'
 import { comments, tournaments } from '@/lib/schema'
 import { desc, eq, and, count } from 'drizzle-orm'
-import { revalidatePath, unstable_cache } from 'next/cache'
+import { revalidatePath, revalidateTag, unstable_cache } from 'next/cache'
 import { headers } from 'next/headers'
 import { verifyAuth } from '@/lib/auth'
 
@@ -37,74 +37,71 @@ function containsProfanity(text: string): boolean {
   return PROFANITY_WORDS.some(word => normalized.includes(word))
 }
 
-export const getCachedComments = unstable_cache(
-  async (tournamentId: number, page: number = 1, limit: number = 20) => 
-    getComments(tournamentId, page, limit),
-  ['comments'],
-  { 
-    revalidate: 10,
-    tags: ['comments']
-  }
-);
+// Cache comments with unstable_cache
+export const getComments = unstable_cache(
+  async (
+    tournamentId: number,
+    page: number = 1,
+    limit: number = 20
+  ): Promise<{ comments: Comment[]; stats: CommentStats }> => {
+    try {
+      const offset = (page - 1) * limit
 
-// Get comments with pagination and stats
-export async function getComments(
-  tournamentId: number,
-  page: number = 1,
-  limit: number = 20
-): Promise<{ comments: Comment[]; stats: CommentStats }> {
-  try {
-    const offset = (page - 1) * limit
-
-    const [commentsResult, statsResult] = await Promise.all([
-      db
-        .select({
-          id: comments.id,
-          nickname: comments.nickname,
-          message: comments.message,
-          createdAt: comments.createdAt,
-        })
-        .from(comments)
-        .where(
-          and(
-            eq(comments.tournamentId, tournamentId),
-            eq(comments.isDeleted, false)
+      const [commentsResult, statsResult] = await Promise.all([
+        db
+          .select({
+            id: comments.id,
+            nickname: comments.nickname,
+            message: comments.message,
+            createdAt: comments.createdAt,
+          })
+          .from(comments)
+          .where(
+            and(
+              eq(comments.tournamentId, tournamentId),
+              eq(comments.isDeleted, false)
+            )
           )
-        )
-        .orderBy(desc(comments.createdAt))
-        .limit(limit + 1) // Get one extra to check if there are more
-        .offset(offset),
-      
-      db
-        .select({ count: count() })
-        .from(comments)
-        .where(
-          and(
-            eq(comments.tournamentId, tournamentId),
-            eq(comments.isDeleted, false)
+          .orderBy(desc(comments.createdAt))
+          .limit(limit + 1) // Get one extra to check if there are more
+          .offset(offset),
+        
+        db
+          .select({ count: count() })
+          .from(comments)
+          .where(
+            and(
+              eq(comments.tournamentId, tournamentId),
+              eq(comments.isDeleted, false)
+            )
           )
-        )
-    ])
+      ])
 
-    const hasMore = commentsResult.length > limit
-    const actualComments = hasMore ? commentsResult.slice(0, -1) : commentsResult
-    const total = statsResult[0]?.count || 0
+      const hasMore = commentsResult.length > limit
+      const actualComments = hasMore ? commentsResult.slice(0, -1) : commentsResult
+      const total = statsResult[0]?.count || 0
 
-    return {
-      comments: actualComments,
-      stats: {
-        total,
-        hasMore
+      return {
+        comments: actualComments,
+        stats: {
+          total,
+          hasMore
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch comments:', error)
+      return {
+        comments: [],
+        stats: { total: 0, hasMore: false }
       }
     }
-  } catch (error) {
-    console.error('Failed to fetch comments:', error)
-    return {
-      comments: [],
-      stats: { total: 0, hasMore: false }
-    }
+  },
+  ['comments-by-tournament-id'],
+  {
+    tags: ['comments'],
+    revalidate: 60, // Cache for 60 seconds
   }
-}
+)
 
 // Enhanced comment validation and sanitization
 function sanitizeInput(text: string): string {
@@ -160,8 +157,11 @@ export async function addComment(
       ipAddress: ip,
     }).returning()
 
+    // Invalidate comments cache
+    revalidateTag(`comments`)
+    
     // Revalidate the tournament page
-    revalidatePath(`/tournament/${tournament.slug}`)
+    revalidatePath(`/events/${tournament.slug}/bracket`)
     
     return { 
       success: true, 
@@ -202,6 +202,9 @@ export async function deleteComment(
         // You might want to add deletedAt timestamp and deletedBy fields
       })
       .where(eq(comments.id, commentId))
+
+    // Invalidate comments cache for this tournament
+    revalidateTag(`comments`)
 
     return { success: true }
   } catch (error) {

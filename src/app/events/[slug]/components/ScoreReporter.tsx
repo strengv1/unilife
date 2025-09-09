@@ -5,7 +5,8 @@ import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect, useTransition } from 'react';
 import { toast } from 'sonner';
-import { fetchMatchesAction, updateMatchScoreAction, resetMatchAction } from '@/lib/actions/match-actions';
+import { updateMatchScoreAction, resetMatchAction } from '@/lib/actions/match-actions';
+import { fetchMatchesAction } from '@/lib/actions/tournament-actions';
 
 export function ScoreReporter({ tournamentSlug }: { tournamentSlug: string }) {
   const [matches, setMatches] = useState<Match[] | null>([]);

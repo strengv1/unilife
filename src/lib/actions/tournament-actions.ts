@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath, unstable_cache } from 'next/cache'
+import { revalidatePath, revalidateTag, unstable_cache } from 'next/cache'
 import { db, Match, StandingWithPosition, Team } from '@/lib/db'
 import { tournaments, teams, matches } from '@/lib/schema'
 import { verifyAuth } from '@/lib/auth'
@@ -8,20 +8,163 @@ import { desc, eq, and, asc } from 'drizzle-orm'
 import { SwissSystem } from '../tournament-logic'
 import { alias } from 'drizzle-orm/pg-core'
 
-export async function getTournamentsAction() {
-  try {
-    const tournamentList = await db
-      .select()
-      .from(tournaments)
-      .orderBy(desc(tournaments.createdAt));
-    
-    return { success: true, tournaments: tournamentList }
-  } catch (error) {
-    console.error('Error fetching tournaments:', error);
-    return { error: 'Failed to fetch tournaments' }
+// Cached version of getTournamentBySlug
+export const getTournamentBySlugAction = unstable_cache(
+  async (slug: string) => {
+    try {
+      const [tournament] = await db
+        .select()
+        .from(tournaments)
+        .where(eq(tournaments.slug, slug));
+
+      if (!tournament) {
+        return { error: 'Tournament not found' }
+      }
+      return { success: true, tournament }
+    } catch (error) {
+      console.error('Error fetching tournament:', error);
+      return { error: 'Failed to fetch tournament' }
+    }
+  },
+  ['tournament-by-slug'], // static key prefix
+  {
+    tags: ['tournament'], // static tags
+    revalidate: 60,
   }
+)
+
+// Cached version of getStandings
+export const getStandingsAction = unstable_cache(
+  async (slug: string) => {
+    try {
+      // Find tournament first
+      const [tournament] = await db
+        .select()
+        .from(tournaments)
+        .where(eq(tournaments.slug, slug));
+     
+      if (!tournament) {
+        return { error: 'Tournament not found' }
+      }
+      
+      const standings = await SwissSystem.getStandings(tournament.id);
+
+      // Add position for each team
+      const standingsWithPosition: StandingWithPosition[] = standings.map((team, index) => ({
+        ...team,
+        position: index + 1
+      }));
+      
+      return { success: true, standings: standingsWithPosition }
+    } catch (error) {
+      console.error('Error fetching standings:', error);
+      return { error: 'Failed to fetch standings' }
+    }
+  },
+  ['standings-by-slug'],
+  {
+    tags: ['standings'],
+    revalidate: 60,
+  }
+)
+
+// Cached version of fetchMatches (remove the duplicate from match-actions.ts)
+export const fetchMatchesAction = unstable_cache(
+  async (tournamentSlug: string, status: string) => {
+    try {
+      // Find tournament
+      const [tournament] = await db
+        .select()
+        .from(tournaments)
+        .where(eq(tournaments.slug, tournamentSlug));
+
+      if (!tournament) {
+        return { error: 'Tournament not found' }
+      }
+
+      // Create aliases for teams
+      const team1 = alias(teams, 'team1');
+      const team2 = alias(teams, 'team2');
+
+      // Build query conditions
+      const conditions = [eq(matches.tournamentId, tournament.id)];
+      
+      if (status && status !== 'all') {
+        conditions.push(eq(matches.status, status));
+      }
+
+      // Get matches with team information
+      const rawMatches = await db
+        .select({
+          id: matches.id,
+          tournamentId: matches.tournamentId,
+          roundNumber: matches.roundNumber,
+          matchNumber: matches.matchNumber,
+          phase: matches.phase,
+          team1Id: matches.team1Id,
+          team2Id: matches.team2Id,
+          team1Score: matches.team1Score,
+          team2Score: matches.team2Score,
+          winnerId: matches.winnerId,
+          status: matches.status,
+          bracketPosition: matches.bracketPosition,
+          nextMatchId: matches.nextMatchId,
+          team1: {
+            id: team1.id,
+            name: team1.name,
+            seed: team1.seed,
+          },
+          team2: {
+            id: team2.id,
+            name: team2.name,
+            seed: team2.seed,
+          },
+        })
+        .from(matches)
+        .leftJoin(team1, eq(team1.id, matches.team1Id))
+        .leftJoin(team2, eq(team2.id, matches.team2Id))
+        .where(and(...conditions))
+        .orderBy(asc(matches.roundNumber), asc(matches.matchNumber));
+
+      // Transform to match the expected Match type
+      const matchList = rawMatches.map(match => ({
+        ...match,
+        team1: match.team1 ? {
+          id: match.team1.id!,
+          name: match.team1.name!,
+          seed: match.team1.seed!,
+        } : null,
+        team2: match.team2 ? {
+          id: match.team2.id!,
+          name: match.team2.name!,
+          seed: match.team2.seed!,
+        } : null,
+      })) as Match[];
+
+      return { success: true, matches: matchList }
+    } catch (error) {
+      console.error('Error fetching matches:', error);
+      return { error: 'Failed to fetch matches' }
+    }
+  },
+  ['matches-by-slug'],
+  {
+    tags: ['matches'],
+    revalidate: 60,
+  }
+)
+
+// Helper function to invalidate caches when tournament data changes
+export async function invalidateTournamentCache(slug: string) {
+  revalidateTag('tournament')
+  revalidateTag('standings')
+  revalidateTag('matches')
+  revalidateTag('teams')
+  revalidatePath(`/events/${slug}/bracket`)
+  revalidatePath(`/admin/tournaments/${slug}`)
 }
 
+// Update your existing write operations to invalidate cache
 export async function createTournamentAction(formData: FormData) {
   const isAuthenticated = await verifyAuth();
   if (!isAuthenticated) {
@@ -79,13 +222,79 @@ export async function createTournamentAction(formData: FormData) {
       }
     }
 
-    // Revalidate the admin page
+    // Invalidate caches
+    await invalidateTournamentCache(slug)
     revalidatePath('/admin')
     
     return { success: true, tournament }
   } catch (error) {
     console.error('Error creating tournament:', error);
     return { error: 'Failed to create tournament' }
+  }
+}
+
+// Add cache invalidation to other write operations
+export async function startTournamentAction(slug: string) {
+  const isAuthenticated = await verifyAuth();
+  if (!isAuthenticated) {
+    return { error: 'Unauthorized' }
+  }
+
+  try {
+    // Find tournament
+    const [tournament] = await db
+      .select()
+      .from(tournaments)
+      .where(eq(tournaments.slug, slug));
+
+    if (!tournament) {
+      return { error: 'Tournament not found' }
+    }
+
+    if (tournament.status !== 'registration') {
+      return { error: 'Tournament already started' }
+    }
+
+    // Get all teams
+    const teamList = await db
+      .select()
+      .from(teams)
+      .where(eq(teams.tournamentId, tournament.id));
+
+    if (teamList.length < 2) {
+      return { error: 'Need at least 2 teams to start' }
+    }
+
+    // Update tournament status
+    await db
+      .update(tournaments)
+      .set({ status: 'swiss' })
+      .where(eq(tournaments.id, tournament.id));
+
+    // Generate first Swiss round
+    await SwissSystem.generateSwissRound(tournament.id, 1);
+
+    // Invalidate caches
+    await invalidateTournamentCache(slug)
+
+    return { success: true, message: 'Tournament started' }
+  } catch (error) {
+    console.error('Error starting tournament:', error);
+    return { error: 'Failed to start tournament' }
+  }
+}
+
+export async function getTournamentsAction() {
+  try {
+    const tournamentList = await db
+      .select()
+      .from(tournaments)
+      .orderBy(desc(tournaments.createdAt));
+    
+    return { success: true, tournaments: tournamentList }
+  } catch (error) {
+    console.error('Error fetching tournaments:', error);
+    return { error: 'Failed to fetch tournaments' }
   }
 }
 
@@ -96,6 +305,12 @@ export async function deleteTournamentAction(tournamentId: number) {
   }
 
   try {
+    // Get tournament slug first for cache invalidation
+    const [tournament] = await db
+      .select()
+      .from(tournaments)
+      .where(eq(tournaments.id, tournamentId));
+
     // Start a transaction to ensure all deletes happen atomically
     await db.transaction(async (tx) => {
       // First, delete all matches for this tournament
@@ -113,6 +328,11 @@ export async function deleteTournamentAction(tournamentId: number) {
         .delete(tournaments)
         .where(eq(tournaments.id, tournamentId));
     });
+
+    // Invalidate cache if tournament existed
+    if (tournament) {
+      await invalidateTournamentCache(tournament.slug)
+    }
 
     return { success: true, message: 'Tournament deleted successfully' };
   } catch (error) {
@@ -173,23 +393,6 @@ export async function validateTeamNamesAction(tournamentSlug: string, teamNames:
   }
 }
 
-export async function getTournamentBySlugAction(slug: string) {
-  try {
-    const [tournament] = await db
-      .select()
-      .from(tournaments)
-      .where(eq(tournaments.slug, slug));
-
-    if (!tournament) {
-      return { error: 'Tournament not found' }
-    }
-    return { success: true, tournament }
-  } catch (error) {
-    console.error('Error fetching tournament:', error);
-    return { error: 'Failed to fetch tournament' }
-  }
-}
-
 export async function getTeamsByTournamentSlugAction(slug: string) {
   try {
     // Find tournament first
@@ -214,34 +417,6 @@ export async function getTeamsByTournamentSlugAction(slug: string) {
     return { error: 'Failed to fetch teams' }
   }
 }
-
-// Cached versions of your server actions
-export const getCachedTournament = unstable_cache(
-  async (slug: string) => getTournamentBySlugAction(slug),
-  ['tournament-by-slug'],
-  { 
-    revalidate: 60,
-    tags: ['tournament']
-  }
-);
-
-export const getCachedStandings = unstable_cache(
-  async (slug: string) => getStandingsAction(slug),
-  ['standings-by-slug'],
-  { 
-    revalidate: 60,
-    tags: ['standings']
-  }
-);
-
-export const getCachedMatches = unstable_cache(
-  async (slug: string) => fetchMatchesAction(slug, 'all'),
-  ['matches-by-slug'],
-  { 
-    revalidate: 60,
-    tags: ['matches']
-  }
-);
 
 export async function updateTournamentSettingsAction(
   slug: string,
@@ -268,9 +443,8 @@ export async function updateTournamentSettingsAction(
       return { error: 'Tournament not found' }
     }
 
-    // Revalidate relevant pages
-    revalidatePath(`/admin/tournaments/${slug}`)
-    revalidatePath(`/events/${slug}/bracket`)
+    // Invalidate caches
+    await invalidateTournamentCache(slug)
 
     return { success: true, tournament }
   } catch (error) {
@@ -311,9 +485,8 @@ export async function deleteTeamAction(tournamentSlug: string, teamId: number) {
       return { error: 'Team not found or not authorized to delete' }
     }
 
-    // Revalidate relevant pages
-    revalidatePath(`/admin/tournaments/${tournamentSlug}`)
-    revalidatePath(`/events/${tournamentSlug}/bracket`)
+    // Invalidate caches
+    await invalidateTournamentCache(tournamentSlug)
 
     return { success: true, message: 'Team deleted successfully' }
   } catch (error) {
@@ -367,9 +540,8 @@ export async function addMultipleTeamsAction(tournamentSlug: string, teamNames: 
       results.push(team);
     }
 
-    // Revalidate relevant pages
-    revalidatePath(`/admin/tournaments/${tournamentSlug}`);
-    revalidatePath(`/events/${tournamentSlug}/bracket`);
+    // Invalidate caches
+    await invalidateTournamentCache(tournamentSlug);
 
     return {
       success: true,
@@ -379,161 +551,5 @@ export async function addMultipleTeamsAction(tournamentSlug: string, teamNames: 
   } catch (error) {
     console.error('Error adding teams:', error);
     return { error: 'Failed to add teams' };
-  }
-}
-
-export async function startTournamentAction(slug: string) {
-  const isAuthenticated = await verifyAuth();
-  if (!isAuthenticated) {
-    return { error: 'Unauthorized' }
-  }
-
-  try {
-    // Find tournament
-    const [tournament] = await db
-      .select()
-      .from(tournaments)
-      .where(eq(tournaments.slug, slug));
-
-    if (!tournament) {
-      return { error: 'Tournament not found' }
-    }
-
-    if (tournament.status !== 'registration') {
-      return { error: 'Tournament already started' }
-    }
-
-    // Get all teams
-    const teamList = await db
-      .select()
-      .from(teams)
-      .where(eq(teams.tournamentId, tournament.id));
-
-    if (teamList.length < 2) {
-      return { error: 'Need at least 2 teams to start' }
-    }
-
-    // Update tournament status
-    await db
-      .update(tournaments)
-      .set({ status: 'swiss' })
-      .where(eq(tournaments.id, tournament.id));
-
-    // Generate first Swiss round
-    await SwissSystem.generateSwissRound(tournament.id, 1);
-
-    // Revalidate relevant pages
-    revalidatePath(`/admin/tournaments/${slug}`)
-    revalidatePath(`/events/${slug}/bracket`)
-
-    return { success: true, message: 'Tournament started' }
-  } catch (error) {
-    console.error('Error starting tournament:', error);
-    return { error: 'Failed to start tournament' }
-  }
-}
-
-export async function getStandingsAction(slug: string) {
-  try {
-    // Find tournament
-    const [tournament] = await db
-      .select()
-      .from(tournaments)
-      .where(eq(tournaments.slug, slug));
-   
-    if (!tournament) {
-      return { error: 'Tournament not found' }
-    }
-    
-    const standings = await SwissSystem.getStandings(tournament.id);
-
-    // Add position for each team
-    const standingsWithPosition: StandingWithPosition[] = standings.map((team, index) => ({
-      ...team,
-      position: index + 1
-    }));
-    
-    return { success: true, standings: standingsWithPosition }
-  } catch (error) {
-    console.error('Error fetching standings:', error);
-    return { error: 'Failed to fetch standings' }
-  }
-}
-
-export async function fetchMatchesAction(tournamentSlug: string, status: string) {
-  try {
-    // Find tournament
-    const [tournament] = await db
-      .select()
-      .from(tournaments)
-      .where(eq(tournaments.slug, tournamentSlug));
-
-    if (!tournament) {
-      return { error: 'Tournament not found' }
-    }
-
-    // Create aliases for teams
-    const team1 = alias(teams, 'team1');
-    const team2 = alias(teams, 'team2');
-
-    // Build query conditions
-    const conditions = [eq(matches.tournamentId, tournament.id)];
-    
-    if (status && status !== 'all') {
-      conditions.push(eq(matches.status, status));
-    }
-
-    // Get matches with team information
-    const rawMatches = await db
-      .select({
-        id: matches.id,
-        tournamentId: matches.tournamentId,
-        roundNumber: matches.roundNumber,
-        matchNumber: matches.matchNumber,
-        phase: matches.phase,
-        team1Id: matches.team1Id,
-        team2Id: matches.team2Id,
-        team1Score: matches.team1Score,
-        team2Score: matches.team2Score,
-        winnerId: matches.winnerId,
-        status: matches.status,
-        bracketPosition: matches.bracketPosition,
-        nextMatchId: matches.nextMatchId,
-        team1: {
-          id: team1.id,
-          name: team1.name,
-          seed: team1.seed,
-        },
-        team2: {
-          id: team2.id,
-          name: team2.name,
-          seed: team2.seed,
-        },
-      })
-      .from(matches)
-      .leftJoin(team1, eq(team1.id, matches.team1Id))
-      .leftJoin(team2, eq(team2.id, matches.team2Id))
-      .where(and(...conditions))
-      .orderBy(asc(matches.roundNumber), asc(matches.matchNumber));
-
-    // Transform to match the expected Match type
-    const matchList = rawMatches.map(match => ({
-      ...match,
-      team1: match.team1 ? {
-        id: match.team1.id!,
-        name: match.team1.name!,
-        seed: match.team1.seed!,
-      } : null,
-      team2: match.team2 ? {
-        id: match.team2.id!,
-        name: match.team2.name!,
-        seed: match.team2.seed!,
-      } : null,
-    })) as Match[];
-
-    return { success: true, matches: matchList }
-  } catch (error) {
-    console.error('Error fetching matches:', error);
-    return { error: 'Failed to fetch matches' }
   }
 }

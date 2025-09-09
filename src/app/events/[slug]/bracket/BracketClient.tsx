@@ -6,12 +6,11 @@ import { EliminationBracket } from '../components/EliminationBracket';
 import { TeamStandings } from '../components/TeamStandings';
 import CommentSection from '../components/CommentSection';
 import { Match, StandingWithPosition, Tournament } from '@/lib/db';
-import { Comment, CommentStats, getCachedComments } from '@/lib/actions/comment-actions';
-import { getCachedMatches, getCachedStandings } from '@/lib/actions/tournament-actions';
-// import {
-//   getStandingsAction,
-//   fetchMatchesAction
-// } from '@/lib/actions/tournament-actions';
+import { Comment, CommentStats, getComments } from '@/lib/actions/comment-actions';
+import {
+  getStandingsAction,
+  fetchMatchesAction
+} from '@/lib/actions/tournament-actions';
 
 interface BracketClientProps {
   tournament: Tournament;
@@ -42,15 +41,12 @@ export function BracketClient({
   }, [])
 
   const refreshData = async () => {
-    // Refresh to take advantage of page Caching!
-    // With this we reduce the request amount from 3*amt_of_refreshes to 1!
-    // window.location.reload();
     startTransition(async () => {
       try {
         const [standingsResult, matchesResult, commentsResult] = await Promise.all([
-          getCachedStandings(tournament.slug),
-          getCachedMatches(tournament.slug),
-          getCachedComments(tournament.id),
+          getStandingsAction(tournament.slug),
+          fetchMatchesAction(tournament.slug, 'all'),
+          getComments(tournament.id, 1, 20) // page 1, 20 comments
         ]);
 
         if (!standingsResult.error) {
@@ -73,7 +69,7 @@ export function BracketClient({
   const refreshComments = async () => {
     startTransition(async () => {
       try {
-        const commentsResult = await getCachedComments(tournament.id);
+        const commentsResult = await getComments(tournament.id, 1, 20); // page 1, 20 comments
         setComments(commentsResult.comments);
         setCommentStats(commentsResult.stats);
       } catch (error) {
@@ -93,6 +89,7 @@ export function BracketClient({
               onClick={refreshData}
               disabled={isPending}
               className="px-3 py-1.5 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 disabled:opacity-50 flex items-center gap-2"
+              title="Click to check for updates."
             >
               <svg className={`w-4 h-4 ${isPending ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -101,7 +98,9 @@ export function BracketClient({
             </button>
           </div>
           {lastUpdated && !isPending ?
-            <p className="text-xs text-gray-500 mt-1">Updated: {lastUpdated}</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Updated: {lastUpdated}
+            </p>
           :
             <div className="text-xs text-gray-500 mt-1 flex items-center gap-1">
               Updated: 

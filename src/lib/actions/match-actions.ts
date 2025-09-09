@@ -1,90 +1,11 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
-import { db, Match } from '@/lib/db'
+import { db } from '@/lib/db'
 import { matches, tournaments, teams } from '@/lib/schema'
-import { eq, and, asc } from 'drizzle-orm'
-import { alias } from 'drizzle-orm/pg-core'
+import { eq, and } from 'drizzle-orm'
 import { verifyAuth } from '@/lib/auth'
 import { EliminationBracket, SwissSystem } from '@/lib/tournament-logic'
-
-export async function fetchMatchesAction(tournamentSlug: string, status: string) {
-  try {
-    // Find tournament
-    const [tournament] = await db
-      .select()
-      .from(tournaments)
-      .where(eq(tournaments.slug, tournamentSlug));
-
-    if (!tournament) {
-      return { error: 'Tournament not found' }
-    }
-
-    // Create aliases for teams
-    const team1 = alias(teams, 'team1');
-    const team2 = alias(teams, 'team2');
-
-    // Build query conditions
-    const conditions = [eq(matches.tournamentId, tournament.id)];
-    
-    if (status && status !== 'all') {
-      conditions.push(eq(matches.status, status));
-    }
-
-    // Get matches with team information
-    const rawMatches = await db
-      .select({
-        id: matches.id,
-        tournamentId: matches.tournamentId,
-        roundNumber: matches.roundNumber,
-        matchNumber: matches.matchNumber,
-        phase: matches.phase,
-        team1Id: matches.team1Id,
-        team2Id: matches.team2Id,
-        team1Score: matches.team1Score,
-        team2Score: matches.team2Score,
-        winnerId: matches.winnerId,
-        status: matches.status,
-        bracketPosition: matches.bracketPosition,
-        nextMatchId: matches.nextMatchId,
-        team1: {
-          id: team1.id,
-          name: team1.name,
-          seed: team1.seed,
-        },
-        team2: {
-          id: team2.id,
-          name: team2.name,
-          seed: team2.seed,
-        },
-      })
-      .from(matches)
-      .leftJoin(team1, eq(team1.id, matches.team1Id))
-      .leftJoin(team2, eq(team2.id, matches.team2Id))
-      .where(and(...conditions))
-      .orderBy(asc(matches.roundNumber), asc(matches.matchNumber));
-
-    // Transform to match the expected Match type
-    const matchList = rawMatches.map(match => ({
-      ...match,
-      team1: match.team1 ? {
-        id: match.team1.id!,
-        name: match.team1.name!,
-        seed: match.team1.seed!,
-      } : null,
-      team2: match.team2 ? {
-        id: match.team2.id!,
-        name: match.team2.name!,
-        seed: match.team2.seed!,
-      } : null,
-    })) as Match[];
-
-    return { success: true, matches: matchList }
-  } catch (error) {
-    console.error('Error fetching matches:', error);
-    return { error: 'Failed to fetch matches' }
-  }
-}
+import { invalidateTournamentCache } from './tournament-actions'
 
 export async function updateMatchScoreAction(
   tournamentSlug: string,
@@ -274,9 +195,8 @@ export async function updateMatchScoreAction(
       }
     }
 
-    // Revalidate the tournament pages
-    revalidatePath(`/events/${tournamentSlug}/bracket`)
-    revalidatePath(`/events/${tournamentSlug}/bracket/admin`)
+    // Invalidate tournament cache after any score update
+    await invalidateTournamentCache(tournamentSlug)
 
     return { 
       success: true, 
@@ -364,9 +284,8 @@ export async function resetMatchAction(tournamentSlug: string, matchId: number) 
       }
     }
 
-    // Revalidate the tournament pages
-    revalidatePath(`/events/${tournamentSlug}/bracket`)
-    revalidatePath(`/events/${tournamentSlug}/bracket/admin`)
+    // Invalidate tournament cache after match reset
+    await invalidateTournamentCache(tournamentSlug)
 
     return { success: true, message: 'Match reset successfully' }
   } catch (error) {
