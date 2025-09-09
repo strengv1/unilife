@@ -7,10 +7,10 @@ import { TeamStandings } from '../components/TeamStandings';
 import CommentSection from '../components/CommentSection';
 import { Match, StandingWithPosition, Tournament } from '@/lib/db';
 import { Comment, CommentStats, getComments } from '@/lib/actions/comment-actions';
-import {
-  getStandingsAction,
-  fetchMatchesAction
-} from '@/lib/actions/tournament-actions';
+// import {
+//   getStandingsAction,
+//   fetchMatchesAction
+// } from '@/lib/actions/tournament-actions';
 
 interface BracketClientProps {
   tournament: Tournament;
