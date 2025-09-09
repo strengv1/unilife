@@ -23,6 +23,9 @@ function TournamentNotFound() {
   );
 }
 
+// Cache page for 1 minute.
+export const revalidate = 60;
+
 export default async function BracketPage({ params }: BracketPageProps) {
   const { slug } = await params;
  

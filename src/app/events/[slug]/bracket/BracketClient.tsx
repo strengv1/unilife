@@ -41,29 +41,32 @@ export function BracketClient({
   }, [])
 
   const refreshData = async () => {
-    startTransition(async () => {
-      try {
-        const [standingsResult, matchesResult, commentsResult] = await Promise.all([
-          getStandingsAction(tournament.slug),
-          fetchMatchesAction(tournament.slug, 'all'),
-          getComments(tournament.id),
-        ]);
+    // Refresh to take advantage of page Caching!
+    // With this we reduce the request amount from 3*amt_of_refreshes to 1!
+    window.location.reload();
+    // startTransition(async () => {
+    //   try {
+    //     const [standingsResult, matchesResult, commentsResult] = await Promise.all([
+    //       getStandingsAction(tournament.slug),
+    //       fetchMatchesAction(tournament.slug, 'all'),
+    //       getComments(tournament.id),
+    //     ]);
 
-        if (!standingsResult.error) {
-          setStandings(standingsResult.standings || []);
-        }
-        if (!matchesResult.error) {
-          setMatches(matchesResult.matches || []);
-        }
+    //     if (!standingsResult.error) {
+    //       setStandings(standingsResult.standings || []);
+    //     }
+    //     if (!matchesResult.error) {
+    //       setMatches(matchesResult.matches || []);
+    //     }
         
-        setComments(commentsResult.comments);
-        setCommentStats(commentsResult.stats);
+    //     setComments(commentsResult.comments);
+    //     setCommentStats(commentsResult.stats);
         
-        setLastUpdated(new Date().toLocaleTimeString());
-      } catch (error) {
-        console.error('Error refreshing data:', error);
-      }
-    });
+    //     setLastUpdated(new Date().toLocaleTimeString());
+    //   } catch (error) {
+    //     console.error('Error refreshing data:', error);
+    //   }
+    // });
   };
 
   const refreshComments = async () => {
