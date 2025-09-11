@@ -19,7 +19,11 @@ vi.mock('@/lib/auth', () => ({
   clearAuthCookie: vi.fn()
 }))
 vi.mock('next/cache', () => ({
-  revalidatePath: vi.fn()
+  revalidatePath: vi.fn(),
+  unstable_cache: vi.fn().mockImplementation((fn: Function) => {
+    // Return a function that just calls the original function without caching
+    return (...args: any[]) => fn(...args)
+  })
 }))
 
 describe('Team Actions Integration Tests', () => {

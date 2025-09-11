@@ -10,7 +10,7 @@ interface Props {
   showElimination: boolean;
 }
 
-const TeamRowMobile: React.FC<Props> = ({ sortedTeams, showElimination }) => {
+const TempTeamRowMobile: React.FC<Props> = ({ sortedTeams, showElimination }) => {
   return (
     <div className="md:hidden">
       <div className="divide-y divide-gray-200">
@@ -121,7 +121,7 @@ const ExpandableTeam: React.FC<{
               ({team.swissGamePointsFor}:{team.swissGamePointsAgainst})
             </div>
           </div>
-          <Link href={`/events/${tournamentSlug}/team/${team.id}`}>
+          <Link href={`/${tournamentSlug}/team/${team.id}`}>
             <Button
               variant="ghost"
               className="mt-3 w-full px-4 py-2.5 text-sm font-medium rounded-lg border border-blue-200 hover:bg-blue-100 text-blue-700 cursor-pointer"
@@ -135,4 +135,4 @@ const ExpandableTeam: React.FC<{
   );
 };
 
-export default TeamRowMobile;
+export default TempTeamRowMobile;

@@ -1,16 +1,15 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { SwissBracket } from '../components/SwissBracket';
-import { EliminationBracket } from '../components/EliminationBracket';
-import { TeamStandings } from '../components/TeamStandings';
-import CommentSection from '../components/CommentSection';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { SwissBracket } from '../events/[slug]/components/SwissBracket';
+import { EliminationBracket } from '../events/[slug]/components/EliminationBracket';
+import { TempTeamStandings } from './tempComponents/TempTeamStandings';
+import CommentSection from '../events/[slug]/components/CommentSection';
 import { Match, StandingWithPosition, Tournament } from '@/lib/db';
 import { Comment, CommentStats, getComments } from '@/lib/actions/comment-actions';
-import { fetchMatchesAction, getStandingsAction } from '@/lib/actions/tournament-actions';
 
-
-interface BracketClientProps {
+interface CachedClientProps {
   tournament: Tournament;
   standings: StandingWithPosition[];
   matches: Match[];
@@ -19,47 +18,44 @@ interface BracketClientProps {
   lastUpdated: string;
 }
 
-export function BracketClient({ 
+export function CachedClient({ 
   tournament: initialTournament, 
   standings: initialStandings, 
   matches: initialMatches,
   comments: initialComments,
   commentStats: initialCommentStats,
-  lastUpdated: initialLastUpdated
-}: BracketClientProps) {
+  lastUpdated
+}: CachedClientProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [tournament] = useState(initialTournament);
-  const [standings, setStandings] = useState(initialStandings);
-  const [matches, setMatches] = useState(initialMatches);
   const [comments, setComments] = useState(initialComments);
   const [commentStats, setCommentStats] = useState(initialCommentStats);
-  const [activeTab, setActiveTab] = useState('standings');
-  const [lastUpdated, setLastUpdated] = useState<string | null>(initialLastUpdated);
   const [isPending, startTransition] = useTransition();
 
-  const refreshData = async () => {
-    startTransition(async () => {
-      try {
-        const [standingsResult, matchesResult, commentsResult] = await Promise.all([
-          getStandingsAction(tournament.slug),
-          fetchMatchesAction(tournament.slug, 'all'),
-          getComments(tournament.id, 1, 20) // page 1, 20 comments
-        ]);
+  // Get active tab from URL params, default to 'standings'
+  const activeTab = searchParams.get('tab') || 'standings';
 
-        if (!standingsResult.error) {
-          setStandings(standingsResult.standings || []);
-        }
-        if (!matchesResult.error) {
-          setMatches(matchesResult.matches || []);
-        }
-        
-        setComments(commentsResult.comments);
-        setCommentStats(commentsResult.stats);
-        
-        setLastUpdated(new Date().toLocaleTimeString());
-      } catch (error) {
-        console.error('Error refreshing data:', error);
-      }
-    });
+  // Function to update the URL with the new tab
+  const setActiveTab = (tab: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (tab === 'standings') {
+      // Remove tab param for default tab to keep URL clean
+      params.delete('tab');
+    } else {
+      params.set('tab', tab);
+    }
+    
+    // Use replace to avoid adding to browser history for tab switches
+    const newUrl = params.toString() ? `?${params.toString()}` : window.location.pathname;
+    router.replace(newUrl, { scroll: false });
+  };
+
+  const refreshData = async () => {
+    // Preserve the current tab when refreshing
+    const currentParams = new URLSearchParams(searchParams.toString());
+    const refreshUrl = currentParams.toString() ? `?${currentParams.toString()}` : window.location.pathname;
+    window.location.href = refreshUrl;
   };
 
   const refreshComments = async () => {
@@ -95,11 +91,11 @@ export function BracketClient({
           </div>
           {lastUpdated && !isPending ?
             <p className="text-xs text-gray-500 mt-1">
-              Updated: {lastUpdated}
+              Last Updated: {lastUpdated}
             </p>
           :
             <div className="text-xs text-gray-500 mt-1 flex items-center gap-1">
-              Updated: 
+              Last Updated: 
               <div className="w-12 h-3 bg-gray-200 rounded animate-pulse"></div>
             </div>
           }
@@ -176,16 +172,16 @@ export function BracketClient({
       {/* Content */}
       <div className="container mx-auto px-4 py-4">
         {activeTab === 'standings' && (
-          <TeamStandings 
-            standings={standings}
+          <TempTeamStandings 
+            standings={initialStandings}
             showElimination={tournament.status === 'elimination' || tournament.status === 'completed'}
           />
         )}
         {activeTab === 'swiss' && (
-          <SwissBracket matches={matches.filter(m => m.phase === 'swiss')} />
+          <SwissBracket matches={initialMatches.filter(m => m.phase === 'swiss')} />
         )}
         {activeTab === 'elimination' && (
-          <EliminationBracket matches={matches.filter(m => m.phase === 'elimination')} />
+          <EliminationBracket matches={initialMatches.filter(m => m.phase === 'elimination')} />
         )}
         {activeTab === 'lobby' && (
           <CommentSection

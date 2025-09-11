@@ -109,7 +109,7 @@ function MatchCard({ match }: { match: Match }) {
     `}>
       {/* Match Number (Table Number) */}
       <div className="flex items-center justify-between mb-2 md:mb-3">
-        <span className="text-xs font-medium text-gray-500 uppercase">Table {tableNumber} {turnNumber>0 && <span className="ml-1">(Turn {turnNumber})</span>}</span>
+        <span className="text-xs font-medium text-gray-500 uppercase">Table {tableNumber} {turnNumber>1 && <span className="ml-1">(Turn {turnNumber})</span>}</span>
         <span className={`
           text-xs px-2 py-1 rounded-full font-medium
           ${match.status === 'completed' ? 'bg-gray-200 text-gray-700' : ''}

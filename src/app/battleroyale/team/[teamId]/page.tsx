@@ -10,14 +10,16 @@ interface TeamPageProps {
 }
 
 export default async function TeamPage({ params }: TeamPageProps) {
-  const { slug, teamId: teamIdParam } = await params;
+  const { teamId: teamIdParam } = await params;
+
+  const tempTournamentSlug = 'battleroyale'
   const teamId = parseInt(teamIdParam);
-  
+
   if (isNaN(teamId)) {
     notFound();
   }
 
-  const { team, error } = await getTeamDetailsAction(slug, teamId);
+  const { team, error } = await getTeamDetailsAction(tempTournamentSlug, teamId);
 
   if (error || !team) {
     notFound();

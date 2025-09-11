@@ -15,7 +15,8 @@ export const tournaments = pgTable('tournaments', {
 
 export const teams = pgTable('teams', {
   id: serial('id').primaryKey(),
-  tournamentId: integer('tournament_id').references(() => tournaments.id),
+  tournamentId: integer('tournament_id')
+    .references(() => tournaments.id, { onDelete: 'cascade' }),
   name: varchar('name', { length: 255 }).notNull(),
   seed: integer('seed'),
   swissPoints: integer('swiss_points').default(0),
@@ -31,25 +32,32 @@ export const teams = pgTable('teams', {
 
 export const matches = pgTable('matches', {
   id: serial('id').primaryKey(),
-  tournamentId: integer('tournament_id').references(() => tournaments.id),
+  tournamentId: integer('tournament_id')
+    .references(() => tournaments.id, { onDelete: 'cascade' }),
   roundNumber: integer('round_number').notNull(),
   matchNumber: integer('match_number').notNull(),
   phase: varchar('phase', { length: 50 }).notNull(),
-  team1Id: integer('team1_id').references(() => teams.id),
-  team2Id: integer('team2_id').references(() => teams.id),
+  team1Id: integer('team1_id')
+    .references(() => teams.id, { onDelete: 'set null' }),
+  team2Id: integer('team2_id')
+    .references(() => teams.id, { onDelete: 'set null' }),
   team1Score: integer('team1_score'),
   team2Score: integer('team2_score'),
-  winnerId: integer('winner_id').references(() => teams.id),
+  winnerId: integer('winner_id')
+    .references(() => teams.id, { onDelete: 'set null' }),
   status: varchar('status', { length: 50 }).default('pending'),
   bracketPosition: varchar('bracket_position', { length: 50 }),
-  nextMatchId: integer('next_match_id').references((): AnyPgColumn => matches.id),
+  nextMatchId: integer('next_match_id')
+    .references((): AnyPgColumn => matches.id, { onDelete: 'set null' }),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 });
 
 export const comments = pgTable('comments', {
   id: serial('id').primaryKey(),
-  tournamentId: integer('tournament_id').references(() => tournaments.id).notNull(),
+  tournamentId: integer('tournament_id')
+    .references(() => tournaments.id, { onDelete: 'cascade' })
+    .notNull(),
   nickname: varchar('nickname', { length: 50 }).notNull(),
   message: text('message').notNull(),
   isDeleted: boolean('is_deleted').default(false),
@@ -74,4 +82,3 @@ export const matchRelations = relations(matches, ({ one }) => ({
     relationName: 'winner',
   }),
 }));
-

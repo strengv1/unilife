@@ -3,7 +3,6 @@
 import { ArrowLeft, Users, Target, TrendingUp, Info, X, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { TeamWithMatches } from '@/lib/actions/team-actions';
-import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 interface TeamDetailsClientProps {
@@ -71,12 +70,11 @@ export function TeamDetailsClient({ team }: TeamDetailsClientProps) {
 
   const pointDiff = (team.swissGamePointsFor || 0) - (team.swissGamePointsAgainst || 0);
   
-  const params = useParams();
-  const tournamentSlug = params.slug as string || 'battleroyale';
+  const tournamentSlug = 'battleroyale';
 
   const LinkToOpponent = (oppName: string, oppId: number) => (
     <Link
-      href={`/events/${tournamentSlug}/team/${oppId}`}
+      href={`/${tournamentSlug}/team/${oppId}`}
       className="text-blue-500 hover:underline"
     >
       {oppName}
@@ -155,7 +153,7 @@ export function TeamDetailsClient({ team }: TeamDetailsClientProps) {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center gap-3">
             <Link 
-              href={`/events/${team.tournament.slug}/bracket`}
+              href={`/${tournamentSlug}`}
               className="sm:p-2 hover:bg-gray-100 rounded-lg"
             >
               <ArrowLeft className="w-5 h-5" />

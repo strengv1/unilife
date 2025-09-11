@@ -3,24 +3,22 @@
 import { useState } from "react";
 import { StandingWithPosition } from "@/lib/db";
 import { ChevronDown, Search, X } from "lucide-react";
-import TeamRowMobile from "./TeamStandingsMobileRow";
+import TempTeamRowMobile from "./TempTeamStandingsMobileRow";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 
 interface TeamStandingsProps {
   standings: StandingWithPosition[];
   showElimination?: boolean;
 }
 
-export function TeamStandings({
+export function TempTeamStandings({
   standings = [],
   showElimination = false
 }: TeamStandingsProps) {
   const [showBuchholzInfo, setShowBuchholzInfo] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const params = useParams();
-  const tournamentSlug = params.slug as string || 'battleroyale';
+  const tournamentSlug = 'battleroyale';
   
   const clearSearch = () => setSearchTerm("")
 
@@ -117,7 +115,7 @@ export function TeamStandings({
       </div>
       
       {/* Mobile View */}
-      <TeamRowMobile sortedTeams={filteredTeams} showElimination={showElimination} />
+      <TempTeamRowMobile sortedTeams={filteredTeams} showElimination={showElimination} />
 
       {/* Desktop View */}
       <div className="hidden md:block overflow-x-auto">
@@ -147,7 +145,7 @@ export function TeamStandings({
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{team.position}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     <Link
-                      href={`/events/${tournamentSlug}/team/${team.id}`}
+                      href={`/${tournamentSlug}/team/${team.id}`}
                       className="text-blue-500"
                     >
                       {team.name}

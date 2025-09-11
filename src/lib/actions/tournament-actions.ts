@@ -161,6 +161,7 @@ export async function invalidateTournamentCache(slug: string) {
   revalidateTag('matches')
   revalidateTag('teams')
   revalidatePath(`/events/${slug}/bracket`)
+  revalidatePath(`/battleroyale`)
   revalidatePath(`/admin/tournaments/${slug}`)
 }
 
@@ -311,28 +312,15 @@ export async function deleteTournamentAction(tournamentId: number) {
       .from(tournaments)
       .where(eq(tournaments.id, tournamentId));
 
-    // Start a transaction to ensure all deletes happen atomically
-    await db.transaction(async (tx) => {
-      // First, delete all matches for this tournament
-      await tx
-        .delete(matches)
-        .where(eq(matches.tournamentId, tournamentId));
-      
-      // Then, delete all teams for this tournament
-      await tx
-        .delete(teams)
-        .where(eq(teams.tournamentId, tournamentId));
-      
-      // Finally, delete the tournament itself
-      await tx
-        .delete(tournaments)
-        .where(eq(tournaments.id, tournamentId));
-    });
-
-    // Invalidate cache if tournament existed
-    if (tournament) {
-      await invalidateTournamentCache(tournament.slug)
+    if (!tournament) {
+      return { error: 'Tournament not found' };
     }
+
+    // Delete tournament - cascading will handle all related records
+    await db.delete(tournaments).where(eq(tournaments.id, tournamentId));
+
+    // Invalidate cache
+    await invalidateTournamentCache(tournament.slug);
 
     return { success: true, message: 'Tournament deleted successfully' };
   } catch (error) {
