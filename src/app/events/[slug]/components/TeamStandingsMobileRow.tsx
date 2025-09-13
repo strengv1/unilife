@@ -14,13 +14,17 @@ const TeamRowMobile: React.FC<Props> = ({ sortedTeams, showElimination }) => {
   return (
     <div className="md:hidden">
       <div className="divide-y divide-gray-200">
-        {sortedTeams.map((team) => (
-          <ExpandableTeam
-            key={team.id}
-            team={team}
-            showElimination={showElimination}
-          />
-        ))}
+        {sortedTeams.length > 0 ?
+          sortedTeams.map((team) => (
+            <ExpandableTeam
+              key={team.id}
+              team={team}
+              showElimination={showElimination}
+            />
+          ))
+          :
+          <div className="px-4 py-2">Teams not visible yet.</div>
+        }
       </div>
     </div>
   );
