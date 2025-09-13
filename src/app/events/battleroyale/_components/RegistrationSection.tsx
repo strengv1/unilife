@@ -151,7 +151,7 @@ export const RegistrationSection = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-gray-400">•</span>
-                  <span>Ticket sales close 12 hours before the event! (13.09. 23:59)</span>
+                  <span>Ticket sales close 1 hour before the event! (14.09. 11:00)</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-gray-400">•</span>
