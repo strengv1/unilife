@@ -97,7 +97,7 @@ function MatchCard({ match }: { match: Match }) {
   const isTeam2Winner = match.winnerId === match.team2Id;
   const isDraw = match.status === 'completed' && !match.winnerId && match.team1Score === match.team2Score;
 
-  const AMOUNT_OF_TABLES = 38;
+  const AMOUNT_OF_TABLES = 25;
   const turnNumber = Math.floor((match.matchNumber - 1) / AMOUNT_OF_TABLES) + 1;
   const tableNumber = ((match.matchNumber - 1) % AMOUNT_OF_TABLES) + 1;
 

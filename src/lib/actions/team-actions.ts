@@ -211,7 +211,7 @@ export async function getTeamDetailsAction(
         opponent = opponentResult[0] || null;
       }
 
-      const AMOUNT_OF_TABLES = 38;
+      const AMOUNT_OF_TABLES = 25;
       let turnNumber = 0
       let tableNumber = 0
 

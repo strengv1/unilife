@@ -86,7 +86,7 @@ export default async function BracketPage() {
     const pageNumber = 1;
     const commentsResult = await getComments(tournament.id, pageNumber, commentsPerPage);
 
-    const lastUpdated = new Date().toLocaleTimeString('fi-FI');
+    const lastUpdated = new Date().toLocaleTimeString('fi-FI', {hour: '2-digit', minute:'2-digit'});
 
     return (
       <Suspense fallback={<LoadingFallback />}>

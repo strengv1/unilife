@@ -65,9 +65,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* AHREFS analytics -script */}
-        <Script src="https://analytics.ahrefs.com/analytics.js" data-key="c4edFtLyzOY0an+l7w/I4Q" async></Script>
-        
         {/* Google Analytics – gtag.js */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VH8F3Z11MT"
