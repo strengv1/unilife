@@ -20,7 +20,7 @@ export default function TournamentQuickRules() {
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
         </a>
-        Updated 09/09/2025
+        Updated 14/09/2025 9:30
       </div>
       <ul className="mt-6">
         <li className={listHeaderClass}>
