@@ -1,6 +1,6 @@
 # UNI LIFE Tournament System
 
-A serverless tournament management system for organizing Swiss-system and elimination tournaments. Built for occasional use (2-3 times per year) with cost-efficiency in mind.
+Homepage for UNI LIFE, with a serverless tournament management system for organizing Swiss-system and elimination tournaments. Built for occasional use (2-3 times per year) with cost-efficiency in mind.
 
 ## Quick Links
 
